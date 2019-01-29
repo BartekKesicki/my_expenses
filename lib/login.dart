@@ -31,7 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(child:
+          Container(
+            child:
             Stack(children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
@@ -50,8 +51,36 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize : 80.0, fontWeight: FontWeight.bold
                   ),
                 ),
-              )
-            ],),)
+              ),
+            ],),),
+          Container(
+            padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+            child: Column(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                      labelText: "EMAIL",
+                      labelStyle: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey
+                      )
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                      labelText: "PASSWORD",
+                      labelStyle: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey
+                      )
+                  ),
+                  obscureText: true,
+                )
+              ],
+            ),
+          )
         ],
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
