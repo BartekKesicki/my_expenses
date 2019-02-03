@@ -1,33 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/login/login_state_presenter.dart';
+import 'package:my_expenses/login/login_state_view.dart';
 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Expenses',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'My Expenses'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LoginPageState extends State<LoginPage> implements LoginStateView {
+
+  LoginStatePresenter presenter;
 
   @override
   Widget build(BuildContext context) {
+    initLoginPresenter();
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -62,6 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void initLoginPresenter() {
+    presenter = LoginStatePresenter();
+    presenter.attach(this);
   }
 
   Stack createHeader() {
@@ -144,5 +140,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextStyle createForgotPasswordTextStyle() {
     return new TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontFamily: 'Montserrat', decoration: TextDecoration.underline);
+  }
+
+  @override
+  void redirectToHomePage() {
+    // TODO: implement redirectToHomePage
+  }
+
+  @override
+  void redirectToSignUpPage() {
+    // TODO: implement redirectToSignUpPage
+  }
+
+  @override
+  void showMessage(String message) {
+    // TODO: implement showMessage
   }
 }
