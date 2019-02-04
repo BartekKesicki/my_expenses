@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
+import 'package:my_expenses/sign_up/sign_up_page.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -101,8 +102,13 @@ class _LoginPageState extends State<LoginPage> implements LoginStateView {
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(25.0),
         ),
-        child: Center(
-            child: createText("SIGN UP", TextStyle(fontWeight: FontWeight.bold, fontFamily: "Montserrat"))
+        child: GestureDetector(
+          onTap: () {
+            presenter.performToLaunchSignUpPage();
+          },
+          child: Center(
+              child: createText("SIGN UP", TextStyle(fontWeight: FontWeight.bold, fontFamily: "Montserrat"))
+          ),
         ),
       ),
     );
@@ -149,7 +155,7 @@ class _LoginPageState extends State<LoginPage> implements LoginStateView {
 
   @override
   void redirectToSignUpPage() {
-    // TODO: implement redirectToSignUpPage
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
   }
 
   @override

@@ -10,6 +10,10 @@ class LoginStatePresenter extends BaseStatePresenter {
     //todo perform login
   }
 
+  void performToLaunchSignUpPage() {
+    view.redirectToSignUpPage();
+  }
+
   @override
   void attach(BaseStateView view) {
     this.view = view;
