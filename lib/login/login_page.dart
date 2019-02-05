@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
 import 'package:my_expenses/sign_up/sign_up_page.dart';
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> implements LoginStateView {
+class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView {
 
   LoginStatePresenter presenter;
 
@@ -31,10 +32,10 @@ class _LoginPageState extends State<LoginPage> implements LoginStateView {
             child: Column(
               children: <Widget>[
                 TextField(
-                  decoration: createLoginTextFieldDecoration("EMAIL"),
+                  decoration: createTextFieldDecoration("EMAIL"),
                 ),
                 TextField(
-                  decoration: createLoginTextFieldDecoration("PASSWORD"),
+                  decoration: createTextFieldDecoration("PASSWORD"),
                   obscureText: true,
                 ),
                 createSizedBox(5.0),
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> implements LoginStateView {
                   alignment: Alignment(1.0, 0.0),
                   padding: EdgeInsets.only(top: 15, left: 20),
                   child: InkWell(
-                    child: createText("Forgot Password", createForgotPasswordTextStyle())),
+                    child: createText("Forgot Password", createHyperLinkTextStyle())),
                   ),
                 createSizedBox(30.0),
                 createLoginButton(),
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> implements LoginStateView {
             //todo login button
           },
           child: Center(
-            child: createText("LOGIN", createLoginButtonTextStyle()),
+            child: createText("LOGIN", createButtonTextStyle()),
           ),
         ),
       ),
@@ -112,40 +113,6 @@ class _LoginPageState extends State<LoginPage> implements LoginStateView {
         ),
       ),
     );
-  }
-
-  Container createTopLabelsContainer(Text text, EdgeInsets insets) {
-    return new Container(
-      padding: insets,
-      child: text,
-    );
-  }
-
-  SizedBox createSizedBox(double height) {
-    return new SizedBox(height: height,);
-  }
-
-  Text createText(String label, TextStyle textStyle) {
-    return new Text(label, style: textStyle,);
-  }
-
-  TextStyle createTitleTextStyle() {
-    return new TextStyle(fontSize : 80.0, fontWeight: FontWeight.bold);
-  }
-
-  TextStyle createLoginButtonTextStyle() {
-    return new TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: "Montserrat");
-  }
-
-  InputDecoration createLoginTextFieldDecoration(String labelText) {
-    return new InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, color: Colors.grey)
-    );
-  }
-
-  TextStyle createForgotPasswordTextStyle() {
-    return new TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontFamily: 'Montserrat', decoration: TextDecoration.underline);
   }
 
   @override

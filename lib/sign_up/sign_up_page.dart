@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/sign_up/sign_up_state_presenter.dart';
 import 'package:my_expenses/sign_up/sign_up_state_view.dart';
 
@@ -12,9 +13,10 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> implements SignUpStateView {
+class _SignUpPageState extends BasePageState<SignUpPage> implements SignUpStateView {
 
   SignUpStatePresenter presenter;
+  ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,26 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpStateView {
       body: Column(
         children: <Widget>[
           Container(
-              child: Text("REGISTER PAGE (WIP)")
+              child: createTopLabelsContainer(createText("Sign up", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0))
+          ),
+          Container(
+              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    decoration: createTextFieldDecoration("EMAIL"),
+                  ),
+                  TextField(
+                    decoration: createTextFieldDecoration("PASSWORD"),
+                    obscureText: true,
+                  ),
+                  TextField(
+                    decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
+                    obscureText: true,
+                  ),
+                  createSizedBox(5.0),
+                ],
+              ),
           ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -53,5 +74,11 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpStateView {
   @override
   void signUpUser() {
     // TODO: implement signUpUser
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }
