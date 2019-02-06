@@ -22,32 +22,53 @@ class _SignUpPageState extends BasePageState<SignUpPage> implements SignUpStateV
   Widget build(BuildContext context) {
     initSignUpPresenter();
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Container(
-              child: createTopLabelsContainer(createText("Sign up", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0))
-          ),
-          Container(
-              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    decoration: createTextFieldDecoration("EMAIL"),
+        body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
+            return SingleChildScrollView(
+              child: Container(
+                  padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                  child:
+                  Column(
+                    children: <Widget>[
+                      createTopLabelsContainer(createText("Sign up", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
+                      ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: viewportConstraints.maxHeight,
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              IntrinsicHeight(
+                                child: Container(
+                                  padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      TextField(
+                                        decoration: createTextFieldDecoration("EMAIL"),
+                                      ),
+                                      createSizedBox(20.0),
+                                      TextField(
+                                        decoration: createTextFieldDecoration("PASSWORD"),
+                                        obscureText: true,
+                                      ),
+                                      createSizedBox(20.0),
+                                      TextField(
+                                        decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
+                                        obscureText: true,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                    ],
                   ),
-                  TextField(
-                    decoration: createTextFieldDecoration("PASSWORD"),
-                    obscureText: true,
-                  ),
-                  TextField(
-                    decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
-                    obscureText: true,
-                  ),
-                  createSizedBox(5.0),
-                ],
               ),
-          ),
-        ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
+            );
+          },
+        )
     );
   }
 
