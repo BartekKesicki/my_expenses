@@ -1,10 +1,10 @@
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
-import 'package:my_expenses/sign_up/sign_up_state_view.dart';
+import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';
 
-class SignUpStatePresenter extends BaseStatePresenter {
+class SignUpPersonalDataStatePresenter extends BaseStatePresenter {
 
-  SignUpStateView view;
+  SignUpPersonalDataStateView view;
 
   @override
   void attach(BaseStateView view) {

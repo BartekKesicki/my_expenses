@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
-import 'package:my_expenses/sign_up/sign_up_page.dart';
-
+import 'package:my_expenses/sign_up_personal_data/sign_up_page_personal_data.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -46,7 +45,9 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                     child: createText("Forgot Password", createHyperLinkTextStyle())),
                   ),
                 createSizedBox(30.0),
-                createLoginButton(),
+                createSubmitButton(() {
+                  //todo login user
+                }, createText("LOGIN", createButtonTextStyle())),
                 createSizedBox(20.0),
                 createSignUpButton()
               ],
@@ -67,26 +68,6 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
       createTopLabelsContainer(createText("My", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
       createTopLabelsContainer(createText("Expenses", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 175.0, 0.0, 0.0))
     ]);
-  }
-
-  Container createLoginButton() {
-    return new Container(
-      height: 50,
-      child: Material(
-        borderRadius: BorderRadius.circular(25.0),
-        shadowColor: Colors.lightGreen,
-        color: Colors.green,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: () {
-            //todo login button
-          },
-          child: Center(
-            child: createText("LOGIN", createButtonTextStyle()),
-          ),
-        ),
-      ),
-    );
   }
 
   Container createSignUpButton() {
@@ -122,7 +103,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
 
   @override
   void redirectToSignUpPage() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPersonalDataPage()));
   }
 
   @override
