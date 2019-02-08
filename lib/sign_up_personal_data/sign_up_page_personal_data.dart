@@ -15,7 +15,6 @@ class SignUpPersonalDataPage extends StatefulWidget {
 class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage> implements SignUpPersonalDataStateView {
 
   SignUpPersonalDataStatePresenter presenter;
-  ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                   ),
                   createSizedBox(5.0),
                   TextField(
-                    decoration: createTextFieldDecoration("PASSWORD"),
+                    decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
                     obscureText: true,
                   ),
                   createSizedBox(50.0),
@@ -81,13 +80,13 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
   }
 
   @override
-  void signUpUser() {
+  void redirectToNextPage() {
     // TODO: implement signUpUser
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    presenter.detach();
     super.dispose();
   }
 }
