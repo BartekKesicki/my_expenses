@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/sign_up_expense_data/sign_up_expense_page_data.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';
 
@@ -49,7 +50,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                   ),
                   createSizedBox(50.0),
                   createSubmitButton(() {
-                    //todo move to next page
+                    presenter.performToMoveToNextPage();
                   }, createText("NEXT", createButtonTextStyle()))
                 ],
               ),
@@ -66,7 +67,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
 
   @override
   void redirectToLoginPage() {
-    // TODO: implement redirectToLoginPage
+    Navigator.pop(context);
   }
 
   @override
@@ -81,7 +82,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
 
   @override
   void redirectToNextPage() {
-    // TODO: implement signUpUser
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpExpenseDataPage()));
   }
 
   @override

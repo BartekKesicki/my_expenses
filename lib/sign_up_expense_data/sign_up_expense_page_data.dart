@@ -19,7 +19,21 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
   @override
   Widget build(BuildContext context) {
     initSignUpPresenter();
-    return Scaffold();
+    return Scaffold(
+        body: Column(
+            children: <Widget>[
+              Container(
+                  child:
+                  Stack(
+                    children: <Widget>[
+                      createTopLabelsContainer(createText("Sign up", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
+                      createTopLabelsContainer(createText("Expenses data", createSubTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
+                    ],
+                  )
+              ),
+            ]
+        )
+    );
   }
 
   void initSignUpPresenter() {

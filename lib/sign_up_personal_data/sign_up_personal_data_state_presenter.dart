@@ -11,6 +11,11 @@ class SignUpPersonalDataStatePresenter extends BaseStatePresenter {
     this.view = view;
   }
 
+  void performToMoveToNextPage() {
+    //todo validation
+    view.redirectToNextPage();
+  }
+
   @override
   void detach() {
     view = null;
