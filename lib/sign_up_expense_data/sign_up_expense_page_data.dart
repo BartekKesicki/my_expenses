@@ -31,6 +31,28 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                     ],
                   )
               ),
+              Container(
+                padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      decoration: createTextFieldDecoration("START FUNDS"),
+                    ),
+                    createSizedBox(5.0),
+                    TextField(
+                      decoration: createTextFieldDecoration("YOUR INCOME"),
+                    ),
+                    createSizedBox(5.0),
+                    TextField(
+                      decoration: createTextFieldDecoration("MONTHLY LIMIT (OPTIONAL)"),
+                    ),
+                    createSizedBox(50.0),
+                    createSubmitButton(() {
+                      //todo perform to login page without previous screens on stack
+                    }, createText("SIGN UP", createButtonTextStyle()))
+                  ],
+                ),
+              )
             ]
         )
     );
