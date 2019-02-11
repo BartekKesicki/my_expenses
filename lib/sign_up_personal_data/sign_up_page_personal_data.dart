@@ -33,27 +33,37 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
             ),
             Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    decoration: createTextFieldDecoration("EMAIL"),
-                  ),
-                  createSizedBox(5.0),
-                  TextField(
-                    decoration: createTextFieldDecoration("PASSWORD"),
-                    obscureText: true,
-                  ),
-                  createSizedBox(5.0),
-                  TextField(
-                    decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
-                    obscureText: true,
-                  ),
-                  createSizedBox(50.0),
-                  createSubmitButton(() {
-                    presenter.performToMoveToNextPage();
-                  }, createText("NEXT", createButtonTextStyle()))
-                ],
-              ),
+              child: Form(
+                child:  Column(
+                  children: <Widget>[
+                    TextFormField(
+                        decoration: createTextFieldDecoration("EMAIL"),
+                        onSaved: (String value) {
+
+                        }
+                     ),
+                    createSizedBox(5.0),
+                    TextFormField(
+                        decoration: createTextFieldDecoration("PASSWORD"),
+                        obscureText: true,
+                        onSaved: (String value) {
+
+                        }
+                    ),
+                    createSizedBox(5.0),
+                    TextFormField(
+                        decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
+                        obscureText: true,
+                        onSaved: (String value) {
+
+                        }
+                    ),
+                    createSizedBox(50.0),
+                    createSubmitButton(() {
+                      presenter.performToMoveToNextPage();
+                      }, createText("NEXT", createButtonTextStyle()))
+                  ],
+                ),)
             )
           ],
         )
