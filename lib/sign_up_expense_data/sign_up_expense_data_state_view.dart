@@ -4,4 +4,5 @@ abstract class SignUpExpenseDataStateView extends BaseStateView {
   void signUpUser();
   void showError();
   void redirectToLoginPage();
+  void autoValidate();
 }

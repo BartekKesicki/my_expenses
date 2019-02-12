@@ -3,6 +3,7 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_page_data.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';
+import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_validator.dart';
 
 class SignUpPersonalDataPage extends StatefulWidget {
   SignUpPersonalDataPage({Key key, this.title}) : super(key: key);
@@ -16,6 +17,7 @@ class SignUpPersonalDataPage extends StatefulWidget {
 class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage> implements SignUpPersonalDataStateView {
 
   SignUpPersonalDataStatePresenter presenter;
+  SignUpPersonalDataValidator validator;
 
   @override
   Widget build(BuildContext context) {
@@ -34,36 +36,48 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
             Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Form(
-                child:  Column(
-                  children: <Widget>[
-                    TextFormField(
-                        decoration: createTextFieldDecoration("EMAIL"),
-                        onSaved: (String value) {
-
-                        }
-                     ),
-                    createSizedBox(5.0),
-                    TextFormField(
-                        decoration: createTextFieldDecoration("PASSWORD"),
-                        obscureText: true,
-                        onSaved: (String value) {
-
-                        }
+                  key: presenter.getFormKey,
+                  autovalidate: presenter.model.getAutoValidate,
+                  child:  Column(
+                    children: <Widget>[
+                      TextFormField(
+                          decoration: createTextFieldDecoration("EMAIL"),
+                          validator: (String value) {
+                            validator.emailIsValid(value);
+                            },
+                          onSaved: (String value) {
+                            presenter.model.email = value;
+                          }
+                          ),
+                      createSizedBox(5.0),
+                      TextFormField(
+                          decoration: createTextFieldDecoration("PASSWORD"),
+                          obscureText: true,
+                          validator: (String value) {
+                            // todo match password and confirm password
+                          },
+                          onSaved: (String value) {
+                            presenter.model.password = value;
+                          }
                     ),
-                    createSizedBox(5.0),
-                    TextFormField(
-                        decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
-                        obscureText: true,
-                        onSaved: (String value) {
-
-                        }
+                      createSizedBox(5.0),
+                      TextFormField(
+                          decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
+                          obscureText: true,
+                          validator: (String value) {
+                          // todo match password and confirm password
+                          },
+                          onSaved: (String value) {
+                            presenter.model.confirmPassword = value;
+                          }
                     ),
-                    createSizedBox(50.0),
-                    createSubmitButton(() {
-                      presenter.performToMoveToNextPage();
-                      }, createText("NEXT", createButtonTextStyle()))
-                  ],
-                ),)
+                      createSizedBox(50.0),
+                      createSubmitButton(() {
+                        presenter.performToMoveToNextPage();
+                        }, createText("NEXT", createButtonTextStyle()))
+                    ],
+                ),
+              )
             )
           ],
         )
@@ -99,5 +113,10 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
   void dispose() {
     presenter.detach();
     super.dispose();
+  }
+
+  @override
+  void autoValidate() {
+    presenter.model.setAutoValidate(true);
   }
 }

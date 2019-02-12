@@ -4,4 +4,5 @@ abstract class SignUpPersonalDataStateView extends BaseStateView {
     void redirectToNextPage();
     void showError();
     void redirectToLoginPage();
+    void autoValidate();
 }

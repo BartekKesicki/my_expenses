@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_view.dart';
+import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_validator.dart';
 
 class SignUpExpenseDataPage extends StatefulWidget {
   SignUpExpenseDataPage({Key key, this.title}) : super(key: key);
@@ -15,6 +16,7 @@ class SignUpExpenseDataPage extends StatefulWidget {
 class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> implements SignUpExpenseDataStateView {
 
   SignUpExpenseDataStatePresenter presenter;
+  SignUpExpenseDataValidator validator;
 
   @override
   Widget build(BuildContext context) {
@@ -34,34 +36,45 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
               Container(
                 padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 child: Form(
+                    key: presenter.getFormKey,
+                    autovalidate: presenter.model.getAutoValidate ,
                     child: Column(
                       children: <Widget>[
                         TextFormField(
                           decoration: createTextFieldDecoration("START FUNDS"),
                           keyboardType: TextInputType.number,
+                          validator: (String value) {
+                            validator.validateNumberInput(value);
+                          },
                           onSaved: (String value) {
-
+                              presenter.model.startFunds = value;
                           },
                         ),
                         createSizedBox(5.0),
                         TextFormField(
                             decoration: createTextFieldDecoration("YOUR INCOME"),
                             keyboardType: TextInputType.number,
+                            validator: (String value) {
+                              validator.validateNumberInput(value);
+                            },
                             onSaved: (String value) {
-
+                                presenter.model.income = value;
                             }
                         ),
                         createSizedBox(5.0),
                         TextFormField(
                             decoration: createTextFieldDecoration("MONTHLY LIMIT (OPTIONAL)"),
                             keyboardType: TextInputType.number,
+                            validator: (String value) {
+                              validator.validateMonthlyLimit(value);
+                            },
                             onSaved: (String value) {
-
+                                presenter.model.monthlyLimit = value;
                             }
                         ),
                         createSizedBox(50.0),
                         createSubmitButton(() {
-                          //todo perform to login page without previous screens on stack
+                          presenter.validateInputsAndSignup();
                         }, createText("SIGN UP", createButtonTextStyle()))
                       ],
                     ),
@@ -101,6 +114,13 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
   void dispose() {
     presenter.detach();
     super.dispose();
+  }
+
+  @override
+  void autoValidate() {
+    setState(() {
+      presenter.model.setAutoValidate(true);
+    });
   }
 
 }
