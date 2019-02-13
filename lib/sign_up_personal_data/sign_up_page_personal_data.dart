@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_page_data.dart';
+import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_validator.dart';
@@ -105,8 +106,8 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
   }
 
   @override
-  void redirectToNextPage() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpExpenseDataPage()));
+  void redirectToNextPage(SignUpPersonalDataModel model) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpExpenseDataPage(model)));
   }
 
   @override

@@ -3,11 +3,13 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_view.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_validator.dart';
+import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.dart';
 
 class SignUpExpenseDataPage extends StatefulWidget {
-  SignUpExpenseDataPage({Key key, this.title}) : super(key: key);
+  SignUpExpenseDataPage(SignUpPersonalDataModel model, {Key key, this.title}) : super(key: key);
 
   final String title;
+  SignUpPersonalDataModel model;
 
   @override
   _SignUpExpenseDataPageState createState() => _SignUpExpenseDataPageState();
@@ -17,6 +19,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
 
   SignUpExpenseDataStatePresenter presenter;
   SignUpExpenseDataValidator validator;
+  SignUpPersonalDataModel personalData;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,8 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                         ),
                         createSizedBox(50.0),
                         createSubmitButton(() {
-                          presenter.validateInputsAndSignup();
+                          personalData = widget.model;
+                          presenter.validateInputsAndSignup(personalData);
                         }, createText("SIGN UP", createButtonTextStyle()))
                       ],
                     ),

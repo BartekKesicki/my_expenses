@@ -22,7 +22,7 @@ class SignUpPersonalDataStatePresenter extends BaseStatePresenter {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       //todo sign up data
-      view.redirectToNextPage();
+      view.redirectToNextPage(model);
     } else {
       view.autoValidate();
     }
