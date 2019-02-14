@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_view.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_validator.dart';
@@ -18,7 +19,6 @@ class SignUpExpenseDataPage extends StatefulWidget {
 class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> implements SignUpExpenseDataStateView {
 
   SignUpExpenseDataStatePresenter presenter;
-  SignUpExpenseDataValidator validator;
   SignUpPersonalDataModel personalData;
 
   @override
@@ -40,14 +40,15 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                 padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 child: Form(
                     key: presenter.getFormKey,
-                    autovalidate: presenter.model.getAutoValidate ,
                     child: Column(
                       children: <Widget>[
                         TextFormField(
                           decoration: createTextFieldDecoration("START FUNDS"),
                           keyboardType: TextInputType.number,
                           validator: (String value) {
-                            validator.validateNumberInput(value);
+                            if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
+                              return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
+                            }
                           },
                           onSaved: (String value) {
                               presenter.model.startFunds = value;
@@ -58,7 +59,12 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                             decoration: createTextFieldDecoration("YOUR INCOME"),
                             keyboardType: TextInputType.number,
                             validator: (String value) {
-                              validator.validateNumberInput(value);
+                              if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
+                                return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
+                              }
+                              if (!SignUpExpenseDataValidator.numberIsNotBelowZero(value)) {
+                                return ValidationMessagesConstants.VALUE_CANT_BE_BELOW_ZERO;
+                              }
                             },
                             onSaved: (String value) {
                                 presenter.model.income = value;
@@ -69,14 +75,16 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                             decoration: createTextFieldDecoration("MONTHLY LIMIT (OPTIONAL)"),
                             keyboardType: TextInputType.number,
                             validator: (String value) {
-                              validator.validateMonthlyLimit(value);
+                              if (!SignUpExpenseDataValidator.numberIsNotBelowZero(value)) {
+                                return ValidationMessagesConstants.VALUE_CANT_BE_BELOW_ZERO;
+                              }
                             },
                             onSaved: (String value) {
                                 presenter.model.monthlyLimit = value;
                             }
                         ),
                         createSizedBox(50.0),
-                        createSubmitButton(() {
+                        createRaisedButton(() {
                           personalData = widget.model;
                           presenter.validateInputsAndSignup(personalData);
                         }, createText("SIGN UP", createButtonTextStyle()))
@@ -90,8 +98,10 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
   }
 
   void initSignUpPresenter() {
-    presenter = SignUpExpenseDataStatePresenter();
-    presenter.attach(this);
+    if (presenter == null) {
+      presenter = SignUpExpenseDataStatePresenter();
+      presenter.attach(this);
+    }
   }
 
   @override

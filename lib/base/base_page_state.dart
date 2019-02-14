@@ -62,4 +62,19 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     );
   }
 
+  Container createRaisedButton(VoidCallback callback, Text centerText) {
+    return new Container(
+        height: 50,
+        child: RaisedButton(
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25.0)),
+          elevation: 7.0,
+          color: Colors.green,
+          onPressed: callback,
+          child: Center(
+              child: centerText
+          ),
+      ),
+    );
+  }
+
 }

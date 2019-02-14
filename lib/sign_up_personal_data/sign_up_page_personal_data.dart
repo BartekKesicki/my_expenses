@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_page_data.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_presenter.dart';
@@ -18,7 +19,6 @@ class SignUpPersonalDataPage extends StatefulWidget {
 class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage> implements SignUpPersonalDataStateView {
 
   SignUpPersonalDataStatePresenter presenter;
-  SignUpPersonalDataValidator validator;
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +38,14 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Form(
                   key: presenter.getFormKey,
-                  autovalidate: presenter.model.getAutoValidate,
                   child:  Column(
                     children: <Widget>[
                       TextFormField(
                           decoration: createTextFieldDecoration("EMAIL"),
                           validator: (String value) {
-                            validator.emailIsValid(value);
+                            if (!SignUpPersonalDataValidator.emailIsValid(value)) {
+                              return ValidationMessagesConstants.INCORRECT_EMAIL;
+                            }
                             },
                           onSaved: (String value) {
                             presenter.model.email = value;
@@ -55,7 +56,9 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                           decoration: createTextFieldDecoration("PASSWORD"),
                           obscureText: true,
                           validator: (String value) {
-                            // todo match password and confirm password
+                            if (SignUpPersonalDataValidator.textFormFieldIsEmpty(value)) {
+                              return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
+                            }
                           },
                           onSaved: (String value) {
                             presenter.model.password = value;
@@ -66,16 +69,19 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                           decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
                           obscureText: true,
                           validator: (String value) {
-                          // todo match password and confirm password
+                            if (SignUpPersonalDataValidator.textFormFieldIsEmpty(value)) {
+                              return ValidationMessagesConstants.PASSWORDS_ARE_NOT_EQUAL;
+                            }
                           },
                           onSaved: (String value) {
                             presenter.model.confirmPassword = value;
                           }
                     ),
                       createSizedBox(50.0),
-                      createSubmitButton(() {
+                      //todo need raised button
+                      createRaisedButton(() {
                         presenter.performToMoveToNextPage();
-                        }, createText("NEXT", createButtonTextStyle()))
+                      }, createText("SIGN UP", createButtonTextStyle()))
                     ],
                 ),
               )
@@ -86,8 +92,10 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
   }
 
   void initSignUpPresenter() {
-    presenter = SignUpPersonalDataStatePresenter();
-    presenter.attach(this);
+    if (presenter == null) {
+      presenter = SignUpPersonalDataStatePresenter();
+      presenter.attach(this);
+    }
   }
 
   @override
