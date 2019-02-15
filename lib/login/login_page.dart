@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/login/login_model.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_page_personal_data.dart';
@@ -16,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView {
 
   LoginStatePresenter presenter;
+  LoginModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +30,43 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
           ),
           Container(
             padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  decoration: createTextFieldDecoration("EMAIL"),
-                ),
-                TextField(
-                  decoration: createTextFieldDecoration("PASSWORD"),
-                  obscureText: true,
-                ),
-                createSizedBox(5.0),
-                Container(
-                  alignment: Alignment(1.0, 0.0),
-                  padding: EdgeInsets.only(top: 15, left: 20),
-                  child: InkWell(
-                    child: createText("Forgot Password", createHyperLinkTextStyle())),
+            child: Form(
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: createTextFieldDecoration("EMAIL"),
+                    validator: (String value) {
+                      //todo validation
+                    },
+                    onSaved: (String value) {
+                      model.email = value;
+                    },
                   ),
-                createSizedBox(30.0),
-                createSubmitButton(() {
-                  //todo login user
-                }, createText("LOGIN", createButtonTextStyle())),
-                createSizedBox(20.0),
-                createSignUpButton()
-              ],
+                  TextFormField(
+                    decoration: createTextFieldDecoration("PASSWORD"),
+                    validator: (String value) {
+                      //todo validation
+                    },
+                    obscureText: true,
+                    onSaved: (String value) {
+                      model.password = value;
+                    },
+                  ),
+                  createSizedBox(5.0),
+                  Container(
+                    alignment: Alignment(1.0, 0.0),
+                    padding: EdgeInsets.only(top: 15, left: 20),
+                    child: InkWell(
+                        child: createText("Forgot Password", createHyperLinkTextStyle())),
+                  ),
+                  createSizedBox(30.0),
+                  createRaisedButton(() {
+                    presenter.performLogin(model.email, model.password);
+                  }, createText("LOGIN", createButtonTextStyle())),
+                  createSizedBox(20.0),
+                  createSignUpButton(),                  // createSignUpButton()
+                ],
+              ),
             ),
           )
         ],
@@ -59,8 +75,11 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
   }
 
   void initLoginPresenter() {
-    presenter = LoginStatePresenter();
-    presenter.attach(this);
+    if (presenter == null) {
+      presenter = LoginStatePresenter();
+      presenter.attach(this);
+      model = LoginModel();
+    }
   }
 
   Stack createHeader() {
