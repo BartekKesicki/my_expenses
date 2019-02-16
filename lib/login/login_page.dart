@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/login/login_model.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
@@ -36,7 +37,10 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                   TextFormField(
                     decoration: createTextFieldDecoration("EMAIL"),
                     validator: (String value) {
-                      //todo validation
+                      if (!presenter.emailIsValid(value)) {
+                        return ValidationMessagesConstants.INCORRECT_EMAIL;
+                      }
+                      model.email = value;
                     },
                     onSaved: (String value) {
                       model.email = value;
@@ -45,7 +49,12 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                   TextFormField(
                     decoration: createTextFieldDecoration("PASSWORD"),
                     validator: (String value) {
-                      //todo validation
+                      if (!presenter.passwordIsValid(value)) {
+                        return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
+                      }
+                      if (!presenter.loginAndPasswordIsValid(model.email, value)) {
+                        return ValidationMessagesConstants.INCORRECT_EMAIL_OR_PASSWORD;
+                      }
                     },
                     obscureText: true,
                     onSaved: (String value) {
