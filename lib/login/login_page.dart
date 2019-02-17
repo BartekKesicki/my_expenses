@@ -73,7 +73,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                     presenter.performLogin(model.email, model.password);
                   }, createText("LOGIN", createButtonTextStyle())),
                   createSizedBox(20.0),
-                  createSignUpButton(),                  // createSignUpButton()
+                  createSignUpButton(),
                 ],
               ),
             ),
