@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io' as io;
 import 'package:my_expenses/db/constants/db_query_constants.dart';
+import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/db/model/user.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -26,9 +27,14 @@ class DatabaseHelper {
 
   void _onCreate(Database db, int version) async {
     await db.execute(QueryConstants.CREATE_USER_TABLE_QUERY);
+    await db.execute(QueryConstants.CREATE_EXPENSE_TABLE_QUERY);
   }
 
   void saveUser(User user) {
+    //todo save user
+  }
 
+  void saveExpense(Expense expense) {
+    //todo save expense
   }
 }
