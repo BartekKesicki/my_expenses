@@ -1,9 +1,9 @@
 
 class SignUpExpenseModel {
   bool _autoValidate = false;
-  String startFunds;
-  String income;
-  String monthlyLimit;
+  double startFunds;
+  double income;
+  double monthlyLimit;
 
   get getAutoValidate => _autoValidate;
 

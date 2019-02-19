@@ -51,7 +51,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                             }
                           },
                           onSaved: (String value) {
-                              presenter.model.startFunds = value;
+                              presenter.model.startFunds = double.parse(value);
                           },
                         ),
                         createSizedBox(5.0),
@@ -67,7 +67,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                               }
                             },
                             onSaved: (String value) {
-                                presenter.model.income = value;
+                                presenter.model.income = double.parse(value);
                             }
                         ),
                         createSizedBox(5.0),
@@ -80,7 +80,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
                               }
                             },
                             onSaved: (String value) {
-                                presenter.model.monthlyLimit = value;
+                                presenter.model.monthlyLimit = double.parse(value);
                             }
                         ),
                         createSizedBox(50.0),
