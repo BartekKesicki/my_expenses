@@ -78,10 +78,9 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                           }
                     ),
                       createSizedBox(50.0),
-                      //todo need raised button
                       createRaisedButton(() {
                         presenter.performToMoveToNextPage();
-                      }, createText("SIGN UP", createButtonTextStyle()))
+                      }, createText("NEXT", createButtonTextStyle()))
                     ],
                 ),
               )

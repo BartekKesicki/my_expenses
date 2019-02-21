@@ -7,7 +7,7 @@ import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_validator.
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.dart';
 
 class SignUpExpenseDataPage extends StatefulWidget {
-  SignUpExpenseDataPage(SignUpPersonalDataModel model, {Key key, this.title}) : super(key: key);
+  SignUpExpenseDataPage(this.model, {Key key, this.title}) : super(key: key);
 
   final String title;
   SignUpPersonalDataModel model;

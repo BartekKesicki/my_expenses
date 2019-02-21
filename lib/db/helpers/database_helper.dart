@@ -30,8 +30,12 @@ class DatabaseHelper {
     await db.execute(QueryConstants.CREATE_EXPENSE_TABLE_QUERY);
   }
 
-  void saveUser(User user) {
-    //todo save user
+  Future saveUser(User user) async {
+    var dbClient = await db;
+    String query = "INSERT INTO User(id, email, password, income, limit, startFunds) VALUES(null, ${user.email}, ${user.password}, ${user.income}, ${user.limit}, ${user.startFunds})";
+    await dbClient.transaction((txn) async {
+      return await txn.rawInsert(query);
+    });
   }
 
   void saveExpense(Expense expense) {
