@@ -38,6 +38,10 @@ class DatabaseHelper {
     });
   }
 
+  bool checkIfUserExists(String login, String password) {
+    return false;
+  }
+
   void saveExpense(Expense expense) {
     //todo save expense
   }

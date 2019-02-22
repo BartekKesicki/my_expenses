@@ -1,14 +1,26 @@
+import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
+import 'package:my_expenses/db/helpers/database_helper.dart';
+import 'package:my_expenses/login/login_model.dart';
 import 'package:my_expenses/login/login_state_view.dart';
 import 'package:my_expenses/login/login_validator.dart';
 
 class LoginStatePresenter extends BaseStatePresenter {
 
   LoginStateView view;
+  LoginModel model;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var dbHelper = DatabaseHelper();
+
+  get getFormKey => _formKey;
 
   void performLogin(String login, String password) {
-    //todo perform login
+    if (_formKey.currentState.validate() && !dbHelper.checkIfUserExists(login, password)) {
+      _formKey.currentState.save();
+    } else {
+      view.autoValidate();
+    }
   }
 
   bool emailIsValid(String email) {
@@ -20,8 +32,7 @@ class LoginStatePresenter extends BaseStatePresenter {
   }
 
   bool loginAndPasswordIsValid(String login, String password) {
-    //todo check if user exists
-    return true;
+    return !dbHelper.checkIfUserExists(login, password);
   }
 
   void performToLaunchSignUpPage() {

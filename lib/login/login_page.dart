@@ -32,6 +32,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
           Container(
             padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
             child: Form(
+              key: presenter.getFormKey,
               child: Column(
                 children: <Widget>[
                   TextFormField(
@@ -137,5 +138,12 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
   @override
   void showMessage(String message) {
     // TODO: implement showMessage
+  }
+
+  @override
+  void autoValidate() {
+    setState(() {
+      presenter.model.setAutoValidate(true);
+    });
   }
 }
