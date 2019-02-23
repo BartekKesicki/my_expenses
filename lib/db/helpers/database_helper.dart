@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io' as io;
+import 'package:my_expenses/db/constants/db_column_constants.dart';
 import 'package:my_expenses/db/constants/db_query_constants.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/db/model/user.dart';
@@ -32,13 +33,16 @@ class DatabaseHelper {
 
   Future saveUser(User user) async {
     var dbClient = await db;
-    String query = "INSERT INTO User(id, email, password, income, limit, startFunds) VALUES(null, ${user.email}, ${user.password}, ${user.income}, ${user.limit}, ${user.startFunds})";
+    String query = "INSERT INTO ${DbColumnConstants.tableUser}(${DbColumnConstants.idColumnName}, " +
+        "${DbColumnConstants.emailColumn}, ${DbColumnConstants.passwordColumn}, ${DbColumnConstants.incomeColumn}, ${DbColumnConstants.limitColumn}, ${DbColumnConstants.startFunds}) " +
+            "VALUES(null, ${user.email}, ${user.password}, ${user.income}, ${user.limit}, ${user.startFunds})";
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(query);
     });
   }
 
   bool checkIfUserExists(String login, String password) {
+    //List<Map<String, dynamic>> result = await _db.rawQuery("SELECT * FROM User WHERE email=${login} AND password=${password})";
     return false;
   }
 
