@@ -41,9 +41,9 @@ class DatabaseHelper {
     });
   }
 
-  bool checkIfUserExists(String login, String password) {
-    //List<Map<String, dynamic>> result = await _db.rawQuery("SELECT * FROM User WHERE email=${login} AND password=${password})";
-    return false;
+  Future<bool> checkIfUserExists(String login, String password) async {
+    List<Map> result = await _db.rawQuery("SELECT * FROM ${DbColumnConstants.tableUser} WHERE ${DbColumnConstants.emailColumn}=$login AND ${DbColumnConstants.passwordColumn}=$password");
+    return result != null && result.length > 0;
   }
 
   void saveExpense(Expense expense) {

@@ -15,9 +15,11 @@ class LoginStatePresenter extends BaseStatePresenter {
 
   get getFormKey => _formKey;
 
-  void performLogin(String login, String password) {
-    if (_formKey.currentState.validate() && !dbHelper.checkIfUserExists(login, password)) {
+  void performLogin(String login, String password) async {
+    var userExists = await dbHelper.checkIfUserExists(login, password);
+    if (_formKey.currentState.validate() && !userExists) {
       _formKey.currentState.save();
+      //todo redirect to home page
     } else {
       view.autoValidate();
     }
@@ -29,10 +31,6 @@ class LoginStatePresenter extends BaseStatePresenter {
 
   bool passwordIsValid(String password) {
     return !LoginValidator.fieldIsEmpty(password);
-  }
-
-  bool loginAndPasswordIsValid(String login, String password) {
-    return !dbHelper.checkIfUserExists(login, password);
   }
 
   void performToLaunchSignUpPage() {

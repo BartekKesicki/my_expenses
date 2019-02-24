@@ -49,12 +49,9 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                   ),
                   TextFormField(
                     decoration: createTextFieldDecoration("PASSWORD"),
-                    validator: (String value) {
+                    validator: (String value){
                       if (!presenter.passwordIsValid(value)) {
                         return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
-                      }
-                      if (!presenter.loginAndPasswordIsValid(model.email, value)) {
-                        return ValidationMessagesConstants.INCORRECT_EMAIL_OR_PASSWORD;
                       }
                     },
                     obscureText: true,
