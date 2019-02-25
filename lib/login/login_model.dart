@@ -6,6 +6,10 @@ class LoginModel {
 
   get getAutoValidate => _autoValidate;
 
+  get getEmail => email;
+
+  get getPassword => password;
+
   void setAutoValidate(bool value) {
     _autoValidate = value;
   }

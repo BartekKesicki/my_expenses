@@ -8,7 +8,7 @@ class DbColumnConstants {
   static const String emailColumn = "email";
   static const String passwordColumn = "password";
   static const String incomeColumn = "income";
-  static const String limitColumn = "limit";
+  static const String limitColumn = "expenseLimit";
   static const String startFunds = "startFunds";
 
   //EXPENSE TABLE COLUMN NAMES (WIP)

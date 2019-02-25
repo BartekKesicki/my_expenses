@@ -35,15 +35,20 @@ class DatabaseHelper {
     var dbClient = await db;
     String query = "INSERT INTO ${DbColumnConstants.tableUser}(${DbColumnConstants.idColumnName}, " +
         "${DbColumnConstants.emailColumn}, ${DbColumnConstants.passwordColumn}, ${DbColumnConstants.incomeColumn}, ${DbColumnConstants.limitColumn}, ${DbColumnConstants.startFunds}) " +
-            "VALUES(null, ${user.email}, ${user.password}, ${user.income}, ${user.limit}, ${user.startFunds})";
+            "VALUES(${user.id}, '${user.email}', '${user.password}', ${user.income}, ${user.limit}, ${user.startFunds})";
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(query);
     });
   }
 
-  Future<bool> checkIfUserExists(String login, String password) async {
-    List<Map> result = await _db.rawQuery("SELECT * FROM ${DbColumnConstants.tableUser} WHERE ${DbColumnConstants.emailColumn}=$login AND ${DbColumnConstants.passwordColumn}=$password");
-    return result != null && result.length > 0;
+  Future<int> getUserIdOrNull(String login, String password) async {
+    var dbClient = await db;
+    List<Map> result = await dbClient.rawQuery("SELECT * FROM ${DbColumnConstants.tableUser} WHERE ${DbColumnConstants.emailColumn}='$login' AND ${DbColumnConstants.passwordColumn}='$password'");
+    User user;
+    if (result != null && result.isNotEmpty) {
+      user = User.fromMap(result.first);
+    }
+    return user.id;
   }
 
   void saveExpense(Expense expense) {

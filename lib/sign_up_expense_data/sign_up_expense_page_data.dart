@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
+import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_view.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_validator.dart';
@@ -106,7 +107,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
 
   @override
   void redirectToLoginPage() {
-    // TODO: implement redirectToLoginPage
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (Route<dynamic> route) => false);
   }
 
   @override

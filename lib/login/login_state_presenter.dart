@@ -9,20 +9,29 @@ import 'package:my_expenses/login/login_validator.dart';
 class LoginStatePresenter extends BaseStatePresenter {
 
   LoginStateView view;
-  LoginModel model;
+  LoginModel model = new LoginModel();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  var dbHelper = DatabaseHelper();
+  var dbHelper;
 
   get getFormKey => _formKey;
 
-  void performLogin(String login, String password) async {
-    var userExists = await dbHelper.checkIfUserExists(login, password);
-    if (_formKey.currentState.validate() && !userExists) {
-      _formKey.currentState.save();
-      //todo redirect to home page
+  void performLogin() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();      
     } else {
       view.autoValidate();
+      return;
     }
+    await dbHelper.getUserIdOrNull(model.getEmail, model.getPassword).then(login, onError: loginError);
+
+  }
+
+  void login(int value) {
+    view.redirectToHomePage(value);
+  }
+
+  void loginError() {
+    view.showMessage("LOGIN FAILED");
   }
 
   bool emailIsValid(String email) {
@@ -40,6 +49,8 @@ class LoginStatePresenter extends BaseStatePresenter {
   @override
   void attach(BaseStateView view) {
     this.view = view;
+    dbHelper = DatabaseHelper();
+
   }
 
   @override

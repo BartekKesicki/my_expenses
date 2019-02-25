@@ -1,4 +1,3 @@
-
 import 'package:my_expenses/db/constants/db_column_constants.dart';
 
 class User {

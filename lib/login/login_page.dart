@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
+import 'package:my_expenses/home/home_page.dart';
 import 'package:my_expenses/login/login_model.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
@@ -18,7 +19,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView {
 
   LoginStatePresenter presenter;
-  LoginModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +41,10 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                       if (!presenter.emailIsValid(value)) {
                         return ValidationMessagesConstants.INCORRECT_EMAIL;
                       }
-                      model.email = value;
+                      presenter.model.email = value;
                     },
                     onSaved: (String value) {
-                      model.email = value;
+                      presenter.model.email = value;
                     },
                   ),
                   TextFormField(
@@ -56,7 +56,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                     },
                     obscureText: true,
                     onSaved: (String value) {
-                      model.password = value;
+                      presenter.model.password = value;
                     },
                   ),
                   createSizedBox(5.0),
@@ -68,7 +68,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                   ),
                   createSizedBox(30.0),
                   createRaisedButton(() {
-                    presenter.performLogin(model.email, model.password);
+                    presenter.performLogin();
                   }, createText("LOGIN", createButtonTextStyle())),
                   createSizedBox(20.0),
                   createSignUpButton(),
@@ -85,7 +85,6 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
     if (presenter == null) {
       presenter = LoginStatePresenter();
       presenter.attach(this);
-      model = LoginModel();
     }
   }
 
@@ -123,8 +122,8 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
   }
 
   @override
-  void redirectToHomePage() {
-    // TODO: implement redirectToHomePage
+  void redirectToHomePage(int id) {
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomePage(id)), (Route<dynamic> route) => false);
   }
 
   @override
@@ -134,7 +133,9 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
 
   @override
   void showMessage(String message) {
-    // TODO: implement showMessage
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text(message),
+    ));
   }
 
   @override
