@@ -16,6 +16,7 @@ class DbColumnConstants {
   static const String expenseTable = "Expense";
   static const String expenseIdColumnName = "id";
   static const String priceColumnName = "price";
+  static const String expenseNameColumnName = "name";
   static const String categoryColumnName = "category";
   static const String timestampColumnName = "timestamp";
 }

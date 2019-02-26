@@ -8,9 +8,10 @@ class QueryConstants {
       "${DbColumnConstants.incomeColumn} REAL, " +
       "${DbColumnConstants.limitColumn} REAL, " +
       "${DbColumnConstants.startFunds} REAL)";
-  static const String CREATE_EXPENSE_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.expenseTable} ("
-      "${DbColumnConstants.expenseIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, "
-      "${DbColumnConstants.categoryColumnName} TEXT, "
-      "${DbColumnConstants.priceColumnName} REAL, "
+  static const String CREATE_EXPENSE_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.expenseTable} (" +
+      "${DbColumnConstants.expenseIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+      "${DbColumnConstants.expenseNameColumnName} TEXT," +
+      "${DbColumnConstants.categoryColumnName} TEXT, " +
+      "${DbColumnConstants.priceColumnName} REAL, " +
       "${DbColumnConstants.timestampColumnName} INTEGER)";
 }

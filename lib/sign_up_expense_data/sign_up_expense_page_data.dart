@@ -112,17 +112,16 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
 
   @override
   void showError() {
-    // TODO: implement showError
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text("SOMETHING GOES WRONG"),
+    ));
   }
 
   @override
   void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
-  @override
-  void signUpUser() {
-    // TODO: implement signUpUser
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text(message),
+    ));
   }
 
   @override

@@ -51,7 +51,13 @@ class DatabaseHelper {
     return user.id;
   }
 
-  void saveExpense(Expense expense) {
-    //todo save expense
+  Future saveExpense(Expense expense) async {
+    var dbClient = await db;
+    String query = "INSERT INTO ${DbColumnConstants.expenseTable} (${DbColumnConstants.expenseIdColumnName}, ${DbColumnConstants.expenseNameColumnName}, " +
+        "${DbColumnConstants.categoryColumnName}, ${DbColumnConstants.priceColumnName}, ${DbColumnConstants.timestampColumnName} " +
+            "VALUES(${expense.id}, '${expense.name}', '${expense.category}', ${expense.price}, ${expense.timestamp})";
+    await dbClient.transaction((txn) async {
+      return txn.rawInsert(query);
+    });
   }
 }
