@@ -60,4 +60,15 @@ class DatabaseHelper {
       return txn.rawInsert(query);
     });
   }
+
+  Future<List<Expense>> getAllExpenses() async {
+    var dbClient = await db;
+    String query = "SELECT * FROM ${DbColumnConstants.expenseTable}";
+    List<Map> result = await dbClient.rawQuery(query);
+    List<Expense> expenses;
+    if (result != null && result.isNotEmpty) {
+      expenses = result.toList().map((e) => Expense.fromMap(e));
+    }
+    return expenses;
+  }
 }
