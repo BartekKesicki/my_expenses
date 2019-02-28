@@ -2,16 +2,16 @@ import 'package:my_expenses/db/constants/db_column_constants.dart';
 
 class Expense {
   int id;
-  String category;
+  int categoryId;
   String name;
   double price;
   int timestamp;
-  Expense(this.id, this.name, this.category, this.price, this.timestamp);
+  Expense(this.id, this.name, this.categoryId, this.price, this.timestamp);
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       DbColumnConstants.expenseNameColumnName : name,
-      DbColumnConstants.categoryColumnName : category,
+      DbColumnConstants.categoryIdColumnName : categoryId,
       DbColumnConstants.priceColumnName : price,
       DbColumnConstants.timestampColumnName : timestamp,
     };
@@ -24,7 +24,7 @@ class Expense {
   Expense.fromMap(Map<String, dynamic> map) {
     id = map[DbColumnConstants.expenseIdColumnName];
     name = map[DbColumnConstants.expenseNameColumnName];
-    category = map[DbColumnConstants.categoryColumnName];
+    categoryId = map[DbColumnConstants.categoryIdColumnName];
     price = map[DbColumnConstants.priceColumnName];
     timestamp = map[DbColumnConstants.timestampColumnName];
   }
