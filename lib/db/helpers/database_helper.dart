@@ -72,4 +72,16 @@ class DatabaseHelper {
     }
     return expenses;
   }
+
+  Future<List<Expense>> getExpensesFromSpecifiedMonth(int lowerTimeStamp, int topTimeStamp) async {
+    var dbClient = await db;
+    String query = "SELECT * FROM ${DbColumnConstants.expenseTableName} " +
+        "WHERE $lowerTimeStamp < ${DbColumnConstants.timestampColumnName} AND $topTimeStamp > ${DbColumnConstants.timestampColumnName}";
+    List<Map> result = await dbClient.rawQuery(query);
+    List<Expense> expenses;
+    if (result != null && result.isNotEmpty) {
+      expenses = result.toList().map((e) => Expense.fromMap(e));
+    }
+    return expenses;
+  }
 }
