@@ -14,6 +14,6 @@ class QueryConstants {
       "${DbColumnConstants.categoryIdColumnName} INTEGER, " +
       "${DbColumnConstants.priceColumnName} REAL, " +
       "${DbColumnConstants.timestampColumnName} INTEGER)";
-  static const String CREATE_CATEGORY_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.expenseTableName} (${DbColumnConstants.categoryTableIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+  static const String CREATE_CATEGORY_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.categoryTableName} (${DbColumnConstants.categoryTableIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
       "${DbColumnConstants.categoryTableNameColumnName} TEXT, ${DbColumnConstants.categoryTableIsBillColumnName} INTEGER)";
 }
