@@ -2,7 +2,7 @@ import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/home/home_state_view.dart';
 
-class HomeState extends BaseStatePresenter {
+class HomeStatePresenter extends BaseStatePresenter {
 
   HomeStateView view;
 
@@ -14,6 +14,10 @@ class HomeState extends BaseStatePresenter {
   @override
   void detach() {
     this.view = null;
+  }
+
+  void performLaunchNewExpense(int userId) {
+    view.redirectToAddNewExpensePage(userId);
   }
 
 }
