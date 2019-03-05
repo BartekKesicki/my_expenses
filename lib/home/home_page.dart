@@ -3,7 +3,6 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/home/home_state_presenter.dart';
 import 'package:my_expenses/home/home_state_view.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   HomePage(this.id, {Key key, this.title}) : super(key: key);
@@ -53,13 +52,13 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
         )
       ),
       //todo fix icons
-      bottomNavigationBar: new BottomNavigationBar(items: [
-        new BottomNavigationBarItem(icon: Icon(Icons.monetization_on), backgroundColor: Colors.green, title: new Text("My expenses", style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.account_circle), backgroundColor: Colors.green, title: new Text("My profile", style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.dashboard), backgroundColor: Colors.green, title: new Text("Dashboard", style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.category), backgroundColor: Colors.green, title: new Text("Categories", style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.settings), backgroundColor: Colors.green, title: new Text("Settings", style: TextStyle(color: Colors.green),)),
-      ], ),
+      bottomNavigationBar: BottomNavigationBar(currentIndex: 2 , items: [
+        new BottomNavigationBarItem(icon: Icon(Icons.attach_money), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
+        new BottomNavigationBarItem(icon: Icon(Icons.account_circle), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
+        new BottomNavigationBarItem(icon: Icon(Icons.dashboard), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
+        new BottomNavigationBarItem(icon: Icon(Icons.category), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
+        new BottomNavigationBarItem(icon: Icon(Icons.settings), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
+      ], type: BottomNavigationBarType.shifting,),
     );
   }
 
