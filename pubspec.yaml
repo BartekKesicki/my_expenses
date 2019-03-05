@@ -22,6 +22,7 @@ dependencies:
   path_provider: '>=0.3.0'
   flutter_circular_chart: ^0.1.0
   sqflite: any
+  flutter_svg: ^0.11.0+1
 
 dev_dependencies:
   flutter_test:
