@@ -26,6 +26,7 @@ class _DashboardPageState extends BasePageState<DashBoardPage> implements Dashbo
   @override
   Widget build(BuildContext context) {
     initPresenter();
+    prepareChartData();
     return new Scaffold(
       body: new Center(
           child: new Container(
@@ -62,6 +63,20 @@ class _DashboardPageState extends BasePageState<DashBoardPage> implements Dashbo
       presenter = new DashboardStatePresenter();
       presenter.attach(this);
     }
+  }
+
+  void prepareChartData() {
+    data = <CircularStackEntry>[
+      new CircularStackEntry(
+        <CircularSegmentEntry>[
+          new CircularSegmentEntry(5.0, Colors.red[200], rankKey: 'Q1'),
+          new CircularSegmentEntry(20.0, Colors.green[200], rankKey: 'Q2'),
+          new CircularSegmentEntry(40.0, Colors.blue[200], rankKey: 'Q3'),
+          new CircularSegmentEntry(35.0, Colors.yellow[200], rankKey: 'Q4'),
+        ],
+        rankKey: 'Quarterly Profits',
+      ),
+    ];
   }
 
   @override

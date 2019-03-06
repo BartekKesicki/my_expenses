@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/categories_page/categories_page.dart';
 import 'package:my_expenses/dashboard_page/dashboard_page.dart';
+import 'package:my_expenses/expenses_page/expenses_page.dart';
 import 'package:my_expenses/home/home_state_presenter.dart';
 import 'package:my_expenses/home/home_state_view.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:my_expenses/my_profile_page/profile_page.dart';
+import 'package:my_expenses/settings_page/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage(this.id, {Key key, this.title}) : super(key: key);
@@ -17,65 +21,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
 
-  final GlobalKey<AnimatedCircularChartState> _chartKey = new GlobalKey<AnimatedCircularChartState>();
   List<CircularStackEntry> data;
   HomeStatePresenter presenter;
+  PageController _pageController;
+  int _page = 2;
 
   @override
   Widget build(BuildContext context) {
-    prepareChartData();
     initHomePresenter();
     return new Scaffold(
-      body: new DashBoardPage(),
-//      new Center(
-//        child: new Container(
-//          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-//          child: new Column(
-//            children: <Widget>[
-//              new AnimatedCircularChart(
-//                key: _chartKey,
-//                size: const Size(300.0, 300.0),
-//                initialChartData: data,
-//                chartType: CircularChartType.Radial,
-//                percentageValues: true,
-//                holeLabel: 'Expenses',
-//                labelStyle: new TextStyle(
-//                  color: Colors.blueGrey[600],
-//                  fontWeight: FontWeight.bold,
-//                  fontSize: 24.0,
-//                ),
-//              ),
-//              createSizedBox(30.0),
-//              createRaisedButton(() {
-//                presenter.performLaunchNewExpense(widget.id);
-//              }, createText("NEW EXPENSE", createButtonTextStyle())),
-//            ],
-//          ),
-//        )
-//      ),
-    //todo fix navigation
-      bottomNavigationBar: BottomNavigationBar(currentIndex: 2 , items: [
+      body: new PageView(
+        children: <Widget>[
+          new ExpensesPage(),
+          new ProfilePage(),
+          new DashBoardPage(),
+          new CategoriesPage(),
+          new SettingsPage()
+        ],
+        controller: _pageController,
+        onPageChanged: onPageChanged,
+      ),
+      bottomNavigationBar: BottomNavigationBar(currentIndex: _page , items: [
         new BottomNavigationBarItem(icon: Icon(Icons.attach_money), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
         new BottomNavigationBarItem(icon: Icon(Icons.account_circle), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
         new BottomNavigationBarItem(icon: Icon(Icons.dashboard), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
         new BottomNavigationBarItem(icon: Icon(Icons.category), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
         new BottomNavigationBarItem(icon: Icon(Icons.settings), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
-      ], type: BottomNavigationBarType.shifting,),
-    );
-  }
-
-  void prepareChartData() {
-     data = <CircularStackEntry>[
-      new CircularStackEntry(
-        <CircularSegmentEntry>[
-          new CircularSegmentEntry(5.0, Colors.red[200], rankKey: 'Q1'),
-          new CircularSegmentEntry(20.0, Colors.green[200], rankKey: 'Q2'),
-          new CircularSegmentEntry(40.0, Colors.blue[200], rankKey: 'Q3'),
-          new CircularSegmentEntry(35.0, Colors.yellow[200], rankKey: 'Q4'),
-        ],
-        rankKey: 'Quarterly Profits',
+      ],
+        type: BottomNavigationBarType.shifting,
+        onTap: navigationTapped,
       ),
-    ];
+    );
   }
 
   void initHomePresenter() {
@@ -86,6 +62,18 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController(initialPage: _page);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  @override
   void showMessage(String message) {
     // TODO: implement showMessage
   }
@@ -93,5 +81,16 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
   @override
   void redirectToAddNewExpensePage(int userId) {
     // TODO: implement redirectToAddNewExpensePage
+  }
+
+  void navigationTapped(int page) {
+    _pageController.animateToPage(page,
+        duration: const Duration(milliseconds: 300), curve: Curves.ease);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      _page = page;
+    });
   }
 }
