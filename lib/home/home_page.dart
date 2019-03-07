@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/categories_page.dart';
 import 'package:my_expenses/dashboard_page/dashboard_page.dart';
-import 'package:my_expenses/expenses_page/expenses_page.dart';
+import 'package:my_expenses/fund_management_page/fund_management_page.dart';
 import 'package:my_expenses/home/home_state_presenter.dart';
 import 'package:my_expenses/home/home_state_view.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
@@ -32,7 +32,7 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
     return new Scaffold(
       body: new PageView(
         children: <Widget>[
-          new ExpensesPage(),
+          new FundManagementPage(),
           new ProfilePage(),
           new DashBoardPage(),
           new CategoriesPage(),
