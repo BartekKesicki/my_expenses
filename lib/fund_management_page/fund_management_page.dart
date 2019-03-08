@@ -27,7 +27,7 @@ class _FundManagementState extends BasePageState<FundManagementPage> implements 
       ),
     );
   }
-  //todo fill the page tab view
+  //todo fill the page tab view (wip)
 
   void initPresenter() {
     if (presenter == null) {
