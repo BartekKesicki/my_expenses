@@ -2,37 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_presenter.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_view.dart';
+import 'package:my_expenses/income_tab_page/income_tab_page.dart';
+import 'package:my_expenses/outcome_tab_page/outcome_tab_page.dart';
 
 class FundManagementPage extends StatefulWidget {
-
   FundManagementPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
   State<StatefulWidget> createState() => _FundManagementState();
-
 }
 
-class _FundManagementState extends BasePageState<FundManagementPage> implements FundManagementStateView {
-
+class _FundManagementState extends BasePageState<FundManagementPage>
+    implements FundManagementStateView {
   FundManagementStatePresenter presenter;
+  IncomeTabPage incomeTabPage;
+  OutcomeTabPage outcomeTabPage;
 
   @override
   Widget build(BuildContext context) {
-    initPresenter();
-    return new Scaffold(
-      body: Center(
-        child: Text("FUND MANAGEMENT"),
-      ),
-    );
+    initPresenterAndTabViews();
+    return new DefaultTabController(
+        length: 2,
+        child: new Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.green,
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: "INCOMES",
+                ),
+                Tab(
+                  text: "EXPENSES",
+                ),
+              ],
+            ),
+            title: Text('Funds Management'),
+          ),
+          body: TabBarView(
+            children: [
+              incomeTabPage,
+              outcomeTabPage,
+            ],
+          ),
+        ));
   }
   //todo fill the page tab view (wip)
 
-  void initPresenter() {
+  void initPresenterAndTabViews() {
+    //todo get user id (temporary mocked)
+    var id = -1;
     if (presenter == null) {
       presenter = new FundManagementStatePresenter();
       presenter.attach(this);
+    }
+    if (incomeTabPage == null) {
+      incomeTabPage = IncomeTabPage(id);
+    }
+    if (outcomeTabPage == null) {
+      outcomeTabPage = OutcomeTabPage(id);
     }
   }
 
@@ -40,5 +69,4 @@ class _FundManagementState extends BasePageState<FundManagementPage> implements 
   void showMessage(String message) {
     // TODO: implement showMessage
   }
-
 }
