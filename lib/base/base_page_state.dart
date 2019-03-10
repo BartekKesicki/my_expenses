@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 class BasePageState<V extends StatefulWidget> extends State<V> {
-
   @override
   Widget build(BuildContext context) {}
 
@@ -14,15 +12,20 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
   }
 
   SizedBox createSizedBox(double height) {
-    return new SizedBox(height: height,);
+    return new SizedBox(
+      height: height,
+    );
   }
 
   Text createText(String label, TextStyle textStyle) {
-    return new Text(label, style: textStyle,);
+    return new Text(
+      label,
+      style: textStyle,
+    );
   }
 
   TextStyle createTitleTextStyle() {
-    return new TextStyle(fontSize : 80.0, fontWeight: FontWeight.bold);
+    return new TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold);
   }
 
   TextStyle createSubTitleTextStyle() {
@@ -30,51 +33,55 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
   }
 
   TextStyle createButtonTextStyle() {
-    return new TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: "Montserrat");
+    return new TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontFamily: "Montserrat");
   }
 
   InputDecoration createTextFieldDecoration(String labelText) {
     return new InputDecoration(
         labelText: labelText,
-        labelStyle: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.bold, color: Colors.grey)
-    );
+        labelStyle: TextStyle(
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.bold,
+            color: Colors.grey));
   }
 
   TextStyle createHyperLinkTextStyle() {
-    return new TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontFamily: 'Montserrat', decoration: TextDecoration.underline);
+    return new TextStyle(
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Montserrat',
+        decoration: TextDecoration.underline);
   }
 
   Container createSubmitButton(GestureTapCallback callback, Text centerText) {
     return new Container(
-      height: 50,
-      child: Material(
-        borderRadius: BorderRadius.circular(25.0),
-        shadowColor: Colors.lightGreen,
-        color: Colors.green,
-        elevation: 7.0,
-        child: GestureDetector(
-          onTap: callback,
-          child: Center(
-            child: centerText
+        height: 50,
+        child: Material(
+          borderRadius: BorderRadius.circular(25.0),
+          shadowColor: Colors.lightGreen,
+          color: Colors.green,
+          elevation: 7.0,
+          child: GestureDetector(
+            onTap: callback,
+            child: Center(child: centerText),
           ),
-        ),
-        )
-    );
+        ));
   }
 
   Container createRaisedButton(VoidCallback callback, Text centerText) {
     return new Container(
-        height: 50,
-        child: RaisedButton(
-          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25.0)),
-          elevation: 7.0,
-          color: Colors.green,
-          onPressed: callback,
-          child: Center(
-              child: centerText
-          ),
+      height: 50,
+      child: RaisedButton(
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(25.0)),
+        elevation: 7.0,
+        color: Colors.green,
+        onPressed: callback,
+        child: Center(child: centerText),
       ),
     );
   }
-
 }

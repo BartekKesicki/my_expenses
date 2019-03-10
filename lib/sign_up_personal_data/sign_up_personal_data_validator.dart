@@ -1,6 +1,4 @@
-
 class SignUpPersonalDataValidator {
-
   static bool textFormFieldIsEmpty(String value) {
     return value.isEmpty;
   }

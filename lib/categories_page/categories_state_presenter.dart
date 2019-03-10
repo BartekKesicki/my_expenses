@@ -1,10 +1,8 @@
-
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/categories_page/categories_state_view.dart';
 
 class CategoriesStatePresenter extends BaseStatePresenter {
-
   CategoriesStateView view;
 
   @override

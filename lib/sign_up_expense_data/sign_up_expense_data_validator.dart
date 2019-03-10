@@ -1,6 +1,4 @@
-
 class SignUpExpenseDataValidator {
-
   static bool numberIsEmpty(String value) {
     return value.isEmpty;
   }

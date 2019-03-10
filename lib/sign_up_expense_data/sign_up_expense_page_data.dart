@@ -17,8 +17,8 @@ class SignUpExpenseDataPage extends StatefulWidget {
   _SignUpExpenseDataPageState createState() => _SignUpExpenseDataPageState();
 }
 
-class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> implements SignUpExpenseDataStateView {
-
+class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
+    implements SignUpExpenseDataStateView {
   SignUpExpenseDataStatePresenter presenter;
   SignUpPersonalDataModel personalData;
 
@@ -26,76 +26,79 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
   Widget build(BuildContext context) {
     initSignUpPresenter();
     return Scaffold(
-        body: Column(
+        body: Column(children: <Widget>[
+      Container(
+          child: Stack(
+        children: <Widget>[
+          createTopLabelsContainer(
+              createText("Sign up", createTitleTextStyle()),
+              EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
+          createTopLabelsContainer(
+              createText("Expenses data", createSubTitleTextStyle()),
+              EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
+        ],
+      )),
+      Container(
+        padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+        child: Form(
+          key: presenter.getFormKey,
+          child: Column(
             children: <Widget>[
-              Container(
-                  child:
-                  Stack(
-                    children: <Widget>[
-                      createTopLabelsContainer(createText("Sign up", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-                      createTopLabelsContainer(createText("Expenses data", createSubTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
-                    ],
-                  )
+              TextFormField(
+                decoration: createTextFieldDecoration("START FUNDS"),
+                keyboardType: TextInputType.number,
+                validator: (String value) {
+                  if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
+                    return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
+                  }
+                },
+                onSaved: (String value) {
+                  presenter.model.startFunds = double.parse(value);
+                },
               ),
-              Container(
-                padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                child: Form(
-                    key: presenter.getFormKey,
-                    child: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: createTextFieldDecoration("START FUNDS"),
-                          keyboardType: TextInputType.number,
-                          validator: (String value) {
-                            if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
-                              return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
-                            }
-                          },
-                          onSaved: (String value) {
-                              presenter.model.startFunds = double.parse(value);
-                          },
-                        ),
-                        createSizedBox(5.0),
-                        TextFormField(
-                            decoration: createTextFieldDecoration("YOUR INCOME"),
-                            keyboardType: TextInputType.number,
-                            validator: (String value) {
-                              if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
-                                return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
-                              }
-                              if (!SignUpExpenseDataValidator.numberIsNotBelowZero(value)) {
-                                return ValidationMessagesConstants.VALUE_CANT_BE_BELOW_ZERO;
-                              }
-                            },
-                            onSaved: (String value) {
-                                presenter.model.income = double.parse(value);
-                            }
-                        ),
-                        createSizedBox(5.0),
-                        TextFormField(
-                            decoration: createTextFieldDecoration("MONTHLY LIMIT (OPTIONAL)"),
-                            keyboardType: TextInputType.number,
-                            validator: (String value) {
-                              if (!SignUpExpenseDataValidator.numberIsNotBelowZero(value)) {
-                                return ValidationMessagesConstants.VALUE_CANT_BE_BELOW_ZERO;
-                              }
-                            },
-                            onSaved: (String value) {
-                                presenter.model.monthlyLimit = double.parse(value);
-                            }
-                        ),
-                        createSizedBox(50.0),
-                        createRaisedButton(() {
-                          personalData = widget.model;
-                          presenter.validateInputsAndSignup(personalData);
-                        }, createText("SIGN UP", createButtonTextStyle()))
-                      ],
-                    ),
-                ),
-              )
-            ]
-        )
-    );
+              createSizedBox(5.0),
+              TextFormField(
+                  decoration: createTextFieldDecoration("YOUR INCOME"),
+                  keyboardType: TextInputType.number,
+                  validator: (String value) {
+                    if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
+                      return ValidationMessagesConstants
+                          .THIS_FIELD_CANT_BE_EMPTY;
+                    }
+                    if (!SignUpExpenseDataValidator.numberIsNotBelowZero(
+                        value)) {
+                      return ValidationMessagesConstants
+                          .VALUE_CANT_BE_BELOW_ZERO;
+                    }
+                  },
+                  onSaved: (String value) {
+                    presenter.model.income = double.parse(value);
+                  }),
+              createSizedBox(5.0),
+              TextFormField(
+                  decoration:
+                      createTextFieldDecoration("MONTHLY LIMIT (OPTIONAL)"),
+                  keyboardType: TextInputType.number,
+                  validator: (String value) {
+                    if (!SignUpExpenseDataValidator.numberIsNotBelowZero(
+                        value)) {
+                      return ValidationMessagesConstants
+                          .VALUE_CANT_BE_BELOW_ZERO;
+                    }
+                  },
+                  onSaved: (String value) {
+                    presenter.model.monthlyLimit = double.parse(value);
+                  }),
+              createSizedBox(50.0),
+              createRaisedButton(() {
+                personalData = widget.model;
+                presenter.validateInputsAndSignup(personalData);
+              }, createText("SIGN UP", createButtonTextStyle()))
+            ],
+          ),
+        ),
+      )
+    ]));
   }
 
   void initSignUpPresenter() {
@@ -107,7 +110,9 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
 
   @override
   void redirectToLoginPage() {
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (Route<dynamic> route) => false);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        (Route<dynamic> route) => false);
   }
 
   @override
@@ -136,5 +141,4 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage> i
       presenter.model.setAutoValidate(true);
     });
   }
-
 }

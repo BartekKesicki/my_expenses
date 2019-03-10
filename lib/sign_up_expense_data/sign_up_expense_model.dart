@@ -1,4 +1,3 @@
-
 class SignUpExpenseModel {
   bool _autoValidate = false;
   double startFunds;

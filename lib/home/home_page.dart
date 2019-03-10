@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
-
   List<CircularStackEntry> data;
   HomeStatePresenter presenter;
   PageController _pageController;
@@ -41,13 +40,45 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
         controller: _pageController,
         onPageChanged: onPageChanged,
       ),
-      bottomNavigationBar: BottomNavigationBar(currentIndex: _page , items: [
-        new BottomNavigationBarItem(icon: Icon(Icons.attach_money), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.account_circle), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.dashboard), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.category), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
-        new BottomNavigationBarItem(icon: Icon(Icons.settings), backgroundColor: Colors.green, title: new Text('', style: TextStyle(color: Colors.green),)),
-      ],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _page,
+        items: [
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money),
+              backgroundColor: Colors.green,
+              title: new Text(
+                '',
+                style: TextStyle(color: Colors.green),
+              )),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              backgroundColor: Colors.green,
+              title: new Text(
+                '',
+                style: TextStyle(color: Colors.green),
+              )),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+              backgroundColor: Colors.green,
+              title: new Text(
+                '',
+                style: TextStyle(color: Colors.green),
+              )),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.category),
+              backgroundColor: Colors.green,
+              title: new Text(
+                '',
+                style: TextStyle(color: Colors.green),
+              )),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              backgroundColor: Colors.green,
+              title: new Text(
+                '',
+                style: TextStyle(color: Colors.green),
+              )),
+        ],
         type: BottomNavigationBarType.shifting,
         onTap: navigationTapped,
       ),

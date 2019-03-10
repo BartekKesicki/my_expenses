@@ -7,7 +7,6 @@ import 'package:my_expenses/login/login_state_view.dart';
 import 'package:my_expenses/login/login_validator.dart';
 
 class LoginStatePresenter extends BaseStatePresenter {
-
   LoginStateView view;
   LoginModel model = new LoginModel();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -17,13 +16,14 @@ class LoginStatePresenter extends BaseStatePresenter {
 
   void performLogin() async {
     if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();      
+      _formKey.currentState.save();
     } else {
       view.autoValidate();
       return;
     }
-    await dbHelper.getUserIdOrNull(model.getEmail, model.getPassword).then(login, onError: loginError);
-
+    await dbHelper
+        .getUserIdOrNull(model.getEmail, model.getPassword)
+        .then(login, onError: loginError);
   }
 
   void login(int value) {
@@ -50,7 +50,6 @@ class LoginStatePresenter extends BaseStatePresenter {
   void attach(BaseStateView view) {
     this.view = view;
     dbHelper = DatabaseHelper();
-
   }
 
   @override

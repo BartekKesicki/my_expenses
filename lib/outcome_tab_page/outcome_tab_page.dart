@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/outcome_tab_page/outcome_tab_presenter.dart';
@@ -14,8 +13,8 @@ class OutcomeTabPage extends StatefulWidget {
   _OutcomeTabPageState createState() => _OutcomeTabPageState();
 }
 
-class _OutcomeTabPageState extends BasePageState<OutcomeTabPage> implements OutcomeTabView {
-
+class _OutcomeTabPageState extends BasePageState<OutcomeTabPage>
+    implements OutcomeTabView {
   OutcomeTabPresenter presenter;
 
   @override
@@ -26,11 +25,8 @@ class _OutcomeTabPageState extends BasePageState<OutcomeTabPage> implements Outc
     );
   }
 
-
   @override
-  void showMessage(String message) {
-
-  }
+  void showMessage(String message) {}
 
   void initHomePresenter() {
     if (presenter == null) {
@@ -38,5 +34,4 @@ class _OutcomeTabPageState extends BasePageState<OutcomeTabPage> implements Outc
       presenter.attach(this);
     }
   }
-
 }

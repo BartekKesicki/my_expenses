@@ -8,7 +8,6 @@ import 'package:my_expenses/sign_up_expense_data/sign_up_expense_model.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.dart';
 
 class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
-
   SignUpExpenseDataStateView view;
   SignUpExpenseModel model;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -35,8 +34,9 @@ class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
 
   User createUser(SignUpPersonalDataModel personalData) {
     //todo remove mocked id
-   // int id = 0;
-    return User(null, personalData.email, personalData.password, model.income, model.monthlyLimit, model.startFunds);
+    // int id = 0;
+    return User(null, personalData.email, personalData.password, model.income,
+        model.monthlyLimit, model.startFunds);
   }
 
   @override

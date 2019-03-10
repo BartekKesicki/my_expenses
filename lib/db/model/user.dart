@@ -7,15 +7,16 @@ class User {
   double income;
   double limit;
   double startFunds;
-  User(this.id, this.email, this.password, this.income, this.limit, this.startFunds);
+  User(this.id, this.email, this.password, this.income, this.limit,
+      this.startFunds);
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      DbColumnConstants.emailColumn : email,
-      DbColumnConstants.passwordColumn : password,
-      DbColumnConstants.incomeColumn : income,
-      DbColumnConstants.limitColumn : limit,
-      DbColumnConstants.startFunds : startFunds
+      DbColumnConstants.emailColumn: email,
+      DbColumnConstants.passwordColumn: password,
+      DbColumnConstants.incomeColumn: income,
+      DbColumnConstants.limitColumn: limit,
+      DbColumnConstants.startFunds: startFunds
     };
     if (id != null) {
       map[DbColumnConstants.idColumnName] = id;

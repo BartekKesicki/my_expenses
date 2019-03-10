@@ -15,8 +15,8 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView {
-
+class _LoginPageState extends BasePageState<LoginPage>
+    implements LoginStateView {
   LoginStatePresenter presenter;
 
   @override
@@ -25,9 +25,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
-            child: createHeader()
-          ),
+          Container(child: createHeader()),
           Container(
             padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
             child: Form(
@@ -48,9 +46,10 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                   ),
                   TextFormField(
                     decoration: createTextFieldDecoration("PASSWORD"),
-                    validator: (String value){
+                    validator: (String value) {
                       if (!presenter.passwordIsValid(value)) {
-                        return ValidationMessagesConstants.THIS_FIELD_CANT_BE_EMPTY;
+                        return ValidationMessagesConstants
+                            .THIS_FIELD_CANT_BE_EMPTY;
                       }
                     },
                     obscureText: true,
@@ -63,7 +62,8 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
                     alignment: Alignment(1.0, 0.0),
                     padding: EdgeInsets.only(top: 15, left: 20),
                     child: InkWell(
-                        child: createText("Forgot Password", createHyperLinkTextStyle())),
+                        child: createText(
+                            "Forgot Password", createHyperLinkTextStyle())),
                   ),
                   createSizedBox(30.0),
                   createRaisedButton(() {
@@ -76,7 +76,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
             ),
           )
         ],
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -89,8 +89,10 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
 
   Stack createHeader() {
     return new Stack(children: <Widget>[
-      createTopLabelsContainer(createText("My", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-      createTopLabelsContainer(createText("Expenses", createTitleTextStyle()), EdgeInsets.fromLTRB(15.0, 175.0, 0.0, 0.0))
+      createTopLabelsContainer(createText("My", createTitleTextStyle()),
+          EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
+      createTopLabelsContainer(createText("Expenses", createTitleTextStyle()),
+          EdgeInsets.fromLTRB(15.0, 175.0, 0.0, 0.0))
     ]);
   }
 
@@ -101,10 +103,7 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-              color: Colors.black,
-              style: BorderStyle.solid,
-              width: 1.0
-          ),
+              color: Colors.black, style: BorderStyle.solid, width: 1.0),
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(25.0),
         ),
@@ -113,8 +112,10 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
             presenter.performToLaunchSignUpPage();
           },
           child: Center(
-              child: createText("SIGN UP", TextStyle(fontWeight: FontWeight.bold, fontFamily: "Montserrat"))
-          ),
+              child: createText(
+                  "SIGN UP",
+                  TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: "Montserrat"))),
         ),
       ),
     );
@@ -122,12 +123,15 @@ class _LoginPageState extends BasePageState<LoginPage> implements LoginStateView
 
   @override
   void redirectToHomePage(int id) {
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomePage(id)), (Route<dynamic> route) => false);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage(id)),
+        (Route<dynamic> route) => false);
   }
 
   @override
   void redirectToSignUpPage() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPersonalDataPage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => SignUpPersonalDataPage()));
   }
 
   @override

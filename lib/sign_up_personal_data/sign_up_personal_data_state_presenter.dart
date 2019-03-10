@@ -5,7 +5,6 @@ import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.da
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';
 
 class SignUpPersonalDataStatePresenter extends BaseStatePresenter {
-
   SignUpPersonalDataStateView view;
   SignUpPersonalDataModel model;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

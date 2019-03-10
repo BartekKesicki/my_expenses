@@ -1,7 +1,4 @@
-
-
 class DbColumnConstants {
-
   //USER TABLE COLUMN NAMES
   static const String tableUserName = "Users";
   static const String idColumnName = "id";

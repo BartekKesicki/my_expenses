@@ -1,6 +1,3 @@
-
 import 'package:my_expenses/base/base_state_view.dart';
 
-abstract class DashboardStateView extends BaseStateView {
-
-}
+abstract class DashboardStateView extends BaseStateView {}

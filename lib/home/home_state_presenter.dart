@@ -3,7 +3,6 @@ import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/home/home_state_view.dart';
 
 class HomeStatePresenter extends BaseStatePresenter {
-
   HomeStateView view;
 
   @override
@@ -19,5 +18,4 @@ class HomeStatePresenter extends BaseStatePresenter {
   void performLaunchNewExpense(int userId) {
     view.redirectToAddNewExpensePage(userId);
   }
-
 }

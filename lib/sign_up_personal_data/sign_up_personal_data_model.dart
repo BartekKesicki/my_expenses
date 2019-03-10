@@ -1,4 +1,3 @@
-
 class SignUpPersonalDataModel {
   bool _autoValidate = false;
   String email;
