@@ -15,7 +15,13 @@ class QueryConstants {
           "${DbColumnConstants.categoryIdColumnName} INTEGER, " +
           "${DbColumnConstants.priceColumnName} REAL, " +
           "${DbColumnConstants.timestampColumnName} INTEGER)";
-  static const String CREATE_CATEGORY_TABLE_QUERY =
-      "CREATE TABLE ${DbColumnConstants.categoryTableName} (${DbColumnConstants.categoryTableIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-          "${DbColumnConstants.categoryTableNameColumnName} TEXT, ${DbColumnConstants.categoryTableIsBillColumnName} INTEGER)";
+  static const String CREATE_EXPENSE_CATEGORY_TABLE_QUERY =
+      "CREATE TABLE ${DbColumnConstants.expenseCategoryTableName} (${DbColumnConstants.expenseCategoryTableIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+          "${DbColumnConstants.expenseCategoryTableNameColumnName} TEXT, ${DbColumnConstants.expenseCategoryTableIsBillColumnName} INTEGER)";
+  static const String CREATE_INCOME_CATEGORY_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.incomeCategoryTableName}(${DbColumnConstants.incomeCategoryIdColumnNamePK} " +
+      "INTEGER PRIMARY KEY AUTOINCREMENT, ${DbColumnConstants.incomeCategoryNameColumnName} TEXT)";
+
+  static const String CREATE_INCOME_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.incomeTableName} (${DbColumnConstants.incomeIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+      "${DbColumnConstants.incomeAmountColumnName} REAL, ${DbColumnConstants.incomeCategoryIdColumnName} TEXT, ${DbColumnConstants.inComeTimestampColumnName} INTEGER)";
+
 }

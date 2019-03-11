@@ -1,4 +1,5 @@
 class DbColumnConstants {
+
   //USER TABLE COLUMN NAMES
   static const String tableUserName = "Users";
   static const String idColumnName = "id";
@@ -17,9 +18,24 @@ class DbColumnConstants {
   static const String categoryIdColumnName = "categoryId";
   static const String timestampColumnName = "timestamp";
 
-  //CATEGORY TABLE COLUMN NAMES (WIP)
-  static const String categoryTableName = "Categories";
-  static const String categoryTableIdColumnName = "id";
-  static const String categoryTableNameColumnName = "name";
-  static const String categoryTableIsBillColumnName = "isBill";
+  //INCOME TABLE COLUMN NAMES (WIP)
+
+  static const String incomeTableName = "Incomes";
+  static const String incomeIdColumnName = "id";
+  static const String incomeAmountColumnName = "amount";
+  static const String incomeCategoryIdColumnName = "incomeCategoryId";
+  static const String inComeTimestampColumnName = "timestamp";
+
+  //EXPENSES CATEGORY TABLE COLUMN NAMES (WIP)
+
+  static const String expenseCategoryTableName = "Categories";
+  static const String expenseCategoryTableIdColumnName = "id";
+  static const String expenseCategoryTableNameColumnName = "name";
+  static const String expenseCategoryTableIsBillColumnName = "isBill";
+
+  //INCOMES CATEGORY COLUMN NAMES (WIP)
+
+  static const String incomeCategoryTableName = "IncomeCategories";
+  static const String incomeCategoryIdColumnNamePK = "id";
+  static const String incomeCategoryNameColumnName = "name";
 }

@@ -27,7 +27,9 @@ class DatabaseHelper {
   void _onCreate(Database db, int version) async {
     await db.execute(QueryConstants.CREATE_USER_TABLE_QUERY);
     await db.execute(QueryConstants.CREATE_EXPENSE_TABLE_QUERY);
-    await db.execute(QueryConstants.CREATE_CATEGORY_TABLE_QUERY);
+    await db.execute(QueryConstants.CREATE_EXPENSE_CATEGORY_TABLE_QUERY);
+    await db.execute(QueryConstants.CREATE_INCOME_CATEGORY_TABLE_QUERY);
+    await db.execute(QueryConstants.CREATE_INCOME_TABLE_QUERY);
   }
 
   Future saveUser(User user) async {
