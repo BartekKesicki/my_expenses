@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
-import 'package:my_expenses/income_tab_page/income_tab_presenter.dart';
-import 'package:my_expenses/income_tab_page/income_tab_view.dart';
+import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
+import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_view.dart';
 
 class IncomeTabPage extends StatefulWidget {
   IncomeTabPage(this.id, {Key key, this.title}) : super(key: key);

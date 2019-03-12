@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
-import 'package:my_expenses/outcome_tab_page/outcome_tab_presenter.dart';
-import 'package:my_expenses/outcome_tab_page/outcome_tab_view.dart';
+import 'package:my_expenses/fund_management_page/outcome_tab_page/outcome_tab_presenter.dart';
+import 'package:my_expenses/fund_management_page/outcome_tab_page/outcome_tab_view.dart';
 
 class OutcomeTabPage extends StatefulWidget {
   OutcomeTabPage(this.id, {Key key, this.title}) : super(key: key);

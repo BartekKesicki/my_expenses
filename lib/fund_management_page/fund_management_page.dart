@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_presenter.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_view.dart';
-import 'package:my_expenses/income_tab_page/income_tab_page.dart';
-import 'package:my_expenses/outcome_tab_page/outcome_tab_page.dart';
+import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_page.dart';
+import 'package:my_expenses/fund_management_page/outcome_tab_page/outcome_tab_page.dart';
 
 class FundManagementPage extends StatefulWidget {
   FundManagementPage({Key key, this.title}) : super(key: key);

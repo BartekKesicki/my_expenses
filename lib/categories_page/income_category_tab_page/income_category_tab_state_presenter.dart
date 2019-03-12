@@ -1,9 +1,10 @@
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
-import 'package:my_expenses/outcome_tab_page/outcome_tab_view.dart';
+import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
 
-class OutcomeTabPresenter extends BaseStatePresenter {
-  OutcomeTabView view;
+class IncomeCategoryTabStatePresenter extends BaseStatePresenter {
+
+  IncomeCategoryTabStateView view;
 
   @override
   void attach(BaseStateView view) {
