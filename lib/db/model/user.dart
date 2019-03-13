@@ -12,24 +12,24 @@ class User {
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      DbColumnConstants.emailColumn: email,
-      DbColumnConstants.passwordColumn: password,
-      DbColumnConstants.incomeColumn: income,
-      DbColumnConstants.limitColumn: limit,
-      DbColumnConstants.startFunds: startFunds
+      DbColumnConstants.userEmailColumnName: email,
+      DbColumnConstants.userPasswordColumnName: password,
+      DbColumnConstants.userIncomeColumnName: income,
+      DbColumnConstants.userLimitColumnName: limit,
+      DbColumnConstants.userStartFundsColumnName: startFunds
     };
     if (id != null) {
-      map[DbColumnConstants.idColumnName] = id;
+      map[DbColumnConstants.userIdColumnName] = id;
     }
     return map;
   }
 
   User.fromMap(Map<String, dynamic> map) {
-    id = map[DbColumnConstants.idColumnName];
-    email = map[DbColumnConstants.emailColumn];
-    password = map[DbColumnConstants.passwordColumn];
-    income = map[DbColumnConstants.incomeColumn];
-    limit = map[DbColumnConstants.limitColumn];
-    startFunds = map[DbColumnConstants.startFunds];
+    id = map[DbColumnConstants.userIdColumnName];
+    email = map[DbColumnConstants.userEmailColumnName];
+    password = map[DbColumnConstants.userPasswordColumnName];
+    income = map[DbColumnConstants.userIncomeColumnName];
+    limit = map[DbColumnConstants.userLimitColumnName];
+    startFunds = map[DbColumnConstants.userStartFundsColumnName];
   }
 }

@@ -35,8 +35,8 @@ class DatabaseHelper {
   Future saveUser(User user) async {
     var dbClient = await db;
     String query =
-        "INSERT INTO ${DbColumnConstants.tableUserName}(${DbColumnConstants.idColumnName}, " +
-            "${DbColumnConstants.emailColumn}, ${DbColumnConstants.passwordColumn}, ${DbColumnConstants.incomeColumn}, ${DbColumnConstants.limitColumn}, ${DbColumnConstants.startFunds}) " +
+        "INSERT INTO ${DbColumnConstants.tableUserName}(${DbColumnConstants.userIdColumnName}, " +
+            "${DbColumnConstants.userEmailColumnName}, ${DbColumnConstants.userPasswordColumnName}, ${DbColumnConstants.userIncomeColumnName}, ${DbColumnConstants.userLimitColumnName}, ${DbColumnConstants.userStartFundsColumnName}) " +
             "VALUES(${user.id}, '${user.email}', '${user.password}', ${user.income}, ${user.limit}, ${user.startFunds})";
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(query);
@@ -46,7 +46,7 @@ class DatabaseHelper {
   Future<int> getUserIdOrNull(String login, String password) async {
     var dbClient = await db;
     List<Map> result = await dbClient.rawQuery(
-        "SELECT * FROM ${DbColumnConstants.tableUserName} WHERE ${DbColumnConstants.emailColumn}='$login' AND ${DbColumnConstants.passwordColumn}='$password'");
+        "SELECT * FROM ${DbColumnConstants.tableUserName} WHERE ${DbColumnConstants.userEmailColumnName}='$login' AND ${DbColumnConstants.userPasswordColumnName}='$password'");
     User user;
     if (result != null && result.isNotEmpty) {
       user = User.fromMap(result.first);
@@ -58,7 +58,7 @@ class DatabaseHelper {
     var dbClient = await db;
     String query =
         "INSERT INTO ${DbColumnConstants.expenseTableName} (${DbColumnConstants.expenseIdColumnName}, ${DbColumnConstants.expenseNameColumnName}, " +
-            "${DbColumnConstants.categoryIdColumnName}, ${DbColumnConstants.priceColumnName}, ${DbColumnConstants.timestampColumnName} " +
+            "${DbColumnConstants.expenseCategoryIdColumnName}, ${DbColumnConstants.expensePriceColumnName}, ${DbColumnConstants.expenseTimestampColumnName} " +
             "VALUES(${expense.id}, '${expense.name}', ${expense.categoryId}, ${expense.price}, ${expense.timestamp})";
     await dbClient.transaction((txn) async {
       return txn.rawInsert(query);
@@ -80,7 +80,7 @@ class DatabaseHelper {
       int lowerTimeStamp, int topTimeStamp) async {
     var dbClient = await db;
     String query = "SELECT * FROM ${DbColumnConstants.expenseTableName} " +
-        "WHERE $lowerTimeStamp < ${DbColumnConstants.timestampColumnName} AND $topTimeStamp > ${DbColumnConstants.timestampColumnName}";
+        "WHERE $lowerTimeStamp < ${DbColumnConstants.expenseTimestampColumnName} AND $topTimeStamp > ${DbColumnConstants.expenseTimestampColumnName}";
     List<Map> result = await dbClient.rawQuery(query);
     List<Expense> expenses;
     if (result != null && result.isNotEmpty) {

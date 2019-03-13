@@ -11,9 +11,9 @@ class Expense {
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       DbColumnConstants.expenseNameColumnName: name,
-      DbColumnConstants.categoryIdColumnName: categoryId,
-      DbColumnConstants.priceColumnName: price,
-      DbColumnConstants.timestampColumnName: timestamp,
+      DbColumnConstants.expenseCategoryIdColumnName: categoryId,
+      DbColumnConstants.expensePriceColumnName: price,
+      DbColumnConstants.expenseTimestampColumnName: timestamp,
     };
     if (id != null) {
       map[DbColumnConstants.expenseIdColumnName] = id;
@@ -24,8 +24,8 @@ class Expense {
   Expense.fromMap(Map<String, dynamic> map) {
     id = map[DbColumnConstants.expenseIdColumnName];
     name = map[DbColumnConstants.expenseNameColumnName];
-    categoryId = map[DbColumnConstants.categoryIdColumnName];
-    price = map[DbColumnConstants.priceColumnName];
-    timestamp = map[DbColumnConstants.timestampColumnName];
+    categoryId = map[DbColumnConstants.expenseCategoryIdColumnName];
+    price = map[DbColumnConstants.expensePriceColumnName];
+    timestamp = map[DbColumnConstants.expenseTimestampColumnName];
   }
 }
