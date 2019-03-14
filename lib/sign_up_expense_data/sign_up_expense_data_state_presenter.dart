@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
-import 'package:my_expenses/db/helpers/database_helper.dart';
+import 'package:my_expenses/db/helpers/user_database_helper.dart';
 import 'package:my_expenses/db/model/user.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_state_view.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_model.dart';
@@ -11,7 +11,7 @@ class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
   SignUpExpenseDataStateView view;
   SignUpExpenseModel model;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  var dbHelper = DatabaseHelper();
+  var dbHelper = UserDatabaseHelper();
 
   get getFormKey => _formKey;
 
