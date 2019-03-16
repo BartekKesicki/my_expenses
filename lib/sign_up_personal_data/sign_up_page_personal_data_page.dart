@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
-import 'package:my_expenses/sign_up_expense_data/sign_up_expense_page_data.dart';
+import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_page.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';

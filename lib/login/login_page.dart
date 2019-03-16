@@ -4,7 +4,7 @@ import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
-import 'package:my_expenses/sign_up_personal_data/sign_up_page_personal_data.dart';
+import 'package:my_expenses/sign_up_personal_data/sign_up_page_personal_data_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
