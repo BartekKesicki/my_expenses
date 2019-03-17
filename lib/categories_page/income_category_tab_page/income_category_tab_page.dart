@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
+import 'package:my_expenses/db/model/income_category.dart';
 
 class IncomeCategoryTabPage extends StatefulWidget {
   IncomeCategoryTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -16,12 +17,13 @@ class IncomeCategoryTabPage extends StatefulWidget {
 class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     implements IncomeCategoryTabStateView {
   IncomeCategoryTabStatePresenter presenter;
+  Widget mainWidget;
 
   @override
   Widget build(BuildContext context) {
     initIncomeCategoryTabPresenter();
     return new Scaffold(
-      body: new Text("INCOMES CATEGORIES"),
+      body: mainWidget,
     );
   }
 
@@ -32,6 +34,21 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     if (presenter == null) {
       presenter = IncomeCategoryTabStatePresenter();
       presenter.attach(this);
+      presenter.loadIncomeCategories();
     }
+  }
+
+  @override
+  void showIncomeCategoriesView(List<IncomeCategory> incomeCategories) {
+    if (incomeCategories.isEmpty) {
+      showNoIncomeCategoryView();
+    } else {
+      mainWidget = new Text("THERE IS SOME INCOME CATEGORY");
+    }
+  }
+
+  @override
+  void showNoIncomeCategoryView() {
+    mainWidget = new Text("THERE IS NO INCOME CATEGORY");
   }
 }
