@@ -1,9 +1,9 @@
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
-import 'package:my_expenses/fund_management_page/outcome_tab_page/outcome_tab_view.dart';
+import 'package:my_expenses/fund_management_page/outcome_tab_page/expense_tab_view.dart';
 
-class OutcomeTabPresenter extends BaseStatePresenter {
-  OutcomeTabView view;
+class ExpenseTabPresenter extends BaseStatePresenter {
+  ExpenseTabView view;
 
   @override
   void attach(BaseStateView view) {
@@ -13,5 +13,9 @@ class OutcomeTabPresenter extends BaseStatePresenter {
   @override
   void detach() {
     this.view = null;
+  }
+
+  void loadExpensesList() {
+    //todo load expenses list
   }
 }

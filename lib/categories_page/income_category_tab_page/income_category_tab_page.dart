@@ -52,20 +52,9 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   @override
   void showNoIncomeCategoryView() {
     setState(() {
-      mainWidget = createNoContentWidget("THERE IS NO NEW CATEGORIES");
+      mainWidget = createNoContentWidget("THERE IS NO INCOME CATEGORIES", "ADD NEW INCOME CATEGORY", () {
+        //todo add new income category page
+      });
     });
-  }
-
-  Center createNoContentWidget(String title) {
-    return new Center(
-      child: new Column(
-        children: <Widget>[
-          new Text(title),
-          createRaisedButton(() {
-            //todo redirect to add new expense category
-          }, createText("ADD NEW INCOME CATEGORY", createButtonTextStyle()))
-        ],
-      ),
-    );
   }
 }

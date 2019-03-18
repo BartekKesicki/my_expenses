@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_view.dart';
 
@@ -16,12 +17,13 @@ class IncomeTabPage extends StatefulWidget {
 class _IncomeTabPageState extends BasePageState<IncomeTabPage>
     implements IncomeTabView {
   IncomeTabPresenter presenter;
+  Widget mainWidget;
 
   @override
   Widget build(BuildContext context) {
     initHomePresenter();
     return new Scaffold(
-      body: new Text("INCOMES"),
+      body: mainWidget,
     );
   }
 
@@ -32,6 +34,23 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
     if (presenter == null) {
       presenter = IncomeTabPresenter();
       presenter.attach(this);
+      presenter.loadIncomesList();
     }
   }
+
+  @override
+  void showIncomesListView(List<Income> incomes) {
+    // TODO: implement showIncomesListView
+  }
+
+  @override
+  void showNoIncomesView() {
+    setState(() {
+      mainWidget = createNoContentWidget("THERE IS NO INCOMES YET", "ADD NEW INCOME", () {
+        //todo add new income page
+      });
+    });
+  }
+
+
 }

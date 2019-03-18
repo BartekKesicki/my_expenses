@@ -52,20 +52,9 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   @override
   void showNoExpenseCategoriesView() {
     setState(() {
-      mainWidget = createNoContentWidget("THERE IS NO NEW CATEGORIES");
+      mainWidget = createNoContentWidget("THERE IS NO NEW CATEGORIES", "ADD NEW CATEGORY", () {
+        //todo add new expense category
+      });
     });
-  }
-
-  Center createNoContentWidget(String title) {
-    return new Center(
-      child: new Column(
-        children: <Widget>[
-          new Text(title),
-          createRaisedButton(() {
-            //todo redirect to add new expense category
-          }, createText("ADD NEW EXPENSE CATEGORY", createButtonTextStyle()))
-        ],
-      ),
-    );
   }
 }

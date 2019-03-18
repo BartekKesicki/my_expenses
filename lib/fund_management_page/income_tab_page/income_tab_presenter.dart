@@ -14,4 +14,8 @@ class IncomeTabPresenter extends BaseStatePresenter {
   void detach() {
     this.view = null;
   }
+
+  void loadIncomesList() {
+    //todo load incomes list
+  }
 }

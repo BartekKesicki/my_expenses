@@ -3,7 +3,7 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_presenter.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_view.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_page.dart';
-import 'package:my_expenses/fund_management_page/outcome_tab_page/outcome_tab_page.dart';
+import 'package:my_expenses/fund_management_page/outcome_tab_page/expense_tab_page.dart';
 
 class FundManagementPage extends StatefulWidget {
   FundManagementPage({Key key, this.title}) : super(key: key);
@@ -18,7 +18,7 @@ class _FundManagementState extends BasePageState<FundManagementPage>
     implements FundManagementStateView {
   FundManagementStatePresenter presenter;
   IncomeTabPage incomeTabPage;
-  OutcomeTabPage outcomeTabPage;
+  ExpenseTabPage outcomeTabPage;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _FundManagementState extends BasePageState<FundManagementPage>
       incomeTabPage = IncomeTabPage(id);
     }
     if (outcomeTabPage == null) {
-      outcomeTabPage = OutcomeTabPage(id);
+      outcomeTabPage = ExpenseTabPage(id);
     }
   }
 

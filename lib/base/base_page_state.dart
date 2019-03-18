@@ -32,6 +32,10 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     return new TextStyle(fontSize: 40.0, fontWeight: FontWeight.normal);
   }
 
+  TextStyle createSimpleLabelTextStyle() {
+    return new TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal);
+  }
+
   TextStyle createButtonTextStyle() {
     return new TextStyle(
         color: Colors.white,
@@ -81,6 +85,21 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
         color: Colors.green,
         onPressed: callback,
         child: Center(child: centerText),
+      ),
+    );
+  }
+
+  Container createNoContentWidget(String title, String addNewItemButtonTitle, GestureTapCallback callback) {
+    return new Container(
+      margin: EdgeInsetsDirectional.only(top: 40.0),
+      child: new Center(
+        child: new Column(
+          children: <Widget>[
+            createText(title, createSimpleLabelTextStyle()),
+            createRaisedButton(callback,
+                createText(addNewItemButtonTitle, createButtonTextStyle()))
+          ],
+        ),
       ),
     );
   }
