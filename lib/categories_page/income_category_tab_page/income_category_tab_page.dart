@@ -40,15 +40,32 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
 
   @override
   void showIncomeCategoriesView(List<IncomeCategory> incomeCategories) {
-    if (incomeCategories.isEmpty) {
-      showNoIncomeCategoryView();
+    if (incomeCategories != null && incomeCategories.isNotEmpty) {
+      setState(() {
+        mainWidget = new Text("THERE IS SOME INCOME CATEGORY");
+      });
     } else {
-      mainWidget = new Text("THERE IS SOME INCOME CATEGORY");
+      showNoIncomeCategoryView();
     }
   }
 
   @override
   void showNoIncomeCategoryView() {
-    mainWidget = new Text("THERE IS NO INCOME CATEGORY");
+    setState(() {
+      mainWidget = createNoContentWidget("THERE IS NO NEW CATEGORIES");
+    });
+  }
+
+  Center createNoContentWidget(String title) {
+    return new Center(
+      child: new Column(
+        children: <Widget>[
+          new Text(title),
+          createRaisedButton(() {
+            //todo redirect to add new expense category
+          }, createText("ADD NEW INCOME CATEGORY", createButtonTextStyle()))
+        ],
+      ),
+    );
   }
 }

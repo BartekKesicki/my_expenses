@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/categories_state_presenter.dart';
 import 'package:my_expenses/categories_page/categories_state_view.dart';
+import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_page.dart';
+import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_page.dart';
 
 class CategoriesPage extends StatefulWidget {
   CategoriesPage({Key key, this.title}) : super(key: key);
@@ -14,24 +16,54 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends BasePageState<CategoriesPage>
     implements CategoriesStateView {
+
   CategoriesStatePresenter presenter;
+  IncomeCategoryTabPage incomeCategoriesTabPage;
+  ExpenseCategoryTabPage expenseCategoriesTabPage;
 
   @override
   Widget build(BuildContext context) {
     initPresenter();
-    return new Scaffold(
-      appBar: AppBar(backgroundColor: Colors.green, title: Text('Categories')),
-      body: Center(
-        child: Text("CATEGORIES"),
-      ),
+    return new DefaultTabController(
+        length: 2,
+        child: new Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.green,
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: "INCOME CATEGORIES",
+                ),
+                Tab(
+                  text: "EXPENSE CATEGORIES",
+                ),
+              ],
+            ),
+            title: Text('Categories'),
+          ),
+          body: TabBarView(
+            children: [
+              incomeCategoriesTabPage,
+              expenseCategoriesTabPage,
+            ],
+          ),
+        )
     );
   }
   //todo fill the page
 
   void initPresenter() {
+    var id = -1;
+    //todo temporary value
     if (presenter == null) {
       presenter = new CategoriesStatePresenter();
       presenter.attach(this);
+    }
+    if (incomeCategoriesTabPage == null) {
+      incomeCategoriesTabPage = IncomeCategoryTabPage(id);
+    }
+    if (expenseCategoriesTabPage == null) {
+      expenseCategoriesTabPage = ExpenseCategoryTabPage(id);
     }
   }
 
