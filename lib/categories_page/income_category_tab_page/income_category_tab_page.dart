@@ -43,6 +43,7 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     if (incomeCategories != null && incomeCategories.isNotEmpty) {
       setState(() {
         mainWidget = new Text("THERE IS SOME INCOME CATEGORY");
+        //todo init income categories list view
       });
     } else {
       showNoIncomeCategoryView();

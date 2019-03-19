@@ -43,6 +43,7 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
     if (categories != null && categories.isNotEmpty) {
       setState(() {
         mainWidget = new Text("THERE IS SOME NEW CATEGORIES");
+        //todo init expense categories list
       });
     } else {
       showNoExpenseCategoriesView();

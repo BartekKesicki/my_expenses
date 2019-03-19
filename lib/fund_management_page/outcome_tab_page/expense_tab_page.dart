@@ -17,13 +17,13 @@ class ExpenseTabPage extends StatefulWidget {
 class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
     implements ExpenseTabView {
   ExpenseTabPresenter presenter;
-  //todo main widget
+  Widget mainWidget;
 
   @override
   Widget build(BuildContext context) {
     initHomePresenter();
     return new Scaffold(
-      body: new Text("OUTCOMES"),
+      body: mainWidget,
     );
   }
 
@@ -40,11 +40,22 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
 
   @override
   void showExpensesListView(List<Expense> expenses) {
-    // TODO: implement showExpensesListView
+    if (expenses != null && expenses.isNotEmpty) {
+      setState(() {
+        mainWidget = new Text("THERE IS SOME NEW EXPENSES");
+        //todo init expenses list
+      });
+    } else {
+      showNoExpensesView();
+    }
   }
 
   @override
   void showNoExpensesView() {
-    // TODO: implement showNoExpensesView
+   setState(() {
+     mainWidget = createNoContentWidget("THERE IS NO EXPENSES", "ADD NEW EXPENSE", () {
+       //todo redirect to new expense page
+     });
+   });
   }
 }

@@ -1,13 +1,16 @@
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
+import 'package:my_expenses/db/helpers/expense_database_helper.dart';
 import 'package:my_expenses/fund_management_page/outcome_tab_page/expense_tab_view.dart';
 
 class ExpenseTabPresenter extends BaseStatePresenter {
   ExpenseTabView view;
+  ExpenseDatabaseHelper helper;
 
   @override
   void attach(BaseStateView view) {
     this.view = view;
+    helper = ExpenseDatabaseHelper();
   }
 
   @override
@@ -15,7 +18,9 @@ class ExpenseTabPresenter extends BaseStatePresenter {
     this.view = null;
   }
 
-  void loadExpensesList() {
-    //todo load expenses list
+  void loadExpensesList() async {
+    await helper.getAllExpenses()
+        .then((expenses) => view.showExpensesListView(expenses))
+        .catchError(() => view.showNoExpensesView());
   }
 }

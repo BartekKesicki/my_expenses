@@ -40,14 +40,21 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
 
   @override
   void showIncomesListView(List<Income> incomes) {
-    // TODO: implement showIncomesListView
+    if (incomes != null && incomes.isNotEmpty) {
+      setState(() {
+        mainWidget = new Text("THERE IS SOME NEW INCOMES");
+        //todo init incomes list
+      });
+    } else {
+      showNoIncomesView();
+    }
   }
 
   @override
   void showNoIncomesView() {
     setState(() {
       mainWidget = createNoContentWidget("THERE IS NO INCOMES YET", "ADD NEW INCOME", () {
-        //todo add new income page
+        //todo add redirect new income page
       });
     });
   }
