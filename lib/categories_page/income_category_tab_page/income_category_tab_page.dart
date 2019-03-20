@@ -3,6 +3,7 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
 import 'package:my_expenses/db/model/income_category.dart';
+import 'package:my_expenses/new_income_category_page/new_income_category_page.dart';
 
 class IncomeCategoryTabPage extends StatefulWidget {
   IncomeCategoryTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -54,7 +55,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   void showNoIncomeCategoryView() {
     setState(() {
       mainWidget = createNoContentWidget("THERE IS NO INCOME CATEGORIES", "ADD NEW INCOME CATEGORY", () {
-        //todo add new income category page
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
       });
     });
   }
