@@ -14,15 +14,34 @@ class NewIncomeCategoryPage extends StatefulWidget {
 
 class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
     implements NewIncomeCategoryStateView {
-
   NewIncomeCategoryStatePresenter presenter;
 
   @override
   Widget build(BuildContext context) {
     initPresenter();
     return new Scaffold(
-      body: new Text("ADD NEW INCOME CATEGORY PAGE"),
-    );
+        body: Column(children: <Widget>[
+      // Container(child: ),
+      Container(
+          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+          child: Form(
+              key: presenter.getFormKey,
+              child: Column(children: <Widget>[
+                TextFormField(
+                  decoration: createTextFieldDecoration("INCOME CATEGORY NAME"),
+                  validator: (String value) {
+                    //todo finish validation
+                  },
+                  onSaved: (String value) {
+                    presenter.incomeName = value;
+                  },
+                ),
+                createSizedBox(30.0),
+                createRaisedButton(() {
+                  presenter.performAddNewIncomeCategoryName();
+                }, createText("LOGIN", createButtonTextStyle())),
+              ])))
+    ]));
   }
   //todo fill the page
 
