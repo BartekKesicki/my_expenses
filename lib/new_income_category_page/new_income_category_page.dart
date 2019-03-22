@@ -21,7 +21,6 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-      // Container(child: ),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(
