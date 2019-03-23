@@ -3,11 +3,11 @@ class LoginModel {
   String password;
   bool _autoValidate = false;
 
-  get getAutoValidate => _autoValidate;
-
   get getEmail => email;
 
   get getPassword => password;
+
+  get getAutoValidate => _autoValidate;
 
   void setAutoValidate(bool value) {
     _autoValidate = value;
