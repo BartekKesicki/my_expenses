@@ -23,7 +23,7 @@ class _SettingsPageState extends BasePageState<SettingsPage>
       appBar: AppBar(backgroundColor: Colors.green, title: Text('Settings')),
       body: Center(
         child: createRaisedButton(() {
-          //todo implement logout
+          showLogoutDialog();
         }, new Text("LOGOUT")),
       ),
     );
@@ -40,5 +40,30 @@ class _SettingsPageState extends BasePageState<SettingsPage>
   @override
   void showMessage(String message) {
     // TODO: implement showMessage
+  }
+
+  void showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Logout"),
+          content: new Text("DO YOU WANT LOGOUT?"),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: () {
+                  redirectToLoginPage();
+                },
+                child: new Text("YES")),
+            new FlatButton(onPressed: null, 
+                child: new Text("NO"))
+          ],
+        );
+      }
+    );
+  }
+
+  void redirectToLoginPage() {
+
   }
 }
