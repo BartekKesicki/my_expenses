@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/settings_page/settings_state_presenter.dart';
 import 'package:my_expenses/settings_page/settings_state_view.dart';
 
@@ -55,7 +56,8 @@ class _SettingsPageState extends BasePageState<SettingsPage>
                   redirectToLoginPage();
                 },
                 child: new Text("YES")),
-            new FlatButton(onPressed: null, 
+            new FlatButton(
+                onPressed: null,
                 child: new Text("NO"))
           ],
         );
@@ -64,6 +66,8 @@ class _SettingsPageState extends BasePageState<SettingsPage>
   }
 
   void redirectToLoginPage() {
-
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+            (Route<dynamic> route) => false);
   }
 }
