@@ -3,6 +3,7 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_view.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
+import 'package:my_expenses/new_expense_category_page/new_expense_category_page.dart';
 
 class ExpenseCategoryTabPage extends StatefulWidget {
   ExpenseCategoryTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -54,7 +55,8 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   void showNoExpenseCategoriesView() {
     setState(() {
       mainWidget = createNoContentWidget("THERE IS NO NEW CATEGORIES", "ADD NEW CATEGORY", () {
-        //todo add new expense category
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));
       });
     });
   }

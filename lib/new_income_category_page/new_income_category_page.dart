@@ -38,7 +38,7 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
                 createSizedBox(30.0),
                 createRaisedButton(() {
                   presenter.performAddNewIncomeCategoryName();
-                }, createText("LOGIN", createButtonTextStyle())),
+                }, createText("ADD NEW INCOME CATEGORY", createButtonTextStyle())),
               ])))
     ]));
   }
