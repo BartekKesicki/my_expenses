@@ -34,4 +34,8 @@ class NewIncomeCategoryStatePresenter extends BaseStatePresenter {
     IncomeCategory incomeCategory = new IncomeCategory(null, incomeName);
     await helper.saveIncome(incomeCategory).then((onValue) => view.insertionSucceed()).catchError((onError) => view.insertionFailed());
   }
+
+  bool isCategoryNameValid(String value) {
+    return value != null && value.isNotEmpty;
+  }
 }

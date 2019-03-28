@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/new_income_category_page/new_income_category_state_presenter.dart';
 import 'package:my_expenses/new_income_category_page/new_income_category_state_view.dart';
 
@@ -29,7 +30,10 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
                 TextFormField(
                   decoration: createTextFieldDecoration("INCOME CATEGORY NAME"),
                   validator: (String value) {
-                    //todo finish validation
+                    if (!presenter.isCategoryNameValid(value)) {
+                      return ValidationMessagesConstants
+                          .THIS_FIELD_CANT_BE_EMPTY;
+                    }
                   },
                   onSaved: (String value) {
                     presenter.incomeName = value;
