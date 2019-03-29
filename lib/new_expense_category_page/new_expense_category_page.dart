@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/new_expense_category_page/new_expense_category_state_presenter.dart';
 import 'package:my_expenses/new_expense_category_page/new_expense_category_state_view.dart';
 
@@ -20,11 +21,31 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
   Widget build(BuildContext context) {
     initPresenter();
     return new Scaffold(
-        body: new Text("NEW EXPENSE CATEGORY PAGE")
-    );
+        body: Column(children: <Widget>[
+          Container(
+              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+              child: Form(
+                  key: presenter.getFormKey,
+                  child: Column(children: <Widget>[
+                    TextFormField(
+                      decoration: createTextFieldDecoration("EXPENSE CATEGORY NAME"),
+                      validator: (String value) {
+                        if (!presenter.isCategoryNameValid(value)) {
+                          return ValidationMessagesConstants
+                              .THIS_FIELD_CANT_BE_EMPTY;
+                        }
+                      },
+                      onSaved: (String value) {
+                        presenter.expenseName = value;
+                      },
+                    ),
+                    createSizedBox(30.0),
+                    createRaisedButton(() {
+                      presenter.performAddNewIncomeCategoryName();
+                    }, createText("ADD NEW EXPENSE CATEGORY", createButtonTextStyle())),
+                  ])))
+        ]));
   }
-
-  //todo fill the page
 
   void initPresenter() {
     if (presenter == null) {
@@ -36,5 +57,15 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
   @override
   void showMessage(String message) {
     // TODO: implement showMessage
+  }
+
+  @override
+  void showInsertionFailure() {
+    // TODO: implement showInsertionFailure
+  }
+
+  @override
+  void showInsertionSuccess() {
+    // TODO: implement showInsertionSuccess
   }
 }
