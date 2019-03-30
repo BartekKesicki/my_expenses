@@ -13,6 +13,7 @@ class NewExpenseCategoryStatePresenter extends BaseStatePresenter {
 
   get getFormKey => _formKey;
   String expenseName;
+  bool isBill = false;
 
   @override
   void attach(BaseStateView view) {
@@ -31,12 +32,15 @@ class NewExpenseCategoryStatePresenter extends BaseStatePresenter {
     } else {
       return;
     }
-    //todo add checkbox to set isBill value
-    ExpenseCategory category = new ExpenseCategory(null, expenseName, false);
+    ExpenseCategory category = new ExpenseCategory(isBill ? 1 : 0, expenseName, false);
     await helper.saveExpenseCategory(category).then((onValue) => view.showInsertionSuccess()).catchError((onError) => view.showInsertionFailure());
   }
 
   bool isCategoryNameValid(String value) {
     return value != null && value.isNotEmpty;
+  }
+
+  void onValueChanged(bool value) {
+    isBill = value;
   }
 }

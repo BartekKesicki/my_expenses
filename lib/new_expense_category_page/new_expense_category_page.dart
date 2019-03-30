@@ -39,6 +39,8 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
                         presenter.expenseName = value;
                       },
                     ),
+                    createSizedBox(10.0),
+                    new Checkbox(value: presenter.isBill, onChanged: presenter.onValueChanged),
                     createSizedBox(30.0),
                     createRaisedButton(() {
                       presenter.performAddNewIncomeCategoryName();
