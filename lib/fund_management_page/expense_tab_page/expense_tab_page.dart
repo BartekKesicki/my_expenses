@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/expense.dart';
-import 'package:my_expenses/fund_management_page/outcome_tab_page/expense_tab_presenter.dart';
-import 'package:my_expenses/fund_management_page/outcome_tab_page/expense_tab_view.dart';
+import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_presenter.dart';
+import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_view.dart';
 
 class ExpenseTabPage extends StatefulWidget {
   ExpenseTabPage(this.id, {Key key, this.title}) : super(key: key);
