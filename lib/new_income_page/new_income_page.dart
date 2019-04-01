@@ -21,8 +21,27 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     //todo fill the page form
     initPresenter();
     return new Scaffold(
-      body: new Text("NEW INCOME"),
-    );
+        body: Column(children: <Widget>[
+          Container(
+              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+              child: Form(
+                  key: presenter.getFormKey,
+                  child: Column(children: <Widget>[
+//                    TextFormField(
+//                      decoration: createTextFieldDecoration(""),
+//                      validator: (String value) {
+//
+//                      },
+//                      onSaved: (String value) {
+
+//                      },
+//                    ),
+                    //todo add new income form page
+                    createRaisedButton(() {
+                      //todo submit new income form page
+                    }, createText("SUBMIT BUTTON", createButtonTextStyle())),
+                  ])))
+        ]));
   }
 
   @override
