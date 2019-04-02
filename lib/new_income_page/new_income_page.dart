@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/new_income_page/new_income_state_presenter.dart';
 import 'package:my_expenses/new_income_page/new_income_state_view.dart';
+import 'package:my_expenses/new_income_page/new_income_validator.dart';
 
 class NewIncomePage extends StatefulWidget {
   NewIncomePage({Key key, this.title}) : super(key: key);
@@ -18,7 +19,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
 
   @override
   Widget build(BuildContext context) {
-    //todo fill the page form
+    //todo fill the title
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
@@ -27,18 +28,34 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
               child: Form(
                   key: presenter.getFormKey,
                   child: Column(children: <Widget>[
-//                    TextFormField(
-//                      decoration: createTextFieldDecoration(""),
-//                      validator: (String value) {
-//
-//                      },
-//                      onSaved: (String value) {
-
-//                      },
-//                    ),
-                    //todo add new income form page
+                    TextFormField(
+                      decoration: createTextFieldDecoration("INCOME NAME"),
+                      validator: (String value) {
+                        //todo check existing income name
+                        if (!NewIncomeValidator.isIncomeNameValid(value)) {
+                          return "INCORRECT NAME";
+                        }
+                      },
+                      onSaved: (String value) {
+                        presenter.model.name = value;
+                      },
+                    ),
+                    createSizedBox(20.0),
+                    TextFormField(
+                      decoration: createTextFieldDecoration("AMOUNT"),
+                      keyboardType: TextInputType.number,
+                      validator: (String value) {
+                        if(!NewIncomeValidator.isIncomeAmountValid(value)) {
+                          return "INCORRECT AMOUNT";
+                        }
+                      },
+                      onSaved: (String value) {
+                        presenter.model.amount = double.parse(value);
+                      },
+                    ),
+                    //todo add dropdown list
                     createRaisedButton(() {
-                      //todo submit new income form page
+                      presenter.performToAddNewIncome();
                     }, createText("SUBMIT BUTTON", createButtonTextStyle())),
                   ])))
         ]));

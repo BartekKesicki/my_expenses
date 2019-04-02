@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_presenter.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_view.dart';
+import 'package:my_expenses/new_expense_page/new_expense_validator.dart';
 
 class NewExpensePage extends StatefulWidget {
   NewExpensePage({Key key, this.title}) : super(key: key);
@@ -26,18 +27,31 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
               child: Form(
                   key: presenter.getFormKey,
                   child: Column(children: <Widget>[
-//                    TextFormField(
-//                      decoration: createTextFieldDecoration(""),
-//                      validator: (String value) {
-//
-//                      },
-//                      onSaved: (String value) {
-
-//                      },
-//                    ),
-                    //todo add new expense form page
+                    TextFormField(
+                      decoration: createTextFieldDecoration("EXPENSE NAME"),
+                      validator: (String value) {
+                        if (!NewExpenseValidator.isExpenseNameValid(value)) {
+                          return "INCORRECT EXPENSE NAME";
+                        }
+                      },
+                      onSaved: (String value) {
+                        presenter.model.name = value;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: createTextFieldDecoration("AMOUNT"),
+                      validator: (String value) {
+                        if (!NewExpenseValidator.isExpenseAmountValid(value)) {
+                          return "INCORRECT EXPENSE AMOUNT";
+                        }
+                      },
+                      onSaved: (String value) {
+                        presenter.model.price = double.parse(value);
+                      },
+                    ),
+                    //todo add dropdown list
                     createRaisedButton(() {
-                      //todo submit new expense form page
+                      presenter.performAddExpense();
                     }, createText("SUBMIT BUTTON", createButtonTextStyle())),
                   ])))
         ]));
