@@ -12,4 +12,8 @@ class NewIncomeValidator {
       return false;
     }
   }
+
+  static bool isCategoryValid(String value) {
+    return value != null && value.isNotEmpty;
+  }
 }

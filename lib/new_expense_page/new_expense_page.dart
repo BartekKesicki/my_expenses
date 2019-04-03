@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/db/model/expense_category.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_presenter.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_view.dart';
 import 'package:my_expenses/new_expense_page/new_expense_validator.dart';
@@ -16,6 +17,7 @@ class NewExpensePage extends StatefulWidget {
 class _NewExpensePageState extends BasePageState<NewExpensePage>
     implements NewExpenseStateView {
   NewExpenseStatePresenter presenter;
+  Widget categoryPartialFormWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                         presenter.model.price = double.parse(value);
                       },
                     ),
-                    //todo add dropdown list
+                    categoryPartialFormWidget,
                     createRaisedButton(() {
                       presenter.performAddExpense();
                     }, createText("SUBMIT BUTTON", createButtonTextStyle())),
@@ -66,6 +68,30 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
     if (presenter == null) {
       presenter = NewExpenseStatePresenter();
       presenter.attach(this);
+      presenter.performToLoadCategories();
     }
+  }
+
+  @override
+  void buildExpenseCategoriesDropDownList(List<ExpenseCategory> list) {
+    // TODO: implement buildExpenseCategoriesDropDownList
+  }
+
+  @override
+  void buildTextFieldForNewCategory() {
+    setState(() {
+      categoryPartialFormWidget = TextFormField(
+        decoration: createTextFieldDecoration("NEW CATEGORY"),
+        keyboardType: TextInputType.number,
+        validator: (String value) {
+          if(!NewExpenseValidator.isExpenseCategoryValid(value)) {
+            return "INCORRECT CATEGORY";
+          }
+        },
+        onSaved: (String value) {
+          presenter.category  = value;
+        },
+      );
+    });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/new_income_page/new_income_state_presenter.dart';
 import 'package:my_expenses/new_income_page/new_income_state_view.dart';
 import 'package:my_expenses/new_income_page/new_income_validator.dart';
@@ -16,6 +17,7 @@ class NewIncomePage extends StatefulWidget {
 class _NewIncomePageState extends BasePageState<NewIncomePage>
     implements NewIncomeStateView {
   NewIncomeStatePresenter presenter;
+  Widget categoryPartialFormWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                         presenter.model.amount = double.parse(value);
                       },
                     ),
-                    //todo add dropdown list
+                    categoryPartialFormWidget,
                     createRaisedButton(() {
                       presenter.performToAddNewIncome();
                     }, createText("SUBMIT BUTTON", createButtonTextStyle())),
@@ -70,6 +72,30 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     if (presenter == null) {
       presenter = NewIncomeStatePresenter();
       presenter.attach(this);
+      presenter.performToLoadCategories();
     }
+  }
+
+  @override
+  void buildIncomeCategoriesDropDownList(List<IncomeCategory> list) {
+    // TODO: implement buildIncomeCategoriesDropDownList
+  }
+
+  @override
+  void buildTextFieldForNewCategory() {
+    setState(() {
+      categoryPartialFormWidget = TextFormField(
+        decoration: createTextFieldDecoration("NEW CATEGORY"),
+        keyboardType: TextInputType.number,
+        validator: (String value) {
+          if(!NewIncomeValidator.isIncomeNameValid(value)) {
+            return "INCORRECT CATEGORY";
+          }
+        },
+        onSaved: (String value) {
+          presenter.category  = value;
+        },
+      );
+    });
   }
 }

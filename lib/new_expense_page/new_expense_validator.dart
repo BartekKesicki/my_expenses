@@ -11,4 +11,8 @@ class NewExpenseValidator {
       return false;
     }
   }
+
+  static bool isExpenseCategoryValid(String value) {
+    return value != null && value.isNotEmpty;
+  }
 }
