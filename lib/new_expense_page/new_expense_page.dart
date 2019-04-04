@@ -74,7 +74,22 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
 
   @override
   void buildExpenseCategoriesDropDownList(List<ExpenseCategory> list) {
-    // TODO: implement buildExpenseCategoriesDropDownList
+    setState(() {
+      categoryPartialFormWidget = DropdownButton(
+        hint: Text('Please choose a location'),
+        onChanged: (newValue) {
+          setState(() {
+            presenter.category = newValue;
+          });
+        },
+        items: list.map((location) {
+          return DropdownMenuItem(
+            child: new Text(location.name),
+            value: location,
+          );
+        }).toList(),
+      );
+    });
   }
 
   @override

@@ -25,42 +25,42 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-          Container(
-              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-              child: Form(
-                  key: presenter.getFormKey,
-                  child: Column(children: <Widget>[
-                    TextFormField(
-                      decoration: createTextFieldDecoration("INCOME NAME"),
-                      validator: (String value) {
-                        //todo check existing income name
-                        if (!NewIncomeValidator.isIncomeNameValid(value)) {
-                          return "INCORRECT NAME";
-                        }
-                      },
-                      onSaved: (String value) {
-                        presenter.model.name = value;
-                      },
-                    ),
-                    createSizedBox(20.0),
-                    TextFormField(
-                      decoration: createTextFieldDecoration("AMOUNT"),
-                      keyboardType: TextInputType.number,
-                      validator: (String value) {
-                        if(!NewIncomeValidator.isIncomeAmountValid(value)) {
-                          return "INCORRECT AMOUNT";
-                        }
-                      },
-                      onSaved: (String value) {
-                        presenter.model.amount = double.parse(value);
-                      },
-                    ),
-                    categoryPartialFormWidget,
-                    createRaisedButton(() {
-                      presenter.performToAddNewIncome();
-                    }, createText("SUBMIT BUTTON", createButtonTextStyle())),
-                  ])))
-        ]));
+      Container(
+          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+          child: Form(
+              key: presenter.getFormKey,
+              child: Column(children: <Widget>[
+                TextFormField(
+                  decoration: createTextFieldDecoration("INCOME NAME"),
+                  validator: (String value) {
+                    //todo check existing income name
+                    if (!NewIncomeValidator.isIncomeNameValid(value)) {
+                      return "INCORRECT NAME";
+                    }
+                  },
+                  onSaved: (String value) {
+                    presenter.model.name = value;
+                  },
+                ),
+                createSizedBox(20.0),
+                TextFormField(
+                  decoration: createTextFieldDecoration("AMOUNT"),
+                  keyboardType: TextInputType.number,
+                  validator: (String value) {
+                    if (!NewIncomeValidator.isIncomeAmountValid(value)) {
+                      return "INCORRECT AMOUNT";
+                    }
+                  },
+                  onSaved: (String value) {
+                    presenter.model.amount = double.parse(value);
+                  },
+                ),
+                categoryPartialFormWidget,
+                createRaisedButton(() {
+                  presenter.performToAddNewIncome();
+                }, createText("SUBMIT BUTTON", createButtonTextStyle())),
+              ])))
+    ]));
   }
 
   @override
@@ -78,7 +78,22 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
 
   @override
   void buildIncomeCategoriesDropDownList(List<IncomeCategory> list) {
-    // TODO: implement buildIncomeCategoriesDropDownList
+    setState(() {
+      categoryPartialFormWidget = DropdownButton(
+        hint: Text('Please choose a location'),
+        onChanged: (newValue) {
+          setState(() {
+            presenter.category = newValue;
+          });
+        },
+        items: list.map((location) {
+          return DropdownMenuItem(
+            child: new Text(location.name),
+            value: location,
+          );
+        }).toList(),
+      );
+    });
   }
 
   @override
@@ -88,12 +103,12 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
         decoration: createTextFieldDecoration("NEW CATEGORY"),
         keyboardType: TextInputType.number,
         validator: (String value) {
-          if(!NewIncomeValidator.isIncomeNameValid(value)) {
+          if (!NewIncomeValidator.isIncomeNameValid(value)) {
             return "INCORRECT CATEGORY";
           }
         },
         onSaved: (String value) {
-          presenter.category  = value;
+          presenter.category = value;
         },
       );
     });
