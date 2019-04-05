@@ -4,6 +4,7 @@ import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/db/helpers/income_category_database_helper.dart';
 import 'package:my_expenses/db/helpers/income_database_helper.dart';
 import 'package:my_expenses/db/model/income.dart';
+import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/new_income_page/new_income_state_view.dart';
 
 class NewIncomeStatePresenter extends BaseStatePresenter {
@@ -34,7 +35,21 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
     //todo add income to db
   }
 
-  void performToLoadCategories() {
-    //todo load categories
+  void performToLoadCategories() async {
+    await categoryHelper.getAllIncomeCategories()
+        .then((result) => onIncomeCategoriesFetched(result))
+        .catchError(onIncomeCategoryFetchError);
+  }
+
+  void onIncomeCategoriesFetched(List<IncomeCategory> result) {
+    if (result.isEmpty) {
+      view.buildIncomeCategoriesDropDownList(result);
+    } else {
+      view.buildTextFieldForNewCategory();
+    }
+  }
+
+  void onIncomeCategoryFetchError() {
+    view.showMessage("SOMETHING GOES WRONG");
   }
 }

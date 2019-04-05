@@ -24,4 +24,11 @@ class ExpenseCategoryDatabaseHelper extends DatabaseHelper {
     }
     return expenseCategories;
   }
+
+  Future<bool> ifCategoryExists(String category) async {
+    var dbClient = await db;
+    String query = "SELECT * FROM ${DbColumnConstants.expenseCategoryTableName} WHERE ${DbColumnConstants.expenseCategoryTableNameColumnName}='$category'";
+    List<Map> result = await dbClient.rawQuery(query);
+    return (result != null && result.isNotEmpty);
+  }
 }
