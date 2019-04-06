@@ -4,7 +4,7 @@ import 'package:my_expenses/db/model/income_category.dart';
 
 class IncomeCategoryDatabaseHelper extends DatabaseHelper {
 
-  Future saveIncome(IncomeCategory incomeCategory) async {
+  Future<int> saveIncomeCategory(IncomeCategory incomeCategory) async {
     var dbClient = await db;
     String query =
         "INSERT INTO ${DbColumnConstants.incomeCategoryTableName} (${DbColumnConstants.incomeCategoryIdColumnNamePK}, ${DbColumnConstants.incomeCategoryNameColumnName}) " +
@@ -23,5 +23,17 @@ class IncomeCategoryDatabaseHelper extends DatabaseHelper {
       incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e));
     }
     return incomeCategories;
+  }
+
+  Future<int> getCategoryId(String categoryName) async {
+    var dbClient = await db;
+    String query = "SELECT ${DbColumnConstants.incomeCategoryIdColumnName} FROM ${DbColumnConstants.incomeCategoryTableName} WHERE ${DbColumnConstants.incomeCategoryNameColumnName}='$categoryName'";
+    List<Map> result = await dbClient.rawQuery(query);
+    List<IncomeCategory> incomeCategories;
+    if (result != null && result.isNotEmpty) {
+      incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e));
+      return incomeCategories[0].id;
+    }
+    return null;
   }
 }

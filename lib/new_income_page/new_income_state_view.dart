@@ -4,4 +4,5 @@ import 'package:my_expenses/db/model/income_category.dart';
 abstract class NewIncomeStateView extends BaseStateView {
   void buildIncomeCategoriesDropDownList(List<IncomeCategory> list);
   void buildTextFieldForNewCategory();
+  void onIncomeInserted();
 }

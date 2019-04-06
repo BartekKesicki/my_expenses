@@ -113,4 +113,9 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
       );
     });
   }
+
+  @override
+  void onIncomeInserted() {
+    // TODO: implement onIncomeInserted
+  }
 }

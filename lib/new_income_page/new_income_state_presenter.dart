@@ -31,8 +31,25 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
     view = null;
   }
 
-  void performToAddNewIncome() {
-    //todo add income to db
+  void performToAddNewIncome() async {
+    await categoryHelper.getCategoryId(category)
+        .then((onValue) => continueInsertionNewIncome(onValue))
+        .catchError((onError) => insertNewIncomeCategory());
+  }
+
+  void continueInsertionNewIncome(int onValue) async {
+    model.incomeCategoryId = onValue;
+    model.timestamp = new DateTime.now().millisecondsSinceEpoch;
+    await helper.saveIncome(model)
+        .then((onValue) => view.onIncomeInserted())
+        .catchError((onError) => view.showMessage("SOMETHING GOES WRONG"));
+  }
+
+  void insertNewIncomeCategory() async {
+    IncomeCategory incomeCategory = IncomeCategory(null, category);
+    categoryHelper.saveIncomeCategory(incomeCategory)
+        .then((onValue) => continueInsertionNewIncome(onValue))
+        .catchError((onError) => view.showMessage("SOMETHING GOES WRONG"));
   }
 
   void performToLoadCategories() async {
