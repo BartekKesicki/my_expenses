@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
+import 'package:my_expenses/home/home_page.dart';
 import 'package:my_expenses/new_expense_category_page/new_expense_category_state_presenter.dart';
 import 'package:my_expenses/new_expense_category_page/new_expense_category_state_view.dart';
 
@@ -68,6 +69,10 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
 
   @override
   void showInsertionSuccess() {
-    // TODO: implement showInsertionSuccess
+    //todo mock id
+    int id = 0;
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage(id)),
+            (Route<dynamic> route) => false);
   }
 }

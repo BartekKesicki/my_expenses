@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
+import 'package:my_expenses/home/home_page.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_presenter.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_view.dart';
 import 'package:my_expenses/new_expense_page/new_expense_validator.dart';
@@ -108,5 +109,14 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
         },
       );
     });
+  }
+
+  @override
+  void onExpenseInserted() {
+    //todo mocked id change later
+    int id = 0;
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage(id)),
+            (Route<dynamic> route) => false);
   }
 }

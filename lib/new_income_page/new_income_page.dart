@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/income_category.dart';
+import 'package:my_expenses/home/home_page.dart';
 import 'package:my_expenses/new_income_page/new_income_state_presenter.dart';
 import 'package:my_expenses/new_income_page/new_income_state_view.dart';
 import 'package:my_expenses/new_income_page/new_income_validator.dart';
@@ -116,6 +117,10 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
 
   @override
   void onIncomeInserted() {
-    // TODO: implement onIncomeInserted
+    //todo mocked id change later
+    int id = 0;
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage(id)),
+            (Route<dynamic> route) => false);
   }
 }
