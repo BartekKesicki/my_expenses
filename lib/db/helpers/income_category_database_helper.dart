@@ -20,7 +20,7 @@ class IncomeCategoryDatabaseHelper extends DatabaseHelper {
     List<Map> result = await dbClient.rawQuery(query);
     List<IncomeCategory> incomeCategories;
     if (result != null && result.isNotEmpty) {
-      incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e));
+      incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e)).toList();
     }
     return incomeCategories;
   }
@@ -31,7 +31,7 @@ class IncomeCategoryDatabaseHelper extends DatabaseHelper {
     List<Map> result = await dbClient.rawQuery(query);
     List<IncomeCategory> incomeCategories;
     if (result != null && result.isNotEmpty) {
-      incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e));
+      incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e)).toList();
       return incomeCategories[0].id;
     }
     return null;

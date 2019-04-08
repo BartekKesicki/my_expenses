@@ -3,6 +3,7 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_view.dart';
+import 'package:my_expenses/new_income_page/new_income_page.dart';
 
 class IncomeTabPage extends StatefulWidget {
   IncomeTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -51,7 +52,8 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   void showNoIncomesView() {
     setState(() {
       mainWidget = createNoContentWidget("THERE IS NO INCOMES YET", "ADD NEW INCOME", () {
-        //todo add redirect new income page
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NewIncomePage()));
       });
     });
   }

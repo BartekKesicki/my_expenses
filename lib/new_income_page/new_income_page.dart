@@ -18,7 +18,9 @@ class NewIncomePage extends StatefulWidget {
 class _NewIncomePageState extends BasePageState<NewIncomePage>
     implements NewIncomeStateView {
   NewIncomeStatePresenter presenter;
-  Widget categoryPartialFormWidget;
+  List<IncomeCategory> categories;
+  bool categoryExists = false;
+  String dropDownCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
           child: Form(
               key: presenter.getFormKey,
               child: Column(children: <Widget>[
+                createSizedBox(20.0),
                 TextFormField(
                   decoration: createTextFieldDecoration("INCOME NAME"),
                   validator: (String value) {
@@ -56,7 +59,32 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                     presenter.model.amount = double.parse(value);
                   },
                 ),
-                categoryPartialFormWidget,
+                createSizedBox(20.0),
+                categoryExists
+                    ? DropdownButton(
+                        hint: Text('Please choose category'),
+                        value: dropDownCategory,
+                        onChanged: onChangedDropDownItem,
+                        items: categories.map((item) {
+                          return DropdownMenuItem(
+                            child: new Text(item.name),
+                            value: item.name,
+                          );
+                        }).toList(),
+                      )
+                    : TextFormField(
+                        decoration: createTextFieldDecoration("NEW CATEGORY"),
+                        keyboardType: TextInputType.number,
+                        validator: (String value) {
+                          if (!NewIncomeValidator.isIncomeNameValid(value)) {
+                            return "INCORRECT CATEGORY";
+                          }
+                        },
+                        onSaved: (String value) {
+                          presenter.category = value;
+                        },
+                      ),
+                createSizedBox(20.0),
                 createRaisedButton(() {
                   presenter.performToAddNewIncome();
                 }, createText("SUBMIT BUTTON", createButtonTextStyle())),
@@ -75,38 +103,23 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
   @override
   void buildIncomeCategoriesDropDownList(List<IncomeCategory> list) {
     setState(() {
-      categoryPartialFormWidget = DropdownButton(
-        hint: Text('Please choose a location'),
-        onChanged: (newValue) {
-          setState(() {
-            presenter.category = newValue;
-          });
-        },
-        items: list.map((location) {
-          return DropdownMenuItem(
-            child: new Text(location.name),
-            value: location,
-          );
-        }).toList(),
-      );
+      categoryExists = true;
+      dropDownCategory = list[0].name;
+      categories = list;
+    });
+  }
+
+  void onChangedDropDownItem(String newValue) {
+    setState(() {
+      presenter.category = newValue;
+      dropDownCategory = newValue;
     });
   }
 
   @override
   void buildTextFieldForNewCategory() {
     setState(() {
-      categoryPartialFormWidget = TextFormField(
-        decoration: createTextFieldDecoration("NEW CATEGORY"),
-        keyboardType: TextInputType.number,
-        validator: (String value) {
-          if (!NewIncomeValidator.isIncomeNameValid(value)) {
-            return "INCORRECT CATEGORY";
-          }
-        },
-        onSaved: (String value) {
-          presenter.category = value;
-        },
-      );
+      categoryExists = false;
     });
   }
 
@@ -116,6 +129,6 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     int id = 0;
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => HomePage(id)),
-            (Route<dynamic> route) => false);
+        (Route<dynamic> route) => false);
   }
 }

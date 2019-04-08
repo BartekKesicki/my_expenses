@@ -59,7 +59,7 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   }
 
   void onIncomeCategoriesFetched(List<IncomeCategory> result) {
-    if (result.isEmpty) {
+    if (result.isNotEmpty) {
       view.buildIncomeCategoriesDropDownList(result);
     } else {
       view.buildTextFieldForNewCategory();

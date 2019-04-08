@@ -3,6 +3,7 @@ import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_presenter.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_view.dart';
+import 'package:my_expenses/new_expense_page/new_expense_page.dart';
 
 class ExpenseTabPage extends StatefulWidget {
   ExpenseTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -51,7 +52,8 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   void showNoExpensesView() {
    setState(() {
      mainWidget = createNoContentWidget("THERE IS NO EXPENSES", "ADD NEW EXPENSE", () {
-       //todo redirect to new expense page
+       Navigator.push(context,
+           MaterialPageRoute(builder: (context) => NewExpensePage()));
      });
    });
   }

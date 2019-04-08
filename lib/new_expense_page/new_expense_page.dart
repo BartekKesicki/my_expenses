@@ -18,46 +18,71 @@ class NewExpensePage extends StatefulWidget {
 class _NewExpensePageState extends BasePageState<NewExpensePage>
     implements NewExpenseStateView {
   NewExpenseStatePresenter presenter;
-  Widget categoryPartialFormWidget;
+  List<ExpenseCategory> categories;
+  bool categoryExists = false;
+  String dropDownCategory;
 
   @override
   Widget build(BuildContext context) {
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-          Container(
-              padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-              child: Form(
-                  key: presenter.getFormKey,
-                  child: Column(children: <Widget>[
-                    TextFormField(
-                      decoration: createTextFieldDecoration("EXPENSE NAME"),
-                      validator: (String value) {
-                        if (!NewExpenseValidator.isExpenseNameValid(value)) {
-                          return "INCORRECT EXPENSE NAME";
-                        }
-                      },
-                      onSaved: (String value) {
-                        presenter.model.name = value;
-                      },
-                    ),
-                    TextFormField(
-                      decoration: createTextFieldDecoration("AMOUNT"),
-                      validator: (String value) {
-                        if (!NewExpenseValidator.isExpenseAmountValid(value)) {
-                          return "INCORRECT EXPENSE AMOUNT";
-                        }
-                      },
-                      onSaved: (String value) {
-                        presenter.model.price = double.parse(value);
-                      },
-                    ),
-                    categoryPartialFormWidget,
-                    createRaisedButton(() {
-                      presenter.performAddExpense();
-                    }, createText("SUBMIT BUTTON", createButtonTextStyle())),
-                  ])))
-        ]));
+      Container(
+          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+          child: Form(
+              key: presenter.getFormKey,
+              child: Column(children: <Widget>[
+                TextFormField(
+                  decoration: createTextFieldDecoration("EXPENSE NAME"),
+                  validator: (String value) {
+                    if (!NewExpenseValidator.isExpenseNameValid(value)) {
+                      return "INCORRECT EXPENSE NAME";
+                    }
+                  },
+                  onSaved: (String value) {
+                    presenter.model.name = value;
+                  },
+                ),
+                TextFormField(
+                  decoration: createTextFieldDecoration("AMOUNT"),
+                  validator: (String value) {
+                    if (!NewExpenseValidator.isExpenseAmountValid(value)) {
+                      return "INCORRECT EXPENSE AMOUNT";
+                    }
+                  },
+                  onSaved: (String value) {
+                    presenter.model.price = double.parse(value);
+                  },
+                ),
+                categoryExists
+                    ? DropdownButton(
+                        onChanged: onChangedDropDownItem,
+                        hint: Text('Please choose category'),
+                        items: categories.map((category) {
+                          return DropdownMenuItem(
+                            child: new Text(category.name),
+                            value: category.name,
+                          );
+                        }).toList(),
+                      )
+                    : TextFormField(
+                        decoration: createTextFieldDecoration("NEW CATEGORY"),
+                        keyboardType: TextInputType.number,
+                        validator: (String value) {
+                          if (!NewExpenseValidator.isExpenseCategoryValid(
+                              value)) {
+                            return "INCORRECT CATEGORY";
+                          }
+                        },
+                        onSaved: (String value) {
+                          presenter.category = value;
+                        },
+                      ),
+                createRaisedButton(() {
+                  presenter.performAddExpense();
+                }, createText("SUBMIT BUTTON", createButtonTextStyle())),
+              ])))
+    ]));
   }
 
   void initPresenter() {
@@ -71,38 +96,23 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
   @override
   void buildExpenseCategoriesDropDownList(List<ExpenseCategory> list) {
     setState(() {
-      categoryPartialFormWidget = DropdownButton(
-        hint: Text('Please choose a location'),
-        onChanged: (newValue) {
-          setState(() {
-            presenter.category = newValue;
-          });
-        },
-        items: list.map((location) {
-          return DropdownMenuItem(
-            child: new Text(location.name),
-            value: location,
-          );
-        }).toList(),
-      );
+      categoryExists = true;
+      categories = list;
+      dropDownCategory = list[0].name;
+    });
+  }
+
+  void onChangedDropDownItem(String newValue) {
+    setState(() {
+      presenter.category = newValue;
+      dropDownCategory = newValue;
     });
   }
 
   @override
   void buildTextFieldForNewCategory() {
     setState(() {
-      categoryPartialFormWidget = TextFormField(
-        decoration: createTextFieldDecoration("NEW CATEGORY"),
-        keyboardType: TextInputType.number,
-        validator: (String value) {
-          if(!NewExpenseValidator.isExpenseCategoryValid(value)) {
-            return "INCORRECT CATEGORY";
-          }
-        },
-        onSaved: (String value) {
-          presenter.category  = value;
-        },
-      );
+      categoryExists = false;
     });
   }
 
@@ -112,6 +122,6 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
     int id = 0;
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => HomePage(id)),
-            (Route<dynamic> route) => false);
+        (Route<dynamic> route) => false);
   }
 }
