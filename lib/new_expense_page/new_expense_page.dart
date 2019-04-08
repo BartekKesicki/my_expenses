@@ -60,11 +60,6 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
         ]));
   }
 
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
   void initPresenter() {
     if (presenter == null) {
       presenter = NewExpenseStatePresenter();

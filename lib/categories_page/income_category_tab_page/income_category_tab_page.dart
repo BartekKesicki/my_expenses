@@ -28,9 +28,6 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     );
   }
 
-  @override
-  void showMessage(String message) {}
-
   void initIncomeCategoryTabPresenter() {
     if (presenter == null) {
       presenter = IncomeCategoryTabStatePresenter();

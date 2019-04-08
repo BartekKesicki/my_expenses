@@ -57,13 +57,8 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
   }
 
   @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
-  @override
   void insertionFailed() {
-    // TODO: insertion failed
+    showMessage("INSERTION FAILED");
   }
 
   @override

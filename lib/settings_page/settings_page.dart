@@ -38,11 +38,6 @@ class _SettingsPageState extends BasePageState<SettingsPage>
     }
   }
 
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
   void showLogoutDialog() {
     showDialog(
       context: context,

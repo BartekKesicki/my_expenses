@@ -105,11 +105,6 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
   }
 
   @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
-  @override
   void redirectToAddNewExpensePage(int userId) {
     // TODO: implement redirectToAddNewExpensePage
   }

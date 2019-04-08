@@ -34,9 +34,4 @@ class _ProfilePageState extends BasePageState<ProfilePage>
       presenter.attach(this);
     }
   }
-
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
 }

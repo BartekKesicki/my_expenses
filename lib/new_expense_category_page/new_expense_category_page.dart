@@ -58,13 +58,8 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
   }
 
   @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
-  @override
   void showInsertionFailure() {
-    // TODO: implement showInsertionFailure
+    showMessage("INSERTION FAILED");
   }
 
   @override

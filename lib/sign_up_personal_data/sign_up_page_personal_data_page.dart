@@ -106,12 +106,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
 
   @override
   void showError() {
-    // TODO: implement showError
-  }
-
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
+    showMessage("ERROR");
   }
 
   @override

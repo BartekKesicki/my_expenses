@@ -76,9 +76,4 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
       ),
     ];
   }
-
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
 }

@@ -64,9 +64,4 @@ class _FundManagementState extends BasePageState<FundManagementPage>
       outcomeTabPage = ExpenseTabPage(id);
     }
   }
-
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
 }

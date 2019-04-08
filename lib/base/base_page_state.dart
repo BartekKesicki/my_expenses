@@ -24,6 +24,12 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     );
   }
 
+  void showMessage(String message) {
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text(message),
+    ));
+  }
+
   TextStyle createTitleTextStyle() {
     return new TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold);
   }

@@ -66,9 +66,4 @@ class _CategoriesPageState extends BasePageState<CategoriesPage>
       expenseCategoriesTabPage = ExpenseCategoryTabPage(id);
     }
   }
-
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
 }

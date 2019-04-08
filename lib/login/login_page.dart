@@ -135,13 +135,6 @@ class _LoginPageState extends BasePageState<LoginPage>
   }
 
   @override
-  void showMessage(String message) {
-    Scaffold.of(context).showSnackBar(new SnackBar(
-      content: new Text(message),
-    ));
-  }
-
-  @override
   void autoValidate() {
     setState(() {
       presenter.model.setAutoValidate(true);

@@ -123,13 +123,6 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
   }
 
   @override
-  void showMessage(String message) {
-    Scaffold.of(context).showSnackBar(new SnackBar(
-      content: new Text(message),
-    ));
-  }
-
-  @override
   void dispose() {
     presenter.detach();
     super.dispose();

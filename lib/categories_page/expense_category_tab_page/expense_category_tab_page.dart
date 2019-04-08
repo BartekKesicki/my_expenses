@@ -28,9 +28,6 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
     );
   }
 
-  @override
-  void showMessage(String message) {}
-
   void initExpenseCategoryTabPresenter() {
     if (presenter == null) {
       presenter = ExpenseCategoryTabStatePresenter();

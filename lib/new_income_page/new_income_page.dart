@@ -64,11 +64,6 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     ]));
   }
 
-  @override
-  void showMessage(String message) {
-    // TODO: implement showMessage
-  }
-
   void initPresenter() {
     if (presenter == null) {
       presenter = NewIncomeStatePresenter();

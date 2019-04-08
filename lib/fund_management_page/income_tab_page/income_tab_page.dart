@@ -27,9 +27,6 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
     );
   }
 
-  @override
-  void showMessage(String message) {}
-
   void initHomePresenter() {
     if (presenter == null) {
       presenter = IncomeTabPresenter();
