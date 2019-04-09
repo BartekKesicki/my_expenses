@@ -4,12 +4,12 @@ import 'package:my_expenses/db/constants/db_column_constants.dart';
 
 class ExpenseCategoryDatabaseHelper extends DatabaseHelper {
 
-  Future saveExpenseCategory(ExpenseCategory expenseCategory) async {
+  Future<int> saveExpenseCategory(ExpenseCategory expenseCategory) async {
     var dbClient = await db;
     String query =
         "INSERT INTO ${DbColumnConstants.expenseCategoryTableName} (${DbColumnConstants.expenseCategoryTableIdColumnName}, ${DbColumnConstants.expenseCategoryTableNameColumnName}, " +
             "${DbColumnConstants.expenseCategoryTableIsBillColumnName} VALUES(${expenseCategory.id}, '${expenseCategory.name}', ${expenseCategory.isBill})";
-    await dbClient.transaction((txn) async {
+    return await dbClient.transaction((txn) async {
       return txn.rawInsert(query);
     });
   }
@@ -20,15 +20,20 @@ class ExpenseCategoryDatabaseHelper extends DatabaseHelper {
     List<Map> result = await dbClient.rawQuery(query);
     List<ExpenseCategory> expenseCategories;
     if (result != null && result.isNotEmpty) {
-      expenseCategories = result.toList().map((e) => ExpenseCategory.fromMap(e));
+      expenseCategories = result.toList().map((e) => ExpenseCategory.fromMap(e)).toList();
     }
     return expenseCategories;
   }
 
-  Future<bool> ifCategoryExists(String category) async {
+  Future<int> getCategoryId(String categoryName) async {
     var dbClient = await db;
-    String query = "SELECT * FROM ${DbColumnConstants.expenseCategoryTableName} WHERE ${DbColumnConstants.expenseCategoryTableNameColumnName}='$category'";
+    String query = "SELECT * FROM ${DbColumnConstants.expenseCategoryTableName} WHERE ${DbColumnConstants.expenseCategoryTableNameColumnName}='$categoryName'";
     List<Map> result = await dbClient.rawQuery(query);
-    return (result != null && result.isNotEmpty);
+    List<ExpenseCategory> incomeCategories;
+    if (result != null && result.isNotEmpty) {
+      incomeCategories = result.toList().map((e) => ExpenseCategory.fromMap(e)).toList();
+      return incomeCategories[0].id;
+    }
+    return null;
   }
 }

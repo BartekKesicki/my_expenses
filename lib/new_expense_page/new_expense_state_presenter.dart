@@ -31,7 +31,24 @@ class NewExpenseStatePresenter extends BaseStatePresenter {
   }
 
   void performAddExpense() async {
-    //todo add new expense
+    await categoryHelper.getCategoryId(category)
+        .then((value) => continueInsertingExpense(value))
+        .catchError(insertCategoryFirst);
+  }
+
+  void continueInsertingExpense(int value) async {
+    model.categoryId = value;
+    model.timestamp = new DateTime.now().millisecondsSinceEpoch;
+    await helper.saveExpense(model)
+        .then((onValue) => view.onExpenseInserted())
+        .catchError((onError) => view.showMessage("INSERTION FAILED"));
+  }
+
+  void insertCategoryFirst() {
+    ExpenseCategory expenseCategory = new ExpenseCategory(null, category, false);
+    categoryHelper.saveExpenseCategory(expenseCategory)
+        .then((insertedCategoryId) => continueInsertingExpense(insertedCategoryId))
+        .catchError((error) => view.showMessage("INSERTION CATEGORY FAILED"));
   }
 
   void performToLoadCategories() async{
@@ -41,7 +58,7 @@ class NewExpenseStatePresenter extends BaseStatePresenter {
   }
 
   void onCategoriesFetched(List<ExpenseCategory> categories) {
-    if (categories.isEmpty) {
+    if (categories.isNotEmpty) {
        view.buildTextFieldForNewCategory();
     } else {
       view.buildExpenseCategoriesDropDownList(categories);
