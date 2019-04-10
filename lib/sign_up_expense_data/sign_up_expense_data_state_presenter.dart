@@ -33,8 +33,6 @@ class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
   }
 
   User createUser(SignUpPersonalDataModel personalData) {
-    //todo remove mocked id
-    // int id = 0;
     return User(null, personalData.email, personalData.password, model.income,
         model.monthlyLimit, model.startFunds);
   }

@@ -63,10 +63,8 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
 
   @override
   void insertionSucceed() {
-    //todo mock id
-    int id = 0;
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage(id)),
+        MaterialPageRoute(builder: (context) => HomePage()),
             (Route<dynamic> route) => false);
   }
 }

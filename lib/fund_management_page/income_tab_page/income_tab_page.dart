@@ -6,9 +6,8 @@ import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_view
 import 'package:my_expenses/new_income_page/new_income_page.dart';
 
 class IncomeTabPage extends StatefulWidget {
-  IncomeTabPage(this.id, {Key key, this.title}) : super(key: key);
+  IncomeTabPage({Key key, this.title}) : super(key: key);
 
-  final int id;
   final String title;
 
   @override

@@ -10,9 +10,8 @@ import 'package:my_expenses/my_profile_page/profile_page.dart';
 import 'package:my_expenses/settings_page/settings_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage(this.id, {Key key, this.title}) : super(key: key);
+  HomePage({Key key, this.title}) : super(key: key);
 
-  final int id;
   final String title;
 
   @override

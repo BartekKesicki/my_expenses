@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/db/helpers/database_helper.dart';
+import 'package:my_expenses/db/helpers/shared_preferences_helper.dart';
 import 'package:my_expenses/db/helpers/user_database_helper.dart';
 import 'package:my_expenses/login/login_model.dart';
 import 'package:my_expenses/login/login_state_view.dart';
@@ -12,6 +13,7 @@ class LoginStatePresenter extends BaseStatePresenter {
   LoginModel model = new LoginModel();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var dbHelper;
+  SharedPreferencesHelper prefsHelper = new SharedPreferencesHelper();
 
   get getFormKey => _formKey;
 
@@ -27,8 +29,9 @@ class LoginStatePresenter extends BaseStatePresenter {
         .then(login, onError: loginError);
   }
 
-  void login(int value) {
-    view.redirectToHomePage(value);
+  void login(int value) async {
+    await prefsHelper.setLanguageCode(value);
+    view.redirectToHomePage();
   }
 
   void loginError() {

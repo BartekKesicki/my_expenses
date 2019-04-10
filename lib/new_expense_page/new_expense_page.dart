@@ -118,10 +118,8 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
 
   @override
   void onExpenseInserted() {
-    //todo mocked id change later
-    int id = 0;
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage(id)),
+        MaterialPageRoute(builder: (context) => HomePage()),
         (Route<dynamic> route) => false);
   }
 }

@@ -122,9 +122,9 @@ class _LoginPageState extends BasePageState<LoginPage>
   }
 
   @override
-  void redirectToHomePage(int id) {
+  void redirectToHomePage() {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage(id)),
+        MaterialPageRoute(builder: (context) => HomePage()),
         (Route<dynamic> route) => false);
   }
 

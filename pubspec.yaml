@@ -23,6 +23,7 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   sqflite: any
   flutter_svg: ^0.11.0+1
+  shared_preferences: ^0.4.2
 
 dev_dependencies:
   flutter_test:

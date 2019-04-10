@@ -51,17 +51,15 @@ class _FundManagementState extends BasePageState<FundManagementPage>
   //todo fill the page tab view (wip)
 
   void initPresenterAndTabViews() {
-    //todo get user id (temporary mocked)
-    var id = -1;
     if (presenter == null) {
       presenter = new FundManagementStatePresenter();
       presenter.attach(this);
     }
     if (incomeTabPage == null) {
-      incomeTabPage = IncomeTabPage(id);
+      incomeTabPage = IncomeTabPage();
     }
     if (outcomeTabPage == null) {
-      outcomeTabPage = ExpenseTabPage(id);
+      outcomeTabPage = ExpenseTabPage();
     }
   }
 }

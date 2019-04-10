@@ -6,9 +6,8 @@ import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_vi
 import 'package:my_expenses/new_expense_page/new_expense_page.dart';
 
 class ExpenseTabPage extends StatefulWidget {
-  ExpenseTabPage(this.id, {Key key, this.title}) : super(key: key);
+  ExpenseTabPage({Key key, this.title}) : super(key: key);
 
-  final int id;
   final String title;
 
   @override

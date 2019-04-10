@@ -64,10 +64,8 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
 
   @override
   void showInsertionSuccess() {
-    //todo mock id
-    int id = 0;
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage(id)),
+        MaterialPageRoute(builder: (context) => HomePage()),
             (Route<dynamic> route) => false);
   }
 }
