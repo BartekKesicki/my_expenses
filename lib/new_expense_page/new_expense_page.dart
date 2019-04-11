@@ -27,6 +27,11 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
+          createSizedBox(30.0),
+          Center(
+            child: createText("NEW EXPENSE", createSubTitleTextStyle()),
+          ),
+          createSizedBox(10.0),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(
@@ -45,6 +50,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                 ),
                 TextFormField(
                   decoration: createTextFieldDecoration("AMOUNT"),
+                  keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (!NewExpenseValidator.isExpenseAmountValid(value)) {
                       return "INCORRECT EXPENSE AMOUNT";
@@ -67,7 +73,6 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                       )
                     : TextFormField(
                         decoration: createTextFieldDecoration("NEW CATEGORY"),
-                        keyboardType: TextInputType.number,
                         validator: (String value) {
                           if (!NewExpenseValidator.isExpenseCategoryValid(
                               value)) {
@@ -78,9 +83,10 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                           presenter.category = value;
                         },
                       ),
+                createSizedBox(20.0),
                 createRaisedButton(() {
                   presenter.performAddExpense();
-                }, createText("SUBMIT BUTTON", createButtonTextStyle())),
+                }, createText("ADD EXPENSE", createButtonTextStyle())),
               ])))
     ]));
   }

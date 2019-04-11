@@ -35,7 +35,7 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
   }
 
   TextStyle createSubTitleTextStyle() {
-    return new TextStyle(fontSize: 40.0, fontWeight: FontWeight.normal);
+    return new TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold);
   }
 
   TextStyle createSimpleLabelTextStyle() {

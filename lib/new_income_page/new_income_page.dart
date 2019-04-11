@@ -28,6 +28,11 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
+      createSizedBox(30.0),
+      Center(
+        child: createText("NEW INCOME", createSubTitleTextStyle()),
+      ),
+      createSizedBox(10.0),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(
@@ -37,7 +42,6 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                 TextFormField(
                   decoration: createTextFieldDecoration("INCOME NAME"),
                   validator: (String value) {
-                    //todo check existing income name
                     if (!NewIncomeValidator.isIncomeNameValid(value)) {
                       return "INCORRECT NAME";
                     }

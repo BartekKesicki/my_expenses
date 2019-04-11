@@ -31,6 +31,7 @@ class NewExpenseStatePresenter extends BaseStatePresenter {
   }
 
   void performAddExpense() async {
+    //todo validate form
     await categoryHelper.getCategoryId(category)
         .then((value) => continueInsertingExpense(value))
         .catchError(insertCategoryFirst);
@@ -58,14 +59,14 @@ class NewExpenseStatePresenter extends BaseStatePresenter {
   }
 
   void onCategoriesFetched(List<ExpenseCategory> categories) {
-    if (categories.isNotEmpty) {
-       view.buildTextFieldForNewCategory();
-    } else {
+    if (categories != null && categories.isNotEmpty) {
       view.buildExpenseCategoriesDropDownList(categories);
+    } else {
+      view.buildTextFieldForNewCategory();
     }
   }
 
   void onFetchError() {
-    view.showMessage("SOMETHING GOES WRONG");
+    view.showMessage("CAN'T LOAD CATEGORIES");
   }
 }

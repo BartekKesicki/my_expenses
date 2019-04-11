@@ -32,6 +32,7 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   }
 
   void performToAddNewIncome() async {
+    //todo validate
     await categoryHelper.getCategoryId(category)
         .then((onValue) => continueInsertionNewIncome(onValue))
         .catchError((onError) => insertNewIncomeCategory());
@@ -42,14 +43,14 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
     model.timestamp = new DateTime.now().millisecondsSinceEpoch;
     await helper.saveIncome(model)
         .then((onValue) => view.onIncomeInserted())
-        .catchError((onError) => view.showMessage("SOMETHING GOES WRONG"));
+        .catchError((onError) => view.showMessage("INSERTION FAILED"));
   }
 
   void insertNewIncomeCategory() async {
     IncomeCategory incomeCategory = IncomeCategory(null, category);
     categoryHelper.saveIncomeCategory(incomeCategory)
         .then((onValue) => continueInsertionNewIncome(onValue))
-        .catchError((onError) => view.showMessage("SOMETHING GOES WRONG"));
+        .catchError((onError) => view.showMessage("CATEGORY INSERTION FAILED"));
   }
 
   void performToLoadCategories() async {
@@ -59,7 +60,7 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   }
 
   void onIncomeCategoriesFetched(List<IncomeCategory> result) {
-    if (result.isNotEmpty) {
+    if (result != null && result.isNotEmpty) {
       view.buildIncomeCategoriesDropDownList(result);
     } else {
       view.buildTextFieldForNewCategory();
@@ -67,6 +68,6 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   }
 
   void onIncomeCategoryFetchError() {
-    view.showMessage("SOMETHING GOES WRONG");
+    view.showMessage("CAN'T LOAD INCOME CATEGORIES");
   }
 }
