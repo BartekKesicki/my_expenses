@@ -8,7 +8,7 @@ class IncomeDatabaseHelper extends DatabaseHelper {
     var dbClient = await db;
     String query =
         "INSERT INTO ${DbColumnConstants.incomeTableName} (${DbColumnConstants.incomeIdColumnName}, ${DbColumnConstants.incomeAmountColumnName}, " +
-            "${DbColumnConstants.incomeNameColumnName}, ${DbColumnConstants.incomeCategoryIdColumnName}, ${DbColumnConstants.incomeTimestampColumnName} " +
+            "${DbColumnConstants.incomeNameColumnName}, ${DbColumnConstants.incomeCategoryIdColumnName}, ${DbColumnConstants.incomeTimestampColumnName}) " +
                 "VALUES(${income.id}, ${income.amount}, '${income.name}', ${income.incomeCategoryId}, ${income.timestamp})";
     await dbClient.transaction((txn) async {
       return txn.rawInsert(query);

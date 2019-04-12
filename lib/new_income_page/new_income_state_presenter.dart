@@ -5,6 +5,7 @@ import 'package:my_expenses/db/helpers/income_category_database_helper.dart';
 import 'package:my_expenses/db/helpers/income_database_helper.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/db/model/income_category.dart';
+import 'package:my_expenses/new_income_page/income_form_model.dart';
 import 'package:my_expenses/new_income_page/new_income_state_view.dart';
 
 class NewIncomeStatePresenter extends BaseStatePresenter {
@@ -12,7 +13,7 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   NewIncomeStateView view;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Income model;
+  IncomeFormModel incomeFormModel;
   IncomeDatabaseHelper helper;
   IncomeCategoryDatabaseHelper categoryHelper;
   String category;
@@ -22,6 +23,7 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   @override
   void attach(BaseStateView view) {
     this.view = view;
+    incomeFormModel = new IncomeFormModel();
     helper = new IncomeDatabaseHelper();
     categoryHelper = IncomeCategoryDatabaseHelper();
   }
@@ -32,16 +34,19 @@ class NewIncomeStatePresenter extends BaseStatePresenter {
   }
 
   void performToAddNewIncome() async {
-    //todo validate
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+    } else {
+      return;
+    }
     await categoryHelper.getCategoryId(category)
         .then((onValue) => continueInsertionNewIncome(onValue))
         .catchError((onError) => insertNewIncomeCategory());
   }
 
   void continueInsertionNewIncome(int onValue) async {
-    model.incomeCategoryId = onValue;
-    model.timestamp = new DateTime.now().millisecondsSinceEpoch;
-    await helper.saveIncome(model)
+    Income income = new Income(null, incomeFormModel.amount, incomeFormModel.name, onValue, new DateTime.now().millisecondsSinceEpoch);
+    await helper.saveIncome(income)
         .then((onValue) => view.onIncomeInserted())
         .catchError((onError) => view.showMessage("INSERTION FAILED"));
   }

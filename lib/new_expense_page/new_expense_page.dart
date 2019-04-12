@@ -45,7 +45,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                     }
                   },
                   onSaved: (String value) {
-                    presenter.model.name = value;
+                    presenter.expenseFormModel.name = value;
                   },
                 ),
                 TextFormField(
@@ -57,7 +57,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                     }
                   },
                   onSaved: (String value) {
-                    presenter.model.price = double.parse(value);
+                    presenter.expenseFormModel.price = double.parse(value);
                   },
                 ),
                 categoryExists

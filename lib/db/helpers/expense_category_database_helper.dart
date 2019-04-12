@@ -6,9 +6,10 @@ class ExpenseCategoryDatabaseHelper extends DatabaseHelper {
 
   Future<int> saveExpenseCategory(ExpenseCategory expenseCategory) async {
     var dbClient = await db;
+    //todo BUG
     String query =
         "INSERT INTO ${DbColumnConstants.expenseCategoryTableName} (${DbColumnConstants.expenseCategoryTableIdColumnName}, ${DbColumnConstants.expenseCategoryTableNameColumnName}, " +
-            "${DbColumnConstants.expenseCategoryTableIsBillColumnName} VALUES(${expenseCategory.id}, '${expenseCategory.name}', ${expenseCategory.isBill})";
+            "${DbColumnConstants.expenseCategoryTableIsBillColumnName}) VALUES(${expenseCategory.id}, '${expenseCategory.name}', ${expenseCategory.isBill})";
     return await dbClient.transaction((txn) async {
       return txn.rawInsert(query);
     });

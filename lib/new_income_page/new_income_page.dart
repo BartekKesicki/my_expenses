@@ -47,7 +47,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                     }
                   },
                   onSaved: (String value) {
-                    presenter.model.name = value;
+                    presenter.incomeFormModel.name = value;
                   },
                 ),
                 createSizedBox(20.0),
@@ -60,7 +60,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                     }
                   },
                   onSaved: (String value) {
-                    presenter.model.amount = double.parse(value);
+                    presenter.incomeFormModel.amount = double.parse(value);
                   },
                 ),
                 createSizedBox(20.0),

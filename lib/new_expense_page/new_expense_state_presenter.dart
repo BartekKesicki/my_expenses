@@ -5,13 +5,14 @@ import 'package:my_expenses/db/helpers/expense_category_database_helper.dart';
 import 'package:my_expenses/db/helpers/expense_database_helper.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
+import 'package:my_expenses/new_expense_page/expense_form_model.dart';
 import 'package:my_expenses/new_expense_page/new_expense_state_view.dart';
 
 class NewExpenseStatePresenter extends BaseStatePresenter {
 
   NewExpenseStateView view;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Expense model;
+  ExpenseFormModel expenseFormModel;
   ExpenseDatabaseHelper helper;
   ExpenseCategoryDatabaseHelper categoryHelper;
   String category;
@@ -21,6 +22,7 @@ class NewExpenseStatePresenter extends BaseStatePresenter {
   @override
   void attach(BaseStateView view) {
     this.view = view;
+    expenseFormModel = new ExpenseFormModel();
     helper = new ExpenseDatabaseHelper();
     categoryHelper = new ExpenseCategoryDatabaseHelper();
   }
@@ -31,16 +33,19 @@ class NewExpenseStatePresenter extends BaseStatePresenter {
   }
 
   void performAddExpense() async {
-    //todo validate form
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+    } else {
+      return;
+    }
     await categoryHelper.getCategoryId(category)
         .then((value) => continueInsertingExpense(value))
         .catchError(insertCategoryFirst);
   }
 
   void continueInsertingExpense(int value) async {
-    model.categoryId = value;
-    model.timestamp = new DateTime.now().millisecondsSinceEpoch;
-    await helper.saveExpense(model)
+    Expense expense = new Expense(null, expenseFormModel.name, value, expenseFormModel.price, new DateTime.now().millisecondsSinceEpoch);
+    await helper.saveExpense(expense)
         .then((onValue) => view.onExpenseInserted())
         .catchError((onError) => view.showMessage("INSERTION FAILED"));
   }

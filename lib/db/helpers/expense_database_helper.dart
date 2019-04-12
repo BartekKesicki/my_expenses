@@ -8,7 +8,7 @@ class ExpenseDatabaseHelper extends DatabaseHelper {
     var dbClient = await db;
     String query =
         "INSERT INTO ${DbColumnConstants.expenseTableName} (${DbColumnConstants.expenseIdColumnName}, ${DbColumnConstants.expenseNameColumnName}, " +
-            "${DbColumnConstants.expenseCategoryIdColumnName}, ${DbColumnConstants.expensePriceColumnName}, ${DbColumnConstants.expenseTimestampColumnName} " +
+            "${DbColumnConstants.expenseCategoryIdColumnName}, ${DbColumnConstants.expensePriceColumnName}, ${DbColumnConstants.expenseTimestampColumnName}) " +
             "VALUES(${expense.id}, '${expense.name}', ${expense.categoryId}, ${expense.price}, ${expense.timestamp})";
     await dbClient.transaction((txn) async {
       return txn.rawInsert(query);
