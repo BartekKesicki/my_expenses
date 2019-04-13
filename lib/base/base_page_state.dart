@@ -42,6 +42,10 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     return new TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal);
   }
 
+  TextStyle createCheckboxTextStyle() {
+    return new TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
+  }
+
   TextStyle createButtonTextStyle() {
     return new TextStyle(
         color: Colors.white,

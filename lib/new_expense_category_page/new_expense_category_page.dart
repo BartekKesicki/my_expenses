@@ -28,6 +28,8 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
               child: Form(
                   key: presenter.getFormKey,
                   child: Column(children: <Widget>[
+                    createText("EXPENSE CATEGORY", createSubTitleTextStyle()),
+                    createSizedBox(20.0),
                     TextFormField(
                       decoration: createTextFieldDecoration("EXPENSE CATEGORY NAME"),
                       validator: (String value) {
@@ -40,14 +42,26 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
                         presenter.expenseName = value;
                       },
                     ),
-                    createSizedBox(10.0),
-                    new Checkbox(value: presenter.isBill, onChanged: presenter.onValueChanged),
+                    createSizedBox(20.0),
+                    new Row(
+                      children: <Widget>[
+                        new Checkbox(value: presenter.isBill,
+                            onChanged: onCheckBoxValueChanged),
+                        createText("EXPENSE IS BILL", createCheckboxTextStyle()),
+                      ],
+                    ),
                     createSizedBox(30.0),
                     createRaisedButton(() {
                       presenter.performAddNewIncomeCategoryName();
                     }, createText("ADD NEW EXPENSE CATEGORY", createButtonTextStyle())),
                   ])))
         ]));
+  }
+
+  void onCheckBoxValueChanged(bool value) {
+    setState(() {
+      presenter.onValueChanged(value);
+    });
   }
 
   void initPresenter() {
