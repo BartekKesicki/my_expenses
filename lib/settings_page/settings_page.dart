@@ -23,9 +23,10 @@ class _SettingsPageState extends BasePageState<SettingsPage>
     return new Scaffold(
       appBar: AppBar(backgroundColor: Colors.green, title: Text('Settings')),
       body: Center(
+
         child: createRaisedButton(() {
           showLogoutDialog();
-        }, new Text("LOGOUT")),
+        }, createText("LOGOUT", createButtonTextStyle())),
       ),
     );
   }

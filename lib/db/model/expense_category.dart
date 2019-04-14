@@ -21,6 +21,6 @@ class ExpenseCategory {
   ExpenseCategory.fromMap(Map<String, dynamic> map) {
     id = map[DbColumnConstants.expenseCategoryTableIdColumnName];
     name = map[DbColumnConstants.expenseCategoryTableNameColumnName];
-    isBill = map[DbColumnConstants.expenseCategoryTableIsBillColumnName];
+    isBill = map[DbColumnConstants.expenseCategoryTableIsBillColumnName] == 1;
   }
 }

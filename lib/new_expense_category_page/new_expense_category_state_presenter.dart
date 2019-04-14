@@ -26,14 +26,30 @@ class NewExpenseCategoryStatePresenter extends BaseStatePresenter {
     view = null;
   }
 
-  void performAddNewIncomeCategoryName() async {
+  void performAddNewExpenseCategoryName() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
     } else {
       return;
     }
-    ExpenseCategory category = new ExpenseCategory(isBill ? 1 : 0, expenseName, false);
-    await helper.saveExpenseCategory(category).then((onValue) => view.showInsertionSuccess()).catchError((onError) => view.showInsertionFailure());
+    await helper.getCategoryId(expenseName)
+        .then((onValue) => showCategoryExistsMessage(onValue))
+        .catchError((onError) => continueInsertionExpenseCategory());
+  }
+
+  void showCategoryExistsMessage(int id) {
+    if (id == null) {
+      continueInsertionExpenseCategory();
+    } else {
+      view.showMessage("THIS CATEGORY ALREADY EXISTS");
+    }
+  }
+
+  void continueInsertionExpenseCategory() async {
+    ExpenseCategory category = new ExpenseCategory(null, expenseName, isBill);
+    await helper.saveExpenseCategory(category)
+        .then((onValue) => view.showInsertionSuccess())
+        .catchError((onError) => view.showInsertionFailure());
   }
 
   bool isCategoryNameValid(String value) {

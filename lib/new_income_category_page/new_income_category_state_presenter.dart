@@ -31,8 +31,24 @@ class NewIncomeCategoryStatePresenter extends BaseStatePresenter {
     } else {
       return;
     }
+    await helper.getCategoryId(incomeName)
+        .then((id) => showIncomeCategoryExistsMessage(id))
+        .catchError((error) => continueIncomeCategoryInsertion());
+  }
+
+  void continueIncomeCategoryInsertion() async {
     IncomeCategory incomeCategory = new IncomeCategory(null, incomeName);
-    await helper.saveIncomeCategory(incomeCategory).then((onValue) => view.insertionSucceed()).catchError((onError) => view.insertionFailed());
+    await helper.saveIncomeCategory(incomeCategory)
+        .then((onValue) => view.insertionSucceed())
+        .catchError((onError) => view.insertionFailed());
+  }
+
+  void showIncomeCategoryExistsMessage(int id) {
+    if (id == null) {
+      continueIncomeCategoryInsertion();
+    } else {
+      view.showMessage("THIS CATEGORY ALREADY EXISTS");
+    }
   }
 
   bool isCategoryNameValid(String value) {

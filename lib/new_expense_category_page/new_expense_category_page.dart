@@ -52,7 +52,7 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
                     ),
                     createSizedBox(30.0),
                     createRaisedButton(() {
-                      presenter.performAddNewIncomeCategoryName();
+                      presenter.performAddNewExpenseCategoryName();
                     }, createText("ADD NEW EXPENSE CATEGORY", createButtonTextStyle())),
                   ])))
         ]));
