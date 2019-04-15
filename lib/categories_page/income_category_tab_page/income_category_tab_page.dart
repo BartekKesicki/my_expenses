@@ -40,8 +40,17 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   void showIncomeCategoriesView(List<IncomeCategory> incomeCategories) {
     if (incomeCategories != null && incomeCategories.isNotEmpty) {
       setState(() {
-        mainWidget = new Text("THERE IS SOME INCOME CATEGORY");
-        //todo init income categories list view
+        mainWidget = new ListView.builder(
+          itemCount: incomeCategories.length,
+          itemBuilder: (context, position) {
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(incomeCategories[position].name, style: TextStyle(fontSize: 22.0),),
+              ),
+            );
+          },
+        );
       });
     } else {
       showNoIncomeCategoryView();

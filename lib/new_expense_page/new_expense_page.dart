@@ -27,11 +27,11 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-          createSizedBox(30.0),
-          Center(
-            child: createText("NEW EXPENSE", createSubTitleTextStyle()),
-          ),
-          createSizedBox(10.0),
+      createSizedBox(30.0),
+      Center(
+        child: createText("NEW EXPENSE", createSubTitleTextStyle()),
+      ),
+      createSizedBox(10.0),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(

@@ -40,8 +40,17 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   void showExpensesCategoriesView(List<ExpenseCategory> categories) {
     if (categories != null && categories.isNotEmpty) {
       setState(() {
-        mainWidget = new Text("THERE IS SOME NEW CATEGORIES");
-        //todo init expense categories list
+        mainWidget = new ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, position) {
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(categories[position].name, style: TextStyle(fontSize: 22.0),),
+              ),
+            );
+          },
+        );
       });
     } else {
       showNoExpenseCategoriesView();
