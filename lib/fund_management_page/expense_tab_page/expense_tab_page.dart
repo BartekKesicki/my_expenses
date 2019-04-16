@@ -39,8 +39,17 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   void showExpensesListView(List<Expense> expenses) {
     if (expenses != null && expenses.isNotEmpty) {
       setState(() {
-        mainWidget = new Text("THERE IS SOME NEW EXPENSES");
-        //todo init expenses list
+        mainWidget = new ListView.builder(
+          itemCount: expenses.length,
+          itemBuilder: (context, position) {
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(expenses[position].name, style: TextStyle(fontSize: 22.0),),
+              ),
+            );
+          },
+        );
       });
     } else {
       showNoExpensesView();

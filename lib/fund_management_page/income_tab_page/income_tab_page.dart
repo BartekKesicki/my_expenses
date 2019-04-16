@@ -39,8 +39,17 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   void showIncomesListView(List<Income> incomes) {
     if (incomes != null && incomes.isNotEmpty) {
       setState(() {
-        mainWidget = new Text("THERE IS SOME NEW INCOMES");
-        //todo init incomes list
+        mainWidget = new ListView.builder(
+          itemCount: incomes.length,
+          itemBuilder: (context, position) {
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(incomes[position].name, style: TextStyle(fontSize: 22.0),),
+              ),
+            );
+          },
+        );
       });
     } else {
       showNoIncomesView();
