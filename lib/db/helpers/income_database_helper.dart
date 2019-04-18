@@ -21,7 +21,7 @@ class IncomeDatabaseHelper extends DatabaseHelper {
     List<Map> result = await dbClient.rawQuery(query);
     List<Income> incomes;
     if (result != null && result.isNotEmpty) {
-      incomes = result.toList().map((e) => Income.fromMap(e));
+      incomes = result.toList().map((e) => Income.fromMap(e)).toList();
     }
     return incomes;
   }

@@ -21,7 +21,7 @@ class ExpenseDatabaseHelper extends DatabaseHelper {
     List<Map> result = await dbClient.rawQuery(query);
     List<Expense> expenses;
     if (result != null && result.isNotEmpty) {
-      expenses = result.toList().map((e) => Expense.fromMap(e));
+      expenses = result.toList().map((e) => Expense.fromMap(e)).toList();
     }
     return expenses;
   }
@@ -34,7 +34,7 @@ class ExpenseDatabaseHelper extends DatabaseHelper {
     List<Map> result = await dbClient.rawQuery(query);
     List<Expense> expenses;
     if (result != null && result.isNotEmpty) {
-      expenses = result.toList().map((e) => Expense.fromMap(e));
+      expenses = result.toList().map((e) => Expense.fromMap(e)).toList();
     }
     return expenses;
   }

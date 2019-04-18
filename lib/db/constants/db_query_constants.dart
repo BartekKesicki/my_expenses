@@ -27,6 +27,6 @@ class QueryConstants {
 
   static const String CREATE_INCOME_TABLE_QUERY = "CREATE TABLE ${DbColumnConstants.incomeTableName} (${DbColumnConstants.incomeIdColumnName} INTEGER PRIMARY KEY AUTOINCREMENT, " +
       "${DbColumnConstants.incomeAmountColumnName} REAL, ${DbColumnConstants.incomeNameColumnName} TEXT, " +
-          "${DbColumnConstants.incomeCategoryIdColumnName} TEXT, ${DbColumnConstants.incomeTimestampColumnName} INTEGER)";
+          "${DbColumnConstants.incomeCategoryIdColumnName} INTEGER, ${DbColumnConstants.incomeTimestampColumnName} INTEGER)";
 
 }
