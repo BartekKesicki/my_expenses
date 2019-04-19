@@ -21,12 +21,13 @@ class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
     model = new SignUpExpenseModel();
   }
 
-  void validateInputsAndSignup(SignUpPersonalDataModel personalData) {
+  void validateInputsAndSignup(SignUpPersonalDataModel personalData) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       User user = createUser(personalData);
-      dbHelper.saveUser(user);
-      view.redirectToLoginPage();
+      await dbHelper.saveUser(user)
+          .then((onValue) => view.redirectToLoginPage())
+          .catchError((onError) => view.showMessage(onError.toString()));
     } else {
       view.autoValidate();
     }
