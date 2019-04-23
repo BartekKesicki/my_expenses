@@ -59,7 +59,7 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   @override
   void showNoIncomesView() {
     setState(() {
-      mainWidget = createNoContentWidget("THERE IS NO INCOMES YET", "ADD NEW INCOME", () {
+      mainWidget = createNoContentWidget("No Incomes", "ADD FIRST INCOME", () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewIncomePage()));
       });

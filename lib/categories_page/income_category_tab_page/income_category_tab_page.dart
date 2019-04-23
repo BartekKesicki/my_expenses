@@ -60,7 +60,7 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   @override
   void showNoIncomeCategoryView() {
     setState(() {
-      mainWidget = createNoContentWidget("THERE IS NO INCOME CATEGORIES", "ADD NEW INCOME CATEGORY", () {
+      mainWidget = createNoContentWidget("No Income Categories", "ADD FIRST INCOME CATEGORY", () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
       });

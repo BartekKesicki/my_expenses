@@ -59,7 +59,7 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   @override
   void showNoExpensesView() {
    setState(() {
-     mainWidget = createNoContentWidget("THERE IS NO EXPENSES", "ADD NEW EXPENSE", () {
+     mainWidget = createNoContentWidget("No expenses", "ADD FIRST EXPENSE", () {
        Navigator.push(context,
            MaterialPageRoute(builder: (context) => NewExpensePage()));
      });

@@ -101,11 +101,15 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
 
   Container createNoContentWidget(String title, String addNewItemButtonTitle, GestureTapCallback callback) {
     return new Container(
-      margin: EdgeInsetsDirectional.only(top: 40.0),
+      margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
       child: new Center(
         child: new Column(
           children: <Widget>[
+            createSizedBox(30.0),
+            new Icon(Icons.close, size: 220.0, color: Colors.grey,),
+            createSizedBox(30.0),
             createText(title, createSimpleLabelTextStyle()),
+            createSizedBox(40.0),
             createRaisedButton(callback,
                 createText(addNewItemButtonTitle, createButtonTextStyle()))
           ],

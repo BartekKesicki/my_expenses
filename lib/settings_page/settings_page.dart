@@ -22,11 +22,14 @@ class _SettingsPageState extends BasePageState<SettingsPage>
     initPresenter();
     return new Scaffold(
       appBar: AppBar(backgroundColor: Colors.green, title: Text('Settings')),
-      body: Center(
-        child: createRaisedButton(() {
-          showLogoutDialog();
-        }, createText("LOGOUT", createButtonTextStyle())),
-      ),
+      body: Container(
+        margin: EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Center(
+          child: createRaisedButton(() {
+            showLogoutDialog();
+          }, createText("LOGOUT", createButtonTextStyle())),
+        ),
+      )
     );
   }
   //todo fill the page

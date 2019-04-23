@@ -60,7 +60,7 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   @override
   void showNoExpenseCategoriesView() {
     setState(() {
-      mainWidget = createNoContentWidget("THERE IS NO NEW CATEGORIES", "ADD NEW CATEGORY", () {
+      mainWidget = createNoContentWidget("No expense Categories", "ADD FIRST EXPENSE CATEGORY", () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));
       });
