@@ -40,16 +40,29 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   void showExpensesCategoriesView(List<ExpenseCategory> categories) {
     if (categories != null && categories.isNotEmpty) {
       setState(() {
-        mainWidget = new ListView.builder(
-          itemCount: categories.length,
-          itemBuilder: (context, position) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(categories[position].name, style: TextStyle(fontSize: 22.0),),
-              ),
-            );
-          },
+        mainWidget = new Column(
+          children: <Widget>[
+            new ListView.builder(
+              itemCount: categories.length,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemBuilder: (context, position) {
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      categories[position].name,
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                );
+              },
+            ),
+            //todo change alignment to bottom
+            createRaisedButton(() {
+              //todo redirect to add new expense category page
+            }, createText("ADD EXPENSE CATEGORY", createButtonTextStyle()))
+          ],
         );
       });
     } else {
@@ -60,7 +73,8 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   @override
   void showNoExpenseCategoriesView() {
     setState(() {
-      mainWidget = createNoContentWidget("No expense Categories", "ADD FIRST EXPENSE CATEGORY", () {
+      mainWidget = createNoContentWidget(
+          "No expense Categories", "ADD FIRST EXPENSE CATEGORY", () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));
       });
