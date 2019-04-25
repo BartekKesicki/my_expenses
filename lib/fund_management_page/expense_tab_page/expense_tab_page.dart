@@ -39,16 +39,27 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   void showExpensesListView(List<Expense> expenses) {
     if (expenses != null && expenses.isNotEmpty) {
       setState(() {
-        mainWidget = new ListView.builder(
-          itemCount: expenses.length,
-          itemBuilder: (context, position) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(expenses[position].name, style: TextStyle(fontSize: 22.0),),
-              ),
-            );
-          },
+        mainWidget = new Column(
+          children: <Widget>[
+            new ListView.builder(
+              itemCount: expenses.length,
+              itemBuilder: (context, position) {
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      expenses[position].name,
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                );
+              },
+            ),
+            //todo change alignment to bottom
+            createRaisedButton(() {
+              //todo redirect to add new expense page
+            }, createText("ADD EXPENSE", createButtonTextStyle()))
+          ],
         );
       });
     } else {
@@ -58,11 +69,12 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
 
   @override
   void showNoExpensesView() {
-   setState(() {
-     mainWidget = createNoContentWidget("No expenses", "ADD FIRST EXPENSE", () {
-       Navigator.push(context,
-           MaterialPageRoute(builder: (context) => NewExpensePage()));
-     });
-   });
+    setState(() {
+      mainWidget =
+          createNoContentWidget("No expenses", "ADD FIRST EXPENSE", () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => NewExpensePage()));
+      });
+    });
   }
 }

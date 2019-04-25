@@ -39,16 +39,27 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   void showIncomesListView(List<Income> incomes) {
     if (incomes != null && incomes.isNotEmpty) {
       setState(() {
-        mainWidget = new ListView.builder(
-          itemCount: incomes.length,
-          itemBuilder: (context, position) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(incomes[position].name, style: TextStyle(fontSize: 22.0),),
-              ),
-            );
-          },
+        mainWidget = new Column(
+          children: <Widget>[
+            new ListView.builder(
+              itemCount: incomes.length,
+              itemBuilder: (context, position) {
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      incomes[position].name,
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                );
+              },
+            ),
+            //todo change alignment to bottom
+            createRaisedButton(() {
+              //todo redirect to add new income page
+            }, createText("ADD INCOME", createButtonTextStyle()))
+          ],
         );
       });
     } else {
@@ -60,11 +71,9 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   void showNoIncomesView() {
     setState(() {
       mainWidget = createNoContentWidget("No Incomes", "ADD FIRST INCOME", () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => NewIncomePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => NewIncomePage()));
       });
     });
   }
-
-
 }

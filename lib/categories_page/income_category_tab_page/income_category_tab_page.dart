@@ -40,16 +40,27 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   void showIncomeCategoriesView(List<IncomeCategory> incomeCategories) {
     if (incomeCategories != null && incomeCategories.isNotEmpty) {
       setState(() {
-        mainWidget = new ListView.builder(
-          itemCount: incomeCategories.length,
-          itemBuilder: (context, position) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(incomeCategories[position].name, style: TextStyle(fontSize: 22.0),),
-              ),
-            );
-          },
+        mainWidget = new Column(
+          children: <Widget>[
+            new ListView.builder(
+              itemCount: incomeCategories.length,
+              itemBuilder: (context, position) {
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      incomeCategories[position].name,
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                );
+              },
+            ),
+            //todo change alignment to bottom
+            createRaisedButton(() {
+              //todo redirect to add new income category page
+            }, createText("ADD INCOME CATEGORY", createButtonTextStyle()))
+          ],
         );
       });
     } else {
@@ -60,7 +71,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   @override
   void showNoIncomeCategoryView() {
     setState(() {
-      mainWidget = createNoContentWidget("No Income Categories", "ADD FIRST INCOME CATEGORY", () {
+      mainWidget = createNoContentWidget(
+          "No Income Categories", "ADD FIRST INCOME CATEGORY", () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
       });
