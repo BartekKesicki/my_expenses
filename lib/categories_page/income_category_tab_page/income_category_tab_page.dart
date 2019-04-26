@@ -58,7 +58,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
             ),
             //todo change alignment to bottom
             createRaisedButton(() {
-              //todo redirect to add new income category page
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
             }, createText("ADD INCOME CATEGORY", createButtonTextStyle()))
           ],
         );

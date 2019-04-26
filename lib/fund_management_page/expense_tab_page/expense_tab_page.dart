@@ -57,7 +57,8 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
             ),
             //todo change alignment to bottom
             createRaisedButton(() {
-              //todo redirect to add new expense page
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => NewExpensePage()));
             }, createText("ADD EXPENSE", createButtonTextStyle()))
           ],
         );

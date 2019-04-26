@@ -60,7 +60,8 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
             ),
             //todo change alignment to bottom
             createRaisedButton(() {
-              //todo redirect to add new expense category page
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));
             }, createText("ADD EXPENSE CATEGORY", createButtonTextStyle()))
           ],
         );
