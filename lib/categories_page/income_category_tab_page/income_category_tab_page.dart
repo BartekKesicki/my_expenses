@@ -47,6 +47,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
               children: <Widget>[
                 new ListView.builder(
                   itemCount: incomeCategories.length,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return Card(
                       child: Padding(
@@ -66,7 +68,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
                           builder: (context) => NewIncomeCategoryPage()));
                 }, createText("ADD INCOME CATEGORY", createButtonTextStyle()))
               ],
-            ));
+            )
+        );
       });
     } else {
       showNoIncomeCategoryView();

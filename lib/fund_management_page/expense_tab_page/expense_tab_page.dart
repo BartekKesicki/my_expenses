@@ -46,6 +46,8 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
             children: <Widget>[
               new ListView.builder(
                 itemCount: expenses.length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
                 itemBuilder: (context, position) {
                   return Card(
                     child: Padding(
