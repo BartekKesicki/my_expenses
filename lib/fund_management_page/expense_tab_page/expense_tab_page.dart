@@ -39,29 +39,31 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   void showExpensesListView(List<Expense> expenses) {
     if (expenses != null && expenses.isNotEmpty) {
       setState(() {
-        mainWidget = new Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            new ListView.builder(
-              itemCount: expenses.length,
-              itemBuilder: (context, position) {
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      expenses[position].name,
-                      style: TextStyle(fontSize: 22.0),
+        mainWidget = new Padding(
+          padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              new ListView.builder(
+                itemCount: expenses.length,
+                itemBuilder: (context, position) {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        expenses[position].name,
+                        style: TextStyle(fontSize: 22.0),
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-            //todo change bottom margin
-            createRaisedButton(() {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => NewExpensePage()));
-            }, createText("ADD EXPENSE", createButtonTextStyle()))
-          ],
+                  );
+                },
+              ),
+              createRaisedButton(() {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => NewExpensePage()));
+              }, createText("ADD EXPENSE", createButtonTextStyle()))
+            ],
+          ),
         );
       });
     } else {

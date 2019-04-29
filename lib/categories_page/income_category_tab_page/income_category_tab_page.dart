@@ -40,30 +40,33 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   void showIncomeCategoriesView(List<IncomeCategory> incomeCategories) {
     if (incomeCategories != null && incomeCategories.isNotEmpty) {
       setState(() {
-        mainWidget = new Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            new ListView.builder(
-              itemCount: incomeCategories.length,
-              itemBuilder: (context, position) {
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      incomeCategories[position].name,
-                      style: TextStyle(fontSize: 22.0),
-                    ),
-                  ),
-                );
-              },
-            ),
-            //todo change margin to bottom
-            createRaisedButton(() {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
-            }, createText("ADD INCOME CATEGORY", createButtonTextStyle()))
-          ],
-        );
+        mainWidget = new Padding(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new ListView.builder(
+                  itemCount: incomeCategories.length,
+                  itemBuilder: (context, position) {
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          incomeCategories[position].name,
+                          style: TextStyle(fontSize: 22.0),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                createRaisedButton(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NewIncomeCategoryPage()));
+                }, createText("ADD INCOME CATEGORY", createButtonTextStyle()))
+              ],
+            ));
       });
     } else {
       showNoIncomeCategoryView();
