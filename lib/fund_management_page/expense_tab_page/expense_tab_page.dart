@@ -40,6 +40,7 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
     if (expenses != null && expenses.isNotEmpty) {
       setState(() {
         mainWidget = new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             new ListView.builder(
               itemCount: expenses.length,
@@ -55,7 +56,7 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
                 );
               },
             ),
-            //todo change alignment to bottom
+            //todo change bottom margin
             createRaisedButton(() {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => NewExpensePage()));

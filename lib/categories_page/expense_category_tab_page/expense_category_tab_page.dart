@@ -41,6 +41,7 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
     if (categories != null && categories.isNotEmpty) {
       setState(() {
         mainWidget = new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             new ListView.builder(
               itemCount: categories.length,
@@ -58,7 +59,7 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
                 );
               },
             ),
-            //todo change alignment to bottom
+            //todo change margin in bottom button
             createRaisedButton(() {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));

@@ -41,6 +41,7 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     if (incomeCategories != null && incomeCategories.isNotEmpty) {
       setState(() {
         mainWidget = new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             new ListView.builder(
               itemCount: incomeCategories.length,
@@ -56,7 +57,7 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
                 );
               },
             ),
-            //todo change alignment to bottom
+            //todo change margin to bottom
             createRaisedButton(() {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
