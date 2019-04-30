@@ -50,11 +50,9 @@ class _CategoriesPageState extends BasePageState<CategoriesPage>
         )
     );
   }
-  //todo fill the page
 
   void initPresenter() {
     var id = -1;
-    //todo temporary value
     if (presenter == null) {
       presenter = new CategoriesStatePresenter();
       presenter.attach(this);

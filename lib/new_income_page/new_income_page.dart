@@ -24,7 +24,6 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
 
   @override
   Widget build(BuildContext context) {
-    //todo fill the title
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
@@ -65,14 +64,14 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                 ),
                 createSizedBox(20.0),
                 categoryExists
-                    ? DropdownButton(
+                    ? new DropdownButton<String>(
                         hint: Text('Please choose category'),
                         value: dropDownCategory,
                         onChanged: onChangedDropDownItem,
                         items: categories.map((item) {
-                          return DropdownMenuItem(
-                            child: new Text(item.name),
-                            value: item.name,
+                          return DropdownMenuItem<String>(
+                            child: new Text(dropDownCategory),
+                            value: dropDownCategory,
                           );
                         }).toList(),
                       )

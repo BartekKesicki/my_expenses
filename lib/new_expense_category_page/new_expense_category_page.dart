@@ -23,6 +23,10 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
+          createSizedBox(30.0),
+          Center(
+            child: createText("NEW EXPENSE CATEGORY", createSubTitleTextStyle()),
+          ),
           Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Form(

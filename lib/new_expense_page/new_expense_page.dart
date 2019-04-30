@@ -61,17 +61,18 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                   },
                 ),
                 categoryExists
-                    ? DropdownButton(
+                    ? new DropdownButton<String>(
+                        value: dropDownCategory,
                         onChanged: onChangedDropDownItem,
                         hint: Text('Please choose category'),
-                        items: categories.map((category) {
-                          return DropdownMenuItem(
+                        items: categories.map((ExpenseCategory category) {
+                          return new DropdownMenuItem<String>(
                             child: new Text(category.name),
                             value: category.name,
                           );
                         }).toList(),
                       )
-                    : TextFormField(
+                    : new TextFormField(
                         decoration: createTextFieldDecoration("NEW CATEGORY"),
                         validator: (String value) {
                           if (!NewExpenseValidator.isExpenseCategoryValid(

@@ -23,6 +23,10 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
+          createSizedBox(30.0),
+          Center(
+            child: createText("NEW INCOME CATEGORY", createSubTitleTextStyle()),
+          ),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(
@@ -47,7 +51,6 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
               ])))
     ]));
   }
-  //todo fill the page
 
   void initPresenter() {
     if (presenter == null) {

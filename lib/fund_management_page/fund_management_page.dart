@@ -48,7 +48,6 @@ class _FundManagementState extends BasePageState<FundManagementPage>
           ),
         ));
   }
-  //todo fill the page tab view (wip)
 
   void initPresenterAndTabViews() {
     if (presenter == null) {

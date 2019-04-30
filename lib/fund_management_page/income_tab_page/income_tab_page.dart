@@ -60,15 +60,12 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                     );
                   },
                 ),
-                new Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: createRaisedButton(() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NewIncomePage()));
-                  }, createText("ADD INCOME", createButtonTextStyle())),
-                )
+                createRaisedButton(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NewIncomePage()));
+                }, createText("ADD INCOME", createButtonTextStyle())),
               ],
             ));
       });
