@@ -7,6 +7,7 @@ import 'package:my_expenses/home/home_state_presenter.dart';
 import 'package:my_expenses/home/home_state_view.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:my_expenses/my_profile_page/profile_page.dart';
+import 'package:my_expenses/new_expense_page/new_expense_page.dart';
 import 'package:my_expenses/settings_page/settings_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -101,11 +102,6 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
   void dispose() {
     super.dispose();
     _pageController.dispose();
-  }
-
-  @override
-  void redirectToAddNewExpensePage(int userId) {
-    // TODO: implement redirectToAddNewExpensePage
   }
 
   void navigationTapped(int page) {

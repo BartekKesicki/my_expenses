@@ -14,8 +14,4 @@ class HomeStatePresenter extends BaseStatePresenter {
   void detach() {
     this.view = null;
   }
-
-  void performLaunchNewExpense(int userId) {
-    view.redirectToAddNewExpensePage(userId);
-  }
 }
