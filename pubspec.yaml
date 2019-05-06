@@ -24,6 +24,8 @@ dependencies:
   sqflite: any
   flutter_svg: ^0.11.0+1
   shared_preferences: ^0.4.2
+  grouped_listview: ^0.0.2
+  date_format: ^1.0.6
 
 dev_dependencies:
   flutter_test:
