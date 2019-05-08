@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/expense.dart';
-import 'package:grouped_listview/grouped_listview.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_presenter.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_view.dart';
-import 'package:my_expenses/fund_management_page/expense_tab_page/group.dart';
 import 'package:my_expenses/new_expense_page/new_expense_page.dart';
 
 class ExpenseTabPage extends StatefulWidget {
@@ -20,6 +18,7 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
     implements ExpenseTabView {
   ExpenseTabPresenter presenter;
   Widget mainWidget;
+  TextEditingController editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,44 +37,57 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   }
 
   @override
-  void showExpensesListView(List<Group> expenses) {
+  void showExpensesListView(List<Expense> expenses) {
     if (expenses != null && expenses.isNotEmpty) {
       setState(() {
-        mainWidget = new Padding(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              new GroupedListView<Group, String>(
-                collection: expenses,
-                groupBy: (Group g) => g.groupName,
-                listBuilder: (BuildContext context, Group g) =>
-                    new ListTile(title: new Text(g.expense.name)),
-                    groupBuilder: (BuildContext context, String name) => new Text(name),
+        mainWidget = new Column(
+          children: <Widget>[
+            //todo decorate page
+            new TextField(
+              onChanged: (String value) {
+                //todo listener
+              },
+              controller: editingController,
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Search",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(25.0)))),
+            ),
+            new Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  new ListView.builder(
+                    itemCount: expenses.length,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, position) {
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            expenses[position].name,
+                            style: TextStyle(fontSize: 22.0),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  //todo fill with separated list builder
+                  createRaisedButton(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NewExpensePage()));
+                  }, createText("ADD EXPENSE", createButtonTextStyle()))
+                ],
               ),
-//              new ListView.builder(
-//                itemCount: expenses.length,
-//                scrollDirection: Axis.vertical,
-//                shrinkWrap: true,
-//                itemBuilder: (context, position) {
-//                  return Card(
-//                    child: Padding(
-//                      padding: const EdgeInsets.all(16.0),
-//                      child: Text(
-//                        expenses[position].name,
-//                        style: TextStyle(fontSize: 22.0),
-//                      ),
-//                    ),
-//                  );
-//                },
-//              ),
-              //todo fill with sticky header list
-              createRaisedButton(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewExpensePage()));
-              }, createText("ADD EXPENSE", createButtonTextStyle()))
-            ],
-          ),
+            )
+          ],
         );
       });
     } else {
