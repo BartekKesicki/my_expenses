@@ -3,5 +3,5 @@ import 'package:my_expenses/db/model/expense.dart';
 
 abstract class ExpenseTabView extends BaseStateView {
   void showNoExpensesView();
-  void showExpensesListView(List<Expense> expenses);
+  void updateExpensesList(List<Expense> expenses);
 }

@@ -19,46 +19,31 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   ExpenseTabPresenter presenter;
   Widget mainWidget;
   TextEditingController editingController = TextEditingController();
+  List<Expense> expenses = new List();
 
   @override
   Widget build(BuildContext context) {
     initHomePresenter();
-    return new Scaffold(
-      body: mainWidget,
-    );
-  }
-
-  void initHomePresenter() {
-    if (presenter == null) {
-      presenter = ExpenseTabPresenter();
-      presenter.attach(this);
-      presenter.loadExpensesList();
-    }
-  }
-
-  @override
-  void showExpensesListView(List<Expense> expenses) {
-    if (expenses != null && expenses.isNotEmpty) {
-      setState(() {
-        mainWidget = new Column(
-          children: <Widget>[
-            //todo decorate page
-            new TextField(
-              onChanged: (String value) {
-                //todo listener
-              },
-              controller: editingController,
-              decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Search",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(25.0)))),
-            ),
-            new Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
-              child: new Column(
+    return expenses.isEmpty
+        ? createNoContentWidget("No expenses", "ADD FIRST EXPENSE", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NewExpensePage()));
+          })
+        : new Column(
+            children: <Widget>[
+              new TextField(
+                onChanged: (String value) {
+                  //todo listener
+                },
+                controller: editingController,
+                decoration: InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              ),
+              new Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   new ListView.builder(
@@ -86,13 +71,23 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
                   }, createText("ADD EXPENSE", createButtonTextStyle()))
                 ],
               ),
-            )
-          ],
-        );
-      });
-    } else {
-      showNoExpensesView();
+            ],
+          );
+  }
+
+  void initHomePresenter() {
+    if (presenter == null) {
+      presenter = ExpenseTabPresenter();
+      presenter.attach(this);
+      presenter.loadExpensesList();
     }
+  }
+
+  @override
+  void updateExpensesList(List<Expense> expenses) {
+    setState(() {
+      this.expenses = expenses;
+    });
   }
 
   @override

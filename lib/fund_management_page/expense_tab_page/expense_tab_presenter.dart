@@ -2,7 +2,6 @@ import 'package:my_expenses/base/base_state_presenter.dart';
 import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/db/helpers/expense_database_helper.dart';
 import 'package:my_expenses/db/model/expense.dart';
-import 'package:date_format/date_format.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_view.dart';
 
 class ExpenseTabPresenter extends BaseStatePresenter {
@@ -27,10 +26,6 @@ class ExpenseTabPresenter extends BaseStatePresenter {
   }
 
   void createGroupedExpenses(List<Expense> expenses) {
-    if (expenses != null && expenses.isNotEmpty) {
-      view.showExpensesListView(expenses);
-    } else {
-      view.showNoExpensesView();
-    }
+    view.updateExpensesList(expenses);
   }
 }
