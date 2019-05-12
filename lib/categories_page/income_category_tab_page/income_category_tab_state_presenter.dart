@@ -4,7 +4,6 @@ import 'package:my_expenses/categories_page/income_category_tab_page/income_cate
 import 'package:my_expenses/db/helpers/income_category_database_helper.dart';
 
 class IncomeCategoryTabStatePresenter extends BaseStatePresenter {
-
   IncomeCategoryTabStateView view;
   IncomeCategoryDatabaseHelper helper;
 
@@ -19,9 +18,10 @@ class IncomeCategoryTabStatePresenter extends BaseStatePresenter {
     this.view = null;
   }
 
-  void loadIncomeCategories() async{
-    await helper.getAllIncomeCategories()
-        .then((onValue) => view.showIncomeCategoriesView(onValue))
+  void loadIncomeCategories() async {
+    await helper
+        .getAllIncomeCategories()
+        .then((onValue) => view.updateIncomeCategoriesList(onValue))
         .catchError((onError) => view.showNoIncomeCategoryView());
   }
 }

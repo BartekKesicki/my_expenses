@@ -4,7 +4,6 @@ import 'package:my_expenses/categories_page/expense_category_tab_page/expense_ca
 import 'package:my_expenses/db/helpers/expense_category_database_helper.dart';
 
 class ExpenseCategoryTabStatePresenter extends BaseStatePresenter {
-
   ExpenseCategoryTabStateView view;
   ExpenseCategoryDatabaseHelper helper;
 
@@ -20,8 +19,9 @@ class ExpenseCategoryTabStatePresenter extends BaseStatePresenter {
   }
 
   void loadExpensesCategories() async {
-    await helper.getAllExpenseCategories()
-        .then((onValue) => view.showExpensesCategoriesView(onValue))
+    await helper
+        .getAllExpenseCategories()
+        .then((onValue) => view.updateExpensesCategoriesList(onValue))
         .catchError((onError) => view.showNoExpenseCategoriesView());
   }
 }

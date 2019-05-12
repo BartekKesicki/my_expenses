@@ -3,5 +3,5 @@ import 'package:my_expenses/db/model/income_category.dart';
 
 abstract class IncomeCategoryTabStateView extends BaseStateView {
   void showNoIncomeCategoryView();
-  void showIncomeCategoriesView(List<IncomeCategory> incomeCategories);
+  void updateIncomeCategoriesList(List<IncomeCategory> incomeCategories);
 }

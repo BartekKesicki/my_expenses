@@ -19,8 +19,9 @@ class IncomeTabPresenter extends BaseStatePresenter {
   }
 
   void loadIncomesList() async {
-    await helper.getAllIncomes()
-        .then((incomes) => view.showIncomesListView(incomes))
+    await helper
+        .getAllIncomes()
+        .then((incomes) => view.updateIncomesList(incomes))
         .catchError(() => view.showNoIncomesView());
   }
 }

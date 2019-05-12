@@ -18,33 +18,38 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
     implements IncomeTabView {
   IncomeTabPresenter presenter;
   Widget mainWidget;
+  TextEditingController editingController = TextEditingController();
+  List<Income> incomes = List();
 
   @override
   Widget build(BuildContext context) {
     initHomePresenter();
-    return new Scaffold(
-      body: mainWidget,
-    );
-  }
-
-  void initHomePresenter() {
-    if (presenter == null) {
-      presenter = IncomeTabPresenter();
-      presenter.attach(this);
-      presenter.loadIncomesList();
-    }
-  }
-
-  @override
-  void showIncomesListView(List<Income> incomes) {
-    if (incomes != null && incomes.isNotEmpty) {
-      setState(() {
-        mainWidget = new Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new ListView.builder(
+    return incomes.isEmpty
+        ? createNoContentWidget("No incomes", "ADD FIRST INCOME", () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NewIncomePage()));
+          })
+        : new Column(
+            children: <Widget>[
+              new Padding(
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                child: new TextField(
+                  onChanged: (String value) {
+                    //todo listener
+                  },
+                  controller: editingController,
+                  decoration: InputDecoration(
+                      labelText: "Search",
+                      hintText: "Search",
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(25.0)))),
+                ),
+              ),
+              new Expanded(
+                child: new ListView.builder(
                   itemCount: incomes.length,
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
@@ -60,18 +65,32 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                     );
                   },
                 ),
-                createRaisedButton(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NewIncomePage()));
+              ),
+              new Padding(
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                child: createRaisedButton(() {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewIncomePage()));
                 }, createText("ADD INCOME", createButtonTextStyle())),
-              ],
-            ));
-      });
-    } else {
-      showNoIncomesView();
+              )
+            ],
+          );
+  }
+
+  void initHomePresenter() {
+    if (presenter == null) {
+      presenter = IncomeTabPresenter();
+      presenter.attach(this);
+      presenter.loadIncomesList();
     }
+  }
+
+  @override
+  void updateIncomesList(List<Income> incomes) {
+    setState(() {
+      this.incomes = incomes;
+    });
   }
 
   @override
