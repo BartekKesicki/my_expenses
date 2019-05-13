@@ -27,6 +27,7 @@ class _CategoriesPageState extends BasePageState<CategoriesPage>
     return new DefaultTabController(
         length: 2,
         child: new Scaffold(
+          resizeToAvoidBottomPadding: false,
           appBar: AppBar(
             backgroundColor: Colors.green,
             bottom: TabBar(

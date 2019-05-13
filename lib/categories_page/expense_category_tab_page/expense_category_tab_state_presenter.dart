@@ -24,4 +24,10 @@ class ExpenseCategoryTabStatePresenter extends BaseStatePresenter {
         .then((onValue) => view.updateExpensesCategoriesList(onValue))
         .catchError((onError) => view.showNoExpenseCategoriesView());
   }
+
+  void loadExpensesByName(String phrase) async {
+    await helper.getExpenseCategoriesByName(phrase)
+        .then((expenses) => view.updateExpensesCategoriesList(expenses))
+        .catchError((onError) => view.showMessage(onError.toString()));
+  }
 }

@@ -36,4 +36,15 @@ class ExpenseCategoryDatabaseHelper extends DatabaseHelper {
     }
     return null;
   }
+
+  Future<List<ExpenseCategory>> getExpenseCategoriesByName(String phrase) async {
+    var dbClient = await db;
+    String query = "SELECT * FROM ${DbColumnConstants.expenseCategoryTableName} WHERE ${DbColumnConstants.expenseCategoryTableNameColumnName} LIKE '$phrase%'";
+    List<Map> result = await dbClient.rawQuery(query);
+    List<ExpenseCategory> expenseCategories;
+    if (result != null && result.isNotEmpty) {
+      expenseCategories = result.toList().map((e) => ExpenseCategory.fromMap(e)).toList();
+    }
+    return expenseCategories;
+  }
 }

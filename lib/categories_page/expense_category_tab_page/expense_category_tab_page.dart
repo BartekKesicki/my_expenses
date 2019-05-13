@@ -40,7 +40,9 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: new TextField(
                   onChanged: (String value) {
-                    //todo listener
+                    if (value != null) {
+                      presenter.loadExpensesByName(value);
+                    }
                   },
                   controller: editingController,
                   decoration: InputDecoration(
@@ -95,7 +97,9 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
   @override
   void updateExpensesCategoriesList(List<ExpenseCategory> categories) {
     setState(() {
-      this.expenseCategories = categories;
+      if (categories != null) {
+        this.expenseCategories = categories;
+      }
     });
   }
 
@@ -108,5 +112,10 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
             MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));
       });
     });
+  }
+
+  @override
+  void showErrorMessage(String message) {
+    Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("Searching Error"),));
   }
 }
