@@ -26,6 +26,17 @@ class ExpenseDatabaseHelper extends DatabaseHelper {
     return expenses;
   }
 
+  Future<List<Expense>> getExpensesByName(String phrase) async {
+    var dbClient = await db;
+    String query = "SELECT * FROM ${DbColumnConstants.expenseTableName} WHERE ${DbColumnConstants.expenseNameColumnName} LIKE '$phrase%'";
+    List<Map> result = await dbClient.rawQuery(query);
+    List<Expense> expenses;
+    if (result != null && result.isNotEmpty) {
+      expenses = result.toList().map((e) => Expense.fromMap(e)).toList();
+    }
+    return expenses;
+  }
+
   Future<List<Expense>> getExpensesFromSpecifiedMonth(
       int lowerTimeStamp, int topTimeStamp) async {
     var dbClient = await db;

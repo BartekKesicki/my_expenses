@@ -36,7 +36,9 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: new TextField(
                   onChanged: (String value) {
-                    //todo listener
+                    if (value != null) {
+
+                    }
                   },
                   controller: editingController,
                   decoration: InputDecoration(
@@ -89,7 +91,9 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   @override
   void updateIncomesList(List<Income> incomes) {
     setState(() {
-      this.incomes = incomes;
+      if (incomes != null) {
+        this.incomes = incomes;
+      }
     });
   }
 

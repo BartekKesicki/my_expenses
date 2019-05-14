@@ -24,4 +24,11 @@ class IncomeCategoryTabStatePresenter extends BaseStatePresenter {
         .then((onValue) => view.updateIncomeCategoriesList(onValue))
         .catchError((onError) => view.showNoIncomeCategoryView());
   }
+
+  void loadIncomesByName(String phrase) async {
+    await helper
+        .getIncomeCategoriesByName(phrase)
+        .then((incomes) => view.updateIncomeCategoriesList(incomes))
+        .catchError((onError) => view.showMessage(onError.toString()));
+  }
 }

@@ -40,7 +40,9 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: new TextField(
                   onChanged: (String value) {
-                    //todo listener
+                    if (value != null) {
+                      presenter.loadIncomesByName(value);
+                    }
                   },
                   controller: editingController,
                   decoration: InputDecoration(
@@ -94,40 +96,10 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
 
   @override
   void updateIncomeCategoriesList(List<IncomeCategory> incomeCategories) {
-    if (incomeCategories != null && incomeCategories.isNotEmpty) {
+    if (incomeCategories != null) {
       setState(() {
-        mainWidget = new Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new ListView.builder(
-                  itemCount: incomeCategories.length,
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (context, position) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          incomeCategories[position].name,
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                createRaisedButton(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NewIncomeCategoryPage()));
-                }, createText("ADD INCOME CATEGORY", createButtonTextStyle()))
-              ],
-            ));
+         this.incomeCategories = incomeCategories;
       });
-    } else {
-      showNoIncomeCategoryView();
     }
   }
 

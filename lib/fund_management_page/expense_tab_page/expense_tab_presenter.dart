@@ -21,11 +21,13 @@ class ExpenseTabPresenter extends BaseStatePresenter {
 
   void loadExpensesList() async {
     await helper.getAllExpenses()
-        .then((expenses) => createGroupedExpenses(expenses))
+        .then((expenses) => view.updateExpensesList(expenses))
         .catchError(() => view.showNoExpensesView());
   }
 
-  void createGroupedExpenses(List<Expense> expenses) {
-    view.updateExpensesList(expenses);
+  void loadExpensesByName(String phrase) async {
+    await helper.getExpensesByName(phrase)
+        .then((expenses) => view.updateExpensesList(expenses))
+        .catchError((error) => view.showMessage(error.toString()));
   }
 }

@@ -25,6 +25,17 @@ class IncomeCategoryDatabaseHelper extends DatabaseHelper {
     return incomeCategories;
   }
 
+  Future<List<IncomeCategory>> getIncomeCategoriesByName(String phrase) async {
+    var dbClient = await db;
+    String query = "SELECT * FROM ${DbColumnConstants.incomeCategoryTableName} WHERE ${DbColumnConstants.incomeCategoryNameColumnName} LIKE '$phrase%'";
+    List<Map> result = await dbClient.rawQuery(query);
+    List<IncomeCategory> incomeCategories;
+    if (result != null && result.isNotEmpty) {
+      incomeCategories = result.toList().map((e) => IncomeCategory.fromMap(e)).toList();
+    }
+    return incomeCategories;
+  }
+
   Future<int> getCategoryId(String categoryName) async {
     var dbClient = await db;
     String query = "SELECT * FROM ${DbColumnConstants.incomeCategoryTableName} WHERE ${DbColumnConstants.incomeCategoryNameColumnName}='$categoryName'";
