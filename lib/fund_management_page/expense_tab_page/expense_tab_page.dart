@@ -56,14 +56,15 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          expenses[position].name,
-                          style: TextStyle(fontSize: 22.0),
-                        ),
+                    return ExpansionTile(
+                      title: Text(
+                        expenses[position].name,
+                        style: TextStyle(fontSize: 22.0),
                       ),
+                      children: <Widget>[
+                        //todo add menu for read, edit or delete
+                        new Text(expenses[position].id.toString())
+                      ],
                     );
                   },
                 ),

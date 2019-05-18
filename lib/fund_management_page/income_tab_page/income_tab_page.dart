@@ -56,14 +56,15 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          incomes[position].name,
-                          style: TextStyle(fontSize: 22.0),
-                        ),
+                    return ExpansionTile(
+                      title: Text(
+                        incomes[position].name,
+                        style: TextStyle(fontSize: 22.0),
                       ),
+                      children: <Widget>[
+                        //todo add menu for read, edit or delete
+                        new Text(incomes[position].id.toString())
+                      ],
                     );
                   },
                 ),
