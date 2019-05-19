@@ -4,6 +4,7 @@ import 'package:my_expenses/categories_page/income_category_tab_page/income_cate
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
 import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/new_income_category_page/new_income_category_page.dart';
+import 'package:my_expenses/utils/date_calculator.dart';
 
 class IncomeCategoryTabPage extends StatefulWidget {
   IncomeCategoryTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -66,8 +67,38 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
                         style: TextStyle(fontSize: 22.0),
                       ),
                       children: <Widget>[
-                        //todo add menu for read, edit or delete
-                        new Text(incomeCategories[position].id.toString())
+                        new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Container(),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Container(
+                                  child: new Text(""),
+                                ),
+                                new Row(
+                                  children: <Widget>[
+                                    new IconButton(
+                                      color: Colors.white,
+                                      onPressed: () => {
+                                        //todo edit incomecategory
+                                      },
+                                      icon: new Icon(Icons.edit, color: Colors.green) ,
+                                    ),
+                                    new IconButton(
+                                      color: Colors.white,
+                                      onPressed: () => {
+                                        //todo delete incomecategory
+                                      },
+                                      icon: new Icon(Icons.delete, color: Colors.green) ,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
                       ],
                     );
                   },

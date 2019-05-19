@@ -66,8 +66,38 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
                         style: TextStyle(fontSize: 22.0),
                       ),
                       children: <Widget>[
-                        //todo add menu for read, edit or delete
-                        new Text(expenseCategories[position].id.toString())
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            new Container(),
+                            new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                new Container(
+                                  child: new Text(""),
+                                ),
+                                new Row(
+                                  children: <Widget>[
+                                    new IconButton(
+                                      color: Colors.white,
+                                      onPressed: () => {
+                                        //todo edit expensecategory
+                                      },
+                                      icon: new Icon(Icons.edit, color: Colors.green) ,
+                                    ),
+                                    new IconButton(
+                                      color: Colors.white,
+                                      onPressed: () => {
+                                        //todo delete expensecategory
+                                      },
+                                      icon: new Icon(Icons.delete, color: Colors.green) ,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
                       ],
                     );
                   },

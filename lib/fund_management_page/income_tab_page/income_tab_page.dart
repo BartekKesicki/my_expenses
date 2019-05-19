@@ -4,6 +4,7 @@ import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_view.dart';
 import 'package:my_expenses/new_income_page/new_income_page.dart';
+import 'package:my_expenses/utils/date_calculator.dart';
 
 class IncomeTabPage extends StatefulWidget {
   IncomeTabPage({Key key, this.title}) : super(key: key);
@@ -62,8 +63,35 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                         style: TextStyle(fontSize: 22.0),
                       ),
                       children: <Widget>[
-                        //todo add menu for read, edit or delete
-                        new Text(incomes[position].id.toString())
+                        new Padding(
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Container(
+                                child: new Text("Created: " + DateCalculator.buildDateTime(incomes[position].timestamp)),
+                              ),
+                              new Row(
+                                children: <Widget>[
+                                  new IconButton(
+                                    color: Colors.white,
+                                    onPressed: () => {
+                                      //todo edit expense
+                                    },
+                                    icon: new Icon(Icons.edit, color: Colors.green) ,
+                                  ),
+                                  new IconButton(
+                                    color: Colors.white,
+                                    onPressed: () => {
+                                      //todo delete expense
+                                    },
+                                    icon: new Icon(Icons.delete, color: Colors.green) ,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     );
                   },
