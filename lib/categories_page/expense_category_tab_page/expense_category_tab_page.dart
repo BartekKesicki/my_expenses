@@ -19,6 +19,9 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
     implements ExpenseCategoryTabStateView {
   ExpenseCategoryTabStatePresenter presenter;
   Widget mainWidget;
+  Widget closeButton = new Container();
+  var searchBarWidth = 100.0;
+  bool isExpanded = false;
   List<ExpenseCategory> expenseCategories = new List();
   TextEditingController editingController = TextEditingController();
 
@@ -35,24 +38,48 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
           })
         : new Column(
             children: <Widget>[
-              new Padding(
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: new TextField(
-                  onChanged: (String value) {
-                    if (value != null) {
-                      presenter.loadExpensesByName(value);
-                    }
-                  },
-                  controller: editingController,
-                  decoration: InputDecoration(
-                      labelText: "Search",
-                      hintText: "Search",
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25.0)))),
-                ),
+              new Row(
+                children: <Widget>[
+                  new Align(
+                    alignment: Alignment.centerLeft,
+                    child: new AnimatedContainer(
+                      duration: new Duration(milliseconds: 300),
+                      width: searchBarWidth,
+                      child: new Container(
+                        child: new Padding(
+                          padding: EdgeInsets.only(
+                              top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                          child: new TextField(
+                            onTap: () => expandSearchBar(),
+                            onChanged: (String value) {
+                              if (value != null) {
+                                presenter.loadExpensesByName(value);
+                              }
+                            },
+                            controller: editingController,
+                            decoration: InputDecoration(
+                                labelText: "Search",
+                                hintText: "Search",
+                                prefixIcon: Icon(Icons.search),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(25.0)))),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  closeButton,
+                  new Expanded(
+                      child: new Align(
+                          alignment: Alignment.centerRight,
+                          child: new Padding(
+                            padding: EdgeInsets.only(right: 5.0),
+                            child: new IconButton(
+                                icon: new Icon(Icons.filter_list),
+                                onPressed: () => {}),
+                          )))
+                ],
               ),
               new Expanded(
                 child: new ListView.builder(
@@ -81,16 +108,18 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
                                     new IconButton(
                                       color: Colors.white,
                                       onPressed: () => {
-                                        //todo edit expensecategory
-                                      },
-                                      icon: new Icon(Icons.edit, color: Colors.green) ,
+                                            //todo edit expensecategory
+                                          },
+                                      icon: new Icon(Icons.edit,
+                                          color: Colors.green),
                                     ),
                                     new IconButton(
                                       color: Colors.white,
                                       onPressed: () => {
-                                        //todo delete expensecategory
-                                      },
-                                      icon: new Icon(Icons.delete, color: Colors.green) ,
+                                            //todo delete expensecategory
+                                          },
+                                      icon: new Icon(Icons.delete,
+                                          color: Colors.green),
                                     ),
                                   ],
                                 )
@@ -125,6 +154,21 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
     }
   }
 
+  void expandSearchBar() {
+    setState(() {
+      searchBarWidth = 250.0;
+      closeButton = new IconButton(
+          icon: new Icon(Icons.close), onPressed: () => closeSearchBar());
+    });
+  }
+
+  void closeSearchBar() {
+    setState(() {
+      searchBarWidth = 100.0;
+      closeButton = new Container();
+    });
+  }
+
   @override
   void updateExpensesCategoriesList(List<ExpenseCategory> categories) {
     setState(() {
@@ -147,6 +191,8 @@ class _ExpenseCategoryTabPageState extends BasePageState<ExpenseCategoryTabPage>
 
   @override
   void showErrorMessage(String message) {
-    Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("Searching Error"),));
+    Scaffold.of(context).showSnackBar(new SnackBar(
+      content: new Text("Searching Error"),
+    ));
   }
 }
