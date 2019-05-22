@@ -4,7 +4,6 @@ import 'package:my_expenses/categories_page/income_category_tab_page/income_cate
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
 import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/new_income_category_page/new_income_category_page.dart';
-import 'package:my_expenses/utils/date_calculator.dart';
 
 class IncomeCategoryTabPage extends StatefulWidget {
   IncomeCategoryTabPage(this.id, {Key key, this.title}) : super(key: key);
@@ -20,6 +19,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     implements IncomeCategoryTabStateView {
   IncomeCategoryTabStatePresenter presenter;
   Widget mainWidget;
+  Widget closeButton = new Container();
+  var searchBarWidth = 100.0;
   List<IncomeCategory> incomeCategories = List();
   TextEditingController editingController = TextEditingController();
 
@@ -36,24 +37,48 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
           })
         : new Column(
             children: <Widget>[
-              new Padding(
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: new TextField(
-                  onChanged: (String value) {
-                    if (value != null) {
-                      presenter.loadIncomesByName(value);
-                    }
-                  },
-                  controller: editingController,
-                  decoration: InputDecoration(
-                      labelText: "Search",
-                      hintText: "Search",
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25.0)))),
-                ),
+              new Row(
+                children: <Widget>[
+                  new Align(
+                    alignment: Alignment.centerLeft,
+                    child: new AnimatedContainer(
+                      duration: new Duration(milliseconds: 300),
+                      width: searchBarWidth,
+                      child: new Container(
+                        child: new Padding(
+                          padding: EdgeInsets.only(
+                              top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                          child: new TextField(
+                            onTap: () => expandSearchBar(),
+                            onChanged: (String value) {
+                              if (value != null) {
+                                presenter.loadIncomesByName(value);
+                              }
+                            },
+                            controller: editingController,
+                            decoration: InputDecoration(
+                                labelText: "Search",
+                                hintText: "Search",
+                                prefixIcon: Icon(Icons.search),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(25.0)))),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  closeButton,
+                  new Expanded(
+                      child: new Align(
+                          alignment: Alignment.centerRight,
+                          child: new Padding(
+                            padding: EdgeInsets.only(right: 5.0),
+                            child: new IconButton(
+                                icon: new Icon(Icons.filter_list),
+                                onPressed: () => {}),
+                          )))
+                ],
               ),
               new Expanded(
                 child: new ListView.builder(
@@ -124,6 +149,21 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
       presenter.attach(this);
       presenter.loadIncomeCategories();
     }
+  }
+
+  void expandSearchBar() {
+    setState(() {
+      searchBarWidth = 250.0;
+      closeButton = new IconButton(
+          icon: new Icon(Icons.close), onPressed: () => closeSearchBar());
+    });
+  }
+
+  void closeSearchBar() {
+    setState(() {
+      searchBarWidth = 100.0;
+      closeButton = new Container();
+    });
   }
 
   @override

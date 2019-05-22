@@ -19,6 +19,8 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
     implements IncomeTabView {
   IncomeTabPresenter presenter;
   Widget mainWidget;
+  Widget closeButton = new Container();
+  var searchBarWidth = 100.0;
   TextEditingController editingController = TextEditingController();
   List<Income> incomes = List();
 
@@ -32,24 +34,48 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
           })
         : new Column(
             children: <Widget>[
-              new Padding(
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: new TextField(
-                  onChanged: (String value) {
-                    if (value != null) {
-
-                    }
-                  },
-                  controller: editingController,
-                  decoration: InputDecoration(
-                      labelText: "Search",
-                      hintText: "Search",
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25.0)))),
-                ),
+              new Row(
+                children: <Widget>[
+                  new Align(
+                    alignment: Alignment.centerLeft,
+                    child: new AnimatedContainer(
+                      duration: new Duration(milliseconds: 300),
+                      width: searchBarWidth,
+                      child: new Container(
+                        child: new Padding(
+                          padding: EdgeInsets.only(
+                              top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                          child: new TextField(
+                            onTap: () => expandSearchBar(),
+                            onChanged: (String value) {
+                              if (value != null) {
+                                presenter.loadIncomesByName(value);
+                              }
+                            },
+                            controller: editingController,
+                            decoration: InputDecoration(
+                                labelText: "Search",
+                                hintText: "Search",
+                                prefixIcon: Icon(Icons.search),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(25.0)))),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  closeButton,
+                  new Expanded(
+                      child: new Align(
+                          alignment: Alignment.centerRight,
+                          child: new Padding(
+                            padding: EdgeInsets.only(right: 5.0),
+                            child: new IconButton(
+                                icon: new Icon(Icons.filter_list),
+                                onPressed: () => {}),
+                          )))
+                ],
               ),
               new Expanded(
                 child: new ListView.builder(
@@ -115,6 +141,21 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
       presenter.attach(this);
       presenter.loadIncomesList();
     }
+  }
+
+  void expandSearchBar() {
+    setState(() {
+      searchBarWidth = 250.0;
+      closeButton = new IconButton(
+          icon: new Icon(Icons.close), onPressed: () => closeSearchBar());
+    });
+  }
+
+  void closeSearchBar() {
+    setState(() {
+      searchBarWidth = 100.0;
+      closeButton = new Container();
+    });
   }
 
   @override
