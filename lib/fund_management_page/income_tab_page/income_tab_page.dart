@@ -23,6 +23,7 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
   var searchBarWidth = 100.0;
   TextEditingController editingController = TextEditingController();
   List<Income> incomes = List();
+  FocusNode myFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                           child: new TextField(
+                            focusNode: myFocusNode,
                             onTap: () => expandSearchBar(),
                             onChanged: (String value) {
                               if (value != null) {
@@ -155,6 +157,8 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
     setState(() {
       searchBarWidth = 100.0;
       closeButton = new Container();
+      editingController.clear();
+      myFocusNode.unfocus();
     });
   }
 

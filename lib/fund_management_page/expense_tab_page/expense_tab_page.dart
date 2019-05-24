@@ -23,6 +23,7 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
   var searchBarWidth = 100.0;
   TextEditingController editingController = TextEditingController();
   List<Expense> expenses = new List();
+  FocusNode myFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                           child: new TextField(
+                            focusNode: myFocusNode,
                             onTap: () => expandSearchBar(),
                             onChanged: (String value) {
                               if (value != null) {
@@ -157,6 +159,8 @@ class _ExpenseTabPageState extends BasePageState<ExpenseTabPage>
     setState(() {
       searchBarWidth = 100.0;
       closeButton = new Container();
+      editingController.clear();
+      myFocusNode.unfocus();
     });
   }
 

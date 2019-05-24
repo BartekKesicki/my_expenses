@@ -23,6 +23,7 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
   var searchBarWidth = 100.0;
   List<IncomeCategory> incomeCategories = List();
   TextEditingController editingController = TextEditingController();
+  FocusNode myFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -163,6 +164,8 @@ class _IncomeCategoryTabPageState extends BasePageState<IncomeCategoryTabPage>
     setState(() {
       searchBarWidth = 100.0;
       closeButton = new Container();
+      editingController.clear();
+      myFocusNode.unfocus();
     });
   }
 
