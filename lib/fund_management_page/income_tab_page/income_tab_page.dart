@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
@@ -15,15 +16,11 @@ class IncomeTabPage extends StatefulWidget {
   _IncomeTabPageState createState() => _IncomeTabPageState();
 }
 
-class _IncomeTabPageState extends BasePageState<IncomeTabPage>
+class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
     implements IncomeTabView {
   IncomeTabPresenter presenter;
   Widget mainWidget;
-  Widget closeButton = new Container();
-  var searchBarWidth = 100.0;
-  TextEditingController editingController = TextEditingController();
   List<Income> incomes = List();
-  FocusNode myFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -37,46 +34,13 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
             children: <Widget>[
               new Row(
                 children: <Widget>[
-                  new Align(
-                    alignment: Alignment.centerLeft,
-                    child: new AnimatedContainer(
-                      duration: new Duration(milliseconds: 300),
-                      width: searchBarWidth,
-                      child: new Container(
-                        child: new Padding(
-                          padding: EdgeInsets.only(
-                              top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                          child: new TextField(
-                            focusNode: myFocusNode,
-                            onTap: () => expandSearchBar(),
-                            onChanged: (String value) {
-                              if (value != null) {
-                                presenter.loadIncomesByName(value);
-                              }
-                            },
-                            controller: editingController,
-                            decoration: InputDecoration(
-                                labelText: "Search",
-                                hintText: "Search",
-                                prefixIcon: Icon(Icons.search),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(25.0)))),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  createSearchBarContent((String value) {
+                    if (value != null) {
+                      presenter.loadIncomesByName(value);
+                    }
+                  }),
                   closeButton,
-                  new Expanded(
-                      child: new Align(
-                          alignment: Alignment.centerRight,
-                          child: new Padding(
-                            padding: EdgeInsets.only(right: 5.0),
-                            child: new IconButton(
-                                icon: new Icon(Icons.filter_list),
-                                onPressed: () => {}),
-                          )))
+                  createFilterListButton(),
                 ],
               ),
               new Expanded(
@@ -85,43 +49,11 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
-                    return ExpansionTile(
-                      title: Text(
-                        incomes[position].name,
-                        style: TextStyle(fontSize: 22.0),
-                      ),
-                      children: <Widget>[
-                        new Padding(
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              new Container(
-                                child: new Text("Created: " + DateCalculator.buildDateTime(incomes[position].timestamp)),
-                              ),
-                              new Row(
-                                children: <Widget>[
-                                  new IconButton(
-                                    color: Colors.white,
-                                    onPressed: () => {
-                                      //todo edit expense
-                                    },
-                                    icon: new Icon(Icons.edit, color: Colors.green) ,
-                                  ),
-                                  new IconButton(
-                                    color: Colors.white,
-                                    onPressed: () => {
-                                      //todo delete expense
-                                    },
-                                    icon: new Icon(Icons.delete, color: Colors.green) ,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    );
+                    return createListItemTile(incomes[position].name, () {
+                      //todo edit item
+                    }, () {
+                      //todo delete item
+                    }, incomes[position].timestamp);
                   },
                 ),
               ),
@@ -143,23 +75,6 @@ class _IncomeTabPageState extends BasePageState<IncomeTabPage>
       presenter.attach(this);
       presenter.loadIncomesList();
     }
-  }
-
-  void expandSearchBar() {
-    setState(() {
-      searchBarWidth = 250.0;
-      closeButton = new IconButton(
-          icon: new Icon(Icons.close), onPressed: () => closeSearchBar());
-    });
-  }
-
-  void closeSearchBar() {
-    setState(() {
-      searchBarWidth = 100.0;
-      closeButton = new Container();
-      editingController.clear();
-      myFocusNode.unfocus();
-    });
   }
 
   @override
