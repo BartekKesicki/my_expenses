@@ -50,9 +50,13 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return createListItemTile(incomes[position].name, () {
-                      //todo edit item
+                      showListItemDialog(context, "EDIT", "DO YOU WANT EDIT THIS ITEM?", () {
+                        //todo redirect to edit item
+                      });
                     }, () {
-                      //todo delete item
+                      showListItemDialog(context, "DELETE", "DO YOU WANT DELETE THIS ITEM?", () {
+                        //todo delete item
+                      });
                     }, incomes[position].timestamp);
                   },
                 ),

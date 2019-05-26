@@ -3,6 +3,7 @@ import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_view.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
+import 'dart:developer';
 import 'package:my_expenses/new_expense_category_page/new_expense_category_page.dart';
 
 class ExpenseCategoryTabPage extends StatefulWidget {
@@ -52,9 +53,13 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return createListItemTile(expenseCategories[position].name, () {
-                      //todo edit item
+                      showListItemDialog(context, "EDIT", "DO YOU WANT EDIT THIS ITEM?", () {
+                        //todo redirect to edit item
+                      });
                     }, () {
-                      //todo delete item
+                      showListItemDialog(context, "DELETE", "DO YOU WANT DELETE THIS ITEM?", () {
+                        //todo delete item
+                      });
                     }, -1);
                   },
                 ),

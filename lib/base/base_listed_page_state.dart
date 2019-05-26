@@ -38,14 +38,15 @@ class BaseListedPageState<V extends StatefulWidget> extends BasePageState<V> {
   }
 
   Container createCreationTimeContainer(int timeStamp) {
-    if (timeStamp != -1) {
+    if (timeStamp == -1) {
       return new Container(
         child: new Text(""),
       );
+    } else {
+      return new Container(
+        child: new Text("Created: " + DateCalculator.buildDateTime(timeStamp)),
+      );
     }
-    return new Container(
-      child: new Text("Created: " + DateCalculator.buildDateTime(timeStamp)),
-    );
   }
 
   Row createListItemExpandableRow(VoidCallback editCallBack, VoidCallback deleteCallback) {
@@ -53,13 +54,13 @@ class BaseListedPageState<V extends StatefulWidget> extends BasePageState<V> {
       children: <Widget>[
         new IconButton(
           color: Colors.white,
-          onPressed: () => editCallBack,
+          onPressed: editCallBack,
           icon: new Icon(Icons.edit,
               color: Colors.green),
         ),
         new IconButton(
           color: Colors.white,
-          onPressed: () => deleteCallback,
+          onPressed: deleteCallback,
           icon: new Icon(Icons.delete,
               color: Colors.green),
         ),
@@ -126,6 +127,28 @@ class BaseListedPageState<V extends StatefulWidget> extends BasePageState<V> {
                   }),
             )
         )
+    );
+  }
+
+  void showListItemDialog(BuildContext context, String mode, String prompt, VoidCallback confirmCallBack) {
+    showDialog(
+        context: this.context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(mode),
+            content: new Text(prompt),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: confirmCallBack,
+                  child: new Text("YES")),
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text("NO"))
+            ],
+          );
+        }
     );
   }
 }

@@ -55,7 +55,7 @@ class _SettingsPageState extends BasePageState<SettingsPage>
                 },
                 child: new Text("YES")),
             new FlatButton(
-                onPressed: null,
+                onPressed: () {},
                 child: new Text("NO"))
           ],
         );
