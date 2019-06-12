@@ -14,19 +14,67 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends BasePageState<ProfilePage>
     implements ProfileStateView {
+  String _myName = "My Name";
+  String _summary = "1500.00";
+  String _summaryLabel = "Summary";
+  String _limitLabel = "Limit";
+  String _limit = "1000.00";
   ProfileStatePresenter presenter;
 
   @override
   Widget build(BuildContext context) {
     initPresenter();
+    Size screenSize = MediaQuery.of(context).size;
+
     return new Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(backgroundColor: Colors.green, title: Text('My Profile')),
-      body: Center(
-        child: Text("PROFILE"),
+      body: Stack(
+        children: <Widget>[
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: screenSize.height / 6.4,
+                  ),
+                  buildProfileImage(),
+                  buildFullName()
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
-  //todo fill the page
+
+  Widget buildProfileImage() {
+    return Center(
+      child: new Container(
+        width: 140.0,
+        height: 140.0,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/cat.jpg'), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(80.0),
+            border: Border.all(color: Colors.black, width: 10.0)),
+      ),
+    );
+  }
+
+  Widget buildFullName() {
+    TextStyle textStyle = TextStyle(
+        fontFamily: 'Roboto',
+        color: Colors.black,
+        fontSize: 28.0,
+        fontWeight: FontWeight.w700);
+
+    return Text(
+      _myName,
+      style: textStyle,
+    );
+  }
 
   void initPresenter() {
     if (presenter == null) {
