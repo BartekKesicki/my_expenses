@@ -21,6 +21,12 @@ class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
     model = new SignUpExpenseModel();
   }
 
+  void initDB() async {
+    if (dbHelper != null) {
+      await dbHelper.db;
+    }
+  }
+
   void validateInputsAndSignup(SignUpPersonalDataModel personalData) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();

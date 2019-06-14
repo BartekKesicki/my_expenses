@@ -105,6 +105,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
     if (presenter == null) {
       presenter = SignUpExpenseDataStatePresenter();
       presenter.attach(this);
+      presenter.initDB();
     }
   }
 
