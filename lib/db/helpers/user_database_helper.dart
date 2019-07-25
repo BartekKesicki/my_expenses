@@ -25,5 +25,4 @@ class UserDatabaseHelper extends DatabaseHelper {
     }
     return user.id;
   }
-
 }

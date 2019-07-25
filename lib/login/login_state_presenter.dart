@@ -12,7 +12,7 @@ class LoginStatePresenter extends BaseStatePresenter {
   LoginStateView view;
   LoginModel model = new LoginModel();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  var dbHelper;
+  var dbHelper = UserDatabaseHelper();
   SharedPreferencesHelper prefsHelper = new SharedPreferencesHelper();
 
   get getFormKey => _formKey;
@@ -26,7 +26,8 @@ class LoginStatePresenter extends BaseStatePresenter {
     }
     await dbHelper
         .getUserIdOrNull(model.getEmail, model.getPassword)
-        .then(login, onError: loginError);
+        .then(login)
+        .catchError((onError) => loginError);
   }
 
   void login(int value) async {

@@ -42,6 +42,11 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     return new TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal);
   }
 
+  TextStyle createSimpleDataTextStyle() {
+    return new TextStyle(
+        fontSize: 15.0, fontWeight: FontWeight.bold, fontFamily: "Montserrat");
+  }
+
   TextStyle createCheckboxTextStyle() {
     return new TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
   }
@@ -99,14 +104,19 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     );
   }
 
-  Container createNoContentWidget(String title, String addNewItemButtonTitle, GestureTapCallback callback) {
+  Container createNoContentWidget(
+      String title, String addNewItemButtonTitle, GestureTapCallback callback) {
     return new Container(
       margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
       child: new Center(
         child: new Column(
           children: <Widget>[
             createSizedBox(30.0),
-            new Icon(Icons.close, size: 220.0, color: Colors.grey,),
+            new Icon(
+              Icons.close,
+              size: 220.0,
+              color: Colors.grey,
+            ),
             createSizedBox(30.0),
             createText(title, createSimpleLabelTextStyle()),
             createSizedBox(40.0),

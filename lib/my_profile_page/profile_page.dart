@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/my_profile_page/my_profile_clipper.dart';
 import 'package:my_expenses/my_profile_page/profile_state_presenter.dart';
 import 'package:my_expenses/my_profile_page/profile_state_view.dart';
 
@@ -31,6 +32,10 @@ class _ProfilePageState extends BasePageState<ProfilePage>
       appBar: AppBar(backgroundColor: Colors.green, title: Text('My Profile')),
       body: Stack(
         children: <Widget>[
+          ClipPath(
+            clipper: MyProfileClipper(),
+            child: Container(color: Colors.black.withOpacity(0.8)),
+          ),
           SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -39,7 +44,23 @@ class _ProfilePageState extends BasePageState<ProfilePage>
                     height: screenSize.height / 6.4,
                   ),
                   buildProfileImage(),
-                  buildFullName()
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  buildFullName(),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  buildUserData(),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(15.0),
+                    child: createRaisedButton(() {
+                      //todo redirect to edit user
+                    }, createText("EDIT", createButtonTextStyle())),
+                  )
                 ],
               ),
             ),
@@ -58,7 +79,8 @@ class _ProfilePageState extends BasePageState<ProfilePage>
             image: DecorationImage(
                 image: AssetImage('assets/images/cat.jpg'), fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(80.0),
-            border: Border.all(color: Colors.black, width: 10.0)),
+            border: Border.all(color: Colors.black, width: 1.0),
+            boxShadow: [BoxShadow(color: Colors.black, blurRadius: 7.0)]),
       ),
     );
   }
@@ -70,6 +92,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
         fontSize: 28.0,
         fontWeight: FontWeight.w700);
 
+    //todo build name
     return Text(
       _myName,
       style: textStyle,
@@ -81,5 +104,29 @@ class _ProfilePageState extends BasePageState<ProfilePage>
       presenter = new ProfileStatePresenter();
       presenter.attach(this);
     }
+  }
+
+  Container buildUserData() {
+    //todo get info about summary funds and limit
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              createText(_summaryLabel, createSimpleLabelTextStyle()),
+              createText(_summary, createSimpleDataTextStyle())
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              createText(_limitLabel, createSimpleLabelTextStyle()),
+              createText(_limit, createSimpleDataTextStyle())
+            ],
+          ),
+        ],
+      ),
+      margin: EdgeInsets.all(20.0),
+    );
   }
 }
