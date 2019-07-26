@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/db/model/user.dart';
 import 'package:my_expenses/my_profile_page/my_profile_clipper.dart';
 import 'package:my_expenses/my_profile_page/profile_state_presenter.dart';
 import 'package:my_expenses/my_profile_page/profile_state_view.dart';
@@ -16,17 +17,16 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends BasePageState<ProfilePage>
     implements ProfileStateView {
   String _myName = "My Name";
-  String _summary = "1500.00";
-  String _summaryLabel = "Summary";
-  String _limitLabel = "Limit";
-  String _limit = "1000.00";
+  String _totalFunds = "1500.00";
+  String _totalFundsLabel = "Total funds";
+  String _expensesQuantityLabel = "Expenses";
+  String _expensesQuantity = "1000.00";
   ProfileStatePresenter presenter;
 
   @override
   Widget build(BuildContext context) {
     initPresenter();
     Size screenSize = MediaQuery.of(context).size;
-
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(backgroundColor: Colors.green, title: Text('My Profile')),
@@ -103,6 +103,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
     if (presenter == null) {
       presenter = new ProfileStatePresenter();
       presenter.attach(this);
+      presenter.calculateData();
     }
   }
 
@@ -114,19 +115,34 @@ class _ProfilePageState extends BasePageState<ProfilePage>
         children: <Widget>[
           Column(
             children: <Widget>[
-              createText(_summaryLabel, createSimpleLabelTextStyle()),
-              createText(_summary, createSimpleDataTextStyle())
+              createText(_totalFundsLabel, createSimpleLabelTextStyle()),
+              createText(_totalFunds, createSimpleDataTextStyle())
             ],
           ),
           Column(
             children: <Widget>[
-              createText(_limitLabel, createSimpleLabelTextStyle()),
-              createText(_limit, createSimpleDataTextStyle())
+              createText(_expensesQuantityLabel, createSimpleLabelTextStyle()),
+              createText(_expensesQuantity, createSimpleDataTextStyle())
             ],
           ),
         ],
       ),
       margin: EdgeInsets.all(20.0),
     );
+  }
+
+  @override
+  void fillExpensesData(int totalExpenses, double totalFunds) {
+    setState(() {
+      _expensesQuantity = totalExpenses.toString();
+      _totalFunds = totalFunds.toString();
+    });
+  }
+
+  @override
+  void fillUserData(User user) {
+    setState(() {
+      _myName = user.email;
+    });
   }
 }
