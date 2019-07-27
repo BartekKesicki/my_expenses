@@ -3,6 +3,8 @@ import 'package:my_expenses/base/base_state_view.dart';
 import 'package:my_expenses/db/helpers/expense_database_helper.dart';
 import 'package:my_expenses/db/helpers/shared_preferences_helper.dart';
 import 'package:my_expenses/db/helpers/user_database_helper.dart';
+import 'package:my_expenses/db/model/expense.dart';
+import 'package:my_expenses/db/model/user.dart';
 import 'package:my_expenses/my_profile_page/profile_state_view.dart';
 
 class ProfileStatePresenter extends BaseStatePresenter {
@@ -21,8 +23,22 @@ class ProfileStatePresenter extends BaseStatePresenter {
     this.view = null;
   }
 
-  void calculateData() async {
-    int userId = await _sharedPreferencesHelper.getLanguageCode();
-    //todo get user and expense data
+  void performLoadProfileData() async {
+    await _sharedPreferencesHelper.getLanguageCode()
+        .then((id) => getProfileData(id))
+        .catchError((onError) => view.showMessage(onError.toString()));
+  }
+
+  void getProfileData(int id) async {
+    await _userDbHelper.getUser(id)
+        .then((user) => getExpensesData(user))
+        .catchError((onError) => view.showMessage(onError.toString()));
+  }
+
+  void getExpensesData(User user) async {
+    view.fillUserData(user);
+    await _expenseDbHelper.getAllExpenses()
+        .then((expenses) => view.fillExpensesData(expenses.length, user.startFunds))
+        .catchError((onError) => view.showMessage(onError.toString()));
   }
 }

@@ -17,10 +17,10 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends BasePageState<ProfilePage>
     implements ProfileStateView {
   String _myName = "My Name";
-  String _totalFunds = "1500.00";
-  String _totalFundsLabel = "Total funds";
+  String _totalFunds = "0.00";
+  String _totalFundsLabel = "Start funds";
   String _expensesQuantityLabel = "Expenses";
-  String _expensesQuantity = "1000.00";
+  String _expensesQuantity = "0.00";
   ProfileStatePresenter presenter;
 
   @override
@@ -91,8 +91,6 @@ class _ProfilePageState extends BasePageState<ProfilePage>
         color: Colors.black,
         fontSize: 28.0,
         fontWeight: FontWeight.w700);
-
-    //todo build name
     return Text(
       _myName,
       style: textStyle,
@@ -103,12 +101,11 @@ class _ProfilePageState extends BasePageState<ProfilePage>
     if (presenter == null) {
       presenter = new ProfileStatePresenter();
       presenter.attach(this);
-      presenter.calculateData();
+      presenter.performLoadProfileData();
     }
   }
 
   Container buildUserData() {
-    //todo get info about summary funds and limit
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

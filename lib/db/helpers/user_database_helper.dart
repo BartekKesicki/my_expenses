@@ -25,4 +25,15 @@ class UserDatabaseHelper extends DatabaseHelper {
     }
     return user.id;
   }
+
+  Future<User> getUser(int userId) async {
+    var dbClient = await db;
+    List<Map> result = await dbClient.rawQuery(
+        "SELECT * FROM ${DbColumnConstants.tableUserName} WHERE ${DbColumnConstants.userIdColumnName}=$userId");
+    User user;
+    if (result != null && result.isNotEmpty) {
+      user = User.fromMap(result.first);
+    }
+    return user;
+  }
 }
