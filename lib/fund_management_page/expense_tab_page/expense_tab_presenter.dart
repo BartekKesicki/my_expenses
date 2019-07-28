@@ -22,7 +22,7 @@ class ExpenseTabPresenter extends BaseStatePresenter {
   void loadExpensesList() async {
     await helper.getAllExpenses()
         .then((expenses) => view.updateExpensesList(expenses))
-        .catchError(() => view.showNoExpensesView());
+        .catchError((onError) => view.showNoExpensesView());
   }
 
   void loadExpensesByName(String phrase) async {

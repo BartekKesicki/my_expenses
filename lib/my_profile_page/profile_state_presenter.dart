@@ -32,13 +32,13 @@ class ProfileStatePresenter extends BaseStatePresenter {
   void getProfileData(int id) async {
     await _userDbHelper.getUser(id)
         .then((user) => getExpensesData(user))
-        .catchError((onError) => view.showMessage(onError.toString()));
+        .catchError((onError) => view.showMessage("ERROR"));
   }
 
   void getExpensesData(User user) async {
     view.fillUserData(user);
     await _expenseDbHelper.getAllExpenses()
-        .then((expenses) => view.fillExpensesData(expenses.length, user.startFunds))
-        .catchError((onError) => view.showMessage(onError.toString()));
+        .then((expenses) => view.fillExpensesData(expenses != null ? expenses.length : 0, user.startFunds))
+        .catchError((onError) => view.showMessage("ERROR"));
   }
 }

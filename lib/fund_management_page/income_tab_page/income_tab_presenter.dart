@@ -22,7 +22,7 @@ class IncomeTabPresenter extends BaseStatePresenter {
     await helper
         .getAllIncomes()
         .then((incomes) => view.updateIncomesList(incomes))
-        .catchError(() => view.showNoIncomesView());
+        .catchError((onError) => view.showNoIncomesView());
   }
 
   void loadIncomesByName(String phrase) async {
