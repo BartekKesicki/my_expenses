@@ -7,6 +7,7 @@ class User {
   double income;
   double limit;
   double startFunds;
+  String photoPath = "";
   User(this.id, this.email, this.password, this.income, this.limit,
       this.startFunds);
 
@@ -16,7 +17,8 @@ class User {
       DbColumnConstants.userPasswordColumnName: password,
       DbColumnConstants.userIncomeColumnName: income,
       DbColumnConstants.userLimitColumnName: limit,
-      DbColumnConstants.userStartFundsColumnName: startFunds
+      DbColumnConstants.userStartFundsColumnName: startFunds,
+      DbColumnConstants.userPhotoPathColumnName: photoPath
     };
     if (id != null) {
       map[DbColumnConstants.userIdColumnName] = id;
@@ -31,5 +33,6 @@ class User {
     income = map[DbColumnConstants.userIncomeColumnName];
     limit = map[DbColumnConstants.userLimitColumnName];
     startFunds = map[DbColumnConstants.userStartFundsColumnName];
+    photoPath = map[DbColumnConstants.userPhotoPathColumnName];
   }
 }

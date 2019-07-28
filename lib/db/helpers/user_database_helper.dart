@@ -8,8 +8,9 @@ class UserDatabaseHelper extends DatabaseHelper {
     var dbClient = await db;
     String query =
         "INSERT INTO ${DbColumnConstants.tableUserName}(${DbColumnConstants.userIdColumnName}, " +
-            "${DbColumnConstants.userEmailColumnName}, ${DbColumnConstants.userPasswordColumnName}, ${DbColumnConstants.userIncomeColumnName}, ${DbColumnConstants.userLimitColumnName}, ${DbColumnConstants.userStartFundsColumnName}) " +
-            "VALUES(${user.id}, '${user.email}', '${user.password}', ${user.income}, ${user.limit}, ${user.startFunds})";
+            "${DbColumnConstants.userEmailColumnName}, ${DbColumnConstants.userPasswordColumnName}, ${DbColumnConstants.userIncomeColumnName}, "
+                "${DbColumnConstants.userLimitColumnName}, ${DbColumnConstants.userStartFundsColumnName}, ${DbColumnConstants.userPhotoPathColumnName}) " +
+            "VALUES(${user.id}, '${user.email}', '${user.password}', ${user.income}, ${user.limit}, ${user.startFunds}, ${user.photoPath})";
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(query);
     });

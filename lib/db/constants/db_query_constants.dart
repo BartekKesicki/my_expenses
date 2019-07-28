@@ -8,7 +8,8 @@ class QueryConstants {
           "${DbColumnConstants.userPasswordColumnName} TEXT, " +
           "${DbColumnConstants.userIncomeColumnName} REAL, " +
           "${DbColumnConstants.userLimitColumnName} REAL, " +
-          "${DbColumnConstants.userStartFundsColumnName} REAL)";
+          "${DbColumnConstants.userStartFundsColumnName} REAL, " +
+          "${DbColumnConstants.userPhotoPathColumnName} TEXT)";
 
   static const String CREATE_EXPENSE_TABLE_QUERY =
       "CREATE TABLE ${DbColumnConstants.expenseTableName} (" +

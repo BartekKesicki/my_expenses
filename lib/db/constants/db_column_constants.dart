@@ -8,6 +8,7 @@ class DbColumnConstants {
   static const String userIncomeColumnName = "income";
   static const String userLimitColumnName = "expenseLimit";
   static const String userStartFundsColumnName = "startFunds";
+  static const String userPhotoPathColumnName = "photoPath";
 
   //EXPENSE TABLE COLUMN NAMES (WIP)
 
