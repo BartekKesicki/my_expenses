@@ -3,6 +3,7 @@ class SignUpPersonalDataModel {
   String email;
   String password;
   String confirmPassword;
+  String photoPath = "";
 
   get getAutoValidate => _autoValidate;
 

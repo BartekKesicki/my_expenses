@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
@@ -6,6 +7,7 @@ import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_model.da
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_presenter.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_state_view.dart';
 import 'package:my_expenses/sign_up_personal_data/sign_up_personal_data_validator.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignUpPersonalDataPage extends StatefulWidget {
   SignUpPersonalDataPage({Key key, this.title}) : super(key: key);
@@ -19,6 +21,7 @@ class SignUpPersonalDataPage extends StatefulWidget {
 class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
     implements SignUpPersonalDataStateView {
   SignUpPersonalDataStatePresenter presenter;
+  File _image;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,17 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                 EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
           ],
         )),
+        Column(
+          children: <Widget>[
+            Center(
+              child: _image == null ? Text("Pick Image") : Image.file(_image),
+            ),
+            RaisedButton(
+              onPressed: getImage,
+              child: Text("ADD NEW PHOTO"),
+            )
+          ],
+        ),
         Container(
             padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
             child: Form(
@@ -90,6 +104,13 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
             ))
       ],
     ));
+  }
+
+  Future getImage() async {
+    File picture = await ImagePicker.pickImage(source: ImageSource.camera, maxHeight: 100, maxWidth: 100);
+    setState(() {
+      _image = picture;
+    });
   }
 
   void initSignUpPresenter() {

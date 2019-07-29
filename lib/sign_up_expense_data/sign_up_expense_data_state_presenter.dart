@@ -41,7 +41,7 @@ class SignUpExpenseDataStatePresenter extends BaseStatePresenter {
 
   User createUser(SignUpPersonalDataModel personalData) {
     return User(null, personalData.email, personalData.password, model.income,
-        model.monthlyLimit, model.startFunds);
+        model.monthlyLimit, model.startFunds, personalData.photoPath);
   }
 
   @override

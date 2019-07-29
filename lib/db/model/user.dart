@@ -9,7 +9,7 @@ class User {
   double startFunds;
   String photoPath = "";
   User(this.id, this.email, this.password, this.income, this.limit,
-      this.startFunds);
+      this.startFunds, this.photoPath);
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
