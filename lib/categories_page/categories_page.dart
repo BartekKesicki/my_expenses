@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/categories_state_presenter.dart';
 import 'package:my_expenses/categories_page/categories_state_view.dart';
@@ -33,14 +34,14 @@ class _CategoriesPageState extends BasePageState<CategoriesPage>
             bottom: TabBar(
               tabs: [
                 Tab(
-                  text: "INCOME CATEGORIES",
+                  text: AppStrings.incomeCategories,
                 ),
                 Tab(
-                  text: "EXPENSE CATEGORIES",
+                  text: AppStrings.expenseCategories,
                 ),
               ],
             ),
-            title: Text('Categories'),
+            title: Text(AppStrings.categories),
           ),
           body: TabBarView(
             children: [

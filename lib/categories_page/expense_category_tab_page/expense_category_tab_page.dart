@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_view.dart';
@@ -27,7 +28,7 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
     initExpenseCategoryTabPresenter();
     return expenseCategories.isEmpty
         ? createNoContentWidget(
-            "No expense Categories", "ADD FIRST EXPENSE CATEGORY", () {
+            AppStrings.noExpenseCategories, AppStrings.addFirstExpenseCategory, () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -53,11 +54,11 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return createListItemTile(expenseCategories[position].name, () {
-                      showListItemDialog(context, "EDIT", "DO YOU WANT EDIT THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.edit, AppStrings.doYouWantEditThisItem, () {
                         //todo redirect to edit item
                       });
                     }, () {
-                      showListItemDialog(context, "DELETE", "DO YOU WANT DELETE THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.delete, AppStrings.doYouWantDeleteThisItem, () {
                         //todo delete item
                       });
                     }, -1);
@@ -72,7 +73,7 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
                       context,
                       MaterialPageRoute(
                           builder: (context) => NewExpenseCategoryPage()));
-                }, createText("ADD EXPENSE CATEGORY", createButtonTextStyle())),
+                }, createText(AppStrings.addExpenseCategory, createButtonTextStyle())),
               )
             ],
           );
@@ -99,7 +100,7 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
   void showNoExpenseCategoriesView() {
     setState(() {
       mainWidget = createNoContentWidget(
-          "No expense Categories", "ADD FIRST EXPENSE CATEGORY", () {
+          AppStrings.noExpenseCategories, AppStrings.addFirstExpenseCategory, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));
       });
@@ -109,7 +110,7 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
   @override
   void showErrorMessage(String message) {
     Scaffold.of(context).showSnackBar(new SnackBar(
-      content: new Text("Searching Error"),
+      content: new Text(AppStrings.searchingError),
     ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 
 class BasePageState<V extends StatefulWidget> extends State<V> {
   @override
@@ -44,7 +45,7 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
 
   TextStyle createSimpleDataTextStyle() {
     return new TextStyle(
-        fontSize: 15.0, fontWeight: FontWeight.bold, fontFamily: "Montserrat");
+        fontSize: 15.0, fontWeight: FontWeight.bold, fontFamily: AppStrings.montserratFont);
   }
 
   TextStyle createCheckboxTextStyle() {
@@ -55,14 +56,14 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     return new TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontFamily: "Montserrat");
+        fontFamily: AppStrings.montserratFont);
   }
 
   InputDecoration createTextFieldDecoration(String labelText) {
     return new InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(
-            fontFamily: 'Montserrat',
+            fontFamily: AppStrings.montserratFont,
             fontWeight: FontWeight.bold,
             color: Colors.grey));
   }
@@ -71,7 +72,7 @@ class BasePageState<V extends StatefulWidget> extends State<V> {
     return new TextStyle(
         color: Colors.green,
         fontWeight: FontWeight.bold,
-        fontFamily: 'Montserrat',
+        fontFamily: AppStrings.montserratFont,
         decoration: TextDecoration.underline);
   }
 

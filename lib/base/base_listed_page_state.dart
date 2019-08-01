@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/utils/date_calculator.dart';
 
@@ -44,7 +45,7 @@ class BaseListedPageState<V extends StatefulWidget> extends BasePageState<V> {
       );
     } else {
       return new Container(
-        child: new Text("Created: " + DateCalculator.buildDateTime(timeStamp)),
+        child: new Text(AppStrings.created + DateCalculator.buildDateTime(timeStamp)),
       );
     }
   }
@@ -101,8 +102,8 @@ class BaseListedPageState<V extends StatefulWidget> extends BasePageState<V> {
               onChanged: onChanged,
               controller: editingController,
               decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Search",
+                  labelText: AppStrings.search,
+                  hintText: AppStrings.search,
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
@@ -140,12 +141,12 @@ class BaseListedPageState<V extends StatefulWidget> extends BasePageState<V> {
             actions: <Widget>[
               new FlatButton(
                   onPressed: confirmCallBack,
-                  child: new Text("YES")),
+                  child: new Text(AppStrings.yes)),
               new FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: new Text("NO"))
+                  child: new Text(AppStrings.no))
             ],
           );
         }

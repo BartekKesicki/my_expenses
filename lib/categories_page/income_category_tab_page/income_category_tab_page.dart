@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
@@ -27,7 +28,7 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
     initIncomeCategoryTabPresenter();
     return incomeCategories.isEmpty
         ? createNoContentWidget(
-            "No Income Categories", "ADD FIRST INCOME CATEGORY", () {
+           AppStrings.noIncomeCategories, AppStrings.addFirstIncomeCategory, () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -53,11 +54,11 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return createListItemTile(incomeCategories[position].name, () {
-                      showListItemDialog(context, "EDIT", "DO YOU WANT EDIT THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.edit, AppStrings.doYouWantEditThisItem, () {
                         //todo redirect to edit item
                       });
                     }, () {
-                      showListItemDialog(context, "DELETE", "DO YOU WANT DELETE THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.delete, AppStrings.doYouWantDeleteThisItem, () {
                         //todo delete item
                       });
                     }, -1);
@@ -72,7 +73,7 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
                       context,
                       MaterialPageRoute(
                           builder: (context) => NewIncomeCategoryPage()));
-                }, createText("ADD INCOME CATEGORY", createButtonTextStyle())),
+                }, createText(AppStrings.addIncomeCategory, createButtonTextStyle())),
               )
             ],
           );
@@ -99,7 +100,7 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
   void showNoIncomeCategoryView() {
     setState(() {
       mainWidget = createNoContentWidget(
-          "No Income Categories", "ADD FIRST INCOME CATEGORY", () {
+          AppStrings.noIncomeCategories, AppStrings.addFirstIncomeCategory, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));
       });
