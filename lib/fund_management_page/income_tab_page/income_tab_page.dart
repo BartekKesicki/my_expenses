@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
-import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_view.dart';
 import 'package:my_expenses/new_income_page/new_income_page.dart';
-import 'package:my_expenses/utils/date_calculator.dart';
 
 class IncomeTabPage extends StatefulWidget {
   IncomeTabPage({Key key, this.title}) : super(key: key);
@@ -26,7 +25,7 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
   Widget build(BuildContext context) {
     initHomePresenter();
     return incomes.isEmpty
-        ? createNoContentWidget("No incomes", "ADD FIRST INCOME", () {
+        ? createNoContentWidget(AppStrings.noIncomes, AppStrings.addNewIncome, () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => NewIncomePage()));
           })
@@ -50,11 +49,11 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return createListItemTile(incomes[position].name, () {
-                      showListItemDialog(context, "EDIT", "DO YOU WANT EDIT THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.edit, AppStrings.doYouWantEditThisItem, () {
                         //todo redirect to edit item
                       });
                     }, () {
-                      showListItemDialog(context, "DELETE", "DO YOU WANT DELETE THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.delete, AppStrings.doYouWantDeleteThisItem, () {
                         //todo delete item
                       });
                     }, incomes[position].timestamp);
@@ -67,7 +66,7 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
                 child: createRaisedButton(() {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => NewIncomePage()));
-                }, createText("ADD INCOME", createButtonTextStyle())),
+                }, createText(AppStrings.addIncome, createButtonTextStyle())),
               )
             ],
           );

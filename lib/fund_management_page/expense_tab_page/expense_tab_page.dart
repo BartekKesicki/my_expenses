@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_presenter.dart';
@@ -24,7 +25,7 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
   Widget build(BuildContext context) {
     initHomePresenter();
     return expenses.isEmpty
-        ? createNoContentWidget("No expenses", "ADD FIRST EXPENSE", () {
+        ? createNoContentWidget(AppStrings.noExpenses, AppStrings.addNewExpense, () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => NewExpensePage()));
           })
@@ -48,11 +49,11 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
                   shrinkWrap: true,
                   itemBuilder: (context, position) {
                     return createListItemTile(expenses[position].name, () {
-                      showListItemDialog(context, "EDIT", "DO YOU WANT EDIT THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.edit, AppStrings.doYouWantEditThisItem, () {
                         //todo redirect to edit item
                       });
                     }, () {
-                      showListItemDialog(context, "DELETE", "DO YOU WANT DELETE THIS ITEM?", () {
+                      showListItemDialog(context, AppStrings.delete, AppStrings.doYouWantDeleteThisItem, () {
                         //todo delete item
                       });
                     }, expenses[position].timestamp);
@@ -67,7 +68,7 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
                       context,
                       MaterialPageRoute(
                           builder: (context) => NewExpensePage()));
-                }, createText("ADD EXPENSE", createButtonTextStyle())),
+                }, createText(AppStrings.addExpense, createButtonTextStyle())),
               )
             ],
           );
@@ -94,7 +95,7 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
   void showNoExpensesView() {
     setState(() {
       mainWidget =
-          createNoContentWidget("No expenses", "ADD FIRST EXPENSE", () {
+          createNoContentWidget(AppStrings.noExpenses, AppStrings.addNewExpense, () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => NewExpensePage()));
       });

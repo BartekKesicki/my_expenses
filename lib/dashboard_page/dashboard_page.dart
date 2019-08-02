@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/dashboard_page/dashboard_state_presenter.dart';
 import 'package:my_expenses/dashboard_page/dashboard_state_view.dart';
@@ -26,7 +27,7 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
     initPresenter();
     prepareChartData();
     return new Scaffold(
-      appBar: AppBar(backgroundColor: Colors.green, title: Text('Dashboard')),
+      appBar: AppBar(backgroundColor: Colors.green, title: Text(AppStrings.dashboard)),
       body: new Center(
           child: new Container(
         padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
@@ -38,7 +39,7 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
               initialChartData: data,
               chartType: CircularChartType.Radial,
               percentageValues: true,
-              holeLabel: 'Expenses',
+              holeLabel: AppStrings.expenses,
               labelStyle: new TextStyle(
                 color: Colors.blueGrey[600],
                 fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
             createSizedBox(30.0),
             createRaisedButton(() {
               //presenter.performLaunchNewExpense(widget.id);
-            }, createText("NEW EXPENSE", createButtonTextStyle())),
+            }, createText(AppStrings.newExpense, createButtonTextStyle())),
           ],
         ),
       )),

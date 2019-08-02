@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_presenter.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_view.dart';
@@ -32,14 +33,14 @@ class _FundManagementState extends BasePageState<FundManagementPage>
             bottom: TabBar(
               tabs: [
                 Tab(
-                  text: "INCOMES",
+                  text: AppStrings.incomes,
                 ),
                 Tab(
-                  text: "EXPENSES",
+                  text: AppStrings.expenses,
                 ),
               ],
             ),
-            title: Text('Funds Management'),
+            title: Text(AppStrings.fundsManagement),
           ),
           body: TabBarView(
             children: [

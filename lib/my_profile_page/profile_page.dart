@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/user.dart';
 import 'package:my_expenses/my_profile_page/my_profile_clipper.dart';
@@ -16,6 +17,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends BasePageState<ProfilePage>
     implements ProfileStateView {
+  //todo remove mocks
   String _myName = "My Name";
   String _totalFunds = "0.00";
   String _totalFundsLabel = "Start funds";
@@ -29,7 +31,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
     Size screenSize = MediaQuery.of(context).size;
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(backgroundColor: Colors.green, title: Text('My Profile')),
+      appBar: AppBar(backgroundColor: Colors.green, title: Text(AppStrings.myProfile)),
       body: Stack(
         children: <Widget>[
           ClipPath(
@@ -59,7 +61,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
                     margin: EdgeInsets.all(15.0),
                     child: createRaisedButton(() {
                       //todo redirect to edit user
-                    }, createText("EDIT", createButtonTextStyle())),
+                    }, createText(AppStrings.edit, createButtonTextStyle())),
                   )
                 ],
               ),
@@ -87,7 +89,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
 
   Widget buildFullName() {
     TextStyle textStyle = TextStyle(
-        fontFamily: 'Roboto',
+        fontFamily: AppStrings.robotoFont,
         color: Colors.black,
         fontSize: 28.0,
         fontWeight: FontWeight.w700);

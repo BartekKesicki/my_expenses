@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -33,7 +34,7 @@ class _LoginPageState extends BasePageState<LoginPage>
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    decoration: createTextFieldDecoration("EMAIL"),
+                    decoration: createTextFieldDecoration(AppStrings.email),
                     validator: (String value) {
                       if (!presenter.emailIsValid(value)) {
                         return ValidationMessagesConstants.INCORRECT_EMAIL;
@@ -45,7 +46,7 @@ class _LoginPageState extends BasePageState<LoginPage>
                     },
                   ),
                   TextFormField(
-                    decoration: createTextFieldDecoration("PASSWORD"),
+                    decoration: createTextFieldDecoration(AppStrings.password),
                     validator: (String value) {
                       if (!presenter.passwordIsValid(value)) {
                         return ValidationMessagesConstants
@@ -63,12 +64,12 @@ class _LoginPageState extends BasePageState<LoginPage>
                     padding: EdgeInsets.only(top: 15, left: 20),
                     child: InkWell(
                         child: createText(
-                            "Forgot Password", createHyperLinkTextStyle())),
+                            AppStrings.forgotPassword, createHyperLinkTextStyle())),
                   ),
                   createSizedBox(30.0),
                   createRaisedButton(() {
                     presenter.performLogin();
-                  }, createText("LOGIN", createButtonTextStyle())),
+                  }, createText(AppStrings.login, createButtonTextStyle())),
                   createSizedBox(20.0),
                   createSignUpButton(),
                 ],
@@ -89,9 +90,9 @@ class _LoginPageState extends BasePageState<LoginPage>
 
   Stack createHeader() {
     return new Stack(children: <Widget>[
-      createTopLabelsContainer(createText("My", createTitleTextStyle()),
+      createTopLabelsContainer(createText(AppStrings.my, createTitleTextStyle()),
           EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-      createTopLabelsContainer(createText("Expenses", createTitleTextStyle()),
+      createTopLabelsContainer(createText(AppStrings.expensesLowerCase, createTitleTextStyle()),
           EdgeInsets.fromLTRB(15.0, 175.0, 0.0, 0.0))
     ]);
   }
@@ -113,9 +114,9 @@ class _LoginPageState extends BasePageState<LoginPage>
           },
           child: Center(
               child: createText(
-                  "SIGN UP",
+                  AppStrings.signup,
                   TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: "Montserrat"))),
+                      fontWeight: FontWeight.bold, fontFamily: AppStrings.montserratFont))),
         ),
       ),
     );
