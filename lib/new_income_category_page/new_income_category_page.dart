@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -25,7 +26,7 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
         body: Column(children: <Widget>[
           createSizedBox(30.0),
           Center(
-            child: createText("NEW INCOME CATEGORY", createSubTitleTextStyle()),
+            child: createText(AppStrings.newIncomeCategory, createSubTitleTextStyle()),
           ),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
@@ -33,7 +34,7 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
               key: presenter.getFormKey,
               child: Column(children: <Widget>[
                 TextFormField(
-                  decoration: createTextFieldDecoration("INCOME CATEGORY NAME"),
+                  decoration: createTextFieldDecoration(AppStrings.incomeCategoryName),
                   validator: (String value) {
                     if (!presenter.isCategoryNameValid(value)) {
                       return ValidationMessagesConstants
@@ -47,7 +48,7 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
                 createSizedBox(30.0),
                 createRaisedButton(() {
                   presenter.performAddNewIncomeCategoryName();
-                }, createText("ADD NEW INCOME CATEGORY", createButtonTextStyle())),
+                }, createText(AppStrings.addNewIncomeCategory, createButtonTextStyle())),
               ])))
     ]));
   }
@@ -61,7 +62,7 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
 
   @override
   void insertionFailed() {
-    showMessage("INSERTION FAILED");
+    showMessage(AppStrings.insertionFailed);
   }
 
   @override

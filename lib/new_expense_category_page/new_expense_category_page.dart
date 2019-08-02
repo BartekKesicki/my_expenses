@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -25,17 +26,17 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
         body: Column(children: <Widget>[
           createSizedBox(30.0),
           Center(
-            child: createText("NEW EXPENSE CATEGORY", createSubTitleTextStyle()),
+            child: createText(AppStrings.newExpenseCategory, createSubTitleTextStyle()),
           ),
           Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Form(
                   key: presenter.getFormKey,
                   child: Column(children: <Widget>[
-                    createText("EXPENSE CATEGORY", createSubTitleTextStyle()),
+                    createText(AppStrings.expenseCategory, createSubTitleTextStyle()),
                     createSizedBox(20.0),
                     TextFormField(
-                      decoration: createTextFieldDecoration("EXPENSE CATEGORY NAME"),
+                      decoration: createTextFieldDecoration(AppStrings.expenseCategoryName),
                       validator: (String value) {
                         if (!presenter.isCategoryNameValid(value)) {
                           return ValidationMessagesConstants
@@ -47,17 +48,18 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
                       },
                     ),
                     createSizedBox(20.0),
+                    //todo replace with switch
                     new Row(
                       children: <Widget>[
                         new Checkbox(value: presenter.isBill,
                             onChanged: onCheckBoxValueChanged),
-                        createText("EXPENSE IS BILL", createCheckboxTextStyle()),
+                        createText(AppStrings.expenseIsBill, createCheckboxTextStyle()),
                       ],
                     ),
                     createSizedBox(30.0),
                     createRaisedButton(() {
                       presenter.performAddNewExpenseCategoryName();
-                    }, createText("ADD NEW EXPENSE CATEGORY", createButtonTextStyle())),
+                    }, createText(AppStrings.addNewExpenseCategory, createButtonTextStyle())),
                   ])))
         ]));
   }
@@ -77,7 +79,7 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
 
   @override
   void showInsertionFailure() {
-    showMessage("INSERTION FAILED");
+    showMessage(AppStrings.insertionFailed);
   }
 
   @override

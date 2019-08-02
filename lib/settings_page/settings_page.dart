@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/settings_page/settings_state_presenter.dart';
@@ -21,13 +22,13 @@ class _SettingsPageState extends BasePageState<SettingsPage>
   Widget build(BuildContext context) {
     initPresenter();
     return new Scaffold(
-      appBar: AppBar(backgroundColor: Colors.green, title: Text('Settings')),
+      appBar: AppBar(backgroundColor: Colors.green, title: Text(AppStrings.settingsPage)),
       body: Container(
         margin: EdgeInsets.only(left: 20.0, right: 20.0),
         child: Center(
           child: createRaisedButton(() {
             showLogoutDialog();
-          }, createText("LOGOUT", createButtonTextStyle())),
+          }, createText(AppStrings.logout, createButtonTextStyle())),
         ),
       )
     );
@@ -46,17 +47,17 @@ class _SettingsPageState extends BasePageState<SettingsPage>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Logout"),
-          content: new Text("DO YOU WANT LOGOUT?"),
+          title: new Text(AppStrings.logout),
+          content: new Text(AppStrings.doYouWantLogout),
           actions: <Widget>[
             new FlatButton(
                 onPressed: () {
                   redirectToLoginPage();
                 },
-                child: new Text("YES")),
+                child: new Text(AppStrings.yes)),
             new FlatButton(
                 onPressed: () {},
-                child: new Text("NO"))
+                child: new Text(AppStrings.no))
           ],
         );
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -29,7 +30,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
         body: Column(children: <Widget>[
       createSizedBox(30.0),
       Center(
-        child: createText("NEW EXPENSE", createSubTitleTextStyle()),
+        child: createText(AppStrings.newExpense, createSubTitleTextStyle()),
       ),
       createSizedBox(10.0),
       Container(
@@ -38,10 +39,10 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
               key: presenter.getFormKey,
               child: Column(children: <Widget>[
                 TextFormField(
-                  decoration: createTextFieldDecoration("EXPENSE NAME"),
+                  decoration: createTextFieldDecoration(AppStrings.expenseName),
                   validator: (String value) {
                     if (!NewExpenseValidator.isExpenseNameValid(value)) {
-                      return "INCORRECT EXPENSE NAME";
+                      return AppStrings.incorrectExpenseName;
                     }
                   },
                   onSaved: (String value) {
@@ -49,11 +50,11 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                   },
                 ),
                 TextFormField(
-                  decoration: createTextFieldDecoration("AMOUNT"),
+                  decoration: createTextFieldDecoration(AppStrings.amount),
                   keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (!NewExpenseValidator.isExpenseAmountValid(value)) {
-                      return "INCORRECT EXPENSE AMOUNT";
+                      return AppStrings.incorrectExpenseAmount;
                     }
                   },
                   onSaved: (String value) {
@@ -64,7 +65,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                     ? new DropdownButton<String>(
                         value: dropDownCategory,
                         onChanged: onChangedDropDownItem,
-                        hint: Text('Please choose category'),
+                        hint: Text(AppStrings.pleaseChooseCategory),
                         items: categories.map((ExpenseCategory category) {
                           return new DropdownMenuItem<String>(
                             child: new Text(category.name),
@@ -73,11 +74,11 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                         }).toList(),
                       )
                     : new TextFormField(
-                        decoration: createTextFieldDecoration("NEW CATEGORY"),
+                        decoration: createTextFieldDecoration(AppStrings.newCategory),
                         validator: (String value) {
                           if (!NewExpenseValidator.isExpenseCategoryValid(
                               value)) {
-                            return "INCORRECT CATEGORY";
+                            return AppStrings.inCorrectCategory;
                           }
                         },
                         onSaved: (String value) {
@@ -87,7 +88,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                 createSizedBox(20.0),
                 createRaisedButton(() {
                   presenter.performAddExpense();
-                }, createText("ADD EXPENSE", createButtonTextStyle())),
+                }, createText(AppStrings.addExpense, createButtonTextStyle())),
               ])))
     ]));
   }

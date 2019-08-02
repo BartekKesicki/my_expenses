@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -29,7 +30,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
         body: Column(children: <Widget>[
       createSizedBox(30.0),
       Center(
-        child: createText("NEW INCOME", createSubTitleTextStyle()),
+        child: createText(AppStrings.newIncome, createSubTitleTextStyle()),
       ),
       createSizedBox(10.0),
       Container(
@@ -39,10 +40,10 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
               child: Column(children: <Widget>[
                 createSizedBox(20.0),
                 TextFormField(
-                  decoration: createTextFieldDecoration("INCOME NAME"),
+                  decoration: createTextFieldDecoration(AppStrings.incomeName),
                   validator: (String value) {
                     if (!NewIncomeValidator.isIncomeNameValid(value)) {
-                      return "INCORRECT NAME";
+                      return AppStrings.incorrectName;
                     }
                   },
                   onSaved: (String value) {
@@ -51,11 +52,11 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                 ),
                 createSizedBox(20.0),
                 TextFormField(
-                  decoration: createTextFieldDecoration("AMOUNT"),
+                  decoration: createTextFieldDecoration(AppStrings.amount),
                   keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (!NewIncomeValidator.isIncomeAmountValid(value)) {
-                      return "INCORRECT AMOUNT";
+                      return AppStrings.incorrectAmount;
                     }
                   },
                   onSaved: (String value) {
@@ -65,7 +66,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                 createSizedBox(20.0),
                 categoryExists
                     ? new DropdownButton<String>(
-                        hint: Text('Please choose category'),
+                        hint: Text(AppStrings.pleaseChooseCategory),
                         value: dropDownCategory,
                         onChanged: onChangedDropDownItem,
                         items: categories.map((item) {
@@ -76,11 +77,11 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                         }).toList(),
                       )
                     : TextFormField(
-                        decoration: createTextFieldDecoration("NEW CATEGORY"),
+                        decoration: createTextFieldDecoration(AppStrings.newCategory),
                         keyboardType: TextInputType.number,
                         validator: (String value) {
                           if (!NewIncomeValidator.isIncomeNameValid(value)) {
-                            return "INCORRECT CATEGORY";
+                            return AppStrings.inCorrectCategory;
                           }
                         },
                         onSaved: (String value) {
@@ -90,7 +91,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                 createSizedBox(20.0),
                 createRaisedButton(() {
                   presenter.performToAddNewIncome();
-                }, createText("SUBMIT BUTTON", createButtonTextStyle())),
+                }, createText(AppStrings.submitButton, createButtonTextStyle())),
               ])))
     ]));
   }

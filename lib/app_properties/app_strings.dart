@@ -5,6 +5,9 @@ class AppStrings {
   static const no = "NO";
   static const montserratFont = "Montserrat";
   static const robotoFont = "Roboto";
+  static const insertionFailed = "INSERTION FAILED";
+  static const submitButton = "SUBMIT BUTTON";
+  static const next = "NEXT";
 
   // EXPENSE CATEGORY PAGE
   static const noExpenseCategories = "No expense Categories";
@@ -56,4 +59,49 @@ class AppStrings {
 
   // MY PROFILE
   static const myProfile = "My Profile";
+
+  // NEW EXPENSE CATEGORY PAGE
+  static const newExpenseCategory = "NEW EXPENSE CATEGORY";
+  static const expenseCategory = "EXPENSE CATEGORY";
+  static const expenseCategoryName = "EXPENSE CATEGORY NAME";
+  static const expenseIsBill = "EXPENSE IS BILL";
+  static const addNewExpenseCategory = "ADD NEW EXPENSE CATEGORY";
+
+  // NEW EXPENSE PAGE
+  static const expenseName = "EXPENSE NAME";
+  static const incorrectExpenseName = "INCORRECT EXPENSE NAME";
+  static const amount = "AMOUNT";
+  static const incorrectExpenseAmount = "INCORRECT EXPENSE AMOUNT";
+  static const inCorrectCategory = "INCORRECT CATEGORY";
+  static const pleaseChooseCategory = "Please choose category";
+  static const newCategory = "NEW CATEGORY";
+
+  // NEW INCOME CATEGORY PAGE
+  static const newIncomeCategory = "NEW INCOME CATEGORY";
+  static const incomeCategoryName = "INCOME CATEGORY NAME";
+  static const addNewIncomeCategory = "ADD NEW INCOME CATEGORY";
+
+  // NEW INCOME PAGE
+  static const newIncome = "NEW INCOME";
+  static const incomeName = "INCOME NAME";
+  static const incorrectName = "INCORRECT NAME";
+  static const incorrectAmount = "INCORRECT AMOUNT";
+
+  // SETTINGS PAGE
+  static const settingsPage = "Settings";
+  static const logout = "LOGOUT";
+  static const doYouWantLogout = "DO YOU WANT LOGOUT?";
+
+  // SIGN UP EXPENSE DATA PAGE
+  static const expensesData = "Expenses data";
+  static const startFunds = "START FUNDS";
+  static const yourIncome = "YOUR INCOME";
+  static const monthlyLimit = "MONTHLY LIMIT (OPTIONAL)";
+  static const somethingWentWrong = "SOMETHING WENT WRONG";
+  static const personalData = "Personal data";
+  static const pickImage = "Pick Image";
+  static const addNewPhoto = "ADD NEW PHOTO";
+  static const confirmPassword = "CONFIRM PASSWORD";
+
+
 }

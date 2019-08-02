@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_page.dart';
@@ -33,21 +34,21 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
             child: Stack(
           children: <Widget>[
             createTopLabelsContainer(
-                createText("Sign up", createTitleTextStyle()),
+                createText(AppStrings.expensesData, createTitleTextStyle()),
                 EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
             createTopLabelsContainer(
-                createText("Personal data", createSubTitleTextStyle()),
+                createText(AppStrings.personalData, createSubTitleTextStyle()),
                 EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
           ],
         )),
         Column(
           children: <Widget>[
             Center(
-              child: _image == null ? Text("Pick Image") : Image.file(_image),
+              child: _image == null ? Text(AppStrings.pickImage) : Image.file(_image),
             ),
             RaisedButton(
               onPressed: getImage,
-              child: Text("ADD NEW PHOTO"),
+              child: Text(AppStrings.addNewPhoto),
             )
           ],
         ),
@@ -58,7 +59,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                      decoration: createTextFieldDecoration("EMAIL"),
+                      decoration: createTextFieldDecoration(AppStrings.email),
                       validator: (String value) {
                         if (!SignUpPersonalDataValidator.emailIsValid(value)) {
                           return ValidationMessagesConstants.INCORRECT_EMAIL;
@@ -69,7 +70,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                       }),
                   createSizedBox(5.0),
                   TextFormField(
-                      decoration: createTextFieldDecoration("PASSWORD"),
+                      decoration: createTextFieldDecoration(AppStrings.password),
                       obscureText: true,
                       validator: (String value) {
                         if (SignUpPersonalDataValidator.textFormFieldIsEmpty(
@@ -83,7 +84,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                       }),
                   createSizedBox(5.0),
                   TextFormField(
-                      decoration: createTextFieldDecoration("CONFIRM PASSWORD"),
+                      decoration: createTextFieldDecoration(AppStrings.confirmPassword),
                       obscureText: true,
                       validator: (String value) {
                         if (SignUpPersonalDataValidator.textFormFieldIsEmpty(
@@ -98,7 +99,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                   createSizedBox(50.0),
                   createRaisedButton(() {
                     presenter.performToMoveToNextPage();
-                  }, createText("NEXT", createButtonTextStyle()))
+                  }, createText(AppStrings.next, createButtonTextStyle()))
                 ],
               ),
             ))
