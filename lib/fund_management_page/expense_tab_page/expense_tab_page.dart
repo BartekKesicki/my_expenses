@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/fund_management_page/expense_tab_page/expense_tab_presenter.dart';
@@ -25,7 +27,7 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
   Widget build(BuildContext context) {
     initHomePresenter();
     return expenses.isEmpty
-        ? createNoContentWidget(AppStrings.noExpenses, AppStrings.addNewExpense, () {
+        ? AppWidgets.createNoContentWidget(AppStrings.noExpenses, AppStrings.addNewExpense, () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => NewExpensePage()));
           })
@@ -63,12 +65,12 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
               new Padding(
                 padding: EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: createRaisedButton(() {
+                child: AppWidgets.createRaisedButton(() {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => NewExpensePage()));
-                }, createText(AppStrings.addExpense, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.addExpense, AppStyles.createButtonTextStyle())),
               )
             ],
           );
@@ -95,7 +97,7 @@ class _ExpenseTabPageState extends BaseListedPageState<ExpenseTabPage>
   void showNoExpensesView() {
     setState(() {
       mainWidget =
-          createNoContentWidget(AppStrings.noExpenses, AppStrings.addNewExpense, () {
+          AppWidgets.createNoContentWidget(AppStrings.noExpenses, AppStrings.addNewExpense, () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => NewExpensePage()));
       });

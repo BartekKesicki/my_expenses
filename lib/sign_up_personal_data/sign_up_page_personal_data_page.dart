@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/sign_up_expense_data/sign_up_expense_data_page.dart';
@@ -33,11 +35,11 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
         Container(
             child: Stack(
           children: <Widget>[
-            createTopLabelsContainer(
-                createText(AppStrings.expensesData, createTitleTextStyle()),
+            AppWidgets.createTopLabelsContainer(
+                AppWidgets.createText(AppStrings.expensesData, AppStyles.createTitleTextStyle()),
                 EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-            createTopLabelsContainer(
-                createText(AppStrings.personalData, createSubTitleTextStyle()),
+            AppWidgets.createTopLabelsContainer(
+                AppWidgets.createText(AppStrings.personalData, AppStyles.createSubTitleTextStyle()),
                 EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
           ],
         )),
@@ -59,7 +61,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                      decoration: createTextFieldDecoration(AppStrings.email),
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
                       validator: (String value) {
                         if (!SignUpPersonalDataValidator.emailIsValid(value)) {
                           return ValidationMessagesConstants.INCORRECT_EMAIL;
@@ -68,9 +70,9 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                       onSaved: (String value) {
                         presenter.model.email = value;
                       }),
-                  createSizedBox(5.0),
+                  AppWidgets.createSizedBox(5.0),
                   TextFormField(
-                      decoration: createTextFieldDecoration(AppStrings.password),
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
                       obscureText: true,
                       validator: (String value) {
                         if (SignUpPersonalDataValidator.textFormFieldIsEmpty(
@@ -82,9 +84,9 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                       onSaved: (String value) {
                         presenter.model.password = value;
                       }),
-                  createSizedBox(5.0),
+                  AppWidgets.createSizedBox(5.0),
                   TextFormField(
-                      decoration: createTextFieldDecoration(AppStrings.confirmPassword),
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.confirmPassword),
                       obscureText: true,
                       validator: (String value) {
                         if (SignUpPersonalDataValidator.textFormFieldIsEmpty(
@@ -96,10 +98,10 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
                       onSaved: (String value) {
                         presenter.model.confirmPassword = value;
                       }),
-                  createSizedBox(50.0),
-                  createRaisedButton(() {
+                  AppWidgets.createSizedBox(50.0),
+                  AppWidgets.createRaisedButton(() {
                     presenter.performToMoveToNextPage();
-                  }, createText(AppStrings.next, createButtonTextStyle()))
+                  }, AppWidgets.createText(AppStrings.next, AppStyles.createButtonTextStyle()))
                 ],
               ),
             ))

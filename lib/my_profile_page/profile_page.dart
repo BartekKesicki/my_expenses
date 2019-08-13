@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/user.dart';
 import 'package:my_expenses/my_profile_page/my_profile_clipper.dart';
@@ -59,9 +61,9 @@ class _ProfilePageState extends BasePageState<ProfilePage>
                   ),
                   Container(
                     margin: EdgeInsets.all(15.0),
-                    child: createRaisedButton(() {
+                    child: AppWidgets.createRaisedButton(() {
                       //todo redirect to edit user
-                    }, createText(AppStrings.edit, createButtonTextStyle())),
+                    }, AppWidgets.createText(AppStrings.edit, AppStyles.createButtonTextStyle())),
                   )
                 ],
               ),
@@ -114,14 +116,14 @@ class _ProfilePageState extends BasePageState<ProfilePage>
         children: <Widget>[
           Column(
             children: <Widget>[
-              createText(_totalFundsLabel, createSimpleLabelTextStyle()),
-              createText(_totalFunds, createSimpleDataTextStyle())
+              AppWidgets.createText(_totalFundsLabel, AppStyles.createSimpleLabelTextStyle()),
+              AppWidgets.createText(_totalFunds, AppStyles.createSimpleDataTextStyle())
             ],
           ),
           Column(
             children: <Widget>[
-              createText(_expensesQuantityLabel, createSimpleLabelTextStyle()),
-              createText(_expensesQuantity, createSimpleDataTextStyle())
+              AppWidgets.createText(_expensesQuantityLabel, AppStyles.createSimpleLabelTextStyle()),
+              AppWidgets.createText(_expensesQuantity, AppStyles.createSimpleDataTextStyle())
             ],
           ),
         ],

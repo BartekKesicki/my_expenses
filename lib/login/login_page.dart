@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -34,7 +36,7 @@ class _LoginPageState extends BasePageState<LoginPage>
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    decoration: createTextFieldDecoration(AppStrings.email),
+                    decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
                     validator: (String value) {
                       if (!presenter.emailIsValid(value)) {
                         return ValidationMessagesConstants.INCORRECT_EMAIL;
@@ -46,7 +48,7 @@ class _LoginPageState extends BasePageState<LoginPage>
                     },
                   ),
                   TextFormField(
-                    decoration: createTextFieldDecoration(AppStrings.password),
+                    decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
                     validator: (String value) {
                       if (!presenter.passwordIsValid(value)) {
                         return ValidationMessagesConstants
@@ -58,19 +60,19 @@ class _LoginPageState extends BasePageState<LoginPage>
                       presenter.model.password = value;
                     },
                   ),
-                  createSizedBox(5.0),
+                  AppWidgets.createSizedBox(5.0),
                   Container(
                     alignment: Alignment(1.0, 0.0),
                     padding: EdgeInsets.only(top: 15, left: 20),
                     child: InkWell(
-                        child: createText(
-                            AppStrings.forgotPassword, createHyperLinkTextStyle())),
+                        child: AppWidgets.createText(
+                            AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
                   ),
-                  createSizedBox(30.0),
-                  createRaisedButton(() {
+                  AppWidgets.createSizedBox(30.0),
+                  AppWidgets.createRaisedButton(() {
                     presenter.performLogin();
-                  }, createText(AppStrings.login, createButtonTextStyle())),
-                  createSizedBox(20.0),
+                  }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                  AppWidgets.createSizedBox(20.0),
                   createSignUpButton(),
                 ],
               ),
@@ -90,9 +92,9 @@ class _LoginPageState extends BasePageState<LoginPage>
 
   Stack createHeader() {
     return new Stack(children: <Widget>[
-      createTopLabelsContainer(createText(AppStrings.my, createTitleTextStyle()),
+      AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.my, AppStyles.createTitleTextStyle()),
           EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-      createTopLabelsContainer(createText(AppStrings.expensesLowerCase, createTitleTextStyle()),
+      AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.expensesLowerCase, AppStyles.createTitleTextStyle()),
           EdgeInsets.fromLTRB(15.0, 175.0, 0.0, 0.0))
     ]);
   }
@@ -113,7 +115,7 @@ class _LoginPageState extends BasePageState<LoginPage>
             presenter.performToLaunchSignUpPage();
           },
           child: Center(
-              child: createText(
+              child: AppWidgets.createText(
                   AppStrings.signup,
                   TextStyle(
                       fontWeight: FontWeight.bold, fontFamily: AppStrings.montserratFont))),

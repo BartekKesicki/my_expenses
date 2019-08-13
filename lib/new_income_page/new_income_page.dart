@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -28,19 +30,19 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-      createSizedBox(30.0),
+          AppWidgets.createSizedBox(30.0),
       Center(
-        child: createText(AppStrings.newIncome, createSubTitleTextStyle()),
+        child: AppWidgets.createText(AppStrings.newIncome, AppStyles.createSubTitleTextStyle()),
       ),
-      createSizedBox(10.0),
+          AppWidgets.createSizedBox(10.0),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(
               key: presenter.getFormKey,
               child: Column(children: <Widget>[
-                createSizedBox(20.0),
+                AppWidgets.createSizedBox(20.0),
                 TextFormField(
-                  decoration: createTextFieldDecoration(AppStrings.incomeName),
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.incomeName),
                   validator: (String value) {
                     if (!NewIncomeValidator.isIncomeNameValid(value)) {
                       return AppStrings.incorrectName;
@@ -50,9 +52,9 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                     presenter.incomeFormModel.name = value;
                   },
                 ),
-                createSizedBox(20.0),
+                AppWidgets.createSizedBox(20.0),
                 TextFormField(
-                  decoration: createTextFieldDecoration(AppStrings.amount),
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.amount),
                   keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (!NewIncomeValidator.isIncomeAmountValid(value)) {
@@ -63,7 +65,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                     presenter.incomeFormModel.amount = double.parse(value);
                   },
                 ),
-                createSizedBox(20.0),
+                AppWidgets.createSizedBox(20.0),
                 categoryExists
                     ? new DropdownButton<String>(
                         hint: Text(AppStrings.pleaseChooseCategory),
@@ -77,7 +79,7 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                         }).toList(),
                       )
                     : TextFormField(
-                        decoration: createTextFieldDecoration(AppStrings.newCategory),
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.newCategory),
                         keyboardType: TextInputType.number,
                         validator: (String value) {
                           if (!NewIncomeValidator.isIncomeNameValid(value)) {
@@ -88,10 +90,10 @@ class _NewIncomePageState extends BasePageState<NewIncomePage>
                           presenter.category = value;
                         },
                       ),
-                createSizedBox(20.0),
-                createRaisedButton(() {
+                AppWidgets.createSizedBox(20.0),
+                AppWidgets.createRaisedButton(() {
                   presenter.performToAddNewIncome();
-                }, createText(AppStrings.submitButton, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.submitButton, AppStyles.createButtonTextStyle())),
               ])))
     ]));
   }

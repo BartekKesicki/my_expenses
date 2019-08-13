@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/fund_management_page/income_tab_page/income_tab_presenter.dart';
@@ -25,7 +27,7 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
   Widget build(BuildContext context) {
     initHomePresenter();
     return incomes.isEmpty
-        ? createNoContentWidget(AppStrings.noIncomes, AppStrings.addNewIncome, () {
+        ? AppWidgets.createNoContentWidget(AppStrings.noIncomes, AppStrings.addNewIncome, () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => NewIncomePage()));
           })
@@ -63,10 +65,10 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
               new Padding(
                 padding: EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: createRaisedButton(() {
+                child: AppWidgets.createRaisedButton(() {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => NewIncomePage()));
-                }, createText(AppStrings.addIncome, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.addIncome, AppStyles.createButtonTextStyle())),
               )
             ],
           );
@@ -92,7 +94,7 @@ class _IncomeTabPageState extends BaseListedPageState<IncomeTabPage>
   @override
   void showNoIncomesView() {
     setState(() {
-      mainWidget = createNoContentWidget("No Incomes", "ADD FIRST INCOME", () {
+      mainWidget = AppWidgets.createNoContentWidget("No Incomes", "ADD FIRST INCOME", () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => NewIncomePage()));
       });

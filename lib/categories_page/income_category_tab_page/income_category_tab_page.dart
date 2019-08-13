@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/income_category_tab_page/income_category_tab_view.dart';
@@ -27,7 +29,7 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
   Widget build(BuildContext context) {
     initIncomeCategoryTabPresenter();
     return incomeCategories.isEmpty
-        ? createNoContentWidget(
+        ? AppWidgets.createNoContentWidget(
            AppStrings.noIncomeCategories, AppStrings.addFirstIncomeCategory, () {
             Navigator.push(
                 context,
@@ -68,12 +70,12 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
               new Padding(
                 padding: EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: createRaisedButton(() {
+                child: AppWidgets.createRaisedButton(() {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => NewIncomeCategoryPage()));
-                }, createText(AppStrings.addIncomeCategory, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.addIncomeCategory, AppStyles.createButtonTextStyle())),
               )
             ],
           );
@@ -99,7 +101,7 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
   @override
   void showNoIncomeCategoryView() {
     setState(() {
-      mainWidget = createNoContentWidget(
+      mainWidget = AppWidgets.createNoContentWidget(
           AppStrings.noIncomeCategories, AppStrings.addFirstIncomeCategory, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewIncomeCategoryPage()));

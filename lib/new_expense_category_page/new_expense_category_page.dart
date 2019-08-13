@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -24,19 +26,19 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-          createSizedBox(30.0),
+          AppWidgets.createSizedBox(30.0),
           Center(
-            child: createText(AppStrings.newExpenseCategory, createSubTitleTextStyle()),
+            child: AppWidgets.createText(AppStrings.newExpenseCategory, AppStyles.createSubTitleTextStyle()),
           ),
           Container(
               padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
               child: Form(
                   key: presenter.getFormKey,
                   child: Column(children: <Widget>[
-                    createText(AppStrings.expenseCategory, createSubTitleTextStyle()),
-                    createSizedBox(20.0),
+                    AppWidgets.createText(AppStrings.expenseCategory, AppStyles.createSubTitleTextStyle()),
+                    AppWidgets.createSizedBox(20.0),
                     TextFormField(
-                      decoration: createTextFieldDecoration(AppStrings.expenseCategoryName),
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.expenseCategoryName),
                       validator: (String value) {
                         if (!presenter.isCategoryNameValid(value)) {
                           return ValidationMessagesConstants
@@ -47,19 +49,19 @@ class _NewExpenseCategoryPageState extends BasePageState<NewExpenseCategoryPage>
                         presenter.expenseName = value;
                       },
                     ),
-                    createSizedBox(20.0),
+                    AppWidgets.createSizedBox(20.0),
                     //todo replace with switch
                     new Row(
                       children: <Widget>[
                         new Checkbox(value: presenter.isBill,
                             onChanged: onCheckBoxValueChanged),
-                        createText(AppStrings.expenseIsBill, createCheckboxTextStyle()),
+                        AppWidgets.createText(AppStrings.expenseIsBill, AppStyles.createCheckboxTextStyle()),
                       ],
                     ),
-                    createSizedBox(30.0),
-                    createRaisedButton(() {
+                    AppWidgets.createSizedBox(30.0),
+                    AppWidgets.createRaisedButton(() {
                       presenter.performAddNewExpenseCategoryName();
-                    }, createText(AppStrings.addNewExpenseCategory, createButtonTextStyle())),
+                    }, AppWidgets.createText(AppStrings.addNewExpenseCategory, AppStyles.createButtonTextStyle())),
                   ])))
         ]));
   }

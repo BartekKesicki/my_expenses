@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -24,9 +26,9 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-          createSizedBox(30.0),
+          AppWidgets.createSizedBox(30.0),
           Center(
-            child: createText(AppStrings.newIncomeCategory, createSubTitleTextStyle()),
+            child: AppWidgets.createText(AppStrings.newIncomeCategory, AppStyles.createSubTitleTextStyle()),
           ),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
@@ -34,7 +36,7 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
               key: presenter.getFormKey,
               child: Column(children: <Widget>[
                 TextFormField(
-                  decoration: createTextFieldDecoration(AppStrings.incomeCategoryName),
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.incomeCategoryName),
                   validator: (String value) {
                     if (!presenter.isCategoryNameValid(value)) {
                       return ValidationMessagesConstants
@@ -45,10 +47,10 @@ class _NewIncomeCategoryPageState extends BasePageState<NewIncomeCategoryPage>
                     presenter.incomeName = value;
                   },
                 ),
-                createSizedBox(30.0),
-                createRaisedButton(() {
+                AppWidgets.createSizedBox(30.0),
+                AppWidgets.createRaisedButton(() {
                   presenter.performAddNewIncomeCategoryName();
-                }, createText(AppStrings.addNewIncomeCategory, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.addNewIncomeCategory, AppStyles.createButtonTextStyle())),
               ])))
     ]));
   }

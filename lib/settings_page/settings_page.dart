@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/settings_page/settings_state_presenter.dart';
@@ -26,9 +28,9 @@ class _SettingsPageState extends BasePageState<SettingsPage>
       body: Container(
         margin: EdgeInsets.only(left: 20.0, right: 20.0),
         child: Center(
-          child: createRaisedButton(() {
+          child: AppWidgets.createRaisedButton(() {
             showLogoutDialog();
-          }, createText(AppStrings.logout, createButtonTextStyle())),
+          }, AppWidgets.createText(AppStrings.logout, AppStyles.createButtonTextStyle())),
         ),
       )
     );

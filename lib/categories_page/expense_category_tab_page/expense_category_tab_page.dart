@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_listed_page_state.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_presenter.dart';
 import 'package:my_expenses/categories_page/expense_category_tab_page/expense_category_tab_state_view.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
-import 'dart:developer';
 import 'package:my_expenses/new_expense_category_page/new_expense_category_page.dart';
 
 class ExpenseCategoryTabPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
   Widget build(BuildContext context) {
     initExpenseCategoryTabPresenter();
     return expenseCategories.isEmpty
-        ? createNoContentWidget(
+        ? AppWidgets.createNoContentWidget(
             AppStrings.noExpenseCategories, AppStrings.addFirstExpenseCategory, () {
             Navigator.push(
                 context,
@@ -68,12 +69,12 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
               new Padding(
                 padding: EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                child: createRaisedButton(() {
+                child: AppWidgets.createRaisedButton(() {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => NewExpenseCategoryPage()));
-                }, createText(AppStrings.addExpenseCategory, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.addExpenseCategory, AppStyles.createButtonTextStyle())),
               )
             ],
           );
@@ -99,7 +100,7 @@ class _ExpenseCategoryTabPageState extends BaseListedPageState<ExpenseCategoryTa
   @override
   void showNoExpenseCategoriesView() {
     setState(() {
-      mainWidget = createNoContentWidget(
+      mainWidget = AppWidgets.createNoContentWidget(
           AppStrings.noExpenseCategories, AppStrings.addFirstExpenseCategory, () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => NewExpenseCategoryPage()));

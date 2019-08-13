@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/dashboard_page/dashboard_state_presenter.dart';
 import 'package:my_expenses/dashboard_page/dashboard_state_view.dart';
@@ -46,10 +48,10 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
                 fontSize: 24.0,
               ),
             ),
-            createSizedBox(30.0),
-            createRaisedButton(() {
+            AppWidgets.createSizedBox(30.0),
+            AppWidgets.createRaisedButton(() {
               //presenter.performLaunchNewExpense(widget.id);
-            }, createText(AppStrings.newExpense, createButtonTextStyle())),
+            }, AppWidgets.createText(AppStrings.newExpense, AppStyles.createButtonTextStyle())),
           ],
         ),
       )),

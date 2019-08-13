@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/db/model/expense_category.dart';
 import 'package:my_expenses/home/home_page.dart';
@@ -28,18 +30,18 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
     initPresenter();
     return new Scaffold(
         body: Column(children: <Widget>[
-      createSizedBox(30.0),
+      AppWidgets.createSizedBox(30.0),
       Center(
-        child: createText(AppStrings.newExpense, createSubTitleTextStyle()),
+        child: AppWidgets.createText(AppStrings.newExpense, AppStyles.createSubTitleTextStyle()),
       ),
-      createSizedBox(10.0),
+          AppWidgets.createSizedBox(10.0),
       Container(
           padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
           child: Form(
               key: presenter.getFormKey,
               child: Column(children: <Widget>[
                 TextFormField(
-                  decoration: createTextFieldDecoration(AppStrings.expenseName),
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.expenseName),
                   validator: (String value) {
                     if (!NewExpenseValidator.isExpenseNameValid(value)) {
                       return AppStrings.incorrectExpenseName;
@@ -50,7 +52,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                   },
                 ),
                 TextFormField(
-                  decoration: createTextFieldDecoration(AppStrings.amount),
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.amount),
                   keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (!NewExpenseValidator.isExpenseAmountValid(value)) {
@@ -74,7 +76,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                         }).toList(),
                       )
                     : new TextFormField(
-                        decoration: createTextFieldDecoration(AppStrings.newCategory),
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.newCategory),
                         validator: (String value) {
                           if (!NewExpenseValidator.isExpenseCategoryValid(
                               value)) {
@@ -85,10 +87,10 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
                           presenter.category = value;
                         },
                       ),
-                createSizedBox(20.0),
-                createRaisedButton(() {
+                AppWidgets.createSizedBox(20.0),
+                AppWidgets.createRaisedButton(() {
                   presenter.performAddExpense();
-                }, createText(AppStrings.addExpense, createButtonTextStyle())),
+                }, AppWidgets.createText(AppStrings.addExpense, AppStyles.createButtonTextStyle())),
               ])))
     ]));
   }

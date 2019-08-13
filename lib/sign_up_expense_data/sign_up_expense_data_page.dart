@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/constants/validation_messages_constants.dart';
 import 'package:my_expenses/login/login_page.dart';
@@ -31,11 +33,11 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
       Container(
           child: Stack(
         children: <Widget>[
-          createTopLabelsContainer(
-              createText(AppStrings.signup, createTitleTextStyle()),
+          AppWidgets.createTopLabelsContainer(
+              AppWidgets.createText(AppStrings.signup, AppStyles.createTitleTextStyle()),
               EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-          createTopLabelsContainer(
-              createText(AppStrings.expensesData, createSubTitleTextStyle()),
+          AppWidgets.createTopLabelsContainer(
+              AppWidgets.createText(AppStrings.expensesData, AppStyles.createSubTitleTextStyle()),
               EdgeInsets.fromLTRB(15.0, 195.0, 0.0, 0.0)),
         ],
       )),
@@ -46,7 +48,7 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: createTextFieldDecoration(AppStrings.startFunds),
+                decoration: AppStyles.createTextFieldDecoration(AppStrings.startFunds),
                 keyboardType: TextInputType.number,
                 validator: (String value) {
                   if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
@@ -57,9 +59,9 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
                   presenter.model.startFunds = double.parse(value);
                 },
               ),
-              createSizedBox(5.0),
+              AppWidgets.createSizedBox(5.0),
               TextFormField(
-                  decoration: createTextFieldDecoration(AppStrings.yourIncome),
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.yourIncome),
                   keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (SignUpExpenseDataValidator.numberIsEmpty(value)) {
@@ -75,10 +77,10 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
                   onSaved: (String value) {
                     presenter.model.income = double.parse(value);
                   }),
-              createSizedBox(5.0),
+              AppWidgets.createSizedBox(5.0),
               TextFormField(
                   decoration:
-                      createTextFieldDecoration(AppStrings.monthlyLimit),
+                  AppStyles.createTextFieldDecoration(AppStrings.monthlyLimit),
                   keyboardType: TextInputType.number,
                   validator: (String value) {
                     if (!SignUpExpenseDataValidator.numberIsNotBelowZero(
@@ -90,11 +92,11 @@ class _SignUpExpenseDataPageState extends BasePageState<SignUpExpenseDataPage>
                   onSaved: (String value) {
                     presenter.model.monthlyLimit = double.parse(value);
                   }),
-              createSizedBox(50.0),
-              createRaisedButton(() {
+              AppWidgets.createSizedBox(50.0),
+              AppWidgets.createRaisedButton(() {
                 personalData = widget.model;
                 presenter.validateInputsAndSignup(personalData);
-              }, createText(AppStrings.signup, createButtonTextStyle()))
+              }, AppWidgets.createText(AppStrings.signup, AppStyles.createButtonTextStyle()))
             ],
           ),
         ),
