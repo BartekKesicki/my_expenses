@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/fund_management_page/fund_management_state_presenter.dart';
@@ -25,7 +26,7 @@ class _FundManagementState extends BasePageState<FundManagementPage>
   Widget build(BuildContext context) {
     initPresenterAndTabViews();
     return new DefaultTabController(
-        length: 2,
+        length: AppDimens.fundsManagementTabLength,
         child: new Scaffold(
           resizeToAvoidBottomPadding: false,
           appBar: AppBar(

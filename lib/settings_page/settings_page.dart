@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -26,7 +27,7 @@ class _SettingsPageState extends BasePageState<SettingsPage>
     return new Scaffold(
       appBar: AppBar(backgroundColor: Colors.green, title: Text(AppStrings.settingsPage)),
       body: Container(
-        margin: EdgeInsets.only(left: 20.0, right: 20.0),
+        margin: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
         child: Center(
           child: AppWidgets.createRaisedButton(() {
             showLogoutDialog();

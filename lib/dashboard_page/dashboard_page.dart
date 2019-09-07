@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -32,12 +33,12 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
       appBar: AppBar(backgroundColor: Colors.green, title: Text(AppStrings.dashboard)),
       body: new Center(
           child: new Container(
-        padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+        padding: EdgeInsets.only(top: AppDimens.chartTopMargin, left: AppDimens.chartSideMargin, right: AppDimens.chartSideMargin),
         child: new Column(
           children: <Widget>[
             new AnimatedCircularChart(
               key: _chartKey,
-              size: const Size(300.0, 300.0),
+              size: const Size(AppDimens.chartSize, AppDimens.chartSize),
               initialChartData: data,
               chartType: CircularChartType.Radial,
               percentageValues: true,
@@ -45,7 +46,7 @@ class _DashboardPageState extends BasePageState<DashBoardPage>
               labelStyle: new TextStyle(
                 color: Colors.blueGrey[600],
                 fontWeight: FontWeight.bold,
-                fontSize: 24.0,
+                fontSize: AppDimens.chartFontSize,
               ),
             ),
             AppWidgets.createSizedBox(30.0),

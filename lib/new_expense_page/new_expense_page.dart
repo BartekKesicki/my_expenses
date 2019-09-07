@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -36,7 +37,7 @@ class _NewExpensePageState extends BasePageState<NewExpensePage>
       ),
           AppWidgets.createSizedBox(10.0),
       Container(
-          padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+          padding: EdgeInsets.only(top: AppDimens.containerTopMargin, left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
           child: Form(
               key: presenter.getFormKey,
               child: Column(children: <Widget>[

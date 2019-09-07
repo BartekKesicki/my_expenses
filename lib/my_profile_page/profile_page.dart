@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -60,7 +61,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
                     height: 10.0,
                   ),
                   Container(
-                    margin: EdgeInsets.all(15.0),
+                    margin: EdgeInsets.all(AppDimens.profilePageMarginDimen),
                     child: AppWidgets.createRaisedButton(() {
                       //todo redirect to edit user
                     }, AppWidgets.createText(AppStrings.edit, AppStyles.createButtonTextStyle())),
@@ -77,14 +78,14 @@ class _ProfilePageState extends BasePageState<ProfilePage>
   Widget buildProfileImage() {
     return Center(
       child: new Container(
-        width: 140.0,
-        height: 140.0,
+        width: AppDimens.profilePageImageDimen,
+        height: AppDimens.profilePageImageDimen,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/cat.jpg'), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(80.0),
-            border: Border.all(color: Colors.black, width: 1.0),
-            boxShadow: [BoxShadow(color: Colors.black, blurRadius: 7.0)]),
+            borderRadius: BorderRadius.circular(AppDimens.profileCircularBorderRadius),
+            border: Border.all(color: Colors.black, width: AppDimens.profileImageBorderWidth),
+            boxShadow: [BoxShadow(color: Colors.black, blurRadius: AppDimens.profilePageImageBlurRadius)]),
       ),
     );
   }
@@ -93,7 +94,7 @@ class _ProfilePageState extends BasePageState<ProfilePage>
     TextStyle textStyle = TextStyle(
         fontFamily: AppStrings.robotoFont,
         color: Colors.black,
-        fontSize: 28.0,
+        fontSize: AppDimens.profilePageFullNameFontSize,
         fontWeight: FontWeight.w700);
     return Text(
       _myName,

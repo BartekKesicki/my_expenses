@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -55,7 +56,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
           ],
         ),
         Container(
-            padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+            padding: EdgeInsets.only(top: AppDimens.containerTopMargin, left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
             child: Form(
               key: presenter.getFormKey,
               child: Column(
@@ -110,7 +111,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
   }
 
   Future getImage() async {
-    File picture = await ImagePicker.pickImage(source: ImageSource.camera, maxHeight: 100, maxWidth: 100);
+    File picture = await ImagePicker.pickImage(source: ImageSource.camera, maxHeight: AppDimens.imagePickerDimen, maxWidth: AppDimens.imagePickerDimen);
     setState(() {
       _image = picture;
     });
@@ -130,7 +131,7 @@ class _SignUpPersonalDataPageState extends BasePageState<SignUpPersonalDataPage>
 
   @override
   void showError() {
-    showMessage("ERROR");
+    showMessage(AppStrings.error);
   }
 
   @override

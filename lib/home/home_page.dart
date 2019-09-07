@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/categories_page.dart';
 import 'package:my_expenses/dashboard_page/dashboard_page.dart';
@@ -106,7 +107,7 @@ class _HomePageState extends BasePageState<HomePage> implements HomeStateView {
 
   void navigationTapped(int page) {
     _pageController.animateToPage(page,
-        duration: const Duration(milliseconds: 300), curve: Curves.ease);
+        duration: const Duration(milliseconds: AppDimens.animationInMillis), curve: Curves.ease);
   }
 
   void onPageChanged(int page) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -30,7 +31,7 @@ class _LoginPageState extends BasePageState<LoginPage>
         children: <Widget>[
           Container(child: createHeader()),
           Container(
-            padding: EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
+            padding: EdgeInsets.only(top: AppDimens.loginTopContainerTopMargin, left: AppDimens.loginContainerSideMargin, right: AppDimens.loginContainerSideMargin),
             child: Form(
               key: presenter.getFormKey,
               child: Column(
@@ -63,7 +64,7 @@ class _LoginPageState extends BasePageState<LoginPage>
                   AppWidgets.createSizedBox(5.0),
                   Container(
                     alignment: Alignment(1.0, 0.0),
-                    padding: EdgeInsets.only(top: 15, left: 20),
+                    padding: EdgeInsets.only(top: AppDimens.loginLowerContainerTopMargin, left: AppDimens.loginContainerSideMargin),
                     child: InkWell(
                         child: AppWidgets.createText(
                             AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
@@ -92,6 +93,7 @@ class _LoginPageState extends BasePageState<LoginPage>
 
   Stack createHeader() {
     return new Stack(children: <Widget>[
+      //todo column with specific spacing
       AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.my, AppStyles.createTitleTextStyle()),
           EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
       AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.expensesLowerCase, AppStyles.createTitleTextStyle()),
@@ -101,14 +103,14 @@ class _LoginPageState extends BasePageState<LoginPage>
 
   Container createSignUpButton() {
     return new Container(
-      height: 50.0,
+      height: AppDimens.loginSignUpButtonHeight,
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-              color: Colors.black, style: BorderStyle.solid, width: 1.0),
+              color: Colors.black, style: BorderStyle.solid, width: AppDimens.loginSignUpBorderButtonWidth),
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(AppDimens.loginButtonBorderRadius),
         ),
         child: GestureDetector(
           onTap: () {

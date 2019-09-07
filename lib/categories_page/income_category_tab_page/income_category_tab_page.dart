@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
@@ -69,7 +70,7 @@ class _IncomeCategoryTabPageState extends BaseListedPageState<IncomeCategoryTabP
               ),
               new Padding(
                 padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                    top: AppDimens.bottomButtonDefaultMargin, bottom: AppDimens.bottomButtonDefaultMargin, left: AppDimens.bottomButtonDefaultMargin, right: AppDimens.bottomButtonDefaultMargin),
                 child: AppWidgets.createRaisedButton(() {
                   Navigator.push(
                       context,

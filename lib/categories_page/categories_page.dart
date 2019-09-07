@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/base/base_page_state.dart';
 import 'package:my_expenses/categories_page/categories_state_presenter.dart';
@@ -26,7 +27,7 @@ class _CategoriesPageState extends BasePageState<CategoriesPage>
   Widget build(BuildContext context) {
     initPresenter();
     return new DefaultTabController(
-        length: 2,
+        length: AppDimens.categoriesTabLength,
         child: new Scaffold(
           resizeToAvoidBottomPadding: false,
           appBar: AppBar(

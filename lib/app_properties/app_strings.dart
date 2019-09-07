@@ -8,6 +8,7 @@ class AppStrings {
   static const insertionFailed = "INSERTION FAILED";
   static const submitButton = "SUBMIT BUTTON";
   static const next = "NEXT";
+  static const error = "ERROR";
 
   // EXPENSE CATEGORY PAGE
   static const noExpenseCategories = "No expense Categories";
@@ -102,6 +103,4 @@ class AppStrings {
   static const pickImage = "Pick Image";
   static const addNewPhoto = "ADD NEW PHOTO";
   static const confirmPassword = "CONFIRM PASSWORD";
-
-
 }
