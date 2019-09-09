@@ -4,11 +4,8 @@ import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
-import 'package:my_expenses/constants/validation_messages_constants.dart';
-import 'package:my_expenses/home/home_page.dart';
 import 'package:my_expenses/login/login_state_presenter.dart';
 import 'package:my_expenses/login/login_state_view.dart';
-import 'package:my_expenses/sign_up_personal_data/sign_up_page_personal_data_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -26,6 +23,7 @@ class _LoginPageState extends BasePageState<LoginPage>
   @override
   Widget build(BuildContext context) {
     initLoginPresenter();
+    //todo create new login form with BLoC pattern
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -38,24 +36,12 @@ class _LoginPageState extends BasePageState<LoginPage>
                 children: <Widget>[
                   TextFormField(
                     decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
-                    validator: (String value) {
-                      if (!presenter.emailIsValid(value)) {
-                        return ValidationMessagesConstants.INCORRECT_EMAIL;
-                      }
-                      presenter.model.email = value;
-                    },
                     onSaved: (String value) {
                       presenter.model.email = value;
                     },
                   ),
                   TextFormField(
                     decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
-                    validator: (String value) {
-                      if (!presenter.passwordIsValid(value)) {
-                        return ValidationMessagesConstants
-                            .THIS_FIELD_CANT_BE_EMPTY;
-                      }
-                    },
                     obscureText: true,
                     onSaved: (String value) {
                       presenter.model.password = value;
@@ -128,15 +114,12 @@ class _LoginPageState extends BasePageState<LoginPage>
 
   @override
   void redirectToHomePage() {
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomePage()),
-        (Route<dynamic> route) => false);
+    //todo redirect to home page
   }
 
   @override
   void redirectToSignUpPage() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => SignUpPersonalDataPage()));
+    //todo redirect to sign up page
   }
 
   @override
