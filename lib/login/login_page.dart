@@ -4,8 +4,6 @@ import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/base/base_page_state.dart';
-import 'package:my_expenses/login/login_state_presenter.dart';
-import 'package:my_expenses/login/login_state_view.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -16,53 +14,46 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BasePageState<LoginPage>
-    implements LoginStateView {
-  LoginStatePresenter presenter;
+class _LoginPageState extends BasePageState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    initLoginPresenter();
     //todo create new login form with BLoC pattern
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Container(child: createHeader()),
           Container(
-            padding: EdgeInsets.only(top: AppDimens.loginTopContainerTopMargin, left: AppDimens.loginContainerSideMargin, right: AppDimens.loginContainerSideMargin),
-            child: Form(
-              key: presenter.getFormKey,
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
-                    onSaved: (String value) {
-                      presenter.model.email = value;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
-                    obscureText: true,
-                    onSaved: (String value) {
-                      presenter.model.password = value;
-                    },
-                  ),
-                  AppWidgets.createSizedBox(5.0),
-                  Container(
-                    alignment: Alignment(1.0, 0.0),
-                    padding: EdgeInsets.only(top: AppDimens.loginLowerContainerTopMargin, left: AppDimens.loginContainerSideMargin),
-                    child: InkWell(
-                        child: AppWidgets.createText(
-                            AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
-                  ),
-                  AppWidgets.createSizedBox(30.0),
-                  AppWidgets.createRaisedButton(() {
-                    presenter.performLogin();
-                  }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
-                  AppWidgets.createSizedBox(20.0),
-                  createSignUpButton(),
-                ],
-              ),
+            padding: EdgeInsets.only(left: AppDimens.loginContainerSideMargin, right: AppDimens.loginContainerSideMargin),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                TextFormField(
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
+                  onSaved: (String value) {
+                    //todo fill login model
+                  },
+                ),
+                TextFormField(
+                  decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
+                  obscureText: true,
+                  onSaved: (String value) {
+                    //todo fill login model
+                  },
+                ),
+                Container(
+                  alignment: Alignment(1.0, 0.0),
+                  padding: EdgeInsets.only(top: AppDimens.loginLowerContainerTopMargin, left: AppDimens.loginContainerSideMargin),
+                  child: InkWell(
+                      child: AppWidgets.createText(
+                          AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
+                ),
+                AppWidgets.createRaisedButton(() {
+                  //todo invoke perform login in bloc
+                }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                createSignUpButton(),
+              ],
             ),
           )
         ],
@@ -70,20 +61,18 @@ class _LoginPageState extends BasePageState<LoginPage>
     );
   }
 
-  void initLoginPresenter() {
-    if (presenter == null) {
-      presenter = LoginStatePresenter();
-      presenter.attach(this);
-    }
-  }
-
-  Stack createHeader() {
-    return new Stack(children: <Widget>[
+  Widget createHeader() {
+    return new Column(
+        children: <Widget>[
       //todo column with specific spacing
-      AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.my, AppStyles.createTitleTextStyle()),
-          EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0)),
-      AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.expensesLowerCase, AppStyles.createTitleTextStyle()),
-          EdgeInsets.fromLTRB(15.0, 175.0, 0.0, 0.0))
+      Container(
+        width : MediaQuery.of(context).size.width,
+        child: AppWidgets.createText(AppStrings.my, AppStyles.createTitleTextStyle()),
+      ),
+      Container(
+        width : MediaQuery.of(context).size.width,
+        child: AppWidgets.createText(AppStrings.expensesLowerCase, AppStyles.createTitleTextStyle()),
+      ),
     ]);
   }
 
@@ -100,7 +89,7 @@ class _LoginPageState extends BasePageState<LoginPage>
         ),
         child: GestureDetector(
           onTap: () {
-            presenter.performToLaunchSignUpPage();
+            //todo redirect to signup page
           },
           child: Center(
               child: AppWidgets.createText(
@@ -120,12 +109,5 @@ class _LoginPageState extends BasePageState<LoginPage>
   @override
   void redirectToSignUpPage() {
     //todo redirect to sign up page
-  }
-
-  @override
-  void autoValidate() {
-    setState(() {
-      presenter.model.setAutoValidate(true);
-    });
   }
 }
