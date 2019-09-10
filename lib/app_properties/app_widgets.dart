@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 
 import 'app_styles.dart';
 
@@ -25,12 +26,12 @@ class AppWidgets {
 
   static Container createSubmitButton(GestureTapCallback callback, Text centerText) {
     return new Container(
-        height: 50,
+        height: AppDimens.appRaisedButtonHeight,
         child: Material(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(AppDimens.appRaisedButtonCornerRadius),
           shadowColor: Colors.lightGreen,
           color: Colors.green,
-          elevation: 7.0,
+          elevation: AppDimens.appRaisedButtonElevation,
           child: GestureDetector(
             onTap: callback,
             child: Center(child: centerText),
@@ -40,11 +41,11 @@ class AppWidgets {
 
   static Container createRaisedButton(VoidCallback callback, Text centerText) {
     return new Container(
-      height: 50,
+      height: AppDimens.appRaisedButtonHeight,
       child: RaisedButton(
         shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(25.0)),
-        elevation: 7.0,
+            borderRadius: new BorderRadius.circular(AppDimens.appRaisedButtonCornerRadius)),
+        elevation: AppDimens.appRaisedButtonElevation,
         color: Colors.green,
         onPressed: callback,
         child: Center(child: centerText),
@@ -55,19 +56,17 @@ class AppWidgets {
   static Container createNoContentWidget(
       String title, String addNewItemButtonTitle, GestureTapCallback callback) {
     return new Container(
-      margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+      margin: EdgeInsets.only(top: AppDimens.noContentTopPadding, left: AppDimens.noContentPaddingSide, right: AppDimens.noContentPaddingSide),
       child: new Center(
         child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            createSizedBox(30.0),
             new Icon(
               Icons.close,
-              size: 220.0,
+              size: AppDimens.noContentImageSize,
               color: Colors.grey,
             ),
-            createSizedBox(30.0),
             createText(title, AppStyles.createSimpleLabelTextStyle()),
-            createSizedBox(40.0),
             createRaisedButton(callback,
                 createText(addNewItemButtonTitle, AppStyles.createButtonTextStyle()))
           ],

@@ -27,31 +27,34 @@ class _LoginPageState extends BasePageState<LoginPage> {
           Container(
             padding: EdgeInsets.only(left: AppDimens.loginContainerSideMargin, right: AppDimens.loginContainerSideMargin),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                TextFormField(
+                TextField(
                   decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
-                  onSaved: (String value) {
-                    //todo fill login model
-                  },
+//                  onSaved: (String value) {
+//                    //todo fill login model
+//                  },
                 ),
-                TextFormField(
+                TextField(
                   decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
                   obscureText: true,
-                  onSaved: (String value) {
-                    //todo fill login model
-                  },
+//                  onSaved: (String value) {
+//                    //todo fill login model
+//                  },
                 ),
                 Container(
                   alignment: Alignment(1.0, 0.0),
-                  padding: EdgeInsets.only(top: AppDimens.loginLowerContainerTopMargin, left: AppDimens.loginContainerSideMargin),
+                  padding: EdgeInsets.only(top: AppDimens.loginLowerContainerTopMargin, left: AppDimens.loginContainerSideMargin, bottom: AppDimens.loginBottomContainerMargin),
                   child: InkWell(
                       child: AppWidgets.createText(
                           AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
                 ),
-                AppWidgets.createRaisedButton(() {
-                  //todo invoke perform login in bloc
-                }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                Padding(
+                  padding: EdgeInsets.only(top: AppDimens.loginTopContainerTopMargin, bottom: AppDimens.loginBottomContainerMargin),
+                  child: AppWidgets.createRaisedButton(() {
+                    //todo invoke perform login in bloc
+                  }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                ),
                 createSignUpButton(),
               ],
             ),
@@ -62,18 +65,21 @@ class _LoginPageState extends BasePageState<LoginPage> {
   }
 
   Widget createHeader() {
-    return new Column(
-        children: <Widget>[
-      //todo column with specific spacing
-      Container(
-        width : MediaQuery.of(context).size.width,
-        child: AppWidgets.createText(AppStrings.my, AppStyles.createTitleTextStyle()),
-      ),
-      Container(
-        width : MediaQuery.of(context).size.width,
-        child: AppWidgets.createText(AppStrings.expensesLowerCase, AppStyles.createTitleTextStyle()),
-      ),
-    ]);
+    return Padding(
+      padding: EdgeInsets.only(left: AppDimens.loginContainerSideMargin, right:  AppDimens.loginContainerSideMargin),
+      child: new Column(
+          children: <Widget>[
+        //todo column with specific spacing
+        Container(
+          width : MediaQuery.of(context).size.width,
+          child: AppWidgets.createText(AppStrings.my, AppStyles.createTitleTextStyle()),
+        ),
+        Container(
+          width : MediaQuery.of(context).size.width,
+          child: AppWidgets.createText(AppStrings.expensesLowerCase, AppStyles.createTitleTextStyle()),
+        ),
+      ]),
+    );
   }
 
   Container createSignUpButton() {
@@ -101,12 +107,10 @@ class _LoginPageState extends BasePageState<LoginPage> {
     );
   }
 
-  @override
   void redirectToHomePage() {
     //todo redirect to home page
   }
 
-  @override
   void redirectToSignUpPage() {
     //todo redirect to sign up page
   }

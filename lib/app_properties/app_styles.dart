@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 
 class AppStyles {
@@ -21,15 +22,15 @@ class AppStyles {
   }
 
   static TextStyle createTitleTextStyle() {
-    return new TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold);
+    return new TextStyle(fontSize: AppDimens.loginPageTitleFontSize, fontWeight: FontWeight.bold);
   }
 
   static TextStyle createSubTitleTextStyle() {
-    return new TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold);
+    return new TextStyle(fontSize: AppDimens.loginPageSubTitleFontSize, fontWeight: FontWeight.bold);
   }
 
   static TextStyle createSimpleLabelTextStyle() {
-    return new TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal);
+    return new TextStyle(fontSize: AppDimens.simpleTextFontSize, fontWeight: FontWeight.normal);
   }
 
   static TextStyle createSimpleDataTextStyle() {
