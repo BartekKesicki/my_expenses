@@ -42,9 +42,10 @@ class AppStyles {
     return new TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
   }
 
-  static InputDecoration createTextFieldDecoration(String labelText) {
+  static InputDecoration createTextFieldDecoration(String labelText, String errorText) {
     return new InputDecoration(
         labelText: labelText,
+        errorText: errorText,
         labelStyle: TextStyle(
             fontFamily: AppStrings.montserratFont,
             fontWeight: FontWeight.bold,

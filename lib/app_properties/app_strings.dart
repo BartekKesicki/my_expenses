@@ -57,6 +57,8 @@ class AppStrings {
   static const my = "My";
   static const expensesLowerCase = "Expenses";
   static const signup = "SIGN UP";
+  static const emailErrorText = "Incorrect email";
+  static const passwordErrorText = "Incorrect password";
 
   // MY PROFILE
   static const myProfile = "My Profile";

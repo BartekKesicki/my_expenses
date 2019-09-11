@@ -3,7 +3,8 @@ import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
-import 'package:my_expenses/base/base_page_state.dart';
+import 'package:my_expenses/home_page/home_page.dart';
+import 'package:my_expenses/login/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -14,11 +15,11 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BasePageState<LoginPage> {
+class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    //todo create new login form with BLoC pattern
+    final bloc = LoginBloc();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -29,18 +30,20 @@ class _LoginPageState extends BasePageState<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                TextField(
-                  decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
-//                  onSaved: (String value) {
-//                    //todo fill login model
-//                  },
+                StreamBuilder<String>(
+                  stream: bloc.email,
+                  builder : (context, snapshot) => TextField(
+                    decoration: AppStyles.createTextFieldDecoration(AppStrings.email, snapshot.error),
+                    onChanged: bloc.emailChanged,
+                  ),
                 ),
-                TextField(
-                  decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
-                  obscureText: true,
-//                  onSaved: (String value) {
-//                    //todo fill login model
-//                  },
+                StreamBuilder<String>(
+                  stream: bloc.password,
+                  builder: (context, snapshot) => TextField(
+                    decoration: AppStyles.createTextFieldDecoration(AppStrings.password, snapshot.error),
+                    obscureText: true,
+                    onChanged: bloc.passwordChanged ,
+                  ),
                 ),
                 Container(
                   alignment: Alignment(1.0, 0.0),
@@ -49,11 +52,14 @@ class _LoginPageState extends BasePageState<LoginPage> {
                       child: AppWidgets.createText(
                           AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: AppDimens.loginTopContainerTopMargin, bottom: AppDimens.loginBottomContainerMargin),
-                  child: AppWidgets.createRaisedButton(() {
-                    //todo invoke perform login in bloc
-                  }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                StreamBuilder<bool>(
+                  stream: bloc.submitCheck,
+                  builder: (context, snapshot) => Padding(
+                    padding: EdgeInsets.only(top: AppDimens.loginTopContainerTopMargin, bottom: AppDimens.loginBottomContainerMargin),
+                    child: AppWidgets.createRaisedButton(() {
+                      snapshot.hasData ? redirectToHomePage(context) : null;
+                    }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                  ),
                 ),
                 createSignUpButton(),
               ],
@@ -107,8 +113,10 @@ class _LoginPageState extends BasePageState<LoginPage> {
     );
   }
 
-  void redirectToHomePage() {
-    //todo redirect to home page
+  void redirectToHomePage(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => HomePage()
+    ));
   }
 
   void redirectToSignUpPage() {
