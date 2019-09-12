@@ -42,7 +42,7 @@ class AppStyles {
     return new TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
   }
 
-  static InputDecoration createTextFieldDecoration(String labelText, String errorText) {
+  static InputDecoration createTextFieldDecoration(String labelText, Object errorText) {
     return new InputDecoration(
         labelText: labelText,
         errorText: errorText,

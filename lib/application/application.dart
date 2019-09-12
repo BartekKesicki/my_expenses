@@ -11,7 +11,10 @@ class Application extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(title: 'My Expenses'),
+      home: Scaffold(
+        body: LoginPage(),
+      ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
