@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                   stream: bloc.email,
                   builder : (context, snapshot) => TextField(
                     decoration: AppStyles.createTextFieldDecoration(AppStrings.email, snapshot.error),
-                    onChanged: bloc.emailChanged,
+                    onChanged : (s) => bloc.emailChanged.add(s),
                   ),
                 ),
                 StreamBuilder<String>(
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                   builder: (context, snapshot) => TextField(
                     decoration: AppStyles.createTextFieldDecoration(AppStrings.password, snapshot.error),
                     obscureText: true,
-                    onChanged: bloc.passwordChanged ,
+                    onChanged : (s) => bloc.passwordChanged.add(s) ,
                   ),
                 ),
                 Container(
@@ -52,15 +52,16 @@ class _LoginPageState extends State<LoginPage> {
                       child: AppWidgets.createText(
                           AppStrings.forgotPassword, AppStyles.createHyperLinkTextStyle())),
                 ),
-                StreamBuilder<bool>(
-                  stream: bloc.submitCheck,
-                  builder: (context, snapshot) => Padding(
+                Padding(
                     padding: EdgeInsets.only(top: AppDimens.loginTopContainerTopMargin, bottom: AppDimens.loginBottomContainerMargin),
-                    child: AppWidgets.createRaisedButton(() {
-                      snapshot.hasData ? redirectToHomePage(context) : null;
-                    }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),
+                    child: StreamBuilder<bool>(
+                      stream: bloc.submitCheck,
+                      builder: (context, snapshot) => AppWidgets.createRaisedButton(() {
+                      if (snapshot.hasData) {
+                        redirectToHomePage(context);
+                      }
+                    }, AppWidgets.createText(AppStrings.login, AppStyles.createButtonTextStyle())),)
                   ),
-                ),
                 createSignUpButton(),
               ],
             ),

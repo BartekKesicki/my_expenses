@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:my_expenses/base/base_bloc.dart';
 import 'package:my_expenses/login/login_validator.dart';
 import 'package:rxdart/rxdart.dart';
@@ -6,8 +8,8 @@ class LoginBloc extends Object with LoginValidator implements BaseBloc {
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
 
-  Function(String) get emailChanged => _emailController.sink.add;
-  Function(String) get passwordChanged => _passwordController.sink.add;
+  StreamSink<String> get emailChanged => _emailController.sink;
+  StreamSink<String> get passwordChanged => _passwordController.sink;
 
 
   Stream<String> get email => _emailController.stream.transform(emailValidator);
@@ -18,6 +20,7 @@ class LoginBloc extends Object with LoginValidator implements BaseBloc {
       Observable.combineLatest2(email, password, (e, p) => true);
 
   submit() {
+    print("xyz");
     //todo check DB
   }
 
