@@ -5,6 +5,7 @@ import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/home_page/home_page.dart';
 import 'package:my_expenses/login/login_bloc.dart';
+import 'package:my_expenses/register/register_personal_data.dart';
 
 class LoginPage extends StatelessWidget  {
 
@@ -79,7 +80,7 @@ class LoginPage extends StatelessWidget  {
                             ),
                           )),
                     ),
-                    createSignUpButton(),
+                    createSignUpButton(context),
                   ]))
         ]));
   }
@@ -105,7 +106,7 @@ class LoginPage extends StatelessWidget  {
     );
   }
 
-  Container createSignUpButton() {
+  Container createSignUpButton(BuildContext context) {
     return new Container(
       height: AppDimens.loginSignUpButtonHeight,
       color: Colors.transparent,
@@ -121,7 +122,7 @@ class LoginPage extends StatelessWidget  {
         ),
         child: GestureDetector(
           onTap: () {
-            //todo redirect to signup page
+            redirectToSignUpPage(context);
           },
           child: Center(
               child: AppWidgets.createText(
@@ -136,10 +137,11 @@ class LoginPage extends StatelessWidget  {
 
   redirectToHomePage(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => HomePage()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
   }
 
-  void redirectToSignUpPage() {
-    //todo redirect to sign up page
+  redirectToSignUpPage(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => RegisterPersonalData()));
   }
 }
