@@ -91,7 +91,6 @@ class LoginPage extends StatelessWidget  {
           left: AppDimens.loginContainerSideMargin,
           right: AppDimens.loginContainerSideMargin),
       child: new Column(children: <Widget>[
-        //todo column with specific spacing
         Container(
           width: MediaQuery.of(context).size.width,
           child: AppWidgets.createText(
