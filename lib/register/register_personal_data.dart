@@ -3,12 +3,14 @@ import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
+import 'package:my_expenses/register/register_personal_data_bloc.dart';
 
 class RegisterPersonalData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //todo add bloc pattern
+    final bloc = RegisterPersonalDataBloc();
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -27,7 +29,6 @@ class RegisterPersonalData extends StatelessWidget {
                       child: TextField(
                         decoration: AppStyles.createTextFieldDecoration(
                             AppStrings.login, null),
-                        obscureText: true,
                         onChanged: null,
                       ),
                     ),
