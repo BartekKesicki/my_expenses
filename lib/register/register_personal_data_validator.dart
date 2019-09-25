@@ -1,35 +1,29 @@
 import 'dart:async';
 
-mixin RegisterPersonalDataValidator {
+import 'package:my_expenses/app_properties/app_dimens.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 
-  //todo fix validators
+mixin RegisterPersonalDataValidator {
 
   var emailValidator = StreamTransformer<String,String>.fromHandlers(
       handleData: (email,sink){
-        if(email.contains("@")){
+        Pattern pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regex = new RegExp(pattern);
+        if(regex.hasMatch(email)){
           sink.add(email);
         }else{
-          sink.addError("Email is not valid");
+          sink.addError(AppStrings.emailIsNotValid);
         }
       }
   );
 
   var passwordValidator = StreamTransformer<String,String>.fromHandlers(
       handleData: (password,sink){
-        if(password.length>4){
+        if(password.length > AppDimens.passwordMinCharacters){
           sink.add(password);
         }else{
-          sink.addError("Password length should be greater than 4 chars.");
-        }
-      }
-  );
-
-  var confirmPasswordValidator = StreamTransformer<String,String>.fromHandlers(
-      handleData: (password,sink){
-        if(password.length>4){
-          sink.add(password);
-        }else{
-          sink.addError("Password length should be greater than 4 chars.");
+          sink.addError(AppStrings.passwordIsTooShort);
         }
       }
   );

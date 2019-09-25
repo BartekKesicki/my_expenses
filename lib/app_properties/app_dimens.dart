@@ -38,4 +38,6 @@ class AppDimens {
   static const double imagePickerDimen = 100.0;
 
   static const double simpleTextFontSize = 20.0;
+
+  static const passwordMinCharacters = 8;
 }

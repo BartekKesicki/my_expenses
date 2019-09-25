@@ -10,7 +10,7 @@ class RegisterPersonalData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = RegisterPersonalDataBloc();
-
+    //todo fill bloc with streambuilder
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
