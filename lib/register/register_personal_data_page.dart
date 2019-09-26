@@ -5,12 +5,11 @@ import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/register/register_personal_data_bloc.dart';
 
-class RegisterPersonalData extends StatelessWidget {
+class RegisterPersonalDataPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     final bloc = RegisterPersonalDataBloc();
-    //todo fill bloc with streambuilder
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -26,32 +25,42 @@ class RegisterPersonalData extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
-                      child: TextField(
-                        decoration: AppStyles.createTextFieldDecoration(
-                            AppStrings.login, null),
-                        onChanged: null,
+                      child: StreamBuilder<String>(
+                        stream: bloc.email,
+                        builder: (context, snapshot) => TextField(
+                          decoration: AppStyles.createTextFieldDecoration(
+                              AppStrings.login, null),
+                          onChanged: bloc.emailChanged,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
-                      child: TextField(
-                        decoration: AppStyles.createTextFieldDecoration(
-                            AppStrings.password, null),
-                        obscureText: true,
-                        onChanged: null,
+                      child: StreamBuilder<String>(
+                        stream: bloc.password,
+                        builder: (context, snapshot) => TextField(
+                          decoration: AppStyles.createTextFieldDecoration(
+                              AppStrings.password, null),
+                          obscureText: true,
+                          onChanged: bloc.passwordChanged,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
-                      child: TextField(
-                        decoration: AppStyles.createTextFieldDecoration(
-                            AppStrings.confirmPassword, null),
-                        obscureText: true,
-                        onChanged: null,
+                      child: StreamBuilder<String>(
+                        stream: bloc.confirmPassword,
+                        builder: (context, snapshot) => TextField(
+                          decoration: AppStyles.createTextFieldDecoration(
+                              AppStrings.confirmPassword, null),
+                          obscureText: true,
+                          onChanged: bloc.confirmPasswordChanged,
+                        ),
                       ),
                     ),
                   ],
                 ),
+                //todo submit form
                 Padding(
                   padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin, top: AppDimens.containerTopMargin),
                   child: AppWidgets.createSubmitButton(null, AppWidgets.createText(AppStrings.next, AppStyles.createButtonTextStyle()))
@@ -61,5 +70,9 @@ class RegisterPersonalData extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  submitForm() {
+
   }
 }

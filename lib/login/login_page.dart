@@ -5,7 +5,7 @@ import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/home_page/home_page.dart';
 import 'package:my_expenses/login/login_bloc.dart';
-import 'package:my_expenses/register/register_personal_data.dart';
+import 'package:my_expenses/register/register_personal_data_page.dart';
 
 class LoginPage extends StatelessWidget  {
 
@@ -141,6 +141,6 @@ class LoginPage extends StatelessWidget  {
 
   redirectToSignUpPage(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => RegisterPersonalData()));
+        .push(MaterialPageRoute(builder: (context) => RegisterPersonalDataPage()));
   }
 }
