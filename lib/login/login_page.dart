@@ -11,7 +11,6 @@ class LoginPage extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = LoginBloc();
 
     return SingleChildScrollView(
         child: Column(
@@ -27,22 +26,18 @@ class LoginPage extends StatelessWidget  {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    StreamBuilder<String>(
-                      stream: bloc.email,
-                      builder: (context, snapshot) => TextField(
-                        decoration: AppStyles.createTextFieldDecoration(
-                            AppStrings.email, snapshot.error),
-                        onChanged: bloc.emailChanged,
-                      ),
+                    TextField(
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.email),
+                      onChanged: (value) {
+                        //todo invoke event
+                      },
                     ),
-                    StreamBuilder<String>(
-                      stream: bloc.password,
-                      builder: (context, snapshot) => TextField(
-                        decoration: AppStyles.createTextFieldDecoration(
-                            AppStrings.password, snapshot.error),
-                        obscureText: true,
-                        onChanged: bloc.passwordChanged,
-                      ),
+                    TextField(
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
+                      obscureText: true,
+                      onChanged: (value) {
+                        //todo invoke change event
+                      },
                     ),
                     Container(
                       alignment: Alignment(1.0, 0.0),
@@ -61,24 +56,19 @@ class LoginPage extends StatelessWidget  {
                           bottom: AppDimens.loginBottomContainerMargin),
                       child: Container(
                           height: AppDimens.appRaisedButtonHeight,
-                          child: StreamBuilder<bool>(
-                            stream: bloc.submitCheck,
-                            builder: (BuildContext context, AsyncSnapshot snapshot) => RaisedButton(
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(
-                                      AppDimens.appRaisedButtonCornerRadius)),
-                              elevation: AppDimens.appRaisedButtonElevation,
-                              color: Colors.green,
-                              onPressed: () {
-                                if (snapshot.hasData) {
-                                    redirectToHomePage(context);
-                                }
-                              },
-                              child: Center(
-                                  child: AppWidgets.createText(AppStrings.login,
-                                      AppStyles.createButtonTextStyle())),
-                            ),
-                          )),
+                          child: RaisedButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(
+                                    AppDimens.appRaisedButtonCornerRadius)),
+                            elevation: AppDimens.appRaisedButtonElevation,
+                            color: Colors.green,
+                            onPressed: () {
+                              //todo invoke event
+                            },
+                            child: Center(
+                                child: AppWidgets.createText(AppStrings.login,
+                                    AppStyles.createButtonTextStyle())),
+                          ),),
                     ),
                     createSignUpButton(context),
                   ]))

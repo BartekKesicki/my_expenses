@@ -9,7 +9,6 @@ class RegisterPersonalDataPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = RegisterPersonalDataBloc();
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -25,37 +24,31 @@ class RegisterPersonalDataPage extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
-                      child: StreamBuilder<String>(
-                        stream: bloc.email,
-                        builder: (context, snapshot) => TextField(
-                          decoration: AppStyles.createTextFieldDecoration(
-                              AppStrings.login, null),
-                          onChanged: bloc.emailChanged,
-                        ),
+                      child: TextField(
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.login),
+                        onChanged: (value) {
+                          //todo invoke on change event
+                        },
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
-                      child: StreamBuilder<String>(
-                        stream: bloc.password,
-                        builder: (context, snapshot) => TextField(
-                          decoration: AppStyles.createTextFieldDecoration(
-                              AppStrings.password, null),
-                          obscureText: true,
-                          onChanged: bloc.passwordChanged,
-                        ),
+                      child: TextField(
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.password),
+                        obscureText: true,
+                        onChanged: (value) {
+                          //todo invoke on change event
+                        },
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
-                      child: StreamBuilder<String>(
-                        stream: bloc.confirmPassword,
-                        builder: (context, snapshot) => TextField(
-                          decoration: AppStyles.createTextFieldDecoration(
-                              AppStrings.confirmPassword, null),
-                          obscureText: true,
-                          onChanged: bloc.confirmPasswordChanged,
-                        ),
+                      child: TextField(
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.confirmPassword),
+                        obscureText: true,
+                        onChanged: (value) {
+                          //todo invoke onchange event
+                        },
                       ),
                     ),
                   ],
