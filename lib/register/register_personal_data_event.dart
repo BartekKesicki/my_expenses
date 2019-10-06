@@ -6,8 +6,8 @@ abstract class RegisterPersonalDataEvent extends Equatable {
   RegisterPersonalDataEvent([List props = const []]) : super(props);
 }
 
-class InitialRegisterPersonalDataEvent extends RegisterPersonalDataEvent {
+class InitialRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }
 
-}
+class ValidateRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }
 
-//todo action events (WIP)
+class SubmitRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }

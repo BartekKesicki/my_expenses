@@ -6,7 +6,8 @@ abstract class RegisterPersonalDataState extends Equatable {
   RegisterPersonalDataState([List props = const[]]) : super(props);
 }
 
-class InitialRegisterPersonalDataState extends RegisterPersonalDataState {
+class InitialRegisterPersonalDataState extends RegisterPersonalDataState { }
 
-}
-//todo other states
+class ValidateRegisterPersonalDataState extends RegisterPersonalDataState { }
+
+class SubmitRegisterPersonalDataState extends RegisterPersonalDataState { }
