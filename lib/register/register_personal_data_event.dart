@@ -8,6 +8,16 @@ abstract class RegisterPersonalDataEvent extends Equatable {
 
 class InitialRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }
 
-class ValidateRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }
+class ValidateRegisterPersonalDataEvent extends RegisterPersonalDataEvent {
+  final String email;
+  final String password;
+  final String confirmPassword;
+  ValidateRegisterPersonalDataEvent(this.email, this.password, this.confirmPassword) : super([email, password, confirmPassword]);
+}
 
-class SubmitRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }
+class SubmitRegisterPersonalDataEvent extends RegisterPersonalDataEvent {
+  final String email;
+  final String password;
+  final String confirmPassword;
+  SubmitRegisterPersonalDataEvent(this.email, this.password, this.confirmPassword) : super([email, password, confirmPassword]);
+}

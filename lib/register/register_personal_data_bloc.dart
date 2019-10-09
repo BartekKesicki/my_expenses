@@ -7,12 +7,12 @@ import 'package:bloc/bloc.dart';
 class RegisterPersonalDataBloc extends Bloc<RegisterPersonalDataEvent, RegisterPersonalDataState> {
 
   @override
-  InitialRegisterPersonalDataState get initialState => InitialRegisterPersonalDataState();
+  InitialRegisterPersonalDataState get initialState => InitialRegisterPersonalDataState(null, null, null);
 
 
   @override
   Stream<RegisterPersonalDataState> mapEventToState(RegisterPersonalDataEvent event) async* {
     //todo fix yields
-    yield InitialRegisterPersonalDataState();
+    yield InitialRegisterPersonalDataState(null, null, null);
   }
 }
