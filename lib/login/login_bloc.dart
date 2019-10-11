@@ -1,3 +1,5 @@
+import 'package:my_expenses/app_properties/app_strings.dart';
+
 import 'login_event.dart';
 import 'login_state.dart';
 import 'package:bloc/bloc.dart';
@@ -19,7 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginInProgressState();
       final userExists = await _checkCredentials(event.login, event.password);
       if (userExists) {
-        yield LoginResponseState(userExists);
+        yield LoginResponseState(userExists, AppStrings.userAlreadyExists);
       } else {
         //yield InitialLoginState(AppStrings.incorrectEmailOrPasswordMessage, null);
       }

@@ -26,13 +26,23 @@ class LoginPage extends StatelessWidget  {
           child: BlocBuilder(
             bloc: loginBloc,
             builder: (BuildContext context, LoginState loginState) {
-              //todo return other widgets
-              return buildMainLoginWidget(context, loginState);
+              if (loginState is InitialLoginState) {
+                return buildMainLoginWidget(context, null, null);
+              } else if (loginState is LoginInProgressState) {
+                return buildLoginInProgressSate();
+              } else if (loginState is RedirectToRegisterPageState) {
+                redirectToSignUpPage(context);
+              } else if (loginState is LoginResponseState && loginState.response) {
+                redirectToHomePage(context);
+              } else if (loginState is LoginResponseState && !loginState.response) {
+                return buildMainLoginWidget(context, loginState.responseMessage, null);
+              }
+              return buildMainLoginWidget(context, null, null);
           }),
         ));
   }
 
-  Column buildMainLoginWidget(BuildContext context, InitialLoginState loginState) {
+  Column buildMainLoginWidget(BuildContext context, String userErrorMessage, String passwordErrorMessage) {
     return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -47,7 +57,7 @@ class LoginPage extends StatelessWidget  {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     TextField(
-                      decoration: AppStyles.createTextFieldDecoration(AppStrings.email, loginState.usernameErrorMessage),
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.email, userErrorMessage),
                       controller: _userTextController,
                       onChanged: (value) {
                         final loginBloc = BlocProvider.of<LoginBloc>(context);
@@ -55,7 +65,7 @@ class LoginPage extends StatelessWidget  {
                       },
                     ),
                     TextField(
-                      decoration: AppStyles.createTextFieldDecoration(AppStrings.password, loginState.passwordErrorMessage),
+                      decoration: AppStyles.createTextFieldDecoration(AppStrings.password, passwordErrorMessage),
                       controller: _passwordTextController,
                       obscureText: true,
                       onChanged: (value) {
@@ -87,7 +97,8 @@ class LoginPage extends StatelessWidget  {
                             elevation: AppDimens.appRaisedButtonElevation,
                             color: Colors.green,
                             onPressed: () {
-                              //todo invoke event
+                              final loginBloc = BlocProvider.of<LoginBloc>(context);
+                              loginBloc.dispatch(SubmitLoginEvent(_userTextController.text, _passwordTextController.text));
                             },
                             child: Center(
                                 child: AppWidgets.createText(AppStrings.login,
@@ -156,5 +167,9 @@ class LoginPage extends StatelessWidget  {
   redirectToSignUpPage(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => RegisterPersonalDataPage()));
+  }
+
+  Widget buildLoginInProgressSate() {
+    return Container();
   }
 }

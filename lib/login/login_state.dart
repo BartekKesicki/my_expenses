@@ -19,5 +19,6 @@ class RedirectToRegisterPageState extends LoginState { }
 
 class LoginResponseState extends LoginState {
   final bool response;
-  LoginResponseState(this.response) : super([response]);
+  final String responseMessage;
+  LoginResponseState(this.response, this.responseMessage) : super([response, responseMessage]);
 }

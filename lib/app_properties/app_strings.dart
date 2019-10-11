@@ -108,4 +108,5 @@ class AppStrings {
   static const passwordsAreNotMatch = "Passwords are not equal";
   static const passwordIsTooShort = "Password length should be greater than 4 chars.";
   static const emailIsNotValid = "Email is not valid";
+  static const userAlreadyExists = "User already exists";
 }

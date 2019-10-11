@@ -26,8 +26,16 @@ class RegisterPersonalDataPage extends StatelessWidget {
               child: BlocBuilder(
                 bloc: registerBloc,
                   builder : (BuildContext context, RegisterPersonalDataState registerPersonalDataState) {
-                  //todo return other widgets
-                    return buildMainRegisterForm(context, registerPersonalDataState);
+                    if (registerPersonalDataState is InitialRegisterPersonalDataState) {
+                      return buildMainRegisterForm(context, null, null, null);
+                    } else if (registerPersonalDataState is RegisterPersonalDataInProgressState) {
+                      return buildSubmitInProgressWidget();
+                    } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && registerPersonalDataState.isValid) {
+                      redirectToRegisterExpenseDataPage();
+                    } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && !registerPersonalDataState.isValid) {
+                      return buildMainRegisterForm(context, registerPersonalDataState.optionalMessage, null, null);
+                    }
+                    return buildMainRegisterForm(context, null, null, null);
               })
           ),
         ),
@@ -35,7 +43,7 @@ class RegisterPersonalDataPage extends StatelessWidget {
     );
   }
 
-  Column buildMainRegisterForm(BuildContext context, InitialRegisterPersonalDataState initialRegisterPersonalDataState) {
+  Column buildMainRegisterForm(BuildContext context, String usernameErrorMessage, String passwordErrorMessage, String confirmPasswordErrorMessage) {
     return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,7 +57,7 @@ class RegisterPersonalDataPage extends StatelessWidget {
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
                       child: TextField(
                         controller: _userTextController,
-                        decoration: AppStyles.createTextFieldDecoration(AppStrings.login, initialRegisterPersonalDataState.usernameErrorMessage),
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.login, usernameErrorMessage),
                         onChanged: (value) {
                           final registerBloc = BlocProvider.of<RegisterPersonalDataBloc>(context);
                           registerBloc.dispatch(ValidateRegisterPersonalDataEvent(_userTextController.text, _passwordTextController.text, _confirmPasswordTextController.text));
@@ -60,7 +68,7 @@ class RegisterPersonalDataPage extends StatelessWidget {
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
                       child: TextField(
                         controller: _passwordTextController,
-                        decoration: AppStyles.createTextFieldDecoration(AppStrings.password, initialRegisterPersonalDataState.passwordErrorMessage),
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.password, passwordErrorMessage),
                         obscureText: true,
                         onChanged: (value) {
                           final registerBloc = BlocProvider.of<RegisterPersonalDataBloc>(context);
@@ -72,7 +80,7 @@ class RegisterPersonalDataPage extends StatelessWidget {
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
                       child: TextField(
                         controller: _confirmPasswordTextController,
-                        decoration: AppStyles.createTextFieldDecoration(AppStrings.confirmPassword, initialRegisterPersonalDataState.confirmPasswordErrorMessage),
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.confirmPassword, confirmPasswordErrorMessage),
                         obscureText: true,
                         onChanged: (value) {
                           final registerBloc = BlocProvider.of<RegisterPersonalDataBloc>(context);
@@ -85,10 +93,20 @@ class RegisterPersonalDataPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin, top: AppDimens.containerTopMargin),
                   child: AppWidgets.createSubmitButton(() {
-                    //todo submit button
+                    final registerBloc = BlocProvider.of<RegisterPersonalDataBloc>(context);
+                    registerBloc.dispatch(SubmitRegisterPersonalDataEvent(_userTextController.text, _passwordTextController.text, _confirmPasswordTextController.text));
                   }, AppWidgets.createText(AppStrings.next, AppStyles.createButtonTextStyle()))
                 )
               ],
             );
+  }
+
+  Widget buildSubmitInProgressWidget() {
+    return Container();
+    //todo loading indicator
+  }
+
+  redirectToRegisterExpenseDataPage() {
+    //todo redirect to expense page
   }
 }
