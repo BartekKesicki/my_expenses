@@ -4,9 +4,9 @@ import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
-import 'package:my_expenses/register/register_personal_data_bloc.dart';
-import 'package:my_expenses/register/register_personal_data_event.dart';
-import 'package:my_expenses/register/register_personal_data_state.dart';
+import 'package:my_expenses/register_personal_data/register_personal_data_bloc.dart';
+import 'package:my_expenses/register_personal_data/register_personal_data_event.dart';
+import 'package:my_expenses/register_personal_data/register_personal_data_state.dart';
 
 class RegisterPersonalDataPage extends StatelessWidget {
 
