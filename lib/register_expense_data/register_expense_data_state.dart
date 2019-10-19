@@ -9,3 +9,13 @@ abstract class RegisterExpenseDataState extends Equatable {
 class InitialRegisterExpenseDataState extends RegisterExpenseDataState {
   //todo fill data for initial state
 }
+
+class ValidateRegisterPersonalDataState extends RegisterExpenseDataState {
+
+}
+
+class RegisterPersonalDataInProgressState extends RegisterExpenseDataState { }
+
+class ResponseRegisterPersonalDataState extends RegisterExpenseDataState {
+  //todo fill data for state
+}

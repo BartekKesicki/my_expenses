@@ -8,4 +8,11 @@ abstract class RegisterExpenseDataEvent extends Equatable {
 
 class InitialRegisterPersonalDataEvent extends RegisterExpenseDataEvent { }
 
-//todo fill other events
+class ValidateRegisterPersonalDataEvent extends RegisterExpenseDataEvent {
+
+  //todo fill fields
+}
+
+class SubmitRegisterPersonalDataEvent extends RegisterExpenseDataEvent {
+  //todo fill fields
+}
