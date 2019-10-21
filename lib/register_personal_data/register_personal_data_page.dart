@@ -102,8 +102,17 @@ class RegisterPersonalDataPage extends StatelessWidget {
   }
 
   Widget buildSubmitInProgressWidget() {
-    return Container();
-    //todo loading indicator
+    return Container(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            Text(AppStrings.processingData)
+          ],
+        ),
+      ),
+    );
   }
 
   redirectToRegisterExpenseDataPage() {

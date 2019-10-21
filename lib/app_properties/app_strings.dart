@@ -95,6 +95,9 @@ class AppStrings {
   static const logout = "LOGOUT";
   static const doYouWantLogout = "DO YOU WANT LOGOUT?";
 
+  // SIGN UP PERSONAL DATA PAGE
+  static const processingData = "PROCESSING DATA";
+
   // SIGN UP EXPENSE DATA PAGE
   static const expensesData = "Expenses data";
   static const startFunds = "START FUNDS";
