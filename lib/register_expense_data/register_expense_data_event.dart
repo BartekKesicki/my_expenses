@@ -9,10 +9,14 @@ abstract class RegisterExpenseDataEvent extends Equatable {
 class InitialRegisterPersonalDataEvent extends RegisterExpenseDataEvent { }
 
 class ValidateRegisterPersonalDataEvent extends RegisterExpenseDataEvent {
-
-  //todo fill fields
+  final double startFunds;
+  final double salary;
+  ValidateRegisterPersonalDataEvent(this.startFunds, this.salary) : super([startFunds, salary]);
 }
 
 class SubmitRegisterPersonalDataEvent extends RegisterExpenseDataEvent {
-  //todo fill fields
+  final double startFunds;
+  final double salary;
+  final double optionalLimit;
+  SubmitRegisterPersonalDataEvent(this.startFunds, this.salary, this.optionalLimit) : super([startFunds, salary, optionalLimit]);
 }
