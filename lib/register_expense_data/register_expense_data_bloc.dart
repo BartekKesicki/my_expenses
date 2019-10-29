@@ -5,12 +5,12 @@ import 'package:bloc/bloc.dart';
 class RegisterExpenseDataBloc extends Bloc<RegisterExpenseDataEvent, RegisterExpenseDataState> {
 
   @override
-  RegisterExpenseDataState get initialState => InitialRegisterExpenseDataState(null, null, null);
+  RegisterExpenseDataState get initialState => InitialRegisterExpenseDataState(null, null);
 
   @override
   Stream<RegisterExpenseDataState> mapEventToState(RegisterExpenseDataEvent event) async* {
     // TODO: fix yields
-    yield InitialRegisterExpenseDataState(null, null, null);
+    yield InitialRegisterExpenseDataState(null, null);
   }
 
 }

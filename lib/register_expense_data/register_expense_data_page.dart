@@ -18,12 +18,35 @@ class RegisterExpenseDataPage extends StatelessWidget {
               child: BlocBuilder(
                   bloc: _registerBloc,
                   builder : (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
-                    //todo fill with forms
+                    if (registerExpenseDataState is InitialRegisterExpenseDataState) {
+                      return buildInitialRegisterExpenseForm(null, null, context);
+                    } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
+                      return buildRegisterInProgressWidget();
+                    } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
+                      redirectToLoginPage();
+                    } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
+                      return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
+                    }
+                    return buildInitialRegisterExpenseForm(null, null, context);
                   })
           ),
         ),
       ),
     );
+  }
+
+  Widget buildInitialRegisterExpenseForm(String startFundsErrorMessage, String salaryErrorMessage, BuildContext context) {
+    //todo fill page
+    return Container();
+  }
+
+  Widget buildRegisterInProgressWidget() {
+    //todo fill page
+    return Container();
+  }
+
+  redirectToLoginPage() {
+    //todo redirect to Login page
   }
 
 }

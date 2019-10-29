@@ -7,10 +7,9 @@ abstract class RegisterExpenseDataState extends Equatable {
 }
 
 class InitialRegisterExpenseDataState extends RegisterExpenseDataState {
-  final double startFunds;
-  final double salary;
-  final double optionalLimit;
-  InitialRegisterExpenseDataState(this.startFunds, this.salary, this.optionalLimit) : super([startFunds, salary, optionalLimit]);
+  final double startFundsErrorMessage;
+  final double salaryErrorMessage;
+  InitialRegisterExpenseDataState(this.startFundsErrorMessage, this.salaryErrorMessage) : super([startFundsErrorMessage, salaryErrorMessage]);
 }
 
 class ValidateRegisterExpenseDataState extends RegisterExpenseDataState {
@@ -20,10 +19,10 @@ class ValidateRegisterExpenseDataState extends RegisterExpenseDataState {
   ValidateRegisterExpenseDataState(this.startFunds, this.salary, this.optionalLimit) : super([startFunds, salary, optionalLimit]);
 }
 
-class RegisterPersonalDataInProgressState extends RegisterExpenseDataState { }
+class RegisterExpenseDataInProgressState extends RegisterExpenseDataState { }
 
-class ResponseRegisterPersonalDataState extends RegisterExpenseDataState {
+class ResponseRegisterExpenseDataState extends RegisterExpenseDataState {
   final bool isRegistered;
   final String optionalMessage;
-  ResponseRegisterPersonalDataState(this.isRegistered, this.optionalMessage) : super([isRegistered, optionalMessage]);
+  ResponseRegisterExpenseDataState(this.isRegistered, this.optionalMessage) : super([isRegistered, optionalMessage]);
 }
