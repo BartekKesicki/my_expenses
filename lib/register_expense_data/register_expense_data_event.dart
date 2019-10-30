@@ -6,17 +6,17 @@ abstract class RegisterExpenseDataEvent extends Equatable {
   RegisterExpenseDataEvent([List props = const []]) : super(props);
 }
 
-class InitialRegisterPersonalDataEvent extends RegisterExpenseDataEvent { }
+class InitialRegisterExpenseDataEvent extends RegisterExpenseDataEvent { }
 
-class ValidateRegisterPersonalDataEvent extends RegisterExpenseDataEvent {
+class ValidateRegisterExpenseDataEvent extends RegisterExpenseDataEvent {
   final double startFunds;
   final double salary;
-  ValidateRegisterPersonalDataEvent(this.startFunds, this.salary) : super([startFunds, salary]);
+  ValidateRegisterExpenseDataEvent(this.startFunds, this.salary) : super([startFunds, salary]);
 }
 
-class SubmitRegisterPersonalDataEvent extends RegisterExpenseDataEvent {
+class SubmitRegisterExpenseDataEvent extends RegisterExpenseDataEvent {
   final double startFunds;
   final double salary;
   final double optionalLimit;
-  SubmitRegisterPersonalDataEvent(this.startFunds, this.salary, this.optionalLimit) : super([startFunds, salary, optionalLimit]);
+  SubmitRegisterExpenseDataEvent(this.startFunds, this.salary, this.optionalLimit) : super([startFunds, salary, optionalLimit]);
 }

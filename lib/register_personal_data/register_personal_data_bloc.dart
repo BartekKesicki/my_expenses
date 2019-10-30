@@ -7,10 +7,14 @@ class RegisterPersonalDataBloc extends Bloc<RegisterPersonalDataEvent, RegisterP
   @override
   InitialRegisterPersonalDataState get initialState => InitialRegisterPersonalDataState(null, null, null);
 
+  //todo dbhelper
 
   @override
   Stream<RegisterPersonalDataState> mapEventToState(RegisterPersonalDataEvent event) async* {
-    //todo fix yields
-    yield InitialRegisterPersonalDataState(null, null, null);
+    if (event is ValidateRegisterPersonalDataEvent) {
+      //todo validation
+    } else if (event is SubmitRegisterPersonalDataEvent) {
+      //todo submit
+    }
   }
 }

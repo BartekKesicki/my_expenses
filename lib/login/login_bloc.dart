@@ -10,6 +10,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   InitialLoginState get initialState => InitialLoginState(null, null);
 
   //mocked data
+  //todo add db helper
   final login = "flutter.bloc@softwarehut.com";
   final pass = "Password";
   final passwordMinLength = 6;

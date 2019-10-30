@@ -9,8 +9,10 @@ class RegisterExpenseDataBloc extends Bloc<RegisterExpenseDataEvent, RegisterExp
 
   @override
   Stream<RegisterExpenseDataState> mapEventToState(RegisterExpenseDataEvent event) async* {
-    // TODO: fix yields
-    yield InitialRegisterExpenseDataState(null, null);
+    if (event is SubmitRegisterExpenseDataEvent) {
+      //todo submit button
+    } else if (event is ValidateRegisterExpenseDataEvent) {
+      //todo validate form
+    }
   }
-
 }
