@@ -59,6 +59,7 @@ class AppStrings {
   static const signup = "SIGN UP";
   static const emailErrorText = "Incorrect email";
   static const passwordErrorText = "Incorrect password";
+  static const incorrectEmailOrPasswordMessage = "Incorrect password or Email";
 
   // MY PROFILE
   static const myProfile = "My Profile";
