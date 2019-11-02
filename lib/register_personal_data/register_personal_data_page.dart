@@ -4,6 +4,7 @@ import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/app_properties/app_widgets.dart';
+import 'package:my_expenses/model/register_personal_data_model.dart';
 import 'package:my_expenses/register_personal_data/register_personal_data_bloc.dart';
 import 'package:my_expenses/register_personal_data/register_personal_data_event.dart';
 import 'package:my_expenses/register_personal_data/register_personal_data_state.dart';
@@ -31,7 +32,7 @@ class RegisterPersonalDataPage extends StatelessWidget {
                     } else if (registerPersonalDataState is RegisterPersonalDataInProgressState) {
                       return buildSubmitInProgressWidget();
                     } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && registerPersonalDataState.isValid) {
-                      redirectToRegisterExpenseDataPage();
+                      redirectToRegisterExpenseDataPage(registerPersonalDataState.model);
                     } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && !registerPersonalDataState.isValid) {
                       return buildMainRegisterForm(context, registerPersonalDataState.optionalMessage, null, null);
                     }
@@ -115,7 +116,7 @@ class RegisterPersonalDataPage extends StatelessWidget {
     );
   }
 
-  redirectToRegisterExpenseDataPage() {
-    //todo redirect to expense page
+  redirectToRegisterExpenseDataPage(RegisterPersonalDataModel model) {
+    //todo redirect to expense page with model
   }
 }

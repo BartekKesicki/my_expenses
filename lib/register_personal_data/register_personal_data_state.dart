@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:my_expenses/model/register_personal_data_model.dart';
 
 @immutable
 abstract class RegisterPersonalDataState extends Equatable {
@@ -25,5 +26,6 @@ class RegisterPersonalDataInProgressState extends RegisterPersonalDataState { }
 class ResponseRegisterPersonalDataState extends RegisterPersonalDataState {
     final bool isValid;
     final String optionalMessage;
-    ResponseRegisterPersonalDataState(this.isValid, this.optionalMessage) : super([isValid, optionalMessage]);
+    final RegisterPersonalDataModel model;
+    ResponseRegisterPersonalDataState(this.isValid, this.optionalMessage, this.model) : super([isValid, optionalMessage, model]);
 }
