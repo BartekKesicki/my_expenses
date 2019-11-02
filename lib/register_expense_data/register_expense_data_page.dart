@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_expenses/model/register_personal_data_model.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_bloc.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_state.dart';
 
 class RegisterExpenseDataPage extends StatelessWidget {
 
   final _registerBloc = RegisterExpenseDataBloc();
+  final RegisterPersonalDataModel model;
+
+  RegisterExpenseDataPage({this.model});
 
   @override
   Widget build(BuildContext context) {
