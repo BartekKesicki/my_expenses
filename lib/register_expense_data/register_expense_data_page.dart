@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/model/register_personal_data_model.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_bloc.dart';
@@ -46,8 +47,17 @@ class RegisterExpenseDataPage extends StatelessWidget {
   }
 
   Widget buildRegisterInProgressWidget() {
-    //todo fill page
-    return Container();
+    return Container(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            Text(AppStrings.processingData)
+          ],
+        ),
+      ),
+    );
   }
 
   redirectToLoginPage(BuildContext context) {
