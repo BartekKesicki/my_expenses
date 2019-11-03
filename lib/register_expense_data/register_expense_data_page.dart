@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/model/register_personal_data_model.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_bloc.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_state.dart';
@@ -27,7 +28,7 @@ class RegisterExpenseDataPage extends StatelessWidget {
                     } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
                       return buildRegisterInProgressWidget();
                     } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
-                      redirectToLoginPage();
+                      redirectToLoginPage(context);
                     } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
                       return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
                     }
@@ -49,8 +50,11 @@ class RegisterExpenseDataPage extends StatelessWidget {
     return Container();
   }
 
-  redirectToLoginPage() {
-    //todo redirect to Login page
+  redirectToLoginPage(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+          (Route<dynamic> route) => false,
+    );
   }
-
 }
