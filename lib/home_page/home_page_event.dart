@@ -5,3 +5,13 @@ import 'package:flutter/material.dart';
 abstract class HomePageEvent extends Equatable {
   HomePageEvent([List props = const []]) : super(props);
 }
+
+class RedirectToSettingsPageEvent extends HomePageEvent { }
+
+class RedirectToCategoriesPageEvent extends HomePageEvent { }
+
+class RedirectToFundsManagementPageEvent extends HomePageEvent { }
+
+class InitialHomePageEvent extends HomePageEvent { }
+
+class RedirectToMyProfilePageEvent extends HomePageEvent { }

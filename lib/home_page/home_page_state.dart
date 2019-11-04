@@ -7,3 +7,11 @@ abstract class HomePageState extends Equatable {
 }
 
 class InitialHomePageState extends HomePageState {}
+
+class RedirectToSettingsPageState extends HomePageState { }
+
+class RedirectToCategoriesPageState extends HomePageState { }
+
+class RedirectToFundsManagementPageState extends HomePageState { }
+
+class RedirectToMyProfilePageState extends HomePageState { }
