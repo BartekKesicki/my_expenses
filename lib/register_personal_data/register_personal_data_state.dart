@@ -14,13 +14,6 @@ class InitialRegisterPersonalDataState extends RegisterPersonalDataState {
   InitialRegisterPersonalDataState(this.usernameErrorMessage, this.passwordErrorMessage, this.confirmPasswordErrorMessage) : super([usernameErrorMessage, passwordErrorMessage, confirmPasswordErrorMessage]);
 }
 
-class ValidateRegisterPersonalDataState extends RegisterPersonalDataState {
-  final String username;
-  final String password;
-  final String confirmPassword;
-  ValidateRegisterPersonalDataState(this.username, this.password, this.confirmPassword) : super([username, password, confirmPassword]);
-}
-
 class RegisterPersonalDataInProgressState extends RegisterPersonalDataState { }
 
 class ResponseRegisterPersonalDataState extends RegisterPersonalDataState {

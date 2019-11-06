@@ -20,27 +20,31 @@ class RegisterPersonalDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        builder: (BuildContext context) => registerBloc,
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-              child: BlocBuilder(
-                bloc: registerBloc,
-                  builder : (BuildContext context, RegisterPersonalDataState registerPersonalDataState) {
-                    if (registerPersonalDataState is InitialRegisterPersonalDataState) {
-                      return buildMainRegisterForm(context, null, null, null);
-                    } else if (registerPersonalDataState is RegisterPersonalDataInProgressState) {
-                      return buildSubmitInProgressWidget();
-                    } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && registerPersonalDataState.isValid) {
-                      redirectToRegisterExpenseDataPage(context, registerPersonalDataState.model);
-                    } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && !registerPersonalDataState.isValid) {
-                      return buildMainRegisterForm(context, registerPersonalDataState.optionalMessage, null, null);
-                    }
-                    return buildMainRegisterForm(context, null, null, null);
-              })
+      body: SingleChildScrollView(
+        child: BlocListener(
+          listener: (BuildContext context, RegisterPersonalDataState registerPersonalDataState) {
+            if (registerPersonalDataState is ResponseRegisterPersonalDataState && registerPersonalDataState.isValid) {
+              redirectToRegisterExpenseDataPage(context, registerPersonalDataState.model);
+            }
+          },
+          bloc: registerBloc,
+          child: BlocProvider(
+            builder: (BuildContext context) => registerBloc,
+            child: BlocBuilder(
+                    bloc: registerBloc,
+                      builder : (BuildContext context, RegisterPersonalDataState registerPersonalDataState) {
+                        if (registerPersonalDataState is InitialRegisterPersonalDataState) {
+                          return buildMainRegisterForm(context, registerPersonalDataState.usernameErrorMessage,
+                              registerPersonalDataState.passwordErrorMessage, registerPersonalDataState.confirmPasswordErrorMessage);
+                        } else if (registerPersonalDataState is RegisterPersonalDataInProgressState) {
+                          return buildSubmitInProgressWidget();
+                        } else if (registerPersonalDataState is ResponseRegisterPersonalDataState && !registerPersonalDataState.isValid) {
+                          return buildMainRegisterForm(context, registerPersonalDataState.optionalMessage, null, null);
+                        }
+                        return Container();
+                  }),
           ),
-        ),
+        )
       ),
     );
   }
@@ -53,13 +57,13 @@ class RegisterPersonalDataPage extends StatelessWidget {
               children: <Widget>[
                 AppWidgets.createTopLabelsContainer(AppWidgets.createText(AppStrings.personalData, AppStyles.createTitleTextStyle()), EdgeInsets.all(AppDimens.containerSideMargin)),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
                       child: TextField(
                         controller: _userTextController,
-                        decoration: AppStyles.createTextFieldDecoration(AppStrings.login, usernameErrorMessage),
+                        decoration: AppStyles.createTextFieldDecoration(AppStrings.email, usernameErrorMessage),
                         onChanged: (value) {
                           final registerBloc = BlocProvider.of<RegisterPersonalDataBloc>(context);
                           registerBloc.dispatch(ValidateRegisterPersonalDataEvent(_userTextController.text, _passwordTextController.text, _confirmPasswordTextController.text));

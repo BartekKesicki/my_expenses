@@ -19,3 +19,5 @@ class ValidateLoginEvent extends LoginEvent {
 
   ValidateLoginEvent([this.login, this.password]) : super([login, password]);
 }
+
+class RedirectToRegisterPageEvent extends LoginEvent {}

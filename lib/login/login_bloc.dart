@@ -38,6 +38,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else if (!passwordIsValid) {
         yield InitialLoginState(null, AppStrings.passwordErrorText);
       }
+    } else if (event is RedirectToRegisterPageEvent) {
+      yield RedirectToRegisterPageState();
     }
   }
 

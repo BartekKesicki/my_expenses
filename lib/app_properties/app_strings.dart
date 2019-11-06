@@ -110,7 +110,7 @@ class AppStrings {
   static const addNewPhoto = "ADD NEW PHOTO";
   static const confirmPassword = "CONFIRM PASSWORD";
   static const passwordsAreNotMatch = "Passwords are not equal";
-  static const passwordIsTooShort = "Password length should be greater than 4 chars.";
+  static const incorrectPassword = "Incorrect password";
   static const emailIsNotValid = "Email is not valid";
   static const userAlreadyExists = "User already exists";
   static const registerUser = "REGISTER";

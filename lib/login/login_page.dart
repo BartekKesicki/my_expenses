@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
@@ -19,27 +20,33 @@ class LoginPage extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
-        child: BlocProvider(
-          builder: (BuildContext context) => loginBloc,
-          child: BlocBuilder(
-            bloc: loginBloc,
-            builder: (BuildContext context, LoginState loginState) {
-              if (loginState is InitialLoginState) {
-                return buildMainLoginWidget(context, null, null);
-              } else if (loginState is LoginInProgressState) {
-                return buildLoginInProgressSate();
-              } else if (loginState is RedirectToRegisterPageState) {
-                redirectToSignUpPage(context);
-              } else if (loginState is LoginResponseState && loginState.response) {
-                redirectToHomePage(context);
-              } else if (loginState is LoginResponseState && !loginState.response) {
-                return buildMainLoginWidget(context, loginState.responseMessage, null);
-              }
-              return buildMainLoginWidget(context, null, null);
-          }),
-        ));
+        child: BlocListener(
+          bloc: loginBloc,
+          listener: (BuildContext context, LoginState state) {
+            if (state is RedirectToRegisterPageState) {
+              redirectToSignUpPage(context);
+            } else if (state is LoginResponseState && state.response) {
+              redirectToHomePage(context);
+            }
+          },
+          child: BlocProvider(
+            builder: (BuildContext context) => loginBloc,
+            child: BlocBuilder(
+                bloc: loginBloc,
+                builder: (BuildContext context, LoginState loginState) {
+                  if (loginState is InitialLoginState) {
+                    return buildMainLoginWidget(context, null, null);
+                  } else if (loginState is LoginInProgressState) {
+                    return buildLoginInProgressSate();
+                  }  else if (loginState is LoginResponseState && !loginState.response) {
+                    return buildMainLoginWidget(context, loginState.responseMessage, null);
+                  }
+                  return Container();
+                }),
+          )
+        )
+        );
   }
 
   Column buildMainLoginWidget(BuildContext context, String userErrorMessage, String passwordErrorMessage) {
@@ -146,7 +153,9 @@ class LoginPage extends StatelessWidget  {
         ),
         child: GestureDetector(
           onTap: () {
-            redirectToSignUpPage(context);
+            final loginBloc = BlocProvider.of<LoginBloc>(context);
+            loginBloc.dispatch(RedirectToRegisterPageEvent());
+            //redirectToSignUpPage(context);
           },
           child: Center(
               child: AppWidgets.createText(
@@ -170,6 +179,7 @@ class LoginPage extends StatelessWidget  {
   }
 
   Widget buildLoginInProgressSate() {
+    //todo progress state
     return Container();
   }
 }
