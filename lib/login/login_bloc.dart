@@ -17,7 +17,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    //todo fix yields
     if (event is SubmitLoginEvent) {
       yield LoginInProgressState();
       final userExists = await _checkCredentials(event.login, event.password);
@@ -31,10 +30,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final passwordIsValid = _validatePassword(event.password);
       if (emailIsValid && passwordIsValid) {
         yield InitialLoginState(null, null);
-      } else if (!emailIsValid && !passwordIsValid) {
-        yield InitialLoginState(AppStrings.emailErrorText, AppStrings.passwordErrorText);
       } else if (!emailIsValid) {
-        yield InitialLoginState(null, null);
+        yield InitialLoginState(AppStrings.emailErrorText, null);
       } else if (!passwordIsValid) {
         yield InitialLoginState(null, AppStrings.passwordErrorText);
       }

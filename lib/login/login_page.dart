@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget  {
                 bloc: loginBloc,
                 builder: (BuildContext context, LoginState loginState) {
                   if (loginState is InitialLoginState) {
-                    return buildMainLoginWidget(context, null, null);
+                    return buildMainLoginWidget(context, loginState.usernameErrorMessage, loginState.passwordErrorMessage);
                   } else if (loginState is LoginInProgressState) {
                     return buildLoginInProgressSate();
                   }  else if (loginState is LoginResponseState && !loginState.response) {

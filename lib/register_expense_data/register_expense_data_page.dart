@@ -22,6 +22,7 @@ class RegisterExpenseDataPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //todo bloc listener
     return Scaffold(
       body: BlocProvider(
         builder: (BuildContext context) => _registerBloc,

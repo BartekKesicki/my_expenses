@@ -1,5 +1,6 @@
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/db/helpers/user_database_helper.dart';
+import 'package:my_expenses/model/register_personal_data_model.dart';
 import 'package:my_expenses/register_personal_data/register_personal_data_event.dart';
 import 'package:my_expenses/register_personal_data/register_personal_data_state.dart';
 import 'package:bloc/bloc.dart';
@@ -26,7 +27,8 @@ class RegisterPersonalDataBloc extends Bloc<RegisterPersonalDataEvent, RegisterP
       } else if (!passwordsAreEqual) {
         yield InitialRegisterPersonalDataState(null, null, AppStrings.passwordsAreNotMatch);
       } else if (userIsValid) {
-        //todo pass user to next page
+        RegisterPersonalDataModel model = RegisterPersonalDataModel(event.email, event.password);
+        yield ResponseRegisterPersonalDataState(true, null, model);
       } else if (!userIsValid) {
         yield InitialRegisterPersonalDataState(AppStrings.userAlreadyExists, null, null);
       }
