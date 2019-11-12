@@ -11,8 +11,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   InitialLoginState get initialState => InitialLoginState(null, null);
 
   final _userDB = UserDatabaseHelper();
-  final login = "flutter.bloc@softwarehut.com";
-  final pass = "Password";
   final passwordMinLength = 6;
 
   @override
@@ -40,11 +38,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Future<bool> _checkCredentials(String login, String password) {
-    //todo check with userdatabase helper
-    return Future.delayed(Duration(seconds: 1), () {
-      return login == this.login && password == pass;
-    });
+  Future<bool> _checkCredentials(String login, String password) async {
+    int id = await _userDB.getUserIdOrNull(login, password);
+    return id != null;
   }
 
   bool _validateEmail(String login) {

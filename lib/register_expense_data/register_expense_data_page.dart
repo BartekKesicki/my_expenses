@@ -22,27 +22,32 @@ class RegisterExpenseDataPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //todo bloc listener
     return Scaffold(
-      body: BlocProvider(
-        builder: (BuildContext context) => _registerBloc,
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-              child: BlocBuilder(
-                  bloc: _registerBloc,
-                  builder : (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
-                    if (registerExpenseDataState is InitialRegisterExpenseDataState) {
+      body: BlocListener(
+        listener: (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
+          if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
+            redirectToLoginPage(context);
+          }
+        },
+        bloc: _registerBloc,
+        child: BlocProvider(
+          builder: (BuildContext context) => _registerBloc,
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+                child: BlocBuilder(
+                    bloc: _registerBloc,
+                    builder : (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
+                      if (registerExpenseDataState is InitialRegisterExpenseDataState) {
+                        return buildInitialRegisterExpenseForm(null, null, context);
+                      } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
+                        return buildRegisterInProgressWidget();
+                      } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
+                        return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
+                      }
                       return buildInitialRegisterExpenseForm(null, null, context);
-                    } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
-                      return buildRegisterInProgressWidget();
-                    } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
-                      redirectToLoginPage(context);
-                    } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
-                      return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
-                    }
-                    return buildInitialRegisterExpenseForm(null, null, context);
-                  })
+                    })
+            ),
           ),
         ),
       ),

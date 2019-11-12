@@ -7,8 +7,8 @@ abstract class RegisterExpenseDataState extends Equatable {
 }
 
 class InitialRegisterExpenseDataState extends RegisterExpenseDataState {
-  final double startFundsErrorMessage;
-  final double salaryErrorMessage;
+  final String startFundsErrorMessage;
+  final String salaryErrorMessage;
   InitialRegisterExpenseDataState(this.startFundsErrorMessage, this.salaryErrorMessage) : super([startFundsErrorMessage, salaryErrorMessage]);
 }
 

@@ -114,4 +114,6 @@ class AppStrings {
   static const emailIsNotValid = "Email is not valid";
   static const userAlreadyExists = "User already exists";
   static const registerUser = "REGISTER";
+  static const startFundsIncorrectMessage = "Incorrect start funds";
+  static const salaryIncorrectMessage = "Incorrect salary message";
 }
