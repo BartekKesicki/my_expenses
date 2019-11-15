@@ -5,44 +5,58 @@ import 'package:my_expenses/register_personal_data/register_personal_data_event.
 import 'package:my_expenses/register_personal_data/register_personal_data_state.dart';
 import 'package:bloc/bloc.dart';
 
-class RegisterPersonalDataBloc extends Bloc<RegisterPersonalDataEvent, RegisterPersonalDataState> {
-
+class RegisterPersonalDataBloc
+    extends Bloc<RegisterPersonalDataEvent, RegisterPersonalDataState> {
   @override
-  InitialRegisterPersonalDataState get initialState => InitialRegisterPersonalDataState(null, null, null);
+  InitialRegisterPersonalDataState get initialState =>
+      InitialRegisterPersonalDataState(null, null, null);
 
   final _userDb = UserDatabaseHelper();
   final passwordMinLength = 6;
 
   @override
-  Stream<RegisterPersonalDataState> mapEventToState(RegisterPersonalDataEvent event) async* {
+  Stream<RegisterPersonalDataState> mapEventToState(
+      RegisterPersonalDataEvent event) async* {
     if (event is SubmitRegisterPersonalDataEvent) {
       bool userIsValid = await _userIsValid(event.email, event.password);
       bool emailIsValid = _validateEmail(event.email);
       bool passwordIsValid = _validatePassword(event.password);
       bool passwordsAreEqual = event.password == event.confirmPassword;
       if (!emailIsValid) {
-        yield InitialRegisterPersonalDataState(AppStrings.emailIsNotValid, null, null);
+        yield InitialRegisterPersonalDataState(
+            AppStrings.emailIsNotValid, null, null);
       } else if (!passwordIsValid) {
-        yield InitialRegisterPersonalDataState(null, AppStrings.incorrectPassword, null);
+        yield InitialRegisterPersonalDataState(
+            null, AppStrings.incorrectPassword, null);
       } else if (!passwordsAreEqual) {
-        yield InitialRegisterPersonalDataState(null, null, AppStrings.passwordsAreNotMatch);
+        yield InitialRegisterPersonalDataState(
+            null, null, AppStrings.passwordsAreNotMatch);
       } else if (userIsValid) {
-        RegisterPersonalDataModel model = RegisterPersonalDataModel(event.email, event.password);
+        RegisterPersonalDataModel model =
+            RegisterPersonalDataModel(event.email, event.password);
         yield ResponseRegisterPersonalDataState(true, null, model);
       } else if (!userIsValid) {
-        yield InitialRegisterPersonalDataState(AppStrings.userAlreadyExists, null, null);
+        yield InitialRegisterPersonalDataState(
+            AppStrings.userAlreadyExists, null, null);
       }
     } else if (event is ValidateRegisterPersonalDataEvent) {
-      bool emailIsValid = _validateEmail(event.email);
-      bool passwordIsValid = _validatePassword(event.password);
-      bool passwordsAreEqual = event.password == event.confirmPassword;
-      if (!emailIsValid) {
-        yield InitialRegisterPersonalDataState(AppStrings.emailIsNotValid, null, null);
+      final emailIsValid = _validateEmail(event.email);
+      final passwordIsValid = _validatePassword(event.password);
+      final passwordsAreEqual =
+          passwordIsValid && event.password == event.confirmPassword;
+      if (emailIsValid && passwordIsValid && passwordsAreEqual) {
+        yield InitialRegisterPersonalDataState(null, null, null);
+      } else if (!emailIsValid) {
+        yield InitialRegisterPersonalDataState(
+            AppStrings.emailIsNotValid, null, null);
       } else if (!passwordIsValid) {
-        yield InitialRegisterPersonalDataState(null, AppStrings.incorrectPassword, null);
-      }
-      else if (!passwordsAreEqual) {
-        yield InitialRegisterPersonalDataState(null, null, AppStrings.passwordsAreNotMatch);
+        yield InitialRegisterPersonalDataState(
+            null, AppStrings.incorrectPassword, null);
+      } else if (!passwordsAreEqual) {
+        yield InitialRegisterPersonalDataState(
+            null, null, AppStrings.passwordsAreNotMatch);
+      } else {
+        yield InitialRegisterPersonalDataState(null, null, null);
       }
     }
   }
@@ -53,7 +67,8 @@ class RegisterPersonalDataBloc extends Bloc<RegisterPersonalDataEvent, RegisterP
   }
 
   bool _validateEmail(String login) {
-    bool emailValid = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
+    bool emailValid =
+        RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
     return emailValid;
   }
 

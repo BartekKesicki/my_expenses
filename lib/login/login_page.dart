@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
@@ -12,7 +11,7 @@ import 'package:my_expenses/register_personal_data/register_personal_data_page.d
 import 'login_event.dart';
 import 'login_state.dart';
 
-class LoginPage extends StatelessWidget  {
+class LoginPage extends StatelessWidget {
 
   final _userTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
@@ -155,7 +154,6 @@ class LoginPage extends StatelessWidget  {
           onTap: () {
             final loginBloc = BlocProvider.of<LoginBloc>(context);
             loginBloc.dispatch(RedirectToRegisterPageEvent());
-            //redirectToSignUpPage(context);
           },
           child: Center(
               child: AppWidgets.createText(

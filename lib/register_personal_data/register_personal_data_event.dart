@@ -6,18 +6,22 @@ abstract class RegisterPersonalDataEvent extends Equatable {
   RegisterPersonalDataEvent([List props = const []]) : super(props);
 }
 
-class InitialRegisterPersonalDataEvent extends RegisterPersonalDataEvent { }
+class InitialRegisterPersonalDataEvent extends RegisterPersonalDataEvent {}
 
 class ValidateRegisterPersonalDataEvent extends RegisterPersonalDataEvent {
   final String email;
   final String password;
   final String confirmPassword;
-  ValidateRegisterPersonalDataEvent(this.email, this.password, this.confirmPassword) : super([email, password, confirmPassword]);
+  ValidateRegisterPersonalDataEvent(
+      [this.email, this.password, this.confirmPassword])
+      : super([email, password, confirmPassword]);
 }
 
 class SubmitRegisterPersonalDataEvent extends RegisterPersonalDataEvent {
   final String email;
   final String password;
   final String confirmPassword;
-  SubmitRegisterPersonalDataEvent(this.email, this.password, this.confirmPassword) : super([email, password, confirmPassword]);
+  SubmitRegisterPersonalDataEvent(
+      [this.email, this.password, this.confirmPassword])
+      : super([email, password, confirmPassword]);
 }
