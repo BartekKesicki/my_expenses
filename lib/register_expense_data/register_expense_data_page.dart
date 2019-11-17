@@ -10,18 +10,29 @@ import 'package:my_expenses/register_expense_data/register_expense_data_bloc.dar
 import 'package:my_expenses/register_expense_data/register_expense_data_event.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_state.dart';
 
-class RegisterExpenseDataPage extends StatelessWidget {
+class RegisterExpenseDataPage extends StatefulWidget {
+
+  final RegisterPersonalDataModel model;
+
+  RegisterExpenseDataPage({this.model, Key key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _RegisterExpenseDataPageState();
+}
+
+class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
 
   final _registerBloc = RegisterExpenseDataBloc();
-  final RegisterPersonalDataModel model;
+  RegisterPersonalDataModel model;
   final _startFundsTextController = TextEditingController();
   final _salaryTextController = TextEditingController();
   final _optionalLimitTextController = TextEditingController();
 
-  RegisterExpenseDataPage({this.model});
+  _RegisterExpenseDataPageState({this.model});
 
   @override
   Widget build(BuildContext context) {
+    model = widget.model;
     return Scaffold(
       body: BlocListener(
         listener: (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
@@ -102,7 +113,7 @@ class RegisterExpenseDataPage extends StatelessWidget {
             padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin, top: AppDimens.containerTopMargin),
             child: AppWidgets.createSubmitButton(() {
               final registerBloc = BlocProvider.of<RegisterExpenseDataBloc>(context);
-              registerBloc.dispatch(SubmitRegisterExpenseDataEvent(_startFundsTextController.text, _salaryTextController.text, _optionalLimitTextController.text));
+              registerBloc.dispatch(SubmitRegisterExpenseDataEvent(_startFundsTextController.text, _salaryTextController.text, _optionalLimitTextController.text, model));
             }, AppWidgets.createText(AppStrings.registerUser, AppStyles.createButtonTextStyle()))
         )
       ],

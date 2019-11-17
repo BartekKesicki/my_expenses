@@ -18,10 +18,10 @@ class RegisterPersonalDataBloc
   Stream<RegisterPersonalDataState> mapEventToState(
       RegisterPersonalDataEvent event) async* {
     if (event is SubmitRegisterPersonalDataEvent) {
-      bool userIsValid = await _userIsValid(event.email, event.password);
-      bool emailIsValid = _validateEmail(event.email);
-      bool passwordIsValid = _validatePassword(event.password);
-      bool passwordsAreEqual = event.password == event.confirmPassword;
+      final userIsValid = await _userIsValid(event.email, event.password);
+      final emailIsValid = _validateEmail(event.email);
+      final passwordIsValid = _validatePassword(event.password);
+      final passwordsAreEqual = event.password == event.confirmPassword;
       if (!emailIsValid) {
         yield InitialRegisterPersonalDataState(
             AppStrings.emailIsNotValid, null, null);

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:my_expenses/model/register_personal_data_model.dart';
 
 @immutable
 abstract class RegisterExpenseDataEvent extends Equatable {
@@ -18,5 +19,6 @@ class SubmitRegisterExpenseDataEvent extends RegisterExpenseDataEvent {
   final String startFunds;
   final String salary;
   final String optionalLimit;
-  SubmitRegisterExpenseDataEvent(this.startFunds, this.salary, this.optionalLimit) : super([startFunds, salary, optionalLimit]);
+  final RegisterPersonalDataModel model;
+  SubmitRegisterExpenseDataEvent(this.startFunds, this.salary, this.optionalLimit, this.model) : super([startFunds, salary, optionalLimit, model]);
 }
