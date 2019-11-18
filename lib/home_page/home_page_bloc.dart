@@ -9,8 +9,17 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
   @override
   Stream<HomePageState> mapEventToState(HomePageEvent event) async* {
+    if (event is InitialHomePageEvent) {
+      yield InitialHomePageState();
+    } else if (event is RedirectToSettingsPageEvent) {
+      yield RedirectToSettingsPageState();
+    } else if (event is RedirectToCategoriesPageEvent) {
+      yield RedirectToCategoriesPageState();
+    } else if (event is RedirectToFundsManagementPageEvent) {
+      yield RedirectToFundsManagementPageState();
+    } else if (event is RedirectToMyProfilePageEvent) {
+      yield RedirectToMyProfilePageState();
+    }
     yield InitialHomePageState();
-    //todo fill states
   }
-
 }
