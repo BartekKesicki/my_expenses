@@ -15,3 +15,5 @@ class RedirectToFundsManagementPageEvent extends HomePageEvent { }
 class InitialHomePageEvent extends HomePageEvent { }
 
 class RedirectToMyProfilePageEvent extends HomePageEvent { }
+
+class BackButtonEvent extends HomePageEvent { }

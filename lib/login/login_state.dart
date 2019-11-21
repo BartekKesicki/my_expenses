@@ -22,3 +22,5 @@ class LoginResponseState extends LoginState {
   final String responseMessage;
   LoginResponseState(this.response, this.responseMessage) : super([response, responseMessage]);
 }
+
+class BackButtonState extends LoginState { }

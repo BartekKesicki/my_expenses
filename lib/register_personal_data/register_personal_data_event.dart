@@ -25,3 +25,5 @@ class SubmitRegisterPersonalDataEvent extends RegisterPersonalDataEvent {
       [this.email, this.password, this.confirmPassword])
       : super([email, password, confirmPassword]);
 }
+
+class BackButtonEvent extends RegisterPersonalDataEvent { }

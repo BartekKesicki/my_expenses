@@ -17,7 +17,9 @@ class RegisterPersonalDataBloc
   @override
   Stream<RegisterPersonalDataState> mapEventToState(
       RegisterPersonalDataEvent event) async* {
-    if (event is SubmitRegisterPersonalDataEvent) {
+    if (event is BackButtonState) {
+      yield BackButtonState();
+    } else if (event is SubmitRegisterPersonalDataEvent) {
       final userIsValid = await _userIsValid(event.email, event.password);
       final emailIsValid = _validateEmail(event.email);
       final passwordIsValid = _validatePassword(event.password);

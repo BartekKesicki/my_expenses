@@ -26,6 +26,8 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
   final _confirmPasswordTextController = TextEditingController();
   final registerBloc = RegisterPersonalDataBloc();
 
+  //todo fix behaviour of back button
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

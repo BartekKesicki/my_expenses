@@ -28,6 +28,8 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
   final _salaryTextController = TextEditingController();
   final _optionalLimitTextController = TextEditingController();
 
+  //todo fix behaviour of back button
+
   _RegisterExpenseDataPageState({this.model});
 
   @override

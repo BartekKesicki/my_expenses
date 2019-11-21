@@ -13,7 +13,9 @@ class RegisterExpenseDataBloc extends Bloc<RegisterExpenseDataEvent, RegisterExp
 
   @override
   Stream<RegisterExpenseDataState> mapEventToState(RegisterExpenseDataEvent event) async* {
-    if (event is SubmitRegisterExpenseDataEvent) {
+    if (event is BackButtonState) {
+      yield BackButtonState();
+    } else if (event is SubmitRegisterExpenseDataEvent) {
       //todo submit button
     } else if (event is ValidateRegisterExpenseDataEvent) {
       if (!isStartFundsValid(event.startFunds)) {

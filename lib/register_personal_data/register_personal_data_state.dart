@@ -32,3 +32,5 @@ class ResponseRegisterPersonalDataState extends RegisterPersonalDataState {
       this.isValid, this.optionalMessage, this.model)
       : super([isValid, optionalMessage, model]);
 }
+
+class BackButtonState extends RegisterPersonalDataState { }

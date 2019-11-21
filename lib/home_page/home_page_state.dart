@@ -15,3 +15,5 @@ class RedirectToCategoriesPageState extends HomePageState { }
 class RedirectToFundsManagementPageState extends HomePageState { }
 
 class RedirectToMyProfilePageState extends HomePageState { }
+
+class BackButtonState extends HomePageState { }

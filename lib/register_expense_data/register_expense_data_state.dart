@@ -26,3 +26,5 @@ class ResponseRegisterExpenseDataState extends RegisterExpenseDataState {
   final String optionalMessage;
   ResponseRegisterExpenseDataState(this.isRegistered, this.optionalMessage) : super([isRegistered, optionalMessage]);
 }
+
+class BackButtonState extends RegisterExpenseDataState { }

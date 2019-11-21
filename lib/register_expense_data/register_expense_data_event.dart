@@ -22,3 +22,5 @@ class SubmitRegisterExpenseDataEvent extends RegisterExpenseDataEvent {
   final RegisterPersonalDataModel model;
   SubmitRegisterExpenseDataEvent(this.startFunds, this.salary, this.optionalLimit, this.model) : super([startFunds, salary, optionalLimit, model]);
 }
+
+class BackButtonEvent extends RegisterExpenseDataEvent { }

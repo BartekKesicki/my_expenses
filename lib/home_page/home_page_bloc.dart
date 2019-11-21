@@ -9,7 +9,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
   @override
   Stream<HomePageState> mapEventToState(HomePageEvent event) async* {
-    if (event is InitialHomePageEvent) {
+    if (event is BackButtonState) {
+      yield BackButtonState();
+    } else if (event is InitialHomePageEvent) {
       yield InitialHomePageState();
     } else if (event is RedirectToSettingsPageEvent) {
       yield RedirectToSettingsPageState();
