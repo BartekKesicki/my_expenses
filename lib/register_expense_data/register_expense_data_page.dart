@@ -40,7 +40,9 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
       child: Scaffold(
         body: BlocListener(
           listener: (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
-            if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
+            if (registerExpenseDataState is BackButtonState) {
+              Navigator.pop(context);
+            } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
               redirectToLoginPage(context);
             }
           },
@@ -148,7 +150,7 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.pop(context);
+    _registerBloc.dispatch(BackButtonEvent());
     return true;
   }
 }

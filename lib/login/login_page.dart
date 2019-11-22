@@ -28,7 +28,9 @@ class LoginPage extends StatelessWidget {
             child: BlocListener(
               bloc: loginBloc,
               listener: (BuildContext context, LoginState state) {
-                if (state is RedirectToRegisterPageState) {
+                if (state is BackButtonState) {
+                  //do nothing
+                } else if (state is RedirectToRegisterPageState) {
                   redirectToSignUpPage(context);
                 } else if (state is LoginResponseState && state.response) {
                   redirectToHomePage(context);
@@ -189,6 +191,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Future<bool> _onWillPop() async {
+    loginBloc.dispatch(BackButtonEvent());
     return false;
   }
 }

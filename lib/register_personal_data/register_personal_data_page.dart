@@ -38,7 +38,9 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
           bloc: registerBloc,
           listener: (BuildContext context,
               RegisterPersonalDataState registerPersonalDataState) {
-            if (registerPersonalDataState is ResponseRegisterPersonalDataState &&
+            if (registerPersonalDataState is BackButtonState) {
+                Navigator.pop(context);
+            } else if (registerPersonalDataState is ResponseRegisterPersonalDataState &&
                 registerPersonalDataState.isValid) {
               redirectToRegisterExpenseDataPage(
                   context, registerPersonalDataState.model);
@@ -191,7 +193,7 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.pop(context);
+    registerBloc.dispatch(BackButtonEvent());
     return true;
   }
 }

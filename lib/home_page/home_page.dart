@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
+import 'package:my_expenses/home_page/home_page_event.dart';
 
 import 'home_page_state.dart';
 
@@ -29,6 +30,9 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: BlocListener(
             listener: (BuildContext context, HomePageState homePageState) {
+              if (homePageState is BackButtonState) {
+                //do nothing
+              }
               //todo redirections
             },
             bloc: _homeBloc,
@@ -53,6 +57,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> _onWillPop() async {
-    return false;
+    _homeBloc.dispatch(BackButtonEvent());
+    return true;
   }
 }
