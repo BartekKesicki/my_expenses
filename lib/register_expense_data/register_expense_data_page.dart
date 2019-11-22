@@ -35,31 +35,34 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
   @override
   Widget build(BuildContext context) {
     model = widget.model;
-    return Scaffold(
-      body: BlocListener(
-        listener: (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
-          if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
-            redirectToLoginPage(context);
-          }
-        },
-        bloc: _registerBloc,
-        child: BlocProvider(
-          builder: (BuildContext context) => _registerBloc,
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-                child: BlocBuilder(
-                    bloc: _registerBloc,
-                    builder : (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
-                      if (registerExpenseDataState is InitialRegisterExpenseDataState) {
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: BlocListener(
+          listener: (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
+            if (registerExpenseDataState is ResponseRegisterExpenseDataState && registerExpenseDataState.isRegistered) {
+              redirectToLoginPage(context);
+            }
+          },
+          bloc: _registerBloc,
+          child: BlocProvider(
+            builder: (BuildContext context) => _registerBloc,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                  child: BlocBuilder(
+                      bloc: _registerBloc,
+                      builder : (BuildContext context, RegisterExpenseDataState registerExpenseDataState) {
+                        if (registerExpenseDataState is InitialRegisterExpenseDataState) {
+                          return buildInitialRegisterExpenseForm(null, null, context);
+                        } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
+                          return buildRegisterInProgressWidget();
+                        } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
+                          return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
+                        }
                         return buildInitialRegisterExpenseForm(null, null, context);
-                      } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
-                        return buildRegisterInProgressWidget();
-                      } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
-                        return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
-                      }
-                      return buildInitialRegisterExpenseForm(null, null, context);
-                    })
+                      })
+              ),
             ),
           ),
         ),
@@ -142,5 +145,10 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
       MaterialPageRoute(builder: (context) => LoginPage()),
           (Route<dynamic> route) => false,
     );
+  }
+
+  Future<bool> _onWillPop() async {
+    Navigator.pop(context);
+    return true;
   }
 }

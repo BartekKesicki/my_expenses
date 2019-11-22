@@ -30,44 +30,47 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-          child: BlocListener(
-        bloc: registerBloc,
-        listener: (BuildContext context,
-            RegisterPersonalDataState registerPersonalDataState) {
-          if (registerPersonalDataState is ResponseRegisterPersonalDataState &&
-              registerPersonalDataState.isValid) {
-            redirectToRegisterExpenseDataPage(
-                context, registerPersonalDataState.model);
-          }
-        },
-        child: BlocProvider(
-          builder: (BuildContext context) => registerBloc,
-          child: BlocBuilder(
-              bloc: registerBloc,
-              builder: (BuildContext context,
-                  RegisterPersonalDataState registerPersonalDataState) {
-                if (registerPersonalDataState
-                    is InitialRegisterPersonalDataState) {
-                  return buildMainRegisterForm(
-                      context,
-                      registerPersonalDataState.usernameErrorMessage,
-                      registerPersonalDataState.passwordErrorMessage,
-                      registerPersonalDataState.confirmPasswordErrorMessage);
-                } else if (registerPersonalDataState
-                    is RegisterPersonalDataInProgressState) {
-                  return buildSubmitInProgressWidget();
-                } else if (registerPersonalDataState
-                        is ResponseRegisterPersonalDataState &&
-                    !registerPersonalDataState.isValid) {
-                  return buildMainRegisterForm(context,
-                      registerPersonalDataState.optionalMessage, null, null);
-                }
-                return Container();
-              }),
-        ),
-      )),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: SingleChildScrollView(
+            child: BlocListener(
+          bloc: registerBloc,
+          listener: (BuildContext context,
+              RegisterPersonalDataState registerPersonalDataState) {
+            if (registerPersonalDataState is ResponseRegisterPersonalDataState &&
+                registerPersonalDataState.isValid) {
+              redirectToRegisterExpenseDataPage(
+                  context, registerPersonalDataState.model);
+            }
+          },
+          child: BlocProvider(
+            builder: (BuildContext context) => registerBloc,
+            child: BlocBuilder(
+                bloc: registerBloc,
+                builder: (BuildContext context,
+                    RegisterPersonalDataState registerPersonalDataState) {
+                  if (registerPersonalDataState
+                      is InitialRegisterPersonalDataState) {
+                    return buildMainRegisterForm(
+                        context,
+                        registerPersonalDataState.usernameErrorMessage,
+                        registerPersonalDataState.passwordErrorMessage,
+                        registerPersonalDataState.confirmPasswordErrorMessage);
+                  } else if (registerPersonalDataState
+                      is RegisterPersonalDataInProgressState) {
+                    return buildSubmitInProgressWidget();
+                  } else if (registerPersonalDataState
+                          is ResponseRegisterPersonalDataState &&
+                      !registerPersonalDataState.isValid) {
+                    return buildMainRegisterForm(context,
+                        registerPersonalDataState.optionalMessage, null, null);
+                  }
+                  return Container();
+                }),
+          ),
+        )),
+      ),
     );
   }
 
@@ -185,5 +188,10 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
         builder: (context) => RegisterExpenseDataPage(
               model: model,
             )));
+  }
+
+  Future<bool> _onWillPop() async {
+    Navigator.pop(context);
+    return true;
   }
 }

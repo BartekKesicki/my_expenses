@@ -23,26 +23,36 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: BlocListener(
-          bloc: _homeBloc,
-          child: BlocProvider(
-            builder: (BuildContext context) => _homeBloc,
-            child: BlocBuilder(
-              bloc: _homeBloc,
-              builder: (BuildContext context, HomePageState homePageState) {
-                //todo insert other states
-                return buildInitialHomePage();
-              },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: BlocListener(
+            listener: (BuildContext context, HomePageState homePageState) {
+              //todo redirections
+            },
+            bloc: _homeBloc,
+            child: BlocProvider(
+              builder: (BuildContext context) => _homeBloc,
+              child: BlocBuilder(
+                bloc: _homeBloc,
+                builder: (BuildContext context, HomePageState homePageState) {
+                  //todo insert other states
+                  return buildInitialHomePage();
+                },
+              ),
             ),
           ),
-        ),
-      )
+        )
+      ),
     );
   }
 
   Widget buildInitialHomePage() {
     return Container();
+  }
+
+  Future<bool> _onWillPop() async {
+    return false;
   }
 }

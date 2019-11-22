@@ -21,33 +21,38 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: BlocListener(
-          bloc: loginBloc,
-          listener: (BuildContext context, LoginState state) {
-            if (state is RedirectToRegisterPageState) {
-              redirectToSignUpPage(context);
-            } else if (state is LoginResponseState && state.response) {
-              redirectToHomePage(context);
-            }
-          },
-          child: BlocProvider(
-            builder: (BuildContext context) => loginBloc,
-            child: BlocBuilder(
-                bloc: loginBloc,
-                builder: (BuildContext context, LoginState loginState) {
-                  if (loginState is InitialLoginState) {
-                    return buildMainLoginWidget(context, loginState.usernameErrorMessage, loginState.passwordErrorMessage);
-                  } else if (loginState is LoginInProgressState) {
-                    return buildLoginInProgressSate();
-                  }  else if (loginState is LoginResponseState && !loginState.response) {
-                    return buildMainLoginWidget(context, loginState.responseMessage, null);
-                  }
-                  return Container();
-                }),
-          )
-        )
-        );
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: SingleChildScrollView(
+            child: BlocListener(
+              bloc: loginBloc,
+              listener: (BuildContext context, LoginState state) {
+                if (state is RedirectToRegisterPageState) {
+                  redirectToSignUpPage(context);
+                } else if (state is LoginResponseState && state.response) {
+                  redirectToHomePage(context);
+                }
+              },
+              child: BlocProvider(
+                builder: (BuildContext context) => loginBloc,
+                child: BlocBuilder(
+                    bloc: loginBloc,
+                    builder: (BuildContext context, LoginState loginState) {
+                      if (loginState is InitialLoginState) {
+                        return buildMainLoginWidget(context, loginState.usernameErrorMessage, loginState.passwordErrorMessage);
+                      } else if (loginState is LoginInProgressState) {
+                        return buildLoginInProgressSate();
+                      }  else if (loginState is LoginResponseState && !loginState.response) {
+                        return buildMainLoginWidget(context, loginState.responseMessage, null);
+                      }
+                      return Container();
+                    }),
+              )
+            )
+            ),
+      ),
+    );
   }
 
   Column buildMainLoginWidget(BuildContext context, String userErrorMessage, String passwordErrorMessage) {
@@ -181,5 +186,9 @@ class LoginPage extends StatelessWidget {
   Widget buildLoginInProgressSate() {
     //todo progress state
     return Container();
+  }
+
+  Future<bool> _onWillPop() async {
+    return false;
   }
 }

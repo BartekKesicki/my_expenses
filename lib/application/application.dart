@@ -11,9 +11,7 @@ class Application extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: LoginPage(),
-      ),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
