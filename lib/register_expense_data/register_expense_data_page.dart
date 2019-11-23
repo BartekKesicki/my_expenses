@@ -58,7 +58,7 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
                         if (registerExpenseDataState is InitialRegisterExpenseDataState) {
                           return buildInitialRegisterExpenseForm(null, null, context);
                         } else if (registerExpenseDataState is RegisterExpenseDataInProgressState) {
-                          return buildRegisterInProgressWidget();
+                          return buildRegisterInProgressWidget(context);
                         } else if (registerExpenseDataState is ResponseRegisterExpenseDataState && !registerExpenseDataState.isRegistered) {
                           return buildInitialRegisterExpenseForm(registerExpenseDataState.optionalMessage, null, context);
                         }
@@ -127,8 +127,10 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
     );
   }
 
-  Widget buildRegisterInProgressWidget() {
+  Widget buildRegisterInProgressWidget(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Container(
+      height: height,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

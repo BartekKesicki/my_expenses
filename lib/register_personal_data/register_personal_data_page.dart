@@ -171,7 +171,9 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
   }
 
   Widget buildSubmitInProgressWidget() {
+    double height = MediaQuery.of(context).size.height;
     return Container(
+      height: height,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

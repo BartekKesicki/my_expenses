@@ -16,7 +16,7 @@ class UserDatabaseHelper extends DatabaseHelper {
     });
   }
 
-  Future<int> getUserIdOrNull(String login, String password) async {
+  Future<bool> isUserExists(String login, String password) async {
     var dbClient = await db;
     List<Map> result = await dbClient.rawQuery(
         "SELECT * FROM ${DbColumnConstants.tableUserName} WHERE ${DbColumnConstants.userEmailColumnName}='$login' AND ${DbColumnConstants.userPasswordColumnName}='$password'");
@@ -24,7 +24,7 @@ class UserDatabaseHelper extends DatabaseHelper {
     if (result != null && result.isNotEmpty) {
       user = User.fromMap(result.first);
     }
-    return user.id;
+    return user != null;
   }
 
   Future<User> getUser(int userId) async {

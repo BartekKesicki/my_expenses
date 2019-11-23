@@ -17,8 +17,6 @@ class LoginPage extends StatelessWidget {
   final _passwordTextController = TextEditingController();
   final loginBloc = LoginBloc();
 
-  //todo fix behaviour of back button
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -44,7 +42,7 @@ class LoginPage extends StatelessWidget {
                       if (loginState is InitialLoginState) {
                         return buildMainLoginWidget(context, loginState.usernameErrorMessage, loginState.passwordErrorMessage);
                       } else if (loginState is LoginInProgressState) {
-                        return buildLoginInProgressSate();
+                        return buildLoginInProgressSate(context);
                       }  else if (loginState is LoginResponseState && !loginState.response) {
                         return buildMainLoginWidget(context, loginState.responseMessage, null);
                       }
@@ -185,9 +183,20 @@ class LoginPage extends StatelessWidget {
         .push(MaterialPageRoute(builder: (context) => RegisterPersonalDataPage()));
   }
 
-  Widget buildLoginInProgressSate() {
-    //todo progress state
-    return Container();
+  Widget buildLoginInProgressSate(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    return Container(
+      height: height,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            CircularProgressIndicator(),
+            Text(AppStrings.processingData)
+          ],
+        ),
+      ),
+    );
   }
 
   Future<bool> _onWillPop() async {

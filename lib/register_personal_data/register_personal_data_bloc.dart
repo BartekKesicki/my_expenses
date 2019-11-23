@@ -20,7 +20,7 @@ class RegisterPersonalDataBloc
     if (event is BackButtonState) {
       yield BackButtonState();
     } else if (event is SubmitRegisterPersonalDataEvent) {
-      final userIsValid = await _userIsValid(event.email, event.password);
+      final userExists = await _userIsExists(event.email, event.password);
       final emailIsValid = _validateEmail(event.email);
       final passwordIsValid = _validatePassword(event.password);
       final passwordsAreEqual = event.password == event.confirmPassword;
@@ -33,11 +33,11 @@ class RegisterPersonalDataBloc
       } else if (!passwordsAreEqual) {
         yield InitialRegisterPersonalDataState(
             null, null, AppStrings.passwordsAreNotMatch);
-      } else if (userIsValid) {
+      } else if (!userExists) {
         RegisterPersonalDataModel model =
             RegisterPersonalDataModel(event.email, event.password);
         yield ResponseRegisterPersonalDataState(true, null, model);
-      } else if (!userIsValid) {
+      } else if (userExists) {
         yield InitialRegisterPersonalDataState(
             AppStrings.userAlreadyExists, null, null);
       }
@@ -63,9 +63,8 @@ class RegisterPersonalDataBloc
     }
   }
 
-  Future<bool> _userIsValid(String email, String password) async {
-    int idUser = await _userDb.getUserIdOrNull(email, password);
-    return idUser == null;
+  Future<bool> _userIsExists(String email, String password) async {
+    return await _userDb.isUserExists(email, password);
   }
 
   bool _validateEmail(String login) {

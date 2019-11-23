@@ -41,8 +41,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<bool> _checkCredentials(String login, String password) async {
-    int id = await _userDB.getUserIdOrNull(login, password);
-    return id != null;
+    bool isExists = await _userDB.isUserExists(login, password);
+    return isExists;
   }
 
   bool _validateEmail(String login) {
