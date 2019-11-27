@@ -1,5 +1,6 @@
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/db/helpers/user_database_helper.dart';
+import 'package:my_expenses/db/model/user.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_event.dart';
 import 'package:my_expenses/register_expense_data/register_expense_data_state.dart';
 import 'package:bloc/bloc.dart';
@@ -16,7 +17,22 @@ class RegisterExpenseDataBloc extends Bloc<RegisterExpenseDataEvent, RegisterExp
     if (event is BackButtonState) {
       yield BackButtonState();
     } else if (event is SubmitRegisterExpenseDataEvent) {
-      //todo submit button
+      final startFundsAreValid = isStartFundsValid(event.startFunds);
+      final salaryIsValid = isSalaryValid(event.salary);
+      if (startFundsAreValid && salaryIsValid) {
+        //todo fix photo url
+        User user = User(null, event.model.email, event.model.password, double.parse(event.salary), double.parse(event.optionalLimit), double.parse(event.startFunds), null);
+        try {
+          await _userDb.saveUser(user);
+          yield ResponseRegisterExpenseDataState(true, null);
+        } catch(e) {
+          yield ResponseRegisterExpenseDataState(false, AppStrings.somethingWentWrong);
+        }
+      } else if (!startFundsAreValid) {
+        yield InitialRegisterExpenseDataState(AppStrings.startFundsIncorrectMessage, null);
+      } else if (!salaryIsValid) {
+        yield InitialRegisterExpenseDataState(null, AppStrings.salaryIncorrectMessage);
+      }
     } else if (event is ValidateRegisterExpenseDataEvent) {
       if (!isStartFundsValid(event.startFunds)) {
         yield InitialRegisterExpenseDataState(AppStrings.startFundsIncorrectMessage, null);
