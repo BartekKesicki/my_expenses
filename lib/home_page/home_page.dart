@@ -26,24 +26,25 @@ class _HomePageState extends State<HomePage> {
       onWillPop: _onWillPop,
       child: Scaffold(
         body: SingleChildScrollView(
-          child: BlocListener(
-            listener: (BuildContext context, HomePageState homePageState) {
-              if (homePageState is BackButtonState) {
-                //do nothing
-              }
-              //todo redirections
-            },
-            bloc: _homeBloc,
-            child: BlocProvider(
+          child: BlocProvider(
               builder: (BuildContext context) => _homeBloc,
               child: BlocBuilder(
                 bloc: _homeBloc,
                 builder: (BuildContext context, HomePageState homePageState) {
-                  //todo insert other states
+                  if (homePageState is RedirectToSettingsPageState) {
+                    //todo redirect to settings
+                  } else if (homePageState is RedirectToCategoriesPageState) {
+                    //todo redirect to categories
+                  } else if (homePageState is RedirectToFundsManagementPageState) {
+                    //todo redirect to funds management
+                  } else if (homePageState is RedirectToMyProfilePageState) {
+                    //todo redirect to my profile
+                  } else if (homePageState is BackButtonState) {
+                    //do nothing
+                  }
                   return buildInitialHomePage();
                 },
               ),
-            ),
           ),
         )
       ),
