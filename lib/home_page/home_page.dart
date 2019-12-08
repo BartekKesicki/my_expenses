@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
 import 'package:my_expenses/home_page/home_page_event.dart';
+import 'package:my_expenses/settings/settings_page.dart';
 
 import 'home_page_state.dart';
 
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                 bloc: _homeBloc,
                 builder: (BuildContext context, HomePageState homePageState) {
                   if (homePageState is RedirectToSettingsPageState) {
-                    //todo redirect to settings
+                    return SettingsPage();
                   } else if (homePageState is RedirectToCategoriesPageState) {
                     //todo redirect to categories
                   } else if (homePageState is RedirectToFundsManagementPageState) {
