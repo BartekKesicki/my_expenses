@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/category/categories_page.dart';
+import 'package:my_expenses/funds_management/funds_management_page.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
 import 'package:my_expenses/home_page/home_page_event.dart';
 import 'package:my_expenses/settings/settings_page.dart';
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                   } else if (homePageState is RedirectToCategoriesPageState) {
                     return CategoriesPage();
                   } else if (homePageState is RedirectToFundsManagementPageState) {
-                    //todo redirect to funds management
+                    return FundsManagementPage();
                   } else if (homePageState is RedirectToMyProfilePageState) {
                     //todo redirect to my profile
                   } else if (homePageState is BackButtonState) {
