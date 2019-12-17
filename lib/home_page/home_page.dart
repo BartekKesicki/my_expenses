@@ -4,6 +4,7 @@ import 'package:my_expenses/category/categories_page.dart';
 import 'package:my_expenses/funds_management/funds_management_page.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
 import 'package:my_expenses/home_page/home_page_event.dart';
+import 'package:my_expenses/my_profile/my_profile_page.dart';
 import 'package:my_expenses/settings/settings_page.dart';
 
 import 'home_page_state.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                   } else if (homePageState is RedirectToFundsManagementPageState) {
                     return FundsManagementPage();
                   } else if (homePageState is RedirectToMyProfilePageState) {
-                    //todo redirect to my profile
+                    return MyProfilePage();
                   } else if (homePageState is BackButtonState) {
                     //do nothing
                   }
