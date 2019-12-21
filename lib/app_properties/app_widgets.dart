@@ -74,4 +74,20 @@ class AppWidgets {
       ),
     );
   }
+
+  static AlertDialog createAlertDialog(BuildContext context, String message, String positiveText, String negativeText, VoidCallback onPositivePressed, VoidCallback onNegativePressed) {
+    return AlertDialog(
+      content: Text(message),
+      actions: <Widget>[
+        FlatButton(
+          child: Text(positiveText),
+          onPressed: onPositivePressed,
+        ),
+        FlatButton(
+          child: Text(negativeText),
+          onPressed: onNegativePressed,
+        )
+      ],
+    );
+  }
 }
