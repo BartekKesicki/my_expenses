@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_expenses/my_profile/my_profile_bloc.dart';
+import 'package:my_expenses/my_profile/my_profile_state.dart';
 
 class MyProfilePage extends StatefulWidget {
 
@@ -12,10 +15,23 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePageState extends State<MyProfilePage> {
+
+  final _myProfileBloc = MyProfilePageBloc();
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container();
+    return Scaffold(
+      body: BlocProvider(
+        builder: (BuildContext context) => _myProfileBloc,
+        child: BlocBuilder(
+          bloc: _myProfileBloc,
+          builder : (BuildContext context, MyProfileState myProfileState) {
+            //todo fill with other states
+            return Container();
+          }
+        ),
+      ),
+    );
   }
 
 }
