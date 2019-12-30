@@ -29,8 +29,8 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: BlocProvider(
+          body: SingleChildScrollView(
+            child: BlocProvider(
               builder: (BuildContext context) => _homeBloc,
               child: BlocBuilder(
                 bloc: _homeBloc,
@@ -49,14 +49,17 @@ class _HomePageState extends State<HomePage> {
                   return buildInitialHomePage();
                 },
               ),
-          ),
-        )
+            ),
+          )
       ),
     );
   }
 
   Widget buildInitialHomePage() {
-    return Container();
+    return Center(
+      //todo fill home page with bottom bars
+      child: Text("HOME PAGE"),
+    );
   }
 
   Future<bool> _onWillPop() async {

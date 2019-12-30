@@ -110,7 +110,6 @@ class LoginPage extends StatelessWidget {
                             elevation: AppDimens.appRaisedButtonElevation,
                             color: Colors.green,
                             onPressed: () {
-                              final loginBloc = BlocProvider.of<LoginBloc>(context);
                               loginBloc.dispatch(SubmitLoginEvent(_userTextController.text, _passwordTextController.text));
                             },
                             child: Center(

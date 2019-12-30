@@ -28,12 +28,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else if (event is ValidateLoginEvent) {
       final emailIsValid = _validateEmail(event.login);
       final passwordIsValid = _validatePassword(event.password);
-      if (emailIsValid && passwordIsValid) {
-        yield InitialLoginState(null, null);
-      } else if (!emailIsValid) {
+      if (!emailIsValid) {
         yield InitialLoginState(AppStrings.emailErrorText, null);
       } else if (!passwordIsValid) {
         yield InitialLoginState(null, AppStrings.passwordErrorText);
+      } else {
+        yield InitialLoginState(null, null);
       }
     } else if (event is RedirectToRegisterPageEvent) {
       yield RedirectToRegisterPageState();
