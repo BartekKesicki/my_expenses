@@ -1,5 +1,8 @@
+import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
+import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/category/categories_page.dart';
 import 'package:my_expenses/funds_management/funds_management_page.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
@@ -21,6 +24,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  static int selectedPos = 2;
+  CircularBottomNavigationController _navigationController = CircularBottomNavigationController(selectedPos);
+
+  List<TabItem> tabItems = List.of([
+    TabItem(Icons.assessment, AppStrings.fundsManagement, Colors.green, labelStyle: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold)),
+    TabItem(Icons.person, AppStrings.myProfile, Colors.green, labelStyle: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold)),
+    TabItem(Icons.home, AppStrings.dashboard, Colors.green, labelStyle: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold)),
+    TabItem(Icons.category, AppStrings.categories, Colors.green, labelStyle: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold)),
+    TabItem(Icons.settings, AppStrings.settingsPage, Colors.green, labelStyle: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold)),
+  ]);
 
   final _homeBloc = HomePageBloc();
 
@@ -50,7 +64,17 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-          )
+          ),
+        bottomNavigationBar: CircularBottomNavigation(
+          tabItems,
+          controller: _navigationController,
+          selectedCallback: (int selectedPos) {
+            setState(() {
+              //todo launch events
+              _navigationController.value = selectedPos;
+            });
+          },
+        ),
       ),
     );
   }
