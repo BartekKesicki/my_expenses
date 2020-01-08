@@ -158,7 +158,6 @@ class LoginPage extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
-            final loginBloc = BlocProvider.of<LoginBloc>(context);
             loginBloc.dispatch(RedirectToRegisterPageEvent());
           },
           child: Center(

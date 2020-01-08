@@ -21,7 +21,13 @@ class RegisterExpenseDataBloc extends Bloc<RegisterExpenseDataEvent, RegisterExp
       final salaryIsValid = isSalaryValid(event.salary);
       if (startFundsAreValid && salaryIsValid) {
         //todo fix photo url
-        User user = User(null, event.model.email, event.model.password, double.parse(event.salary), double.parse(event.optionalLimit), double.parse(event.startFunds), null);
+        double salary = double.parse(event.salary);
+        double startFunds = double.parse(event.startFunds);
+        double optionalLimit = 0.0;
+        if (event.optionalLimit != "") {
+          optionalLimit = double.parse(event.optionalLimit);
+        }
+        User user = User(null, event.model.email, event.model.password, salary, optionalLimit, startFunds, null);
         try {
           await _userDb.saveUser(user);
           yield ResponseRegisterExpenseDataState(true, null);
