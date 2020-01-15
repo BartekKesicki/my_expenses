@@ -47,7 +47,7 @@ class AppStrings {
 
   // FUND MANAGEMENT PAGE
   static const incomes = "INCOMES";
-  static const fundsManagement = "Funds Management";
+  static const fundsManagement = "Funds";
 
   // LOGIN PAGE
   static const email = "EMAIL";

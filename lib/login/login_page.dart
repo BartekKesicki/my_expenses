@@ -12,7 +12,6 @@ import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginPage extends StatelessWidget {
-
   final _userTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
   final loginBloc = LoginBloc();
@@ -24,44 +23,50 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
             child: BlocListener(
-              bloc: loginBloc,
-              listener: (BuildContext context, LoginState state) {
-                if (state is BackButtonState) {
-                  //do nothing
-                } else if (state is RedirectToRegisterPageState) {
-                  redirectToSignUpPage(context);
-                } else if (state is LoginResponseState && state.response) {
-                  redirectToHomePage(context);
-                }
-              },
-              child: BlocProvider(
-                builder: (BuildContext context) => loginBloc,
-                child: BlocBuilder(
-                    bloc: loginBloc,
-                    builder: (BuildContext context, LoginState loginState) {
-                      if (loginState is InitialLoginState) {
-                        return buildMainLoginWidget(context, loginState.usernameErrorMessage, loginState.passwordErrorMessage);
-                      } else if (loginState is LoginInProgressState) {
-                        return buildLoginInProgressSate(context);
-                      }  else if (loginState is LoginResponseState && !loginState.response) {
-                        return buildMainLoginWidget(context, loginState.responseMessage, null);
-                      }
-                      return Container();
-                    }),
-              )
-            )
-            ),
+                bloc: loginBloc,
+                listener: (BuildContext context, LoginState state) {
+                  if (state is BackButtonState) {
+                    //do nothing
+                  } else if (state is RedirectToRegisterPageState) {
+                    redirectToSignUpPage(context);
+                  } else if (state is LoginResponseState && state.response) {
+                    redirectToHomePage(context);
+                  }
+                },
+                child: BlocProvider(
+                  builder: (BuildContext context) => loginBloc,
+                  child: BlocBuilder(
+                      bloc: loginBloc,
+                      builder: (BuildContext context, LoginState loginState) {
+                        if (loginState is InitialLoginState) {
+                          return buildMainLoginWidget(
+                              context,
+                              loginState.usernameErrorMessage,
+                              loginState.passwordErrorMessage);
+                        } else if (loginState is LoginInProgressState) {
+                          return buildLoginInProgressSate(context);
+                        } else if (loginState is LoginResponseState &&
+                            !loginState.response) {
+                          return buildMainLoginWidget(
+                              context, loginState.responseMessage, null);
+                        }
+                        return Container();
+                      }),
+                ))),
       ),
     );
   }
 
-  Column buildMainLoginWidget(BuildContext context, String userErrorMessage, String passwordErrorMessage) {
+  Column buildMainLoginWidget(BuildContext context, String userErrorMessage,
+      String passwordErrorMessage) {
     return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              createHeader(context),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(top: AppDimens.containerTopMargin),
+              child: createHeader(context)),
           Container(
               padding: EdgeInsets.only(
                   left: AppDimens.loginContainerSideMargin,
@@ -70,20 +75,26 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     TextField(
-                      decoration: AppStyles.createTextFieldDecoration(AppStrings.email, userErrorMessage),
+                      decoration: AppStyles.createTextFieldDecoration(
+                          AppStrings.email, userErrorMessage),
                       controller: _userTextController,
                       onChanged: (value) {
                         final loginBloc = BlocProvider.of<LoginBloc>(context);
-                        loginBloc.dispatch(ValidateLoginEvent(_userTextController.text, _passwordTextController.text));
+                        loginBloc.dispatch(ValidateLoginEvent(
+                            _userTextController.text,
+                            _passwordTextController.text));
                       },
                     ),
                     TextField(
-                      decoration: AppStyles.createTextFieldDecoration(AppStrings.password, passwordErrorMessage),
+                      decoration: AppStyles.createTextFieldDecoration(
+                          AppStrings.password, passwordErrorMessage),
                       controller: _passwordTextController,
                       obscureText: true,
                       onChanged: (value) {
                         final loginBloc = BlocProvider.of<LoginBloc>(context);
-                        loginBloc.dispatch(ValidateLoginEvent(_userTextController.text, _passwordTextController.text));
+                        loginBloc.dispatch(ValidateLoginEvent(
+                            _userTextController.text,
+                            _passwordTextController.text));
                       },
                     ),
                     Container(
@@ -102,20 +113,23 @@ class LoginPage extends StatelessWidget {
                           top: AppDimens.loginTopContainerTopMargin,
                           bottom: AppDimens.loginBottomContainerMargin),
                       child: Container(
-                          height: AppDimens.appRaisedButtonHeight,
-                          child: RaisedButton(
-                            shape: new RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(
-                                    AppDimens.appRaisedButtonCornerRadius)),
-                            elevation: AppDimens.appRaisedButtonElevation,
-                            color: Colors.green,
-                            onPressed: () {
-                              loginBloc.dispatch(SubmitLoginEvent(_userTextController.text, _passwordTextController.text));
-                            },
-                            child: Center(
-                                child: AppWidgets.createText(AppStrings.login,
-                                    AppStyles.createButtonTextStyle())),
-                          ),),
+                        height: AppDimens.appRaisedButtonHeight,
+                        child: RaisedButton(
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(
+                                  AppDimens.appRaisedButtonCornerRadius)),
+                          elevation: AppDimens.appRaisedButtonElevation,
+                          color: Colors.green,
+                          onPressed: () {
+                            loginBloc.dispatch(SubmitLoginEvent(
+                                _userTextController.text,
+                                _passwordTextController.text));
+                          },
+                          child: Center(
+                              child: AppWidgets.createText(AppStrings.login,
+                                  AppStyles.createButtonTextStyle())),
+                        ),
+                      ),
                     ),
                     createSignUpButton(context),
                   ]))
@@ -177,8 +191,8 @@ class LoginPage extends StatelessWidget {
   }
 
   redirectToSignUpPage(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => RegisterPersonalDataPage()));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => RegisterPersonalDataPage()));
   }
 
   Widget buildLoginInProgressSate(BuildContext context) {

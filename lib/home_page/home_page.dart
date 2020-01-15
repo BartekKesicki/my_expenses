@@ -7,6 +7,7 @@ import 'package:my_expenses/category/categories_page.dart';
 import 'package:my_expenses/funds_management/funds_management_page.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
 import 'package:my_expenses/home_page/home_page_event.dart';
+import 'package:my_expenses/home_page/home_page_type.dart';
 import 'package:my_expenses/my_profile/my_profile_page.dart';
 import 'package:my_expenses/settings/settings_page.dart';
 
@@ -70,7 +71,17 @@ class _HomePageState extends State<HomePage> {
           controller: _navigationController,
           selectedCallback: (int selectedPos) {
             setState(() {
-              //todo launch events
+              if (selectedPos == HomePageType.FUNDS.index) {
+                _homeBloc.dispatch(RedirectToFundsManagementPageEvent());
+              } else if (selectedPos == HomePageType.MY_PROFILE.index) {
+                _homeBloc.dispatch(RedirectToMyProfilePageEvent());
+              } else if (selectedPos == HomePageType.HOME.index) {
+                _homeBloc.dispatch(InitialHomePageEvent());
+              } else if (selectedPos == HomePageType.CATEGORY.index) {
+                _homeBloc.dispatch(RedirectToCategoriesPageEvent());
+              } else if (selectedPos == HomePageType.SETTINGS.index) {
+                _homeBloc.dispatch(RedirectToSettingsPageEvent());
+              }
               _navigationController.value = selectedPos;
             });
           },

@@ -21,7 +21,8 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       yield RedirectToFundsManagementPageState();
     } else if (event is RedirectToMyProfilePageEvent) {
       yield RedirectToMyProfilePageState();
+    } else {
+      yield InitialHomePageState();
     }
-    yield InitialHomePageState();
   }
 }
