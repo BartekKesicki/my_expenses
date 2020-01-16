@@ -24,19 +24,22 @@ class AppWidgets {
     );
   }
 
-  static Container createSubmitButton(GestureTapCallback callback, Text centerText) {
-    return new Container(
-        height: AppDimens.appRaisedButtonHeight,
-        child: Material(
-          borderRadius: BorderRadius.circular(AppDimens.appRaisedButtonCornerRadius),
-          shadowColor: Colors.lightGreen,
-          color: Colors.green,
-          elevation: AppDimens.appRaisedButtonElevation,
-          child: GestureDetector(
-            onTap: callback,
-            child: Center(child: centerText),
-          ),
-        ));
+  static Widget createSubmitButton(GestureTapCallback callback, Text centerText) {
+    return Padding(
+      padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
+      child: Container(
+          height: AppDimens.appRaisedButtonHeight,
+          child: Material(
+            borderRadius: BorderRadius.circular(AppDimens.appRaisedButtonCornerRadius),
+            shadowColor: Colors.lightGreen,
+            color: Colors.green,
+            elevation: AppDimens.appRaisedButtonElevation,
+            child: GestureDetector(
+              onTap: callback,
+              child: Center(child: centerText),
+            ),
+          )),
+    );
   }
 
   static Container createRaisedButton(VoidCallback callback, Text centerText) {

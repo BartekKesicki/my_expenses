@@ -27,14 +27,17 @@ class _SettingsPageState extends State<SettingsPage> {
           bloc: _settingsBloc,
           builder: (BuildContext context, SettingsState settingsState) {
             //todo handle other states
-            return Center(
-              child: AppWidgets.createSubmitButton(() {
-                showAlertDialog();
-              },
-                  AppWidgets.createText(
-                      AppStrings.logout, AppStyles.createButtonTextStyle())),
-            );
+            return _buildMainSettingsWidget();
           }),
+    );
+  }
+
+  Widget _buildMainSettingsWidget() {
+    return Center(
+      child: AppWidgets.createSubmitButton(() {
+        showAlertDialog();
+      }, AppWidgets.createText(
+          AppStrings.logout, AppStyles.createButtonTextStyle())),
     );
   }
 
