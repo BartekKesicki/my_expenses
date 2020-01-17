@@ -7,3 +7,5 @@ abstract class SettingsPageEvent extends Equatable {
 }
 
 class InitialSettingsPageEvent extends SettingsPageEvent { }
+
+class PerformLogoutEvent extends SettingsPageEvent { }

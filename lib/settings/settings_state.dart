@@ -6,4 +6,6 @@ abstract class SettingsState extends Equatable {
   SettingsState([List props = const[]]) : super(props);
 }
 
-class InitialSettingsPageState extends SettingsState {}
+class InitialSettingsPageState extends SettingsState { }
+
+class LogoutPageState extends SettingsState { }
