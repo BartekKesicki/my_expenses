@@ -24,47 +24,52 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: BlocProvider(
-        builder: (BuildContext context) => _settingsBloc,
-        child: BlocBuilder(
-            bloc: _settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) {
-              if (settingsState is LogoutPageState) {
-                _redirectToLoginPage(context);
-                return Container();
-              }
-              return _buildMainSettingsWidget();
-            }),
+      child: BlocListener(
+        bloc: _settingsBloc,
+        listener: (BuildContext context, SettingsState settingsState) {
+          if (settingsState is LogoutPageState) {
+            _redirectToLoginPage(context);
+          }
+        },
+        child: BlocProvider(
+          builder: (BuildContext context) => _settingsBloc,
+          child: BlocBuilder(
+              bloc: _settingsBloc,
+              builder: (BuildContext context, SettingsState settingsState) {
+                if (settingsState is InitialSettingsPageState){
+                  return _buildMainSettingsWidget(context);
+                } else {
+                  return Container();
+                }
+              }),
+        ),
       ),
     );
   }
 
   _redirectToLoginPage(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-          (Route<dynamic> route) => false,
-    );
+    Navigator
+        .of(context)
+        .pushReplacement(MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
   }
 
-  Widget _buildMainSettingsWidget() {
+  Widget _buildMainSettingsWidget(BuildContext context) {
     return Center(
       child: AppWidgets.createSubmitButton(() {
-        showAlertDialog();
+        showAlertDialog(context);
       }, AppWidgets.createText(
           AppStrings.logout, AppStyles.createButtonTextStyle())),
     );
   }
 
-  showAlertDialog() {
+  showAlertDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AppWidgets.createAlertDialog(context,
               AppStrings.doYouWantLogout, AppStrings.yes, AppStrings.no, () {
-            //todo interface to home page
-//                Navigator.pop(context);
-//              _settingsBloc.dispatch(PerformLogoutEvent());
+                Navigator.pop(context);
+                _settingsBloc.dispatch(PerformLogoutEvent());
           }, () {
             Navigator.pop(context);
               });
