@@ -48,9 +48,11 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _redirectToLoginPage(BuildContext context) {
-    Navigator
-        .of(context)
-        .pushReplacement(MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+          (Route<dynamic> route) => false,
+    );
   }
 
   Widget _buildMainSettingsWidget(BuildContext context) {

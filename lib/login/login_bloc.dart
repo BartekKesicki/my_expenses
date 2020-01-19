@@ -25,6 +25,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else {
         yield InitialLoginState(AppStrings.incorrectEmailOrPasswordMessage, null);
       }
+    } else if (event is ValidateLoginEvent) {
+      //todo optional validation
     } else if (event is RedirectToRegisterPageEvent) {
       yield RedirectToRegisterPageState();
     }
@@ -33,14 +35,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<bool> _checkCredentials(String login, String password) async {
     bool isExists = await _userDB.isUserExists(login, password);
     return isExists;
-  }
-
-  bool _validateEmail(String login) {
-    bool emailValid = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(login);
-    return emailValid;
-  }
-
-  bool _validatePassword(String password) {
-    return password.length > passwordMinLength;
   }
 }
