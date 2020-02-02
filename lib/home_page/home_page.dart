@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/category/categories_page.dart';
 import 'package:my_expenses/funds_management/funds_management_page.dart';
+import 'package:my_expenses/home_page/home_page_action.dart';
 import 'package:my_expenses/home_page/home_page_bloc.dart';
 import 'package:my_expenses/home_page/home_page_event.dart';
 import 'package:my_expenses/home_page/home_page_type.dart';
+import 'package:my_expenses/login/login_page.dart';
 import 'package:my_expenses/my_profile/my_profile_page.dart';
 import 'package:my_expenses/settings/settings_page.dart';
 
@@ -24,7 +26,7 @@ class HomePage extends StatefulWidget {
 
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> implements HomePageAction {
 
   static int selectedPos = 2;
   CircularBottomNavigationController _navigationController = CircularBottomNavigationController(selectedPos);
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 bloc: _homeBloc,
                 builder: (BuildContext context, HomePageState homePageState) {
                   if (homePageState is RedirectToSettingsPageState) {
-                    return SettingsPage();
+                    return SettingsPage(homePageAction: this,);
                   } else if (homePageState is RedirectToCategoriesPageState) {
                     return CategoriesPage();
                   } else if (homePageState is RedirectToFundsManagementPageState) {
@@ -100,5 +102,14 @@ class _HomePageState extends State<HomePage> {
   Future<bool> _onWillPop() async {
     _homeBloc.dispatch(BackButtonEvent());
     return true;
+  }
+
+  @override
+  void onLogout() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+          (Route<dynamic> route) => false,
+    );
   }
 }
