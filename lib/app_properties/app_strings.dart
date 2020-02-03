@@ -33,7 +33,6 @@ class AppStrings {
   // DASHBOARD PAGE
   static const dashboard = "Dashboard";
   static const newExpense = "NEW EXPENSE";
-  static const expenses = "EXPENSES";
 
   // EXPENSE TAB PAGE
   static const noExpenses = "No expenses";
@@ -47,6 +46,7 @@ class AppStrings {
 
   // FUND MANAGEMENT PAGE
   static const incomes = "INCOMES";
+  static const expenses = "EXPENSES";
   static const fundsManagement = "Funds";
 
   // LOGIN PAGE
