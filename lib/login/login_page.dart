@@ -18,7 +18,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //todo fix autoreload page after logout
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
