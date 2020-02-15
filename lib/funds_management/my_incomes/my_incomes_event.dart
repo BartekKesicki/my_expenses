@@ -6,4 +6,7 @@ abstract class MyIncomesPageEvent extends Equatable {
   MyIncomesPageEvent([List props = const []]) : super(props);
 }
 
-class InitialMyIncomesPageEvent extends MyIncomesPageEvent {}
+class InitialMyIncomesPageEvent extends MyIncomesPageEvent {
+  final String keyWord;
+  InitialMyIncomesPageEvent(this.keyWord) : super([keyWord]);
+}
