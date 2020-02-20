@@ -12,3 +12,5 @@ class InitialMyExpensesPageState extends MyExpensesPageState {
 
   InitialMyExpensesPageState(this.expenses) : super([expenses]);
 }
+
+class RedirectToNewExpensePageState extends MyExpensesPageState { }

@@ -21,18 +21,26 @@ class _MyExpensesPageState extends State<MyExpensesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      builder: (BuildContext context) => _myExpenseBloc,
-      child: BlocBuilder(
-          bloc: _myExpenseBloc,
-          builder : (BuildContext context, MyExpensesPageState myExpensesPageState) {
-            if (myExpensesPageState is InitialMyExpensesPageState) {
-              return _buildMyIncomesListView(myExpensesPageState.expenses);
-            } else {
-              return Container();
+    return BlocListener(
+      bloc: _myExpenseBloc,
+      listener: (BuildContext context, MyExpensesPageState myExpensesPageState) {
+        if (myExpensesPageState is RedirectToNewExpensePageState) {
+          redirectToNewExpensePage();
+        }
+      },
+      child: BlocProvider(
+        builder: (BuildContext context) => _myExpenseBloc,
+        child: BlocBuilder(
+            bloc: _myExpenseBloc,
+            builder : (BuildContext context, MyExpensesPageState myExpensesPageState) {
+              if (myExpensesPageState is InitialMyExpensesPageState) {
+                return _buildMyIncomesListView(myExpensesPageState.expenses);
+              } else {
+                return Container();
+              }
+              //todo fill with other states
             }
-            //todo fill with other states
-          }
+        ),
       ),
     );
   }
@@ -40,6 +48,10 @@ class _MyExpensesPageState extends State<MyExpensesPage> {
   Widget _buildMyIncomesListView(List<Expense> expenses) {
     //todo create listview
     return Container();
+  }
+
+  void redirectToNewExpensePage() {
+    //todo redirect to new expense page
   }
 
 }
