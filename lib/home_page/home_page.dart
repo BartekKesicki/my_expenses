@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> implements HomePageAction {
                   } else if (homePageState is RedirectToCategoriesPageState) {
                     return CategoriesPage();
                   } else if (homePageState is RedirectToFundsManagementPageState) {
-                    return FundsManagementPage();
+                    return FundsManagementPage(homePageAction: this,);
                   } else if (homePageState is RedirectToMyProfilePageState) {
                     return MyProfilePage();
                   } else if (homePageState is BackButtonState) {
@@ -111,5 +111,10 @@ class _HomePageState extends State<HomePage> implements HomePageAction {
       MaterialPageRoute(builder: (context) => LoginPage()),
           (Route<dynamic> route) => false,
     );
+  }
+
+  @override
+  void redirectToNewExpensePage() {
+    // TODO: implement redirectToNewExpensePage
   }
 }

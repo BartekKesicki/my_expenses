@@ -3,24 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/funds_management/my_expenses/my_expenses_bloc.dart';
 import 'package:my_expenses/funds_management/my_expenses/my_expenses_state.dart';
+import 'package:my_expenses/home_page/home_page_action.dart';
 
 class MyExpensesPage extends StatefulWidget {
 
-  MyExpensesPage({Key key, this.title}) : super(key: key);
+  MyExpensesPage({Key key, this.title, this.homePageAction}) : super(key: key);
 
+  final HomePageAction homePageAction;
   final String title;
 
   @override
   State<StatefulWidget> createState() => _MyExpensesPageState();
-
 }
 
 class _MyExpensesPageState extends State<MyExpensesPage> {
 
   final _myExpenseBloc = MyExpensesPageBloc();
+  HomePageAction _homePageAction;
 
   @override
   Widget build(BuildContext context) {
+    _homePageAction = widget.homePageAction;
     return BlocListener(
       bloc: _myExpenseBloc,
       listener: (BuildContext context, MyExpensesPageState myExpensesPageState) {
@@ -52,7 +55,7 @@ class _MyExpensesPageState extends State<MyExpensesPage> {
   }
 
   void redirectToNewExpensePage() {
-    //todo redirect to new expense page
+    _homePageAction.redirectToNewExpensePage();
   }
 
 }

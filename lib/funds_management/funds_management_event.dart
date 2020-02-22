@@ -7,3 +7,7 @@ abstract class FundsManagementPageEvent extends Equatable {
 }
 
 class InitialFundsManagementEvent extends FundsManagementPageEvent {}
+
+class SwitchMyIncomesPageEvent extends FundsManagementPageEvent {}
+
+class SwitchMyExpensesPageEvent extends FundsManagementPageEvent {}
