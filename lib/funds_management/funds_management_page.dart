@@ -56,11 +56,11 @@ class _FundsManagementPageState extends State<FundsManagementPage> with SingleTi
               bloc: _fundsManagementBloc,
               builder : (BuildContext context, FundsManagementPageState fundsManagementPageState) {
                 if (fundsManagementPageState is SwitchMyIncomesPageEvent) {
-                  return MyIncomesPage();
+                  return MyIncomesPage(homePageAction: _homePageAction,);
                 } else if (fundsManagementPageState is SwitchMyExpensesPageEvent) {
                   return MyExpensesPage(homePageAction: _homePageAction,);
                 } else {
-                  return MyIncomesPage();
+                  return MyIncomesPage(homePageAction: _homePageAction,);
                 }
               }
           ),

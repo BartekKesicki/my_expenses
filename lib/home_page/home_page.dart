@@ -117,4 +117,9 @@ class _HomePageState extends State<HomePage> implements HomePageAction {
   void redirectToNewExpensePage() {
     // TODO: implement redirectToNewExpensePage
   }
+
+  @override
+  void redirectToNewIncomePage() {
+    // TODO: implement redirectToNewIncomePage
+  }
 }

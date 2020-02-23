@@ -12,3 +12,5 @@ class InitialMyIncomesPageState extends MyIncomesPageState {
 
   InitialMyIncomesPageState(this.incomes) : super([incomes]);
 }
+
+class RedirectToNewIncomePageState extends MyIncomesPageState { }
