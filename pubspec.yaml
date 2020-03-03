@@ -24,7 +24,6 @@ dependencies:
   sqflite: any
   shared_preferences: ^0.4.2
   date_format: ^1.0.6
-  image_picker: 0.4.12+1
   rxdart:
   flutter_bloc: ^0.21.0
   equatable: ^0.5.1
