@@ -1,5 +1,8 @@
 class AppDimens {
 
+  static const double searchBarRadius = 20.0;
+  static const double searchBarPadding = 10.0;
+
   static const double noContentImageSize = 220.0;
   static const double noContentPaddingSide = 20.0;
   static const double noContentTopPadding = 30.0;

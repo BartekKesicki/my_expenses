@@ -7,14 +7,14 @@ import 'package:my_expenses/app_properties/app_strings.dart';
 class AppStyles {
 
   static TextStyle createButtonTextStyle() {
-    return new TextStyle(
+    return TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
         fontFamily: AppStrings.montserratFont);
   }
 
   static TextStyle createHyperLinkTextStyle() {
-    return new TextStyle(
+    return TextStyle(
         color: Colors.green,
         fontWeight: FontWeight.bold,
         fontFamily: AppStrings.montserratFont,
@@ -22,33 +22,51 @@ class AppStyles {
   }
 
   static TextStyle createTitleTextStyle() {
-    return new TextStyle(fontSize: AppDimens.loginPageTitleFontSize, fontWeight: FontWeight.bold);
+    return TextStyle(fontSize: AppDimens.loginPageTitleFontSize, fontWeight: FontWeight.bold);
   }
 
   static TextStyle createSubTitleTextStyle() {
-    return new TextStyle(fontSize: AppDimens.loginPageSubTitleFontSize, fontWeight: FontWeight.bold);
+    return TextStyle(fontSize: AppDimens.loginPageSubTitleFontSize, fontWeight: FontWeight.bold);
   }
 
   static TextStyle createSimpleLabelTextStyle() {
-    return new TextStyle(fontSize: AppDimens.simpleTextFontSize, fontWeight: FontWeight.normal);
+    return TextStyle(fontSize: AppDimens.simpleTextFontSize, fontWeight: FontWeight.normal);
   }
 
   static TextStyle createSimpleDataTextStyle() {
-    return new TextStyle(
+    return TextStyle(
         fontSize: 15.0, fontWeight: FontWeight.bold, fontFamily: AppStrings.montserratFont);
   }
 
   static TextStyle createCheckboxTextStyle() {
-    return new TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
+    return TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold);
   }
 
   static InputDecoration createTextFieldDecoration(String labelText, String errorText) {
-    return new InputDecoration(
+    return InputDecoration(
         labelText: labelText,
         errorText: errorText,
-        labelStyle: TextStyle(
-            fontFamily: AppStrings.montserratFont,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey));
+        labelStyle: createInputDecorationTextStyle()
+    );
+  }
+
+  static InputDecoration createSearchBarTextFieldDecoration(String labelText) {
+    return InputDecoration(
+      labelText: labelText,
+      prefixIcon: Icon(Icons.search),
+      border:  OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(AppDimens.searchBarRadius),
+          ),
+        ),
+      labelStyle: createInputDecorationTextStyle()
+    );
+  }
+
+  static createInputDecorationTextStyle() {
+    return TextStyle(
+        fontFamily: AppStrings.montserratFont,
+        fontWeight: FontWeight.bold,
+        color: Colors.grey);
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_expenses/app_properties/app_dimens.dart';
+import 'package:my_expenses/app_properties/app_strings.dart';
+import 'package:my_expenses/app_properties/app_styles.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/funds_management/my_incomes/my_incomes_bloc.dart';
 import 'package:my_expenses/funds_management/my_incomes/my_incomes_state.dart';
@@ -20,6 +23,7 @@ class MyIncomesPage extends StatefulWidget {
 class _MyIncomesPageState extends State<MyIncomesPage> {
 
   final _myIncomesBloc = MyIncomesPageBloc();
+  final _incomesSearchbarControllerText = TextEditingController();
   HomePageAction _homePageAction;
 
   @override
@@ -50,11 +54,32 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
   }
 
   Widget _buildMyIncomesListView(List<Income> incomes) {
-    //todo create listview
-    return Container();
+    return Container(
+      child: Column(
+        children: <Widget>[
+          createSearchbar(),
+          createListView(incomes)
+        ],
+      ),
+    );
   }
 
   void _redirectToNewIncomePage() {
     _homePageAction.redirectToNewIncomePage();
+  }
+
+  Widget createSearchbar() {
+    return Padding(
+      padding: EdgeInsets.all(AppDimens.searchBarPadding),
+      child: TextField(
+        controller: _incomesSearchbarControllerText,
+        decoration: AppStyles.createSearchBarTextFieldDecoration(AppStrings.search),
+      ),
+    );
+  }
+
+  Widget createListView(List<Income> incomes) {
+    //todo create listviewbuilder
+    return Container();
   }
 }
