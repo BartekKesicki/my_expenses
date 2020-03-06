@@ -9,6 +9,12 @@ class FundsManagementPageBloc extends Bloc<FundsManagementPageEvent, FundsManage
 
   @override
   Stream<FundsManagementPageState> mapEventToState(FundsManagementPageEvent event) async* {
-    yield InitialFundsManagementPageState();
+    if (event is SwitchMyIncomesPageEvent) {
+      yield FundsManagementSwitchToMyIncomesState();
+    } else if (event is SwitchMyExpensesPageEvent) {
+      yield FundsManagementSwitchToMyExpensesState();
+    } else {
+      yield InitialFundsManagementPageState();
+    }
   }
 }

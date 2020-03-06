@@ -7,3 +7,7 @@ abstract class FundsManagementPageState extends Equatable {
 }
 
 class InitialFundsManagementPageState extends FundsManagementPageState {}
+
+class FundsManagementSwitchToMyIncomesState extends FundsManagementPageState {}
+
+class FundsManagementSwitchToMyExpensesState extends FundsManagementPageState {}

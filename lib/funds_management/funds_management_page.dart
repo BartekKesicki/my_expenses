@@ -27,8 +27,8 @@ class _FundsManagementPageState extends State<FundsManagementPage> with SingleTi
 
   final _fundsManagementBloc = FundsManagementPageBloc();
   final TABS_LENGTH = 2;
-  final INCOMES_TAB_LENGTH = 0;
-  final EXPENSES_TAB_LENGTH = 1;
+  final INCOMES_TAB_INDEX = 0;
+  final EXPENSES_TAB_INDEX = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +55,9 @@ class _FundsManagementPageState extends State<FundsManagementPage> with SingleTi
           child: BlocBuilder(
               bloc: _fundsManagementBloc,
               builder : (BuildContext context, FundsManagementPageState fundsManagementPageState) {
-                if (fundsManagementPageState is SwitchMyIncomesPageEvent) {
+                if (fundsManagementPageState is FundsManagementSwitchToMyIncomesState) {
                   return MyIncomesPage(homePageAction: _homePageAction,);
-                } else if (fundsManagementPageState is SwitchMyExpensesPageEvent) {
+                } else if (fundsManagementPageState is FundsManagementSwitchToMyExpensesState) {
                   return MyExpensesPage(homePageAction: _homePageAction,);
                 } else {
                   return MyIncomesPage(homePageAction: _homePageAction,);
@@ -70,9 +70,9 @@ class _FundsManagementPageState extends State<FundsManagementPage> with SingleTi
   }
 
   void _performEvent(int index) {
-    if (index == INCOMES_TAB_LENGTH) {
+    if (index == INCOMES_TAB_INDEX) {
       _fundsManagementBloc.dispatch(SwitchMyIncomesPageEvent());
-    } else if (index == EXPENSES_TAB_LENGTH) {
+    } else if (index == EXPENSES_TAB_INDEX) {
       _fundsManagementBloc.dispatch(SwitchMyExpensesPageEvent());
     }
   }
