@@ -37,9 +37,12 @@ class _FundsManagementPageState extends State<FundsManagementPage> with SingleTi
       length: TABS_LENGTH,
       child: Scaffold(
         appBar: AppBar(
+          //todo change height of bar
           backgroundColor: Colors.green,
           bottom: TabBar(
             onTap: (index) => _performEvent(index),
+            unselectedLabelColor: Colors.grey,
+            labelColor: Colors.white,
             tabs: <Widget>[
               Tab(
                 text: AppStrings.incomes,

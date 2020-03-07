@@ -69,6 +69,7 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
   }
 
   Widget createSearchbar() {
+    //todo change focused border color
     return Padding(
       padding: EdgeInsets.all(AppDimens.searchBarPadding),
       child: TextField(

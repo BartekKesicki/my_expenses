@@ -46,7 +46,7 @@ class AppStyles {
     return InputDecoration(
         labelText: labelText,
         errorText: errorText,
-        labelStyle: createInputDecorationTextStyle()
+        labelStyle: _createInputDecorationTextStyle()
     );
   }
 
@@ -54,19 +54,26 @@ class AppStyles {
     return InputDecoration(
       labelText: labelText,
       prefixIcon: Icon(Icons.search),
-      border:  OutlineInputBorder(
-          borderRadius: const BorderRadius.all(
-            const Radius.circular(AppDimens.searchBarRadius),
-          ),
-        ),
-      labelStyle: createInputDecorationTextStyle()
+      border: _createBlackInputBorder(),
+      enabledBorder: _createBlackInputBorder(),
+      disabledBorder: _createBlackInputBorder(),
+      labelStyle: _createInputDecorationTextStyle()
     );
   }
 
-  static createInputDecorationTextStyle() {
+  static OutlineInputBorder _createBlackInputBorder() {
+    return OutlineInputBorder(
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(AppDimens.searchBarRadius),
+        ),
+        borderSide: BorderSide(width: AppDimens.searchBarBorderWidth ,color: Colors.black)
+    );
+  }
+
+  static TextStyle _createInputDecorationTextStyle() {
     return TextStyle(
         fontFamily: AppStrings.montserratFont,
         fontWeight: FontWeight.bold,
-        color: Colors.grey);
+        color: Colors.black);
   }
 }
