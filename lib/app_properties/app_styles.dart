@@ -74,6 +74,6 @@ class AppStyles {
     return TextStyle(
         fontFamily: AppStrings.montserratFont,
         fontWeight: FontWeight.bold,
-        color: Colors.black);
+        color: Colors.grey);
   }
 }
