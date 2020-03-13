@@ -116,7 +116,7 @@ class _RegisterExpenseDataPageState extends State<RegisterExpenseDataPage> {
         ),
         Padding(
             padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin, top: AppDimens.containerTopMargin),
-            child: AppWidgets.createSubmitButton(() {
+            child: AppWidgets.createAppButton(() {
               _registerBloc.dispatch(SubmitRegisterExpenseDataEvent(_startFundsTextController.text, _salaryTextController.text, _optionalLimitTextController.text, model));
             }, AppWidgets.createText(AppStrings.registerUser, AppStyles.createButtonTextStyle()))
         )

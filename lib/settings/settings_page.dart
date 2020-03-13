@@ -56,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildMainSettingsWidget(BuildContext context) {
     return Center(
-      child: AppWidgets.createSubmitButton(() {
+      child: AppWidgets.createAppButton(() {
         showAlertDialog(context);
       }, AppWidgets.createText(
           AppStrings.logout, AppStyles.createButtonTextStyle())),

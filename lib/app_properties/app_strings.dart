@@ -36,12 +36,10 @@ class AppStrings {
 
   // EXPENSE TAB PAGE
   static const noExpenses = "No expenses";
-  static const addNewExpense = "ADD FIRST EXPENSE";
   static const addExpense = "ADD EXPENSE";
 
   // INCOME TAB PAGE
   static const noIncomes = "No incomes";
-  static const addNewIncome = "ADD FIRST INCOME";
   static const addIncome = "ADD INCOME";
 
   // FUND MANAGEMENT PAGE

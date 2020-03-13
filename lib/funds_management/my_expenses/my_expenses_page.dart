@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/db/model/expense.dart';
 import 'package:my_expenses/funds_management/my_expenses/my_expenses_bloc.dart';
 import 'package:my_expenses/funds_management/my_expenses/my_expenses_state.dart';
@@ -55,16 +56,19 @@ class _MyExpensesPageState extends State<MyExpensesPage> {
 
   Widget _buildMyExpensesListView(List<Expense> expenses) {
     return Container(
+      //todo create layout without expenses
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          createSearchbar(),
-          createListView(expenses)
+          _createSearchbar(),
+          _createListView(expenses),
+          _createAddNewExpenseButton()
         ],
       ),
     );
   }
 
-  Widget createSearchbar() {
+  Widget _createSearchbar() {
     //todo change focused border color
     return Padding(
       padding: EdgeInsets.all(AppDimens.searchBarPadding),
@@ -75,12 +79,18 @@ class _MyExpensesPageState extends State<MyExpensesPage> {
     );
   }
 
-  Widget createListView(List<Expense> expenses) {
+  Widget _createListView(List<Expense> expenses) {
     //todo create listviewbuilder
     return Container();
   }
 
   void redirectToNewExpensePage() {
     _homePageAction.redirectToNewExpensePage();
+  }
+
+  Widget _createAddNewExpenseButton() {
+    return AppWidgets.createAppButton(() {
+      //todo redirect to new expense form
+    }, AppWidgets.createText(AppStrings.addExpense, AppStyles.createButtonTextStyle()));
   }
 }

@@ -154,7 +154,7 @@ class _RegisterPersonalDataPageState extends State<RegisterPersonalDataPage> {
                 left: AppDimens.containerSideMargin,
                 right: AppDimens.containerSideMargin,
                 top: AppDimens.containerTopMargin),
-            child: AppWidgets.createSubmitButton(() {
+            child: AppWidgets.createAppButton(() {
               final registerBloc =
                   BlocProvider.of<RegisterPersonalDataBloc>(context);
               registerBloc.dispatch(SubmitRegisterPersonalDataEvent(

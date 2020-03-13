@@ -24,7 +24,7 @@ class AppWidgets {
     );
   }
 
-  static Widget createSubmitButton(GestureTapCallback callback, Text centerText) {
+  static Widget createAppButton(GestureTapCallback callback, Text centerText) {
     return Padding(
       padding: EdgeInsets.only(left: AppDimens.containerSideMargin, right: AppDimens.containerSideMargin),
       child: Container(

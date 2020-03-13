@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_dimens.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/app_properties/app_styles.dart';
+import 'package:my_expenses/app_properties/app_widgets.dart';
 import 'package:my_expenses/db/model/income.dart';
 import 'package:my_expenses/funds_management/my_incomes/my_incomes_bloc.dart';
 import 'package:my_expenses/funds_management/my_incomes/my_incomes_state.dart';
@@ -55,10 +56,13 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
 
   Widget _buildMyIncomesListView(List<Income> incomes) {
     return Container(
+      //todo create layout without incomes
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          createSearchbar(),
-          createListView(incomes)
+          _createSearchbar(),
+          _createListView(incomes),
+          _createAddNewExpenseButton()
         ],
       ),
     );
@@ -68,7 +72,7 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
     _homePageAction.redirectToNewIncomePage();
   }
 
-  Widget createSearchbar() {
+  Widget _createSearchbar() {
     //todo change focused border color
     return Padding(
       padding: EdgeInsets.all(AppDimens.searchBarPadding),
@@ -79,8 +83,14 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
     );
   }
 
-  Widget createListView(List<Income> incomes) {
+  Widget _createListView(List<Income> incomes) {
     //todo create listviewbuilder
     return Container();
+  }
+
+  Widget _createAddNewExpenseButton() {
+    return AppWidgets.createAppButton(() {
+      //todo redirect to new expense form
+    }, AppWidgets.createText(AppStrings.addIncome, AppStyles.createButtonTextStyle()));
   }
 }
