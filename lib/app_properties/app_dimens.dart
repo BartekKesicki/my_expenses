@@ -44,4 +44,8 @@ class AppDimens {
   static const double simpleTextFontSize = 20.0;
 
   static const passwordMinCharacters = 8;
+
+  static const flexForSearchbar = 3;
+  static const flexForListview = 12;
+  static const flexForAddNewItemButton = 2;
 }

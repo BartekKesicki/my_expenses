@@ -60,9 +60,13 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _createSearchbar(),
-          _createListView(incomes),
-          _createAddNewExpenseButton()
+          Expanded(flex: AppDimens.flexForSearchbar, child: _createSearchbar()),
+          Expanded(
+              flex: AppDimens.flexForListview,
+              child: _createListView(incomes)),
+          Expanded(
+              flex: AppDimens.flexForAddNewItemButton,
+              child: _createAddNewIncomeButton())
         ],
       ),
     );
@@ -84,11 +88,44 @@ class _MyIncomesPageState extends State<MyIncomesPage> {
   }
 
   Widget _createListView(List<Income> incomes) {
-    //todo create listviewbuilder
-    return Container();
+    if (incomes.isEmpty) {
+      return Container();
+    }
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: incomes.length,
+      itemBuilder: (context, index) {
+        return _createListTile(incomes[index], index);
+      });
   }
 
-  Widget _createAddNewExpenseButton() {
+  Widget _createListTile(Income income, int index) {
+    return ListTile(
+      title: AppWidgets.createText(
+          income.name, AppStyles.createSimpleLabelTextStyle()),
+      subtitle: AppWidgets.createText(
+          income.amount.toString(), AppStyles.createSimpleDataTextStyle()),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          IconButton(
+            onPressed: () {
+              //todo handle edit
+            },
+            icon: Icon(Icons.edit),
+          ),
+          IconButton(
+            onPressed: () {
+              //todo handle delete
+            },
+            icon: Icon(Icons.delete),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _createAddNewIncomeButton() {
     return AppWidgets.createAppButton(() {
       //todo redirect to new expense form
     }, AppWidgets.createText(AppStrings.addIncome, AppStyles.createButtonTextStyle()));
