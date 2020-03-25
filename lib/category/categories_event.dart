@@ -6,4 +6,8 @@ abstract class CategoriesEvent extends Equatable {
   CategoriesEvent([List props = const []]) : super(props);
 }
 
-class InitialCategoriesEvent extends CategoriesEvent {}
+class InitialCategoriesEvent extends CategoriesEvent { }
+
+class RedirectToIncomeCategoriesEvent extends CategoriesEvent { }
+
+class RedirectToExpenseCategoriesEvent extends CategoriesEvent { }
