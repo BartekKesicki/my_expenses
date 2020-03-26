@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/category/categories_bloc.dart';
 import 'package:my_expenses/category/categories_event.dart';
+import 'package:my_expenses/category/income_categories/income_categories_page.dart';
 
 import 'categories_state.dart';
 
@@ -53,11 +54,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
               builder : (BuildContext context, CategoriesState categoriesState) {
                 //todo handle switching pages
                 if (categoriesState is RedirectToIncomeCategoriesState) {
-                  return Container();
+                  return IncomeCategoriesPage();
                 } else if (categoriesState is RedirectToExpenseCategoriesState) {
                   return Container();
                 } else {
-                  return Container();
+                  return IncomeCategoriesPage();
                 }
               }
           ),
