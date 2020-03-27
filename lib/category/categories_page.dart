@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_expenses/app_properties/app_strings.dart';
 import 'package:my_expenses/category/categories_bloc.dart';
 import 'package:my_expenses/category/categories_event.dart';
+import 'package:my_expenses/category/expense_categories/expense_categories_page.dart';
 import 'package:my_expenses/category/income_categories/income_categories_page.dart';
 
 import 'categories_state.dart';
@@ -56,7 +57,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 if (categoriesState is RedirectToIncomeCategoriesState) {
                   return IncomeCategoriesPage();
                 } else if (categoriesState is RedirectToExpenseCategoriesState) {
-                  return Container();
+                  return ExpenseCategoriesPage();
                 } else {
                   return IncomeCategoriesPage();
                 }
