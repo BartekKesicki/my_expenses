@@ -7,3 +7,5 @@ abstract class IncomeCategoriesEvent extends Equatable {
 }
 
 class InitialIncomeCategoriesEvent extends IncomeCategoriesEvent { }
+
+class RedirectToNewIncomeCategoryEvent extends IncomeCategoriesEvent { }

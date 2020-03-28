@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> implements HomePageAction {
                   if (homePageState is RedirectToSettingsPageState) {
                     return SettingsPage(homePageAction: this,);
                   } else if (homePageState is RedirectToCategoriesPageState) {
-                    return CategoriesPage();
+                    return CategoriesPage(homePageAction: this,);
                   } else if (homePageState is RedirectToFundsManagementPageState) {
                     return FundsManagementPage(homePageAction: this,);
                   } else if (homePageState is RedirectToMyProfilePageState) {
@@ -121,5 +121,10 @@ class _HomePageState extends State<HomePage> implements HomePageAction {
   @override
   void redirectToNewIncomePage() {
     // TODO: implement redirectToNewIncomePage
+  }
+
+  @override
+  void redirectToNewIncomeCategoryPage() {
+    // TODO: implement redirectToNewIncomeCategoryPage
   }
 }
