@@ -3,4 +3,5 @@ abstract class HomePageAction {
   void redirectToNewExpensePage();
   void redirectToNewIncomePage();
   void redirectToNewIncomeCategoryPage();
+  void redirectToNewExpenseCategoryPage();
 }

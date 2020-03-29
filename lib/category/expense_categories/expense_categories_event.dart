@@ -7,3 +7,5 @@ abstract class ExpenseCategoriesEvent extends Equatable {
 }
 
 class InitialExpenseCategoriesEvent extends ExpenseCategoriesEvent { }
+
+class RedirectToNewExpenseCategoryEvent extends ExpenseCategoriesEvent { }

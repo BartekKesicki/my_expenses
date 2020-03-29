@@ -61,7 +61,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 if (categoriesState is RedirectToIncomeCategoriesState) {
                   return IncomeCategoriesPage(homePageAction: _homePageAction,);
                 } else if (categoriesState is RedirectToExpenseCategoriesState) {
-                  return ExpenseCategoriesPage();
+                  return ExpenseCategoriesPage(homePageAction: _homePageAction,);
                 } else {
                   return IncomeCategoriesPage(homePageAction: _homePageAction,);
                 }
