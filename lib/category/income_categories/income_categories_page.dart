@@ -8,6 +8,7 @@ import 'package:my_expenses/category/income_categories/income_categories_bloc.da
 import 'package:my_expenses/db/model/income_category.dart';
 import 'package:my_expenses/home_page/home_page_action.dart';
 
+import 'income_categories_event.dart';
 import 'income_categories_state.dart';
 
 class IncomeCategoriesPage extends StatefulWidget {
@@ -120,7 +121,7 @@ class _IncomeCategoriesPageState extends State<IncomeCategoriesPage> {
 
   Widget _createAddNewIncomeCategoryButton() {
     return AppWidgets.createAppButton(() {
-      //todo redirect to new income category form
+      _incomeCategoriesBloc.dispatch(RedirectToNewIncomeCategoryEvent());
     },
         AppWidgets.createText(
             AppStrings.addIncomeCategory, AppStyles.createButtonTextStyle()));
